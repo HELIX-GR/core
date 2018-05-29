@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  lang="en">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="HELIX-GR" />
+<meta name="keyword" content="HELIX-GR hellenicdataservice.gr publications data research scientific" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<title>HELIX</title>
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<script th:if="${@environment.getActiveProfiles()[0] == 'production'}"
+  th:src="@{/js/vendor/util.min.js}"></script>
+<script th:if="${@environment.getActiveProfiles()[0] == 'development'}"
+  th:src="@{/js/vendor/util.js}"></script>
+
+<script th:if="${@environment.getActiveProfiles()[0] == 'production'}"
+  th:src="@{/js/vendor/react-with-redux.min.js}"></script>
+<script th:if="${@environment.getActiveProfiles()[0] == 'development'}"
+  th:src="@{/js/vendor/react-with-redux.js}"></script>
+
+<link rel="stylesheet"
+  th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" />
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+<script th:if="${@environment.getActiveProfiles()[0] == 'production'}"
+  th:src="@{/js/helix-core.min.js}"></script>
+<script th:if="${@environment.getActiveProfiles()[0] == 'development'}"
+  th:src="@{/js/helix-core.js}"></script>
+
+</html>

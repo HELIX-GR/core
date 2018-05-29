@@ -1,0 +1,41 @@
+/*
+ * Import variables
+ */
+
+@import 'variables';
+
+/*
+ * Bootstrap 4
+ */
+
+ @import '../../../../node_modules/bootstrap/scss/bootstrap';
+
+/*
+ * Customize styles for 3rd party components
+ */
+
+@import 'vendor/react-toastify';
+
+/*
+ * Import HELIX components
+ */
+
+@import 'map';
+
+/*
+ * Forms
+ */
+
+@import 'login';
+
+/**
+ * Openlayers (copied by grunt task)
+ */
+
+@import '../vendor/ol/ol.css';
+
+/**
+ * Custom styles
+ */
+
+ @import 'custom';

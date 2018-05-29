@@ -1,0 +1,1 @@
+package gr.helix.core.common.model;

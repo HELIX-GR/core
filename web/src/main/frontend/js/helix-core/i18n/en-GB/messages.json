@@ -1,0 +1,11 @@
+{
+  "locales": {
+    "en": "English",
+    "el": "Greek"
+  },
+  "login": {
+    "forgot-password": "Forgot password?",
+    "login": "Login",
+    "subtitle": "Sign-in into your account"
+  }
+}
