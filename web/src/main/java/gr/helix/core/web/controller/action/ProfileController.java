@@ -1,6 +1,5 @@
 package gr.helix.core.web.controller.action;
 
-import java.security.Principal;
 import java.util.AbstractMap;
 
 import org.slf4j.Logger;
@@ -36,11 +35,6 @@ public class ProfileController {
 
     @Autowired
     UserService userService;
-
-    @RequestMapping("/user")
-    public Principal user(Principal principal) {
-        return principal;
-    }
 
     /**
      * Get profile data for the authenticated user
