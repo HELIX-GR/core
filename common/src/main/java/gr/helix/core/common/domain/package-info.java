@@ -1,1 +1,0 @@
-package gr.helix.core.common.domain;
