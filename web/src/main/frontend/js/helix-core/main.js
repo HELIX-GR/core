@@ -11,13 +11,13 @@ var rootSelector = document.currentScript.getAttribute('data-root') || '#root';
 
 // Bind top-level event handlers
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   var rootEl = document.querySelector(rootSelector);
 
   // TODO: read from non-httponly "locale" cookie
-  const locale = "en-GB";
+  const locale = 'en-GB';
 
-  const token = document.querySelector("meta[name=_csrf]").getAttribute('content');
+  const token = document.querySelector('meta[name=_csrf]').getAttribute('content');
 
   // Chain preliminary actions before initial rendering
 

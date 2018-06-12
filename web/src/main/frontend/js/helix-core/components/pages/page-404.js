@@ -16,7 +16,7 @@ export default class Page404 extends React.Component {
                 <h4 className='pt-3'>Oops! You're lost.</h4>
                 <p className='text-muted float-left'>The page you are looking for was not found.</p>
               </div>
-              <NavLink to={StaticRoutes.Dashboard}>
+              <NavLink to={StaticRoutes.HOME}>
                 <Button color='primary'><i className='fa fa-home'></i>&nbsp; Take Me Home</Button>
               </NavLink>
             </Col>

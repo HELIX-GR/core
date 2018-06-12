@@ -13,6 +13,10 @@ import {
   Pages
 } from '../model/routes';
 
+import {
+  SearchPage,
+} from './views';
+
 class Home extends React.Component {
 
   constructor(props) {
@@ -27,22 +31,7 @@ class Home extends React.Component {
     const authenticated = (this.props.user != null);
 
     return (
-      <div>
-        {!authenticated &&
-          <div className="row pb-3">
-            <div className="col">
-              <button type="button" className="btn btn-link px-4 w-100" onClick={(e) => this.login()}>Login</button>
-            </div>
-          </div>
-        }
-        {authenticated &&
-          <div className="row pb-3">
-            <div className="col">
-              <button type="button" className="btn btn-link px-4 w-100" onClick={(e) => this.props.logout()}>Logout : {this.props.user.username}</button>
-            </div>
-          </div>
-        }
-      </div>
+      <SearchPage />
     );
   }
 }

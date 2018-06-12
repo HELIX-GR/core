@@ -11,11 +11,16 @@ import {
   viewport,
 } from './ducks/ui/';
 
+import {
+  search,
+} from './ducks/ui/views';
+
 export default Redux.combineReducers({
   config,
   i18n,
   meta,
   ui: Redux.combineReducers({
+    search,
     viewport,
   }),
   user,

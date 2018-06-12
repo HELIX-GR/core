@@ -12,16 +12,10 @@ import ContentRoot from './content-root';
 //
 
 import en from 'react-intl/locale-data/en';
-import de from 'react-intl/locale-data/en';
-import el from 'react-intl/locale-data/en';
+import el from 'react-intl/locale-data/el';
 
 ReactIntl.addLocaleData(en);
-ReactIntl.addLocaleData(de);
 ReactIntl.addLocaleData(el);
-
-//
-// Define presentational component
-//
 
 class Root extends React.Component {
 
@@ -31,7 +25,6 @@ class Root extends React.Component {
     return (
       <ReactIntl.IntlProvider locale={locale} key={locale} messages={messages}>
         <BrowserRouter basename={basename} >
-          {/* wrap connected component in a Route to be aware of navigation */}
           <Route path="/" component={ContentRoot} />
         </BrowserRouter>
       </ReactIntl.IntlProvider>
@@ -44,13 +37,9 @@ Root.defaultProps = {
   messages: {},
 };
 
-//
-// Wrap into a connected component
-//
-
 const mapStateToProps = (state) => {
-  var locale = state.i18n.locale;
-  var messages = state.i18n.messages[locale];
+  const locale = state.i18n.locale;
+  const messages = state.i18n.messages[locale];
   return { locale, messages };
 };
 

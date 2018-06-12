@@ -8,11 +8,11 @@ import pathToRegexp from 'path-to-regexp';
  */
 import * as Roles from './role';
 
-const HOME = '/';
-
 /**
  * Static routes
  */
+const HOME = '/';
+
 export const StaticRoutes = {
   HOME,
 };
@@ -20,7 +20,7 @@ export const StaticRoutes = {
 /**
  * Dynamic routes
  */
-export const DynamicRoutes  = {
+export const DynamicRoutes = {
 
 };
 
@@ -40,7 +40,6 @@ export const Pages = {
 /**
  * Routes for error pages
  */
-
 const Forbidden = '/error/403';
 const NotFound = '/error/404';
 
@@ -73,7 +72,7 @@ const routes = {
 };
 
 /**
- * Find a route by its path e.g. /Dashboard
+ * Find a route by its path e.g. /login
  *
  * @export
  * @param {string} path - the route path

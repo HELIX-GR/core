@@ -16,7 +16,7 @@ export default class Page403 extends React.Component {
                 <h4 className='pt-3'>Oops! You shouldn't be here.</h4>
                 <p className='text-muted float-left'>The page you are looking for was not found or you do not have the required permission.</p>
               </div>
-              <NavLink to={StaticRoutes.Dashboard}>
+              <NavLink to={StaticRoutes.HOME}>
                 <Button color='danger'><i className='fa fa-home'></i>&nbsp; Take Me Home</Button>
               </NavLink>
             </Col>

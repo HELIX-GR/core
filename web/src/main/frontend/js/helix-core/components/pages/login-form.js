@@ -27,10 +27,6 @@ import {
   refreshProfile,
 } from '../../ducks/user';
 
-//
-// Presentational component
-//
-
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
