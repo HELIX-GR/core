@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
 
-import _ from 'lodash';
 import classnames from 'classnames';
 
 import {
@@ -10,32 +9,22 @@ import {
 } from 'redux';
 
 import {
-  changeLocale,
-} from '../../ducks/i18n';
-
-import {
-  logout,
-} from '../../ducks/user';
+  getLatestPosts,
+} from '../../ducks/ui/wordpress';
 
 import {
   changeText,
+  search as searchAll,
   toggleAdvanced,
   togglePill,
 } from '../../ducks/ui/views/search';
-
-import {
-  Pages
-} from '../../model/routes';
 
 import {
   Pill,
 } from '../helpers';
 
 import {
-  About,
-  Footer,
-  Header,
-  News,
+  SearchNews,
   SearchResult,
 } from './';
 
@@ -45,11 +34,6 @@ class SearchPage extends React.Component {
     super(props);
 
     this.onPillChanged = this.onPillChanged.bind(this);
-
-    this.onTextChanged = _.debounce((value) => {
-      this.props.changeText(value);
-    }, 1000);
-
   }
 
   static contextTypes = {
@@ -57,24 +41,42 @@ class SearchPage extends React.Component {
   }
 
   onPillChanged(id) {
+    const { text } = this.props.search;
+
     this.props.togglePill(id);
+
+    if (this.isTextValid(text)) {
+      this.props.searchAll(text);
+    }
   }
 
+  onSearch(e) {
+    e.preventDefault();
+
+    const { text } = this.props.search;
+
+    if (this.isTextValid(text)) {
+      this.props.searchAll(text);
+    }
+  }
+
+  isTextValid(text) {
+    return ((text) && (text.length > 2));
+  }
+
+  componentDidMount() {
+    this.props.getLatestPosts(2);
+  }
 
   render() {
-    const { advanced, pills, text } = this.props.search;
+    const { advanced, result: { composite }, loading, pills, text } = this.props.search;
+    const { latest: posts } = this.props.wordpress;
+
     const _t = this.context.intl.formatMessage;
 
     return (
 
       <div>
-        <Header
-          changeLocale={this.props.changeLocale}
-          locale={this.props.locale}
-          logout={this.props.logout}
-          profile={this.props.profile}
-        />
-
         <section>
           <div className="landing-section">
             <div className="search-form-wrapper">
@@ -86,7 +88,7 @@ class SearchPage extends React.Component {
                     name="landing-search-text" value=""
                     placeholder={_t({ id: 'search.placeholder' })}
                     value={text}
-                    onChange={(e) => this.onTextChanged(e.target.value)}
+                    onChange={(e) => this.props.changeText(e.target.value)}
                   />
                   <div
                     className={
@@ -98,6 +100,7 @@ class SearchPage extends React.Component {
                   >
                     <Pill
                       id="data"
+                      disabled={loading}
                       text="pills.data"
                       className="pill-data"
                       selected={pills.data}
@@ -105,6 +108,7 @@ class SearchPage extends React.Component {
                     />
                     <Pill
                       id="pubs"
+                      disabled={loading}
                       text="pills.pubs"
                       className="pill-pubs"
                       selected={pills.pubs}
@@ -112,6 +116,7 @@ class SearchPage extends React.Component {
                     />
                     <Pill
                       id="lab"
+                      disabled={true}
                       text="pills.lab"
                       className="pill-lab"
                       selected={pills.lab}
@@ -130,7 +135,6 @@ class SearchPage extends React.Component {
                     </div>
                   </div>
 
-                  {/* <div className="closable state-open"> */}
                   <div
                     className={
                       classnames({
@@ -186,12 +190,20 @@ class SearchPage extends React.Component {
                     </div>
                   </div>
 
-                  <SearchResult />
+                  <SearchResult
+                    result={composite}
+                  />
 
                 </div>
 
-                <button type="button" name="landing-search-button" className="landing-search-button">
-                  <i className="fa fa-search"></i>
+                <button
+                  type="submit"
+                  name="landing-search-button"
+                  className="landing-search-button"
+                  disabled={loading}
+                  onClick={(e) => this.onSearch(e)}
+                >
+                  <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
                 </button>
               </form>
             </div>
@@ -200,13 +212,9 @@ class SearchPage extends React.Component {
 
         <section className="landing-page-content">
 
-          <News />
-
-          <About />
+          <SearchNews posts={posts} />
 
         </section>
-
-        <Footer />
       </div >
     );
   }
@@ -217,12 +225,13 @@ const mapStateToProps = (state) => ({
   locale: state.i18n.locale,
   search: state.ui.search,
   profile: state.user.profile,
+  wordpress: state.ui.wordpress,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  changeLocale,
   changeText,
-  logout,
+  getLatestPosts,
+  searchAll,
   toggleAdvanced,
   togglePill,
 }, dispatch);

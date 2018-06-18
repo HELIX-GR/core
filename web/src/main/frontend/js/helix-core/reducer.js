@@ -9,6 +9,7 @@ import {
 
 import {
   viewport,
+  wordpress,
 } from './ducks/ui/';
 
 import {
@@ -22,6 +23,7 @@ export default Redux.combineReducers({
   ui: Redux.combineReducers({
     search,
     viewport,
+    wordpress,
   }),
   user,
 });

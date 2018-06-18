@@ -7,13 +7,32 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { Pages, StaticRoutes, DynamicRoutes, ErrorPages } from '../model/routes';
-import { resize } from '../ducks/ui/viewport';
 
-import Home from './home';
-import LoginForm from './pages/login-form';
+import {
+  changeLocale,
+} from '../ducks/i18n';
 
-import Page403 from './pages/page-403.js';
-import Page404 from './pages/page-404.js';
+import {
+  logout,
+} from '../ducks/user';
+
+import {
+  resize,
+} from '../ducks/ui/viewport';
+
+import {
+  Page403,
+  Page404,
+} from './pages';
+
+import {
+  Footer,
+  Header,
+  News,
+  NewsDetails,
+  Project,
+  SearchPage,
+} from './views';
 
 //
 // Presentational component
@@ -41,12 +60,8 @@ class ContentRoot extends React.Component {
   }
 
   render() {
-    const authenticated = (this.props.user != null);
     const routes = (
       <Switch>
-        {!authenticated &&
-          <Route path={Pages.Login} component={LoginForm} />
-        }
         {/* Handle errors first */}
         <Route path={ErrorPages.Forbidden} component={Page403} exact />
         <Route path={ErrorPages.NotFound} component={Page404} exact />
@@ -55,9 +70,13 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Login} to={StaticRoutes.HOME} exact />
         <Redirect from={Pages.Register} to={StaticRoutes.HOME} exact />
-        {/* Default component */}
-        <Route path="/" component={Home}
-        />
+        {/* Dynamic routes */}
+        <Route path={DynamicRoutes.NEWS_DETAILS} component={NewsDetails} />
+        {/* Static routes */}
+        <Route path={StaticRoutes.NEWS} component={News} />
+        <Route path={StaticRoutes.PROJECT} component={Project} />
+        {/* Default */}
+        <Route path={StaticRoutes.HOME} component={SearchPage} />
       </Switch>
     );
 
@@ -73,7 +92,14 @@ class ContentRoot extends React.Component {
           closeOnClick
           pauseOnHover
         />
+        <Header
+          changeLocale={this.props.changeLocale}
+          locale={this.props.locale}
+          logout={this.props.logout}
+          profile={this.props.profile}
+        />
         {routes}
+        <Footer />
       </div >
     );
   }
@@ -84,10 +110,13 @@ class ContentRoot extends React.Component {
 //
 
 const mapStateToProps = (state) => ({
-  user: state.user.profile,
+  locale: state.i18n.locale,
+  profile: state.user.profile,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  changeLocale,
+  logout,
   resize,
 }, dispatch);
 

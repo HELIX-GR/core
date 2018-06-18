@@ -4,8 +4,6 @@ import * as PropTypes from 'prop-types';
 import OpenLayersMap from 'ol/map';
 import View from 'ol/view';
 
-import Layers from './layers/layers';
-
 /**
  * A wrapper component for {@link OpenLayers.Map}.
  *

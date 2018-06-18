@@ -1,8 +1,8 @@
 import * as RoleNames from './role';
 
 export {
-  UPDATE_INTERVAL_SECONDS,
-} from './constants';
+  EnumCatalog,
+} from './enum';
 
 export {
   EnumErrorLevel,

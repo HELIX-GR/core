@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
       <div className="app flex-row align-items-center">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-6 col-md-8">
+            <div className="col-lg-4 col-md-8">
               <div className="mb-0">
 
                 <div className="p-4">
@@ -130,7 +130,7 @@ class LoginForm extends React.Component {
                     <div className="row pt-3 pb-3">
                       <div className="col">
                         <a href={idp ? `/saml/login?idp=${idp}` : '/saml/login'}
-                           className="btn btn-danger px-4 w-100"
+                          className="btn btn-danger px-4 w-100"
                         >
                           Academic Login
                         </a>

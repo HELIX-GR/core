@@ -1,18 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import classnames from 'classnames';
-
 import {
   NavLink,
 } from 'react-router-dom';
 
 import {
-  FormattedMessage,
-} from 'react-intl';
-
-import {
   Pages,
+  StaticRoutes,
 } from '../../model/routes';
 
 class Header extends React.Component {
@@ -47,11 +42,11 @@ class Header extends React.Component {
     const authenticated = (this.props.profile != null);
 
     return (
-      <header className="header">
+      <header className="header fixed">
         <div className="logo-area">
-          <a>
+          <NavLink to={StaticRoutes.HOME}>
             <img className="logo-image" src="/images/svg/Helix-logo.svg" alt="Helix" />
-          </a>
+          </NavLink>
         </div>
         <div className="menu-wrapper">
           <nav className="nav-menu">
@@ -78,14 +73,10 @@ class Header extends React.Component {
                 </a>
               </li>
               <li id="menu-item-project" className="menu-item aux-item">
-                <a href="#">
-                  Το έργο
-                </a>
+                <NavLink to={StaticRoutes.PROJECT_CHILDREN.DEFAULT} activeClassName="active-link" strict={false}>Το έργο</NavLink>
               </li>
               <li id="menu-item-news" className="menu-item aux-item">
-                <a href="#">
-                  Νέα
-                </a>
+                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">Νέα</NavLink>
               </li>
             </ul>
           </nav>
@@ -100,14 +91,14 @@ class Header extends React.Component {
           {!authenticated &&
             <div className="account-item">
               <NavLink to={Pages.Login}>
-                <img className="account-icon" src="/images/svg/Avatar.svg" alt="Account tab" />
+                <img className="account-icon" src="/images/svg/avatar-white.svg" alt="Account tab" />
               </NavLink>
             </div>
           }
-          {authenticated && this.props.profile.imageUrl &&
+          {authenticated &&
             <div className="account-item">
               <a onClick={(e) => this.props.logout()}>
-                <img className="account-icon" src={this.props.profile.imageUrl} alt="Account tab" />
+                <img className="account-icon" src={this.props.profile.imageUrl || '/images/svg/Avatar.svg'} alt="Account tab" />
               </a>
             </div>
           }

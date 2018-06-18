@@ -21,6 +21,7 @@ class Pill extends React.Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool,
     className: PropTypes.string,
@@ -39,9 +40,16 @@ class Pill extends React.Component {
             "filter-pill": true,
             [this.props.className]: true,
             'selected': this.props.selected,
+            'disabled': this.props.disabled,
           })
         }
-        onClick={(e) => this.props.onChange(this.props.id)}
+        onClick={
+          () => {
+            if (!this.props.disabled) {
+              this.props.onChange(this.props.id);
+            }
+          }
+        }
       >
         <FormattedMessage id={this.props.text} defaultMessage={this.props.text} />
       </div>

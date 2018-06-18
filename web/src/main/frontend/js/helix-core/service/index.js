@@ -1,9 +1,11 @@
-import { default as user } from './user';
 import { default as i18n } from './i18n';
+import { default as search } from './search';
+import { default as user } from './user';
 
 const api = {
-  user,
   i18n,
+  search,
+  user,
 };
 
 export default api;

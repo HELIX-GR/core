@@ -1,3 +1,5 @@
+import moment from '../moment-localized';
+
 import i18n from '../service/i18n';
 
 // Actions
@@ -16,6 +18,7 @@ export default (state = initialState, action) => {
       return state;
 
     case LOAD_MESSAGES:
+      moment.locale(action.locale);
       return {
         ...state,
         locale: action.locale,

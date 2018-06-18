@@ -1,11 +1,12 @@
 import _ from 'lodash';
-import moment from 'moment';
+import moment from '../moment-localized';
 
 import { default as userService } from '../service/user';
 
 // Actions
 export const LOGIN = 'user/LOGIN';
 export const LOGOUT = 'user/LOGOUT';
+
 const REQUEST_LOGIN = 'user/REQUEST_LOGIN';
 const REQUEST_LOGOUT = 'user/REQUEST_LOGOUT';
 const REQUEST_PROFILE = 'user/REQUEST_PROFILE';
@@ -100,12 +101,6 @@ const requestProfile = () => ({
 
 const loadProfile = (profile, timestamp) => ({
   type: LOAD_PROFILE,
-  profile,
-  timestamp,
-});
-
-const setProfile = (profile, timestamp) => ({
-  type: SET_PROFILE,
   profile,
   timestamp,
 });
