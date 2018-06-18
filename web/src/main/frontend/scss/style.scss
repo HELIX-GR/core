@@ -2,6 +2,8 @@
  * Theme
  */
 
+$layout-fixed-width :1280px;
+
 @import 'theme/theme';
 
 /*
@@ -22,3 +24,11 @@
  */
 
 @import '../vendor/ol/ol.css';
+
+/**
+ * Custom rules
+ */
+
+ .menu-wrapper .menu-item .active-link {
+  border-bottom: 2px solid;
+}
