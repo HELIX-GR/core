@@ -11,13 +11,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ClientConfiguration {
 
     @JsonIgnore
-    private final List<String>    identityProviders = new ArrayList<String>();
+    private final List<String>     identityProviders = new ArrayList<String>();
 
-    private String                defaultIdentityProvider;
+    private String                 defaultIdentityProvider;
 
-    private OsmConfiguration      osm;
+    private OsmConfiguration       osm;
 
-    private BingMapsConfiguration bingMaps;
+    private BingMapsConfiguration  bingMaps;
+
+    private WordPressConfiguration wordPress;
 
     public List<String> getIdentityProviders() {
         return this.identityProviders;
@@ -37,6 +39,14 @@ public class ClientConfiguration {
 
     public void setBingMaps(BingMapsConfiguration bingMaps) {
         this.bingMaps = bingMaps;
+    }
+
+    public WordPressConfiguration getWordPress() {
+        return this.wordPress;
+    }
+
+    public void setWordPress(WordPressConfiguration wordPress) {
+        this.wordPress = wordPress;
     }
 
     public String getDefaultIdentityProvider() {

@@ -405,18 +405,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new MetadataDisplayFilter();
     }
 
-//    /**
-//     * Handler deciding where to redirect user after successful login
-//     *
-//     * @return
-//     */
-//    @Bean
-//    public SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler() {
-//        final SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-//        successRedirectHandler.setDefaultTargetUrl("/");
-//        return successRedirectHandler;
-//    }
-
     // Handler deciding where to redirect user after failed login
     @Bean
     public SimpleUrlAuthenticationFailureHandler authenticationFailureHandler() {
@@ -449,54 +437,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public MetadataGeneratorFilter metadataGeneratorFilter() {
         return new MetadataGeneratorFilter(this.metadataGenerator());
     }
-
-//    /**
-//     * Handler for successful logout
-//     *
-//     * @return
-//     */
-//    @Bean
-//    public SimpleUrlLogoutSuccessHandler successLogoutHandler() {
-//        final SimpleUrlLogoutSuccessHandler successLogoutHandler = new SimpleUrlLogoutSuccessHandler();
-//        successLogoutHandler.setDefaultTargetUrl("/");
-//        return successLogoutHandler;
-//    }
-
-//    /**
-//     * Logout handler terminating local session
-//     *
-//     * @return
-//     */
-//    @Bean
-//    public SecurityContextLogoutHandler logoutHandler() {
-//        final SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-//        logoutHandler.setInvalidateHttpSession(true);
-//        logoutHandler.setClearAuthentication(true);
-//        return logoutHandler;
-//    }
-
-//    /**
-//     * Filter processing incoming logout messages. First argument determines URL
-//     * user will be redirected to after successful global logout
-//     *
-//     * @return
-//     */
-//    @Bean
-//    public SAMLLogoutProcessingFilter samlLogoutProcessingFilter() {
-//        return new SAMLLogoutProcessingFilter(this.successLogoutHandler(), this.logoutHandler());
-//    }
-
-//    /**
-//     * Overrides default logout processing filter with the one processing SAML
-//     * messages
-//     *
-//     * @return
-//     */
-//    @Bean
-//    public SAMLLogoutFilter samlLogoutFilter() {
-//        return new SAMLLogoutFilter(this.successLogoutHandler(), new LogoutHandler[] { this.logoutHandler() },
-//                new LogoutHandler[] { this.logoutHandler() });
-//    }
 
     // Bindings
     private ArtifactResolutionProfile artifactResolutionProfile() {
@@ -593,19 +533,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.antMatcher("/**")
             .authorizeRequests()
                 .antMatchers("/",
+                             "/core/**",
+                             // Public assets
                              "/favicon.ico",
-                             "/core/",
                              "/css/**",
-                             "/images/**",
+                             "/docs/**",
+                             "/fonts/**",
                              "/i18n/**",
+                             "/images/**",
                              "/js/**",
                              "/vendor/**",
+                             // Authentication endpoints
                              "/core/login**",
                              "/login**",
                              "/logged-out",
                              "/error**",
+                             // SAML endpoints
+                             "/saml/**",
+                             // Public endpoints
                              "/action/configuration/**",
-                             "/saml/**")
+                             "/action/ckan/**",
+                             "/action/catalog/**",
+                             "/action/openaire/**")
                 .permitAll()
             .anyRequest().authenticated()
                 .antMatchers("/admin/**")

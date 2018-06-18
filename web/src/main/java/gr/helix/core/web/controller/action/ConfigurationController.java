@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import gr.helix.core.common.model.RestResponse;
-import gr.helix.core.web.config.MapConfiguration;
+import gr.helix.core.web.config.ExternalServiceProviderConfiguration;
 import gr.helix.core.web.config.SamlConfiguration;
 import gr.helix.core.web.model.configuration.ClientConfiguration;
 
@@ -16,29 +16,30 @@ import gr.helix.core.web.model.configuration.ClientConfiguration;
 public class ConfigurationController extends BaseController {
 
     @Autowired
-    private SamlConfiguration samlConfiguration;
+    private SamlConfiguration                    samlConfiguration;
 
     @Autowired
-    private MetadataManager metadata;
+    private MetadataManager                      metadata;
 
-	@Autowired
-	private MapConfiguration mapConfiguration;
+    @Autowired
+    private ExternalServiceProviderConfiguration serviceProviderConfiguration;
 
-	@RequestMapping(value = "/action/configuration/{locale}", method = RequestMethod.GET)
-	public RestResponse<ClientConfiguration> getConfiguration(String locale) {
-		return RestResponse.result(this.createConfiguration());
-	}
+    @RequestMapping(value = "/action/configuration/{locale}", method = RequestMethod.GET)
+    public RestResponse<ClientConfiguration> getConfiguration(String locale) {
+        return RestResponse.result(this.createConfiguration());
+    }
 
-	private ClientConfiguration createConfiguration() {
-		final ClientConfiguration config = new ClientConfiguration();
+    private ClientConfiguration createConfiguration() {
+        final ClientConfiguration config = new ClientConfiguration();
 
-		config.setOsm(this.mapConfiguration.getOsm());
-		config.setBingMaps(this.mapConfiguration.getBingMaps());
-		config.setDefaultIdentityProvider(this.samlConfiguration.getDefaultProvider());
+        config.setOsm(this.serviceProviderConfiguration.getOsm());
+        config.setBingMaps(this.serviceProviderConfiguration.getBingMaps());
+        config.setDefaultIdentityProvider(this.samlConfiguration.getDefaultProvider());
+        config.setWordPress(this.serviceProviderConfiguration.getWordPress());
 
-		this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);
+        this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);
 
-		return config;
-	}
+        return config;
+    }
 
 }
