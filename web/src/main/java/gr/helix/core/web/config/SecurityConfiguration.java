@@ -27,7 +27,6 @@ import org.opensaml.xml.parse.StaticBasicParserPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -96,6 +95,7 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
 import gr.helix.core.web.logging.filter.MappedDiagnosticContextFilter;
+import gr.helix.core.web.service.OAuthUserInfoTokenServices;
 import gr.helix.core.web.service.SAMLUserDetailsServiceImpl;
 
 @Configuration
@@ -111,7 +111,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final RegexRequestMatcher          samlMatcher = new RegexRequestMatcher("/saml/.*", null);
 
     @Autowired
-    private SamlConfiguration samlConfiguration;
+    private SamlConfiguration                  samlConfiguration;
 
     @PostConstruct
     public void init() {
@@ -591,8 +591,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .clearAuthentication(true)
             .permitAll();
 
-        //http.httpBasic().authenticationEntryPoint(this.samlEntryPoint());
-
         http.addFilterBefore(this.metadataGeneratorFilter(), ChannelProcessingFilter.class);
         http.addFilterBefore(this.ssoFilter(), BasicAuthenticationFilter.class);
         http.addFilterAfter(this.samlFilter(), BasicAuthenticationFilter.class);
@@ -613,9 +611,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private Filter ssoFilter(ClientResources client, String path) {
         final OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
 
-        final UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
-
         final OAuth2RestTemplate template = new OAuth2RestTemplate(client.getClient(), this.oauth2ClientContext);
+
+        final OAuthUserInfoTokenServices tokenServices = new OAuthUserInfoTokenServices(
+            client.getResource().getUserInfoUri(),
+            client.getClient().getClientId(),
+            this.userService);
 
         tokenServices.setRestTemplate(template);
 

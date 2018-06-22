@@ -1,7 +1,5 @@
 package gr.helix.core.web.controller.action;
 
-import java.util.AbstractMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import gr.helix.core.common.model.BasicErrorCode;
-import gr.helix.core.common.model.EnumRole;
 import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.common.model.user.Account;
 import gr.helix.core.common.service.UserService;
@@ -56,45 +53,13 @@ public class ProfileController {
             return RestResponse.result(account);
         }
         if (authentication instanceof OAuth2Authentication) {
-            return RestResponse.result(this.accountFromOAuth2Authentication((OAuth2Authentication) authentication));
+            final OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
+
+            return RestResponse.result(((User) oauth2Authentication.getUserAuthentication().getDetails()).getAccount());
         }
 
         logger.warn("User not found " + authentication.getName() );
         return RestResponse.error(BasicErrorCode.USER_NOT_FOUND, "User not found");
-    }
-
-    @SuppressWarnings("unchecked")
-    private Account accountFromOAuth2Authentication(OAuth2Authentication authentication) {
-        final Account account = new Account(authentication.getPrincipal().toString());
-
-        if (authentication.getUserAuthentication().getDetails() instanceof AbstractMap<?, ?>) {
-            final AbstractMap<String, String> details = (AbstractMap<String, String>) authentication.getUserAuthentication().getDetails();
-
-            details.keySet().stream()
-                .forEach(key -> {
-                    switch (key) {
-                        case "name":
-                            account.setName(details.get(key));
-                            break;
-                        case "email":
-                            account.setEmail(details.get(key));
-                            break;
-                        case "avatar_url":
-                        case "picture":
-                            account.setImageUrl(details.get(key));
-                            break;
-                        case "locale":
-                            account.setLang(details.get(key));
-                            break;
-                    }
-                });
-        }
-        authentication.getAuthorities().stream()
-            .map(r -> EnumRole.fromString(r.getAuthority()))
-            .filter(r -> r != null)
-            .forEach(r -> account.getRoles().add(r));
-
-        return account;
     }
 
 }

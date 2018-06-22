@@ -31,7 +31,7 @@ public class SsoController {
     private static final Logger logger = LoggerFactory.getLogger(SsoController.class);
 
     @Autowired
-    private SamlConfiguration samlConfiguration;
+    private SamlConfiguration   samlConfiguration;
 
     @Autowired
     private MetadataManager     metadata;
