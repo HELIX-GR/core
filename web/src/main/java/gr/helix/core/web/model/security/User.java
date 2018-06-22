@@ -75,4 +75,9 @@ public class User implements UserDetails {
         return this.account;
     }
 
+    @Override
+    public String toString() {
+        return this.account.getUsername();
+    }
+
 }

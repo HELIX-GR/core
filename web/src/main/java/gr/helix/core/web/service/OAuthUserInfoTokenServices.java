@@ -78,8 +78,9 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
         }
 
         // Replace authentication
-        final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), "N/A", authorities);
-        token.setDetails(new User(account,""));
+        final User user = new User(account,"");
+        final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, "N/A", authorities);
+        token.setDetails(user);
 
         return new OAuth2Authentication(authentication.getOAuth2Request(), token);
     }
