@@ -23,17 +23,22 @@ public class SearchService {
     @Autowired
     private OpenaireServiceProxy openaireServiceProxy;
 
-    public CompositeCatalogResult queryCatalog(String term) throws InterruptedException, ExecutionException {
-        final CatalogQuery query = new CatalogQuery();
-        query.setPageIndex(0);
-        query.setPageSize(10);
-        query.setTerm(term);
+    public CompositeCatalogResult queryCatalog(EnumCatalog catalog, String term) {
+        final CompositeCatalogResult result = new CompositeCatalogResult();
 
-        final CompositeCatalogQuery compositeQuery = new CompositeCatalogQuery();
-        compositeQuery.getQueries().put(EnumCatalog.CKAN, query);
-        compositeQuery.getQueries().put(EnumCatalog.OPENAIRE, query);
+        switch (catalog) {
+            case CKAN:
+                result.add(catalog, this.queryData(term));
+                break;
+            case OPENAIRE:
+                result.add(catalog, this.queryPublications(term));
+                break;
+            default:
+                // Not supported
+                break;
+        }
 
-        return this.queryAsync(compositeQuery);
+        return result;
     }
 
     public CatalogResult<?> queryData(String term) {

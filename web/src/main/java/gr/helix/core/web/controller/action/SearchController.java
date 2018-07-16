@@ -13,6 +13,7 @@ import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.web.model.CatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
+import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.service.SearchService;
 
 @RestController
@@ -23,9 +24,9 @@ public class SearchController {
     public SearchService searchService;
 
     @RequestMapping(value = "/action/catalog/query", method = RequestMethod.GET)
-    public RestResponse<?> query(Authentication authentication, @RequestParam String search) {
+    public RestResponse<?> query(Authentication authentication, @RequestParam EnumCatalog catalog, @RequestParam String search) {
         try {
-            final CompositeCatalogResult result = this.searchService.queryCatalog(search);
+            final CompositeCatalogResult result = this.searchService.queryCatalog(catalog, search);
 
             return RestResponse.result(result);
         } catch (final Exception ex) {
