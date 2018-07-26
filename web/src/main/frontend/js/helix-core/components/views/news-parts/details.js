@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
 import classnames from 'classnames';
-import moment from '../../moment-localized';
+import moment from '../../../moment-localized';
 
 import {
   bindActionCreators
@@ -19,23 +19,23 @@ import {
 import {
   getPost,
   getRelativePosts,
-} from '../../ducks/ui/wordpress';
+} from '../../../ducks/ui/views/news';
 
 import {
   buildPath,
   DynamicRoutes,
-} from '../../model';
+} from '../../../model';
 
 const PARAM_ID = 'id';
 
-class NewsDetails extends React.Component {
+class Details extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   get title() {
-    const { current: post } = this.props.wordpress;
+    const { current: post } = this.props.news;
     const parts = [
       'News',
       this.getPostFirstCategory(post),
@@ -83,7 +83,7 @@ class NewsDetails extends React.Component {
   }
 
   render() {
-    const { current: post, relative: relativePosts } = this.props.wordpress;
+    const { current: post, relative: relativePosts } = this.props.news;
 
     return (
       <div>
@@ -217,7 +217,7 @@ class NewsDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  wordpress: state.ui.wordpress,
+  news: state.ui.news,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -231,4 +231,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(NewsDetails);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Details);

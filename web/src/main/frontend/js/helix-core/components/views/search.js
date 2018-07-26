@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
@@ -10,23 +11,31 @@ import {
 
 import {
   getLatestPosts,
-} from '../../ducks/ui/wordpress';
+} from '../../ducks/ui/views/news';
 
 import {
   changeText,
   search as searchAll,
+  searchAutoComplete,
   toggleAdvanced,
   togglePill,
+  setResultVisibility,
 } from '../../ducks/ui/views/search';
+
+import {
+  EnumCatalog,
+  StaticRoutes,
+} from '../../model';
 
 import {
   Pill,
 } from '../helpers';
 
 import {
+  SearchAdvanced,
   SearchNews,
   SearchResult,
-} from './';
+} from './search-parts';
 
 class SearchPage extends React.Component {
 
@@ -34,34 +43,58 @@ class SearchPage extends React.Component {
     super(props);
 
     this.onPillChanged = this.onPillChanged.bind(this);
+    this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
+
+    this.textInput = React.createRef();
   }
 
   static contextTypes = {
     intl: PropTypes.object,
   }
 
+  isTextValid(text) {
+    return ((text) && (text.length > 2));
+  }
+
+  search() {
+    const { text } = this.props.search;
+
+    if (this.isTextValid(text)) {
+      this.props.searchAll(text).then((data) => {
+        const found = Object.keys(EnumCatalog).some((key) => {
+          return (data.catalogs[key] && data.catalogs[key].count !== 0);
+        });
+
+        if (found) {
+          this.props.history.push(StaticRoutes.RESULTS);
+        }
+      });
+    }
+  }
+
   onPillChanged(id) {
     const { text } = this.props.search;
 
     this.props.togglePill(id);
-
     if (this.isTextValid(text)) {
-      this.props.searchAll(text);
+      this.searchAutoComplete(text);
+    }
+
+    this.textInput.current.focus();
+  }
+
+  onTextChanged(value) {
+    this.props.changeText(value);
+
+    if (this.isTextValid(value)) {
+      this.searchAutoComplete(value);
     }
   }
 
   onSearch(e) {
     e.preventDefault();
 
-    const { text } = this.props.search;
-
-    if (this.isTextValid(text)) {
-      this.props.searchAll(text);
-    }
-  }
-
-  isTextValid(text) {
-    return ((text) && (text.length > 2));
+    this.search();
   }
 
   componentDidMount() {
@@ -69,8 +102,8 @@ class SearchPage extends React.Component {
   }
 
   render() {
-    const { advanced, result: { composite }, loading, pills, text } = this.props.search;
-    const { latest: posts } = this.props.wordpress;
+    const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
+    const { latest: posts } = this.props.news;
 
     const _t = this.context.intl.formatMessage;
 
@@ -84,11 +117,15 @@ class SearchPage extends React.Component {
                 <div className="main-form-content">
                   <input
                     type="text"
+                    autoComplete="off"
                     className="landing-search-text"
                     name="landing-search-text" value=""
                     placeholder={_t({ id: 'search.placeholder' })}
                     value={text}
-                    onChange={(e) => this.props.changeText(e.target.value)}
+                    onChange={(e) => this.onTextChanged(e.target.value)}
+                    onFocus={(e) => this.props.setResultVisibility(true)}
+                    onBlur={(e) => this.props.setResultVisibility(false)}
+                    ref={this.textInput}
                   />
                   <div
                     className={
@@ -135,63 +172,15 @@ class SearchPage extends React.Component {
                     </div>
                   </div>
 
-                  <div
-                    className={
-                      classnames({
-                        'closable': true,
-                        'visible': advanced,
-                      })
+                  <SearchAdvanced
+                    visible={advanced}
+                    toggle={this.props.toggleAdvanced}
+                  />
 
-                    }
-                  >
-                    <div
-                      className="close-btn"
-                      onClick={(e) => this.props.toggleAdvanced()}
-                    >
-                      CLOSE
-                    </div>
-
-                    <div className="search-options">
-                      <label htmlFor="input-organizations"><span className="label-content">ORGANIZATIONS</span>
-                        <input list="organizations" id="input-organizations" name="input-organizations" value="" placeholder="- SELECT -" />
-                        <a href="#"> <i className="fa fa-search"></i> </a>
-                        <datalist id="organizations">
-                          <option value=""></option>
-                        </datalist>
-                      </label>
-                      <label htmlFor="input-tags"><span className="label-content">TAGS</span>
-                        <input list="tags" id="input-tags" name="input-tags" value="" placeholder="- SELECT -" />
-                        <a href="#"> <i className="fa fa-search"></i> </a>
-                        <datalist id="tags">
-                          <option value=""></option>
-                        </datalist>
-                      </label>
-                      <label htmlFor="input-licences"><span className="label-content">LICENCES</span>
-                        <input list="licences" id="input-licences" name="input-licences" value="" placeholder="- SELECT -" />
-                        <a href="#"> <i className="fa fa-search"></i> </a>
-                        <datalist id="licences">
-                          <option value=""></option>
-                        </datalist>
-                      </label>
-                      <label htmlFor="input-topics"><span className="label-content">TOPICS</span>
-                        <input list="topics" id="input-topics" name="input-topics" value="" placeholder="- SELECT -" />
-                        <a href="#"> <i className="fa fa-search"></i> </a>
-                        <datalist id="topics">
-                          <option value=""></option>
-                        </datalist>
-                      </label>
-                      <label htmlFor="input-formats"><span className="label-content">FORMATS</span>
-                        <input list="formats" id="input-formats" name="input-formats" value="" placeholder="- SELECT -" />
-                        <a href="#"> <i className="fa fa-search"></i> </a>
-                        <datalist id="formats">
-                          <option value=""></option>
-                        </datalist>
-                      </label>
-                    </div>
-                  </div>
-
+                  {/* TODO: Use autoComplete result */}
                   <SearchResult
-                    result={composite}
+                    visible={visible && !loading}
+                    result={catalogs}
                   />
 
                 </div>
@@ -223,17 +212,19 @@ class SearchPage extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
+  news: state.ui.news,
   search: state.ui.search,
   profile: state.user.profile,
-  wordpress: state.ui.wordpress,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   changeText,
   getLatestPosts,
   searchAll,
+  searchAutoComplete,
   toggleAdvanced,
   togglePill,
+  setResultVisibility,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

@@ -9,9 +9,9 @@ import {
 import {
   buildPath,
   DynamicRoutes,
-} from '../../model';
+} from '../../../model';
 
-class SearchNews extends React.Component {
+class News extends React.Component {
 
   constructor(props) {
     super(props);
@@ -80,4 +80,4 @@ class SearchNews extends React.Component {
 
 }
 
-export default SearchNews;
+export default News;

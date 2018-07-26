@@ -18,7 +18,7 @@ import {
 
 import {
   getPosts,
-} from '../../ducks/ui/wordpress';
+} from '../../ducks/ui/views/news';
 
 import {
   buildPath,
@@ -36,7 +36,7 @@ class News extends React.Component {
   onLoadMore(e) {
     e.preventDefault();
 
-    const { pageIndex, pageSize } = this.props.wordpress.page;
+    const { pageIndex, pageSize } = this.props.news.page;
 
     this.props.getPosts(pageIndex + 1, pageSize).then(() => {
       this.scrollElementIntoViewIfNeeded();
@@ -48,7 +48,7 @@ class News extends React.Component {
   }
 
   render() {
-    const { page, loading } = this.props.wordpress;
+    const { page, loading } = this.props.news;
 
     return (
       <div>
@@ -75,17 +75,19 @@ class News extends React.Component {
               </div>
 
             </div>
-            <div>
-              <button
-                type="submit"
-                name="landing-search-button"
-                className="landing-search-button"
-                disabled={loading}
-                onClick={(e) => this.onLoadMore(e)}
-              >
-                <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
-              </button>
-            </div>
+            {page.posts.length !== 0 &&
+              <div>
+                <button
+                  type="submit"
+                  name="landing-search-button"
+                  className="landing-search-button"
+                  disabled={loading}
+                  onClick={(e) => this.onLoadMore(e)}
+                >
+                  <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
+                </button>
+              </div>
+            }
 
           </div>
 
@@ -153,7 +155,7 @@ class News extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  wordpress: state.ui.wordpress,
+  news: state.ui.news,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

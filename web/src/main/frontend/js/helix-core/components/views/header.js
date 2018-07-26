@@ -6,9 +6,12 @@ import {
 } from 'react-router-dom';
 
 import {
+  buildPath,
+  DynamicRoutes,
   Pages,
   StaticRoutes,
-} from '../../model/routes';
+  WordPressPages,
+} from '../../model';
 
 class Header extends React.Component {
 
@@ -42,45 +45,62 @@ class Header extends React.Component {
     const authenticated = (this.props.profile != null);
 
     return (
-      <header className="header fixed">
+      <header className="header">
+
         <div className="logo-area">
           <NavLink to={StaticRoutes.HOME}>
             <img className="logo-image" src="/images/svg/Helix-logo.svg" alt="Helix" />
           </NavLink>
         </div>
+
         <div className="menu-wrapper">
+
           <nav className="nav-menu">
             <ul className="menu-items">
-              <li id="menu-item-data" className="menu-item domain-item has-sub-menu">
+              <li id="menu-item-data" className="menu-item domain-item">
                 <a href="index_data.html">
                   Data
                 </a>
-                <ul className="sub-menu">
-                  <li><a href="#">Συμμετέχοντες</a></li>
-                  <li><a href="#">Διοργανωτές</a></li>
-                  <li><a href="#">Χρηματοδότηση</a></li>
-                  <li><a href="#">Ερευνητικό Έργο</a></li>
-                </ul>
               </li>
+
               <li id="menu-item-pubs" className="menu-item domain-item">
                 <a href="index_pubs.html">
                   Pubs
                 </a>
               </li>
+
               <li id="menu-item-lab" className="menu-item domain-item">
                 <a href="index_lab.html">
                   Lab
                 </a>
               </li>
-              <li id="menu-item-project" className="menu-item aux-item">
-                <NavLink to={StaticRoutes.PROJECT_CHILDREN.DEFAULT} activeClassName="active-link" strict={false}>Το έργο</NavLink>
+
+              <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
+                <NavLink to={StaticRoutes.PROJECT} activeClassName="active-link" strict={false}>About</NavLink>
+                <ul className="sub-menu">
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>What is HELIX?</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])}>Services</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>FAQ</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])}>Publish Data</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])}>Software</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])}>The project</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])}>Media</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])}>Acknowledge Helix</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>Contact</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>Terms of use</NavLink></li>
+                </ul>
               </li>
-              <li id="menu-item-news" className="menu-item aux-item">
-                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">Νέα</NavLink>
+
+              <li id="menu-item-news" className="menu-item aux-item has-sub-menu">
+                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">News</NavLink>
+                <ul className="sub-menu">
+                  <li><NavLink to={StaticRoutes.NEWS}>News</NavLink></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
               </li>
+
             </ul>
           </nav>
-
 
           <div className="language-selector" onClick={this.changeLocale}>
             <a href="#">
@@ -95,11 +115,27 @@ class Header extends React.Component {
               </NavLink>
             </div>
           }
+
           {authenticated &&
             <div className="account-item">
-              <a onClick={(e) => this.props.logout()}>
-                <img className="account-icon" src={this.props.profile.imageUrl || '/images/svg/Avatar.svg'} alt="Account tab" />
-              </a>
+              <nav className="nav-menu">
+                <ul className="menu-items">
+                  <li id="menu-item-account" className="menu-item aux-item has-sub-menu">
+                    <a>
+                      <img className="account-icon" src={this.props.profile.imageUrl || '/images/svg/avatar-white.svg'} alt="Account tab" />
+                    </a>
+                    <ul className="sub-menu">
+                      {authenticated &&
+                        <li><a href="#">Signed in as {this.props.profile.username}</a></li>
+                      }
+                      <li><a href="#">Account</a></li>
+                      <li><a href="#">Help</a></li>
+                      <li><a href="#">Settings</a></li>
+                      <li><a href="#" onClick={(e) => this.props.logout()}>Log out</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
             </div>
           }
 
@@ -108,7 +144,9 @@ class Header extends React.Component {
               <i className="fa fa-search"></i>
             </a>
           </div>
+
         </div>
+
       </header>
     );
   }

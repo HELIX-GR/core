@@ -1,20 +1,20 @@
-import moment from '../../moment-localized';
+import moment from '../../../moment-localized';
 
 // Services
-import { default as wordPressService } from '../../service/wordpress';
+import { default as wordPressService } from '../../../service/wordpress';
 
 // Actions
-const POST_LATEST_REQUEST = 'ui/wordpress/POST_LATEST_REQUEST';
-const POST_LATEST_RESPONSE = 'ui/wordpress/POST_LATEST_RESPONSE';
+const POST_LATEST_REQUEST = 'ui/news/POST_LATEST_REQUEST';
+const POST_LATEST_RESPONSE = 'ui/news/POST_LATEST_RESPONSE';
 
-const POST_PAGE_REQUEST = 'ui/wordpress/POST_PAGE_REQUEST';
-const POST_PAGE_RESPONSE = 'ui/wordpress/POST_PAGE_RESPONSE';
+const POST_PAGE_REQUEST = 'ui/news/POST_PAGE_REQUEST';
+const POST_PAGE_RESPONSE = 'ui/news/POST_PAGE_RESPONSE';
 
-const POST_REQUEST = 'ui/wordpress/POST_REQUEST';
-const POST_RESPONSE = 'ui/wordpress/POST_RESPONSE';
+const POST_REQUEST = 'ui/news/POST_REQUEST';
+const POST_RESPONSE = 'ui/news/POST_RESPONSE';
 
-const RELATIVE_POSTS_REQUEST = 'ui/wordpress/RELATIVE_POSTS_REQUEST';
-const RELATIVE_POSTS_RESPONSE = 'ui/wordpress/RELATIVE_POSTS_RESPONSE';
+const RELATIVE_POSTS_REQUEST = 'ui/news/RELATIVE_POSTS_REQUEST';
+const RELATIVE_POSTS_RESPONSE = 'ui/news/RELATIVE_POSTS_RESPONSE';
 
 // Reducer
 const initialState = {
@@ -157,7 +157,7 @@ const getRelativePostsComplete = (posts) => ({
 // Thunk actions
 export const getLatestPosts = (count) => (dispatch, getState) => {
   const {
-    ui: { wordpress: { lastUpdate, latest: posts } },
+    ui: { news: { lastUpdate, latest: posts } },
     config: { wordPress: { endpoint: host } },
   } = getState();
 
@@ -232,7 +232,7 @@ export const getPost = (id) => (dispatch, getState) => {
 
 export const getRelativePosts = (count) => (dispatch, getState) => {
   const {
-    ui: { wordpress: { current: post } },
+    ui: { news: { current: post } },
     config: { wordPress: { endpoint: host } },
   } = getState();
 

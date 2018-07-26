@@ -9,22 +9,30 @@ import {
 // Actions
 const ADVANCED_SEARCH_TOGGLE = 'ui/search-page/ADVANCED_SEARCH_TOGGLE';
 const PILL_TOGGLE = 'ui/search-page/PILL_TOGGLE';
+const SET_RESULT_VISIBILITY = 'ui/search-page/SET_RESULT_VISIBILITY';
 const TEXT_CHANGE = 'ui/search-page/TEXT_CHANGE';
 
 const SEARCH_REQUEST = 'ui/search-page/SEARCH_REQUEST';
 const SEARCH_RESPONSE = 'ui/search-page/SEARCH_RESPONSE';
 
+const SEARCH_AUTOCOMPLETE_REQUEST = 'ui/search-page/SEARCH_AUTOCOMPLETE_REQUEST';
+const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/search-page/SEARCH_AUTOCOMPLETE_RESPONSE';
+
 // Reducer
 const initialState = {
   advanced: false,
   loading: false,
+  partialResult: {
+    visible: false,
+    catalogs: {},
+  },
   pills: {
     data: true,
-    pubs: true,
+    pubs: false,
     lab: false,
   },
   result: {
-    composite: {},
+    catalogs: {},
   },
   text: '',
 };
@@ -42,9 +50,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         pills: {
-          ...state.pills,
-          [action.id]: !state.pills[action.id],
+          data: false,
+          pubs: false,
+          lab: false,
+          [action.id]: true,
+        },
+        partialResult: {
+          visible: false,
+          catalogs: {},
         }
+      };
+
+    case SET_RESULT_VISIBILITY:
+      return {
+        ...state,
+        partialResult: {
+          ...state.partialResult,
+          visible: action.visible,
+        },
       };
 
     case TEXT_CHANGE:
@@ -59,13 +82,32 @@ export default (state = initialState, action) => {
         loading: true,
       };
 
+    case SEARCH_AUTOCOMPLETE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        partialResult: {
+          visible: false,
+          catalogs: {},
+        }
+      };
+
     case SEARCH_RESPONSE:
       return {
         ...state,
-        loading: false,
+        loading: true,
         result: {
-          ...state.result,
-          composite: action.data.catalogs,
+          catalogs: action.data.catalogs,
+        },
+      };
+
+    case SEARCH_AUTOCOMPLETE_RESPONSE:
+      return {
+        ...state,
+        loading: false,
+        partialResult: {
+          visible: true,
+          catalogs: action.data.catalogs,
         },
       };
 
@@ -89,6 +131,23 @@ export const togglePill = (id) => ({
   id,
 });
 
+export const setResultVisibility = (visible) => ({
+  type: SET_RESULT_VISIBILITY,
+  visible,
+});
+
+const catalogSearchKeywordBegin = (catalog, term) => ({
+  type: SEARCH_AUTOCOMPLETE_REQUEST,
+  catalog,
+  term,
+});
+
+const catalogSearchKeywordComplete = (data) => ({
+  type: SEARCH_AUTOCOMPLETE_RESPONSE,
+  data,
+});
+
+
 const catalogSearchBegin = (term) => ({
   type: SEARCH_REQUEST,
   term,
@@ -100,13 +159,16 @@ const catalogSearchComplete = (data) => ({
 });
 
 // Thunk actions
-export const searchKeyword = (term) => (dispatch, getState) => {
-  const { meta: { csrfToken: token } } = getState();
+export const searchAutoComplete = (term) => (dispatch, getState) => {
+  const { meta: { csrfToken: token }, ui: { search: { pills } } } = getState();
 
-  dispatch(catalogSearchBegin(term));
-  return catalogService.searchKeyword(token, term)
+  const catalog = pills.data ? EnumCatalog.CKAN : pills.pubs ? EnumCatalog.OPENAIRE : EnumCatalog.NONE;
+
+  dispatch(catalogSearchKeywordBegin(catalog, term));
+  return catalogService.searchKeyword(token, catalog, term)
     .then((data) => {
-      dispatch(catalogSearchComplete(data));
+      dispatch(catalogSearchKeywordComplete(data));
+      return data;
     })
     .catch((err) => {
       // TODO: Add error handling
@@ -137,6 +199,7 @@ export const search = (term, pageIndex = 0, pageSize = 10) => (dispatch, getStat
   return catalogService.search(token, { queries })
     .then((data) => {
       dispatch(catalogSearchComplete(data));
+      return (data);
     })
     .catch((err) => {
       // TODO: Add error handling

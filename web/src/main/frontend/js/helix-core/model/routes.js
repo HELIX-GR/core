@@ -7,47 +7,26 @@ import pathToRegexp from 'path-to-regexp';
  * Static routes
  */
 const HOME = '/';
+const RESULTS = '/results';
 const NEWS = '/news';
-
 const PROJECT = '/project/*';
-const PROJECT_ABOUT = '/project/about';
-const PROJECT_CONTACT = '/project/contact';
-const PROJECT_DEFAULT = '/project/';
-const PROJECT_FAQ = '/project/faq';
-const PROJECT_LEARN = '/project/learn';
-const PROJECT_USE = '/project/use';
-
-const PROJECT_ABOUT_PUBLISH_DATA = '/project/publish-data';
-const PROJECT_ABOUT_PROJECT = '/project/details';
-const PROJECT_ABOUT_SOFTWARE = '/project/software';
-
 
 export const StaticRoutes = {
   HOME,
+  RESULTS,
   NEWS,
   PROJECT,
-  PROJECT_CHILDREN: {
-    ABOUT: PROJECT_ABOUT,
-    ABOUT_CHILDREN: {
-      PROJECT: PROJECT_ABOUT_PROJECT,
-      PUBLISH_DATA: PROJECT_ABOUT_PUBLISH_DATA,
-      SOFTWARE: PROJECT_ABOUT_SOFTWARE,
-    },
-    CONTACT: PROJECT_CONTACT,
-    DEFAULT: PROJECT_DEFAULT,
-    FAQ: PROJECT_FAQ,
-    LEARN: PROJECT_LEARN,
-    USE: PROJECT_USE,
-  },
 };
 
 /**
  * Dynamic routes
  */
 const NEWS_DETAILS = '/news/view/:id';
+const PROJECT_PAGE = '/project/page/:name';
 
 export const DynamicRoutes = {
   NEWS_DETAILS,
+  PROJECT_PAGE,
 };
 
 /**

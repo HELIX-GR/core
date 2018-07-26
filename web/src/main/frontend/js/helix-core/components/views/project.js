@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { StaticRoutes, ErrorPages } from '../../model/routes';
+import {
+  buildPath,
+  DynamicRoutes,
+  ErrorPages,
+  WordPressPages,
+} from '../../model';
 
 import {
   Page403,
@@ -9,17 +14,9 @@ import {
 } from '../pages';
 
 import {
-  ProjectContact,
-  ProjectDefault,
-  ProjectFAQ,
-  ProjectInfo,
-  ProjectLearn,
-  ProjectPublishData,
-  ProjectSoftware,
-  ProjectUse,
-} from './project-children';
-
-import AboutMenu from './about-menu';
+  ProjectMenu,
+  ProjectPage,
+} from './project-parts';
 
 class Project extends React.Component {
 
@@ -47,7 +44,7 @@ class Project extends React.Component {
               </div>
 
               <div className="col-md-3 col-xs-12">
-                <AboutMenu />
+                <ProjectMenu />
               </div>
 
               <div className="col-md-9 col-xs-12">
@@ -57,16 +54,10 @@ class Project extends React.Component {
                     {/* Handle errors first */}
                     <Route path={ErrorPages.Forbidden} component={Page403} exact />
                     <Route path={ErrorPages.NotFound} component={Page404} exact />
-                    {/* Detail components */}
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.ABOUT_CHILDREN.PROJECT} component={ProjectInfo} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.ABOUT_CHILDREN.PUBLISH_DATA} component={ProjectPublishData} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.ABOUT_CHILDREN.SOFTWARE} component={ProjectSoftware} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.ABOUT} component={ProjectDefault} exact/>
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.CONTACT} component={ProjectContact} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.DEFAULT} component={ProjectDefault} exact />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.FAQ} component={ProjectFAQ} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.LEARN} component={ProjectLearn} />
-                    <Route path={StaticRoutes.PROJECT_CHILDREN.USE} component={ProjectUse} />
+                    {/* Detail component */}
+                    <Route path={DynamicRoutes.PROJECT_PAGE} component={ProjectPage} />
+                    {/* Default */}
+                    <Redirect to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.About])} />
                   </Switch>
 
                 </div>

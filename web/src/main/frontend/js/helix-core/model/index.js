@@ -10,8 +10,14 @@ export {
 } from './error';
 
 export {
+  WordPressPages,
+} from './pages';
+
+export {
   buildPath,
   DynamicRoutes,
+  ErrorPages,
+  Pages,
   StaticRoutes,
 } from './routes';
 

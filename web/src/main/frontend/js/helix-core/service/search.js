@@ -3,8 +3,8 @@ import { api as routes } from '../model/routes';
 
 export default {
 
-  searchKeyword: (token, term) => {
-    return actions.get(`${routes.SearchAll}?search=${term}`, token);
+  searchKeyword: (token, catalog, term) => {
+    return actions.get(`${routes.SearchAll}?catalog=${catalog}&search=${term}`, token);
   },
 
   search: (token, query) => {

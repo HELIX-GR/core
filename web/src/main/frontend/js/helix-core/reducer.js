@@ -9,10 +9,11 @@ import {
 
 import {
   viewport,
-  wordpress,
 } from './ducks/ui/';
 
 import {
+  news,
+  project,
   search,
 } from './ducks/ui/views';
 
@@ -21,9 +22,10 @@ export default Redux.combineReducers({
   i18n,
   meta,
   ui: Redux.combineReducers({
+    news,
+    project,
     search,
     viewport,
-    wordpress,
   }),
   user,
 });

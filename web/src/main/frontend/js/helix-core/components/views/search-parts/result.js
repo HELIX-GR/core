@@ -5,15 +5,16 @@ import classnames from 'classnames';
 
 import {
   EnumCatalog,
-} from '../../model';
+} from '../../../model';
 
-class SearchResult extends React.Component {
+class Result extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   static propTypes = {
+    visible: PropTypes.bool.isRequired,
     result: PropTypes.object.isRequired,
   }
 
@@ -29,7 +30,7 @@ class SearchResult extends React.Component {
     const showPublications = (publications && publications.results && publications.results.length !== 0);
     const showNotebooks = (notebooks && notebooks.results && notebooks.results.length !== 0);
 
-    const visible = showPackages || showPublications || showNotebooks;
+    const visible = this.props.visible && (showPackages || showPublications || showNotebooks);
 
     return (
       <div
@@ -116,4 +117,4 @@ class SearchResult extends React.Component {
 
 }
 
-export default SearchResult;
+export default Result;

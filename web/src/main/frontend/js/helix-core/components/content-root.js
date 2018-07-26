@@ -31,6 +31,7 @@ import {
   News,
   NewsDetails,
   Project,
+  ResultPage,
   SearchPage,
 } from './views';
 
@@ -75,6 +76,7 @@ class ContentRoot extends React.Component {
         {/* Static routes */}
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
+        <Route path={StaticRoutes.RESULTS} component={ResultPage} />
         {/* Default */}
         <Route path={StaticRoutes.HOME} component={SearchPage} />
       </Switch>
