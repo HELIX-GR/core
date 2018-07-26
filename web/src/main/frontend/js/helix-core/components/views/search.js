@@ -19,6 +19,7 @@ import {
   searchAutoComplete,
   toggleAdvanced,
   togglePill,
+  toggleSearchFacet,
   setResultVisibility,
 } from '../../ducks/ui/views/search';
 
@@ -32,7 +33,7 @@ import {
 } from '../helpers';
 
 import {
-  SearchAdvanced,
+  SearchAdvancedModal,
   SearchNews,
   SearchResult,
 } from './search-parts';
@@ -56,11 +57,11 @@ class SearchPage extends React.Component {
     return ((text) && (text.length > 2));
   }
 
-  search() {
+  search(advanced = false) {
     const { text } = this.props.search;
 
     if (this.isTextValid(text)) {
-      this.props.searchAll(text).then((data) => {
+      this.props.searchAll(text, advanced).then((data) => {
         const found = Object.keys(EnumCatalog).some((key) => {
           return (data.catalogs[key] && data.catalogs[key].count !== 0);
         });
@@ -83,10 +84,10 @@ class SearchPage extends React.Component {
     this.textInput.current.focus();
   }
 
-  onTextChanged(value) {
+  onTextChanged(value, refresh = true) {
     this.props.changeText(value);
 
-    if (this.isTextValid(value)) {
+    if ((refresh) && (this.isTextValid(value))) {
       this.searchAutoComplete(value);
     }
   }
@@ -94,7 +95,7 @@ class SearchPage extends React.Component {
   onSearch(e) {
     e.preventDefault();
 
-    this.search();
+    this.search(false);
   }
 
   componentDidMount() {
@@ -119,12 +120,12 @@ class SearchPage extends React.Component {
                     type="text"
                     autoComplete="off"
                     className="landing-search-text"
-                    name="landing-search-text" value=""
+                    name="landing-search-text"
                     placeholder={_t({ id: 'search.placeholder' })}
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
-                    onFocus={(e) => this.props.setResultVisibility(true)}
-                    onBlur={(e) => this.props.setResultVisibility(false)}
+                    onFocus={() => this.props.setResultVisibility(true)}
+                    onBlur={() => this.props.setResultVisibility(false)}
                     ref={this.textInput}
                   />
                   <div
@@ -166,16 +167,11 @@ class SearchPage extends React.Component {
                           'hidden': advanced,
                         })
                       }
-                      onClick={(e) => this.props.toggleAdvanced()}
+                      onClick={() => this.props.toggleAdvanced()}
                     >
                       ADVANCED SEARCH
                     </div>
                   </div>
-
-                  <SearchAdvanced
-                    visible={advanced}
-                    toggle={this.props.toggleAdvanced}
-                  />
 
                   {/* TODO: Use autoComplete result */}
                   <SearchResult
@@ -204,6 +200,17 @@ class SearchPage extends React.Component {
           <SearchNews posts={posts} />
 
         </section>
+
+        <SearchAdvancedModal
+          facets={this.props.search.facets}
+          loading={this.props.search.loading}
+          metadata={this.props.config.ckan}
+          visible={advanced}
+          changeText={(text) => this.onTextChanged(text, false)}
+          search={() => this.search(true)}
+          toggle={this.props.toggleAdvanced}
+          toggleSearchFacet={this.props.toggleSearchFacet}
+        />
       </div >
     );
   }
@@ -214,7 +221,6 @@ const mapStateToProps = (state) => ({
   locale: state.i18n.locale,
   news: state.ui.news,
   search: state.ui.search,
-  profile: state.user.profile,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -224,6 +230,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   searchAutoComplete,
   toggleAdvanced,
   togglePill,
+  toggleSearchFacet,
   setResultVisibility,
 }, dispatch);
 

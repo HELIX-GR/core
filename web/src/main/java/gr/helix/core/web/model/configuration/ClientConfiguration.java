@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import gr.helix.core.web.model.ckan.CkanMetadata;
+
 /**
  * Application configuration settings
  */
@@ -20,6 +22,8 @@ public class ClientConfiguration {
     private BingMapsConfiguration  bingMaps;
 
     private WordPressConfiguration wordPress;
+
+    private CkanMetadata           ckan;
 
     public List<String> getIdentityProviders() {
         return this.identityProviders;
@@ -60,4 +64,13 @@ public class ClientConfiguration {
     public void addIdentityProvider(String identityProvider) {
         this.identityProviders.add(identityProvider);
     }
+
+    public CkanMetadata getCkan() {
+        return this.ckan;
+    }
+
+    public void setCkan(CkanMetadata ckan) {
+        this.ckan = ckan;
+    }
+
 }

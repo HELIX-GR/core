@@ -1,0 +1,98 @@
+.advanced-search {
+  .btn {
+    cursor: pointer;
+  }
+  input.search-text {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    width: 80%;
+    height: 45px;
+    line-height: 2.3;
+    letter-spacing: .025em;
+    color: $main-black;
+    font-weight: 400;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    &::-moz-selection {
+      color: white;
+      background-color: #BFBFBF;
+    }
+    &::selection {
+      color: white;
+      background-color: #BFBFBF;
+    }
+    &:focus {
+      border: none;
+    }
+  }
+  .param-box {
+    margin-top: 35px;
+    max-height: 312px;
+    overflow-y: auto;
+    .title {
+      margin-left: 13px;
+      margin-bottom: 25px;
+    }
+    .switches {
+      label {
+        display: block;
+        border-bottom: 1px solid $details-grey;
+        margin-left: 15px;
+        padding: 15px 0;
+        position: relative;
+        font-weight: 300;
+        font-size: 14px;
+        color: $details-grey;
+        letter-spacing: .05em;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        input {
+          position: relative;
+          top: 2px;
+          background-color: white;
+          border: 1px solid $main-black;
+          border-radius: 2px;
+          margin-right: 10px;
+        }
+      }
+      .more-link {
+        margin-left: 15px;
+        margin-top: 17px;
+        a {
+          font-weight: 300;
+          font-size: 14px;
+          color: $details-grey;
+          letter-spacing: .05em;
+          line-height: 1.5;
+        }
+      }
+    }
+    .map-container img {
+      width: 100%;
+    }
+  }
+  section.footer {
+    padding: 2rem;
+    button.landing-search-button {
+      color: white;
+      background-color: $main-black;
+      border: none;
+      border-radius: 25px;
+      height: 50px;
+      right: 0;
+      opacity: 1;
+      transition: all .2s ease-in-out;
+      -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+      width: 100%;
+      &:hover {
+        opacity: .5;
+        cursor: pointer;
+      }
+    }
+  }
+}

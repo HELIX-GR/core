@@ -640,6 +640,8 @@ body{
         .param-box{
 
           margin-top: 35px;
+          max-height: 312px;
+          overflow-y: auto;
 
           .title{
             margin-left: 13px;
@@ -661,6 +663,10 @@ body{
               color: $details-grey;
               letter-spacing: .05em;
               line-height: 1.5;
+
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
 
               input{
 

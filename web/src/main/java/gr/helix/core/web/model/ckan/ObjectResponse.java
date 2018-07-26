@@ -1,24 +1,14 @@
 package gr.helix.core.web.model.ckan;
 
-public class Response<T> {
+public class ObjectResponse<T> extends Response {
 
-    private boolean   success;
+    private T result;
 
-    private Result<T> result;
-
-    public boolean isSuccess() {
-        return this.success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public Result<T> getResult() {
+    public T getResult() {
         return this.result;
     }
 
-    public void setResult(Result<T> result) {
+    public void setResult(T result) {
         this.result = result;
     }
 

@@ -4,12 +4,14 @@ import { default as catalogService } from '../../../service/search';
 // Model
 import {
   EnumCatalog,
+  EnumFacet,
 } from '../../../model';
 
 // Actions
 const ADVANCED_SEARCH_TOGGLE = 'ui/search-page/ADVANCED_SEARCH_TOGGLE';
 const PILL_TOGGLE = 'ui/search-page/PILL_TOGGLE';
 const SET_RESULT_VISIBILITY = 'ui/search-page/SET_RESULT_VISIBILITY';
+const SET_SEARCH_FACET = 'ui/search-page/SET_SEARCH_FACET';
 const TEXT_CHANGE = 'ui/search-page/TEXT_CHANGE';
 
 const SEARCH_REQUEST = 'ui/search-page/SEARCH_REQUEST';
@@ -21,6 +23,7 @@ const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/search-page/SEARCH_AUTOCOMPLETE_RESPONS
 // Reducer
 const initialState = {
   advanced: false,
+  facets: Object.keys(EnumFacet).reduce((result, key) => { result[EnumFacet[key]] = []; return result; }, {}),
   loading: false,
   partialResult: {
     visible: false,
@@ -36,6 +39,21 @@ const initialState = {
   },
   text: '',
 };
+
+function facetReducer(state, action) {
+  switch (action.type) {
+    case SET_SEARCH_FACET:
+      return {
+        ...state,
+        [action.facet]: state[action.facet].find(value => value === action.value) ?
+          state[action.facet].filter(value => value !== action.value) :
+          [...state[action.facet], action.value],
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -59,6 +77,12 @@ export default (state = initialState, action) => {
           visible: false,
           catalogs: {},
         }
+      };
+
+    case SET_SEARCH_FACET:
+      return {
+        ...state,
+        facets: facetReducer(state.facets, action),
       };
 
     case SET_RESULT_VISIBILITY:
@@ -95,7 +119,7 @@ export default (state = initialState, action) => {
     case SEARCH_RESPONSE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         result: {
           catalogs: action.data.catalogs,
         },
@@ -104,6 +128,7 @@ export default (state = initialState, action) => {
     case SEARCH_AUTOCOMPLETE_RESPONSE:
       return {
         ...state,
+        advanced: false,
         loading: false,
         partialResult: {
           visible: true,
@@ -129,6 +154,12 @@ export const toggleAdvanced = () => ({
 export const togglePill = (id) => ({
   type: PILL_TOGGLE,
   id,
+});
+
+export const toggleSearchFacet = (facet, value) => ({
+  type: SET_SEARCH_FACET,
+  facet,
+  value,
 });
 
 export const setResultVisibility = (visible) => ({
@@ -176,19 +207,22 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
     });
 };
 
-export const search = (term, pageIndex = 0, pageSize = 10) => (dispatch, getState) => {
-  const { meta: { csrfToken: token }, ui: { search: { pills } } } = getState();
+export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (dispatch, getState) => {
+  const { meta: { csrfToken: token }, ui: { search: { pills, facets } } } = getState();
 
   const queries = {};
   if (pills.data) {
     queries[EnumCatalog.CKAN] = {
+      catalog: EnumCatalog.CKAN,
       pageIndex,
       pageSize,
       term,
+      facets: advanced ? facets : null,
     };
   }
   if (pills.pubs) {
     queries[EnumCatalog.OPENAIRE] = {
+      catalog: EnumCatalog.OPENAIRE,
       pageIndex,
       pageSize,
       term,

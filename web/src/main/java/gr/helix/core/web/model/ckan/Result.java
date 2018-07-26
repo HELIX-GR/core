@@ -2,13 +2,24 @@ package gr.helix.core.web.model.ckan;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Result<T> {
 
-    private int     count;
+    @JsonProperty("count")
+    private int                   count;
 
-    private String  sort;
+    @JsonProperty("sort")
+    private String                sort;
 
-    private List<T> results;
+    @JsonProperty("facets")
+    private FacetCollection       facets;
+
+    @JsonProperty("results")
+    private List<T>               results;
+
+    @JsonProperty("search_facets")
+    private SearchFacetCollection searchFacets;
 
     public int getCount() {
         return this.count;
@@ -26,12 +37,28 @@ public class Result<T> {
         this.sort = sort;
     }
 
+    public FacetCollection getFacets() {
+        return this.facets;
+    }
+
+    public void setFacets(FacetCollection facets) {
+        this.facets = facets;
+    }
+
     public List<T> getResults() {
         return this.results;
     }
 
     public void setResults(List<T> results) {
         this.results = results;
+    }
+
+    public SearchFacetCollection getSearchFacets() {
+        return this.searchFacets;
+    }
+
+    public void setSearchFacets(SearchFacetCollection searchFacets) {
+        this.searchFacets = searchFacets;
     }
 
 }

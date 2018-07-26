@@ -3,14 +3,34 @@ package gr.helix.core.web.model;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import gr.helix.core.web.model.ckan.CkanCatalogQuery;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "catalog")
+@JsonSubTypes({
+    @Type(name = "CKAN", value = CkanCatalogQuery.class),
+    @Type(name = "OPENAIRE", value = CatalogQuery.class),
+})
 public class CatalogQuery {
 
-    private int    pageIndex;
+    private EnumCatalog catalog;
 
-    private int    pageSize;
+    private int         pageIndex;
 
-    private String term;
+    private int         pageSize;
+
+    private String      term;
+
+    public EnumCatalog getCatalog() {
+        return this.catalog;
+    }
+
+    public void setCatalog(EnumCatalog catalog) {
+        this.catalog = catalog;
+    }
 
     public int getPageIndex() {
         return this.pageIndex;

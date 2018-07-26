@@ -14,6 +14,7 @@ import gr.helix.core.web.model.CatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
 import gr.helix.core.web.model.EnumCatalog;
+import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.service.SearchService;
 
 @RestController
@@ -63,7 +64,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/action/ckan/query", method = RequestMethod.POST)
-    public RestResponse<?> getPackages(Authentication authentication, @RequestBody CatalogQuery query) {
+    public RestResponse<?> getPackages(Authentication authentication, @RequestBody CkanCatalogQuery query) {
         try {
             return RestResponse.result(this.searchService.queryData(query));
         } catch (final Exception ex) {

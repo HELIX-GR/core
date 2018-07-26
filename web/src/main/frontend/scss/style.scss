@@ -2,7 +2,7 @@
  * Theme
  */
 
-$layout-fixed-width :1280px;
+$layout-fixed-width :1366px;
 
 @import 'theme/theme';
 
@@ -16,6 +16,8 @@ $layout-fixed-width :1280px;
  * Import HELIX react components
  */
 
+@import 'components/accordion';
+@import 'components/advanced-search';
 @import 'components/login';
 @import 'components/map';
 

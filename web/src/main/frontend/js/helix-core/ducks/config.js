@@ -38,7 +38,7 @@ export const receiveConfiguration = (configuration) => ({
 });
 
 // Thunk actions
-export const getConfiguration = (locale) => (dispatch, getState) => {
+export const getConfiguration = (locale) => (dispatch) => {
 
   dispatch(requestConfiguration());
   return configurationService.getConfiguration(locale)

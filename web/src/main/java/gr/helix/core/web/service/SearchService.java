@@ -11,6 +11,7 @@ import gr.helix.core.web.model.CatalogResult;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
 import gr.helix.core.web.model.EnumCatalog;
+import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.model.ckan.Package;
 import gr.helix.core.web.model.openaire.client.Publication;
 
@@ -42,12 +43,12 @@ public class SearchService {
     }
 
     public CatalogResult<?> queryData(String term) {
-        final CatalogQuery query = new CatalogQuery();
+        final CkanCatalogQuery query = new CkanCatalogQuery();
         query.setPageIndex(0);
         query.setPageSize(10);
         query.setTerm(term);
 
-        return this.ckanServiceProxy.getPackages(query);
+        return this.ckanServiceProxy.getPackages(query, false);
     }
 
     public CatalogResult<?> queryPublications(String term) {
@@ -59,8 +60,8 @@ public class SearchService {
         return this.openaireServiceProxy.getPublications(query);
     }
 
-
-    public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {
+    public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query)
+            throws InterruptedException, ExecutionException {
         final CompositeCatalogResult result = new CompositeCatalogResult();
         if (query.isParallel()) {
             result.merge(this.queryAsync(query));
@@ -69,7 +70,7 @@ public class SearchService {
                 final CatalogQuery catalogQuery = query.getQueries().get(key);
                 switch (key) {
                     case CKAN:
-                        result.add(key, this.ckanServiceProxy.getPackages(catalogQuery));
+                        result.add(key, this.ckanServiceProxy.getPackages((CkanCatalogQuery) catalogQuery, true));
                         break;
                     case OPENAIRE:
                         result.add(key, this.openaireServiceProxy.getPublications(catalogQuery));
@@ -83,47 +84,48 @@ public class SearchService {
         return result;
     }
 
-    public CatalogResult<?> queryData(CatalogQuery query) {
-        return this.ckanServiceProxy.getPackages(query);
+    public CatalogResult<?> queryData(CkanCatalogQuery query) {
+        return this.ckanServiceProxy.getPackages(query, true);
     }
 
     public CatalogResult<?> queryPublications(CatalogQuery query) {
         return this.openaireServiceProxy.getPublications(query);
     }
 
-    private CompositeCatalogResult queryAsync(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {
+    private CompositeCatalogResult queryAsync(CompositeCatalogQuery query)
+            throws InterruptedException, ExecutionException {
         final CatalogQuery ckanQuery = query.getQueries().get(EnumCatalog.CKAN);
 
         final CompletableFuture<CatalogResult<Package>> packages = CompletableFuture
-            .supplyAsync(() -> this.ckanServiceProxy.getPackages(ckanQuery)).handle((rs, ex) -> {
-                if (rs != null) {
-                    return rs;
-                }
-                return new CatalogResult<Package>();
-            });
+                .supplyAsync(() -> this.ckanServiceProxy.getPackages((CkanCatalogQuery) ckanQuery, true)).handle((rs, ex) -> {
+                    if (rs != null) {
+                        return rs;
+                    }
+                    return new CatalogResult<Package>();
+                });
 
         final CatalogQuery openaireQuery = query.getQueries().get(EnumCatalog.OPENAIRE);
 
         final CompletableFuture<CatalogResult<Publication>> publications = CompletableFuture
-            .supplyAsync(() -> this.openaireServiceProxy.getPublications(openaireQuery)).handle((rs, ex) -> {
-                if (rs != null) {
-                    return rs;
-                }
-                return new CatalogResult<Publication>();
-            });
+                .supplyAsync(() -> this.openaireServiceProxy.getPublications(openaireQuery)).handle((rs, ex) -> {
+                    if (rs != null) {
+                        return rs;
+                    }
+                    return new CatalogResult<Publication>();
+                });
 
         final CompletableFuture<CompositeCatalogResult> compositeResult = packages
-            .thenCombine(publications, (ckanResult, openaireResult) -> {
-                final CompositeCatalogResult result = new CompositeCatalogResult();
-                result.getCatalogs().put(EnumCatalog.CKAN, ckanResult);
-                result.getCatalogs().put(EnumCatalog.OPENAIRE, openaireResult);
-                return result;
-            }).handle((rs, ex) -> {
-                if (rs != null) {
-                    return rs;
-                }
-                return new CompositeCatalogResult();
-            });
+                .thenCombine(publications, (ckanResult, openaireResult) -> {
+                    final CompositeCatalogResult result = new CompositeCatalogResult();
+                    result.getCatalogs().put(EnumCatalog.CKAN, ckanResult);
+                    result.getCatalogs().put(EnumCatalog.OPENAIRE, openaireResult);
+                    return result;
+                }).handle((rs, ex) -> {
+                    if (rs != null) {
+                        return rs;
+                    }
+                    return new CompositeCatalogResult();
+                });
 
         return compositeResult.get();
     }
