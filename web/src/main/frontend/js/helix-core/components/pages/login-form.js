@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => ({
           toast.dismiss();
           toast.error(<FormattedMessage id="login.failure" defaultMessage="The username or password is incorrect." />);
         })
-      .catch((err) => null)
+      .catch(() => null)
   ),
 });
 

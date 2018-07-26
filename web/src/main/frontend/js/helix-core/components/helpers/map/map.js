@@ -95,7 +95,7 @@ class Map extends React.Component {
     return (
       <div className={this.props.className || 'helix-map-container'} style={{ height: this.props.height || '600px' }} ref={(el) => { this._el = el; }}>
         {map &&
-          React.Children.map(children, (child, index) => {
+          React.Children.map(children, (child) => {
             return React.cloneElement(child, {
               map: this.state.map,
             });

@@ -131,7 +131,7 @@ class Header extends React.Component {
                       <li><a href="#">Account</a></li>
                       <li><a href="#">Help</a></li>
                       <li><a href="#">Settings</a></li>
-                      <li><a href="#" onClick={(e) => this.props.logout()}>Log out</a></li>
+                      <li><a href="#" onClick={() => this.props.logout()}>Log out</a></li>
                     </ul>
                   </li>
                 </ul>

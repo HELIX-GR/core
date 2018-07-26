@@ -27,10 +27,9 @@ class Advanced extends React.Component {
       >
         <div
           className="close-btn"
-          onClick={(e) => this.props.toggle()}
-        >
+          onClick={() => this.props.toggle()}>
           CLOSE
-      </div>
+        </div>
 
         <div className="search-options">
           <label htmlFor="input-organizations"><span className="label-content">ORGANIZATIONS</span>
