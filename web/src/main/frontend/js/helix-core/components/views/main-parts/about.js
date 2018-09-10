@@ -1,10 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-
-import {
-  FormattedDate,
-} from 'react-intl';
 
 import {
   buildPath,

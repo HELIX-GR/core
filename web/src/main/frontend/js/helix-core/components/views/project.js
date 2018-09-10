@@ -32,7 +32,7 @@ class Project extends React.Component {
           </div>
         </section>
 
-        <section className="landing-page-content">
+        <section className="project-landing-page-content">
 
           <div className="about-helix-container container-fluid">
             <div className="row">

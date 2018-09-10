@@ -246,7 +246,7 @@ class Publications extends React.Component {
                     <a href="#" className="tag-box">
                       <div>
                         WFS
-                    </div>
+                      </div>
                     </a>
                   </div>
 
@@ -275,7 +275,7 @@ class Publications extends React.Component {
                     <a href="#" className="tag-box">
                       <div>
                         SHAPEFILE
-                        </div>
+                      </div>
                     </a>
 
                     <a href="#" className="tag-box">

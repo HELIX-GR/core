@@ -3,6 +3,8 @@ body {
     max-width: $layout-fixed-width;
     margin-left: auto;
     margin-right: auto;
+    // Prevent bootstrap from updating body padding
+    padding: 0px !important
   }
 }
 

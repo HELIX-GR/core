@@ -22,16 +22,24 @@ $layout-fixed-width :1366px;
 @import 'components/login';
 @import 'components/map';
 
-/**
+/*
  * Openlayers (the file is copied by grunt "copy" task)
  */
 
 @import '../vendor/ol/ol.css';
 
-/**
+/*
  * Custom rules
  */
 
 .menu-wrapper .menu-item .active-link {
   border-bottom: 3px solid;
+}
+
+/*
+ * Override bootstrap defaults
+ */
+
+.modal-open {
+  overflow: auto;
 }

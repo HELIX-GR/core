@@ -54,7 +54,7 @@ class Faq extends React.Component {
     if (this.sections) {
       return (
         <div>
-          <div id="faq-accordion" className="accordion">
+          <div id="faq-accordion" className="accordion about-text">
             {this.sections.map((section, index) => this.renderSection(section, index))}
           </div>
         </div >
