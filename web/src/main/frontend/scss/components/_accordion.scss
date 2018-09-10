@@ -1,7 +1,3 @@
-.accordion a {
-  color: #4E59A4 !important;
-}
-
 .accordion-group {
   margin-bottom: 2px;
   border: 1px solid #e5e5e5;
@@ -18,6 +14,8 @@
 .accordion-heading .accordion-toggle {
   display: block;
   padding: 8px 15px;
+  background: $main-black;
+  color: white !important;
 }
 
 .accordion-toggle {

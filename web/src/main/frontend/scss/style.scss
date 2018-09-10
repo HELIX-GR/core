@@ -18,11 +18,12 @@ $layout-fixed-width :1366px;
 
 @import 'components/accordion';
 @import 'components/advanced-search';
+@import 'components/debug-console';
 @import 'components/login';
 @import 'components/map';
 
 /**
- * Openlayers (copied by grunt task)
+ * Openlayers (the file is copied by grunt "copy" task)
  */
 
 @import '../vendor/ol/ol.css';
@@ -31,6 +32,6 @@ $layout-fixed-width :1366px;
  * Custom rules
  */
 
- .menu-wrapper .menu-item .active-link {
-  border-bottom: 2px solid;
+.menu-wrapper .menu-item .active-link {
+  border-bottom: 3px solid;
 }
