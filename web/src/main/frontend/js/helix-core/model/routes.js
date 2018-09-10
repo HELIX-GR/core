@@ -1,21 +1,33 @@
+
 /**
  * Libraries
  */
 import pathToRegexp from 'path-to-regexp';
 
 /**
+ * External routes
+ */
+
+export const ExternalRoutes = {
+  Data: 'https://data.hellenicdataservice.gr',
+  Lab: 'https://lab.hellenicdataservice.gr',
+};
+
+/**
  * Static routes
  */
-const HOME = '/';
-const RESULTS = '/results';
+const MAIN = '/';
 const NEWS = '/news';
 const PROJECT = '/project/*';
+const PUBS = '/pubs';
+const RESULTS = '/results';
 
 export const StaticRoutes = {
-  HOME,
-  RESULTS,
+  MAIN,
   NEWS,
   PROJECT,
+  PUBS,
+  RESULTS,
 };
 
 /**

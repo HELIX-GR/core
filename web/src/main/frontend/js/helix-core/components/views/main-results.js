@@ -28,11 +28,11 @@ import {
 
 import {
   Pagination,
-} from './result-parts';
+} from './main-results-parts';
 
 const MIN_FACET_VALUES = 3;
 
-class Results extends React.Component {
+class MainResults extends React.Component {
 
   constructor(props) {
     super(props);
@@ -218,7 +218,7 @@ class Results extends React.Component {
     const _t = this.context.intl.formatMessage;
 
     return (
-      <div>
+      <div className="results-main">
         <section className="main-results-page-content">
           <div className="results-main-content">
 
@@ -368,4 +368,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Results);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(MainResults);

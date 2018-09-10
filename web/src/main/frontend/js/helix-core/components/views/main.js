@@ -33,17 +33,19 @@ import {
 } from '../helpers';
 
 import {
-  SearchAdvancedModal,
-  SearchNews,
-  SearchResult,
-} from './search-parts';
+  About,
+  AdvancedModal,
+  News,
+  Result,
+} from './main-parts';
 
-class SearchPage extends React.Component {
+class Main extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.onPillChanged = this.onPillChanged.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
 
     this.textInput = React.createRef();
@@ -51,6 +53,15 @@ class SearchPage extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object,
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyDown, false);
+    this.props.getLatestPosts(2);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown, false);
   }
 
   isTextValid(text) {
@@ -98,11 +109,14 @@ class SearchPage extends React.Component {
     this.search(false);
   }
 
-  componentDidMount() {
-    this.props.getLatestPosts(2);
+  onKeyDown(e) {
+    if (e.key === 'Escape') {
+      this.props.setResultVisibility(false);
+    }
   }
 
   render() {
+    const { ckan } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
 
@@ -113,6 +127,9 @@ class SearchPage extends React.Component {
       <div>
         <section>
           <div className="landing-section">
+            <div className="landing-section-background">
+
+            </div>
             <div className="search-form-wrapper">
               <form className="landing-search-form">
                 <div className="main-form-content">
@@ -125,7 +142,6 @@ class SearchPage extends React.Component {
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
                     onFocus={() => this.props.setResultVisibility(true)}
-                    onBlur={() => this.props.setResultVisibility(false)}
                     ref={this.textInput}
                   />
                   <div
@@ -174,9 +190,10 @@ class SearchPage extends React.Component {
                   </div>
 
                   {/* TODO: Use autoComplete result */}
-                  <SearchResult
-                    visible={visible && !loading}
+                  <Result
+                    ckan={ckan}
                     result={catalogs}
+                    visible={visible && !loading}
                   />
 
                 </div>
@@ -197,11 +214,13 @@ class SearchPage extends React.Component {
 
         <section className="landing-page-content">
 
-          <SearchNews posts={posts} />
+          <News posts={posts} />
+
+          <About />
 
         </section>
 
-        <SearchAdvancedModal
+        <AdvancedModal
           facets={this.props.search.facets}
           loading={this.props.search.loading}
           metadata={this.props.config.ckan}
@@ -220,6 +239,7 @@ const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
   news: state.ui.news,
+  profile: state.user.profile,
   search: state.ui.search,
 });
 
@@ -240,4 +260,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(SearchPage);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Main);

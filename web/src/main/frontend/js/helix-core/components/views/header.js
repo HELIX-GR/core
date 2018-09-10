@@ -8,6 +8,7 @@ import {
 import {
   buildPath,
   DynamicRoutes,
+  ExternalRoutes,
   Pages,
   StaticRoutes,
   WordPressPages,
@@ -41,15 +42,27 @@ class Header extends React.Component {
     return (this.props.locale === 'el' ? 'ΕΛ' : 'EN');
   }
 
+  get logoImage() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/pubs')) {
+        return '/images/svg/Pubs-logo.svg';
+      }
+    }
+    return '/images/svg/Helix-logo.svg';
+  }
+
   render() {
+    const { ckan: { host: ckanHost } } = this.props.config;
     const authenticated = (this.props.profile != null);
 
     return (
       <header className="header">
 
         <div className="logo-area">
-          <NavLink to={StaticRoutes.HOME}>
-            <img className="logo-image" src="/images/svg/Helix-logo.svg" alt="Helix" />
+          <NavLink to={StaticRoutes.MAIN}>
+            <img className="logo-image" src={this.logoImage} alt="Helix" />
           </NavLink>
         </div>
 
@@ -58,19 +71,17 @@ class Header extends React.Component {
           <nav className="nav-menu">
             <ul className="menu-items">
               <li id="menu-item-data" className="menu-item domain-item">
-                <a href="index_data.html">
+                <a href={ckanHost}>
                   Data
                 </a>
               </li>
 
               <li id="menu-item-pubs" className="menu-item domain-item">
-                <a href="index_pubs.html">
-                  Pubs
-                </a>
+                <NavLink to={StaticRoutes.PUBS} activeClassName="active-link">Pubs</NavLink>
               </li>
 
               <li id="menu-item-lab" className="menu-item domain-item">
-                <a href="index_lab.html">
+                <a href={ExternalRoutes.Lab}>
                   Lab
                 </a>
               </li>

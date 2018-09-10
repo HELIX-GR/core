@@ -12,3 +12,9 @@ export const EnumFacet = {
   Organization: 'organizations',
   Tag: 'tags',
 };
+
+export const EnumRole = {
+  User: 'ROLE_USER',
+  Admin: 'ROLE_ADMIN',
+  Developer: 'ROLE_DEVELOPER',
+};

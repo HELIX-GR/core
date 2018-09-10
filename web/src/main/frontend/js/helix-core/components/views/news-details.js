@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
 import classnames from 'classnames';
-import moment from '../../../moment-localized';
+import moment from '../../moment-localized';
 
 import {
   bindActionCreators
@@ -19,16 +19,21 @@ import {
 import {
   getPost,
   getRelativePosts,
-} from '../../../ducks/ui/views/news';
+} from '../../ducks/ui/views/news';
 
 import {
   buildPath,
   DynamicRoutes,
-} from '../../../model';
+} from '../../model';
 
 const PARAM_ID = 'id';
 
-class Details extends React.Component {
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
+
+class NewsDetails extends React.Component {
 
   constructor(props) {
     super(props);
@@ -38,7 +43,6 @@ class Details extends React.Component {
     const { current: post } = this.props.news;
     const parts = [
       'News',
-      this.getPostFirstCategory(post),
       moment(post.modified).year().toString(),
       post.title.rendered,
     ];
@@ -92,7 +96,7 @@ class Details extends React.Component {
           </div>
         </section>
 
-        <section className="landing-page-content">
+        <section className="news-landing-page-content">
 
           <div className="news-helix-container container-fluid">
             {post &&
@@ -104,7 +108,7 @@ class Details extends React.Component {
                 </div>
 
                 <div className="col-sm-8">
-                  <div className="news-item">
+                  <div className="news-item-details">
                     {this.renderPost(post)}
                   </div>
                 </div>
@@ -120,7 +124,7 @@ class Details extends React.Component {
                 </div>
 
                 <div className="col-sm-8">
-                  <div className="news-item">
+                  <div className="news-item-details-relative">
                     {this.renderRelativePosts(relativePosts)}
                   </div>
                 </div>
@@ -141,7 +145,7 @@ class Details extends React.Component {
     return (
       <div className="row" ref={this.lastPageFirstItem}>
         <div className="col-12">
-          <div className="page-news-item page-news-item-last"
+          <div className="news-item news-item-last"
           >
             <div className="item-details">
               <a>
@@ -179,8 +183,8 @@ class Details extends React.Component {
           <div className="col-12">
             <div className={
               classnames({
-                "page-news-item": true,
-                'page-news-item-last': (posts.length - 1) === index,
+                "news-item": true,
+                'news-item-last': (posts.length - 1) === index,
               })
             }
             >
@@ -199,11 +203,11 @@ class Details extends React.Component {
                     {p.title.rendered}
                   </h3>
                 </NavLink>
-                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.excerpt.rendered }}>
+                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}>
                 </div>
                 <div>
-                  <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} style={{ 'fontWeight': 500 }}>
-                    Read more ...
+                  <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
+                    Read more
                   </NavLink>
                 </div>
               </div>
@@ -231,4 +235,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Details);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(NewsDetails);

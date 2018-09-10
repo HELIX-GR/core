@@ -11,12 +11,12 @@ export default class Page403 extends React.Component {
         <Container>
           <Row className='justify-content-center'>
             <Col md='6'>
-              <div className='clearfix'>
+              <div>
                 <h1 className='float-left display-3 mr-4'>403</h1>
                 <h4 className='pt-3'>Oops! You shouldn't be here.</h4>
                 <p className='text-muted float-left'>The page you are looking for was not found or you do not have the required permission.</p>
               </div>
-              <NavLink to={StaticRoutes.HOME}>
+              <NavLink to={StaticRoutes.MAIN}>
                 <Button color='danger'><i className='fa fa-home'></i>&nbsp; Take Me Home</Button>
               </NavLink>
             </Col>

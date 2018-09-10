@@ -25,6 +25,11 @@ import {
   DynamicRoutes,
 } from '../../model';
 
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
+
 class News extends React.Component {
 
   constructor(props) {
@@ -57,7 +62,7 @@ class News extends React.Component {
           </div>
         </section>
 
-        <section className="landing-page-content">
+        <section className="news-landing-page-content">
 
           <div className="news-helix-container container-fluid">
             <div className="row">
@@ -69,7 +74,7 @@ class News extends React.Component {
               </div>
 
               <div className="col">
-                <div className="news-item">
+                <div className="news-item-list">
                   {this.renderPosts(page.posts)}
                 </div>
               </div>
@@ -84,7 +89,12 @@ class News extends React.Component {
                   disabled={loading}
                   onClick={(e) => this.onLoadMore(e)}
                 >
-                  <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
+                  {!loading &&
+                    <span>More</span>
+                  }
+                  {loading &&
+                    <i className='fa fa-spin fa-spinner'></i>
+                  }
                 </button>
               </div>
             }
@@ -114,8 +124,8 @@ class News extends React.Component {
           <div className="col-12">
             <div className={
               classnames({
-                "page-news-item": true,
-                'page-news-item-last': (posts.length - 1) === index,
+                "news-item": true,
+                'news-item-last': (posts.length - 1) === index,
               })
             }
             >
@@ -134,11 +144,11 @@ class News extends React.Component {
                     {p.title.rendered}
                   </h3>
                 </NavLink>
-                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.excerpt.rendered }}>
+                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}>
                 </div>
                 <div>
-                  <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} style={{ 'fontWeight': 500 }}>
-                    Read more ...
+                  <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
+                    Read more
                   </NavLink>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Collapse } from 'reactstrap';
 
-class FAQ extends React.Component {
+class Faq extends React.Component {
 
   constructor(props) {
     super(props);
@@ -64,4 +64,4 @@ class FAQ extends React.Component {
   }
 }
 
-export default FAQ;
+export default Faq;

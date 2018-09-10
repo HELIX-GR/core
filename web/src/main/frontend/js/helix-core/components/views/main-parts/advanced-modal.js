@@ -129,7 +129,7 @@ class AdvancedModal extends React.Component {
         isOpen={this.props.visible}
         toggle={this.props.toggle}
         centered={true}
-        style={{ width: '80vw', maxWidth: '80vw', height: '80vh' }}>
+        style={{ maxWidth: '1000px', height: '80vh' }}>
         <ModalBody>
 
           <div className="advanced-search">

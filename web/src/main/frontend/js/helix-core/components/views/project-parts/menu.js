@@ -9,7 +9,7 @@ import {
   WordPressPages
 } from '../../../model';
 
-class ProjectMenu extends React.Component {
+class Menu extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,8 +20,6 @@ class ProjectMenu extends React.Component {
   }
 
   toggleSubMenu(e, key) {
-    //e.preventDefault();
-
     this.setState({
       [key]: !this.state[key],
     });
@@ -31,96 +29,64 @@ class ProjectMenu extends React.Component {
     return (
       <div className="about-item">
 
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.About])} onClick={(e) => this.toggleSubMenu(e, 'About')} style={{ 'cursor': 'pointer' }}>
-          <h4 className="about-title">
-            About
-            <i
-              style={{ 'float': 'right', 'fontSize': 'small' }}
-              className={this.state['About'] ? 'fa fa-chevron-up' : 'fa fa-chevron-down'}
-            />
-          </h4>
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])} activeClassName="selected">
+          <h4 className="about-title" >
+            What is HELIX?
+            </h4>
         </NavLink>
 
-        <div
-          className={
-            classnames({
-              'd-none': !this.state['About'],
-            })
-          }
-          style={{ 'background': (this.state['About'] ? 'whitesmoke' : 'none') }}
-        >
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              What is HELIX?
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])} activeClassName="selected">
+          <h4 className="about-title" >
+            Services
             </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Services
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              FAQ
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Publish Data
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Software
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              The project
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Media
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Acknowledge Helix
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Contact
-            </h4>
-          </NavLink>
-
-          <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>
-            <h4 className="about-title" style={{ 'background': 'whitesmoke' }}>
-              Terms of use
-            </h4>
-          </NavLink>
-
-        </div>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Learn])}>
-          <h4 className="about-title">
-            Learn
-          </h4>
         </NavLink>
 
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Use])}>
-          <h4 className="about-title">
-            Use
-          </h4>
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])} activeClassName="selected">
+          <h4 className="about-title" >
+            FAQ
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])} activeClassName="selected">
+          <h4 className="about-title" >
+            Publish Data
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])} activeClassName="selected">
+          <h4 className="about-title" >
+            Software
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])} activeClassName="selected">
+          <h4 className="about-title" >
+            The project
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])} activeClassName="selected">
+          <h4 className="about-title" >
+            Media
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])} activeClassName="selected">
+          <h4 className="about-title" >
+            Acknowledge Helix
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])} activeClassName="selected">
+          <h4 className="about-title" >
+            Contact
+            </h4>
+        </NavLink>
+
+        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])} activeClassName="selected">
+          <h4 className="about-title" >
+            Terms of use
+            </h4>
         </NavLink>
 
       </div >
@@ -128,4 +94,4 @@ class ProjectMenu extends React.Component {
   }
 }
 
-export default ProjectMenu;
+export default Menu;

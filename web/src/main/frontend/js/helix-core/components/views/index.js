@@ -1,7 +1,9 @@
 export { default as Footer } from './footer';
 export { default as Header } from './header';
+export { default as Main } from './main';
+export { default as MainResults } from './main-results';
 export { default as News } from './news';
-export { default as NewsDetails } from './news-parts/details';
+export { default as NewsDetails } from './news-details';
 export { default as Project } from './project';
-export { default as SearchPage } from './search';
-export { default as ResultPage } from './results';
+export { default as Publications } from './publications';
+

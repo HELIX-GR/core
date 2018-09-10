@@ -6,13 +6,24 @@ class Footer extends React.Component {
     super(props);
   }
 
+  resolveClassName() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/pubs')) {
+        return 'pubs-footer';
+      }
+    }
+    return "main-footer";
+  }
+
   render() {
     return (
-      <footer id="footer" className="main-footer">
+      <footer id="footer" className={this.resolveClassName()}>
         <div className="footer-content">
 
           <div className="footer-column logo">
-            <a href="#">
+            <a href="">
               <img src="/images/svg/Helix-logo-White-on-Black.svg" alt="" />
             </a>
           </div>

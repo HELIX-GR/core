@@ -14,7 +14,7 @@ import {
 } from '../../../model';
 
 import {
-  ProjectFaq,
+  Faq,
 } from './';
 
 class Page extends React.Component {
@@ -56,11 +56,11 @@ class Page extends React.Component {
           </a>
         }
         {page && page.slug !== WordPressPages.FAQ &&
-          <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: page.content.rendered }}>
+          <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: page.content.rendered }}>
           </div>
         }
         {page && page.slug === WordPressPages.FAQ &&
-          <ProjectFaq page={page} />
+          <Faq page={page} />
         }
       </div >
 

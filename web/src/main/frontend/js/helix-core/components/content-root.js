@@ -21,18 +21,27 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
+  EnumRole,
+} from '../model';
+
+import {
   Page403,
   Page404,
 } from './pages';
 
 import {
+  DebugConsole,
+} from './helpers';
+
+import {
   Footer,
   Header,
+  Main,
+  MainResults,
   News,
   NewsDetails,
   Project,
-  ResultPage,
-  SearchPage,
+  Publications,
 } from './views';
 
 //
@@ -60,7 +69,51 @@ class ContentRoot extends React.Component {
     );
   }
 
+  resolveBackGroundImage() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/project/page/')) {
+        return '/images/mockups/core-faq-scaled.png';
+      }
+      if (location.pathname.startsWith('/pubs')) {
+        return '/images/mockups/pubs-scaled.png';
+      }
+      if (location.pathname.startsWith('/news/view')) {
+        return '/images/mockups/news-item-scaled.png';
+      }
+      if (location.pathname.startsWith('/news')) {
+        return '/images/mockups/news-scaled.png';
+      }
+      if (location.pathname.startsWith('/results')) {
+        return '/images/mockups/result-all-scaled.png';
+      }
+    }
+    return '/images/mockups/core-main-scaled.png';
+  }
+
+  resolvePageClassName() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/news')) {
+        return 'news';
+      }
+      if (location.pathname.startsWith('/project')) {
+        return 'project';
+      }
+      if (location.pathname.startsWith('/pubs')) {
+        return 'pubs';
+      }
+    }
+
+    return 'home';
+  }
+
   render() {
+    const { location, profile } = this.props;
+    const isDeveloper = profile && profile.roles ? profile.roles.indexOf(EnumRole.Developer) > -1 : false;
+
     const routes = (
       <Switch>
         {/* Handle errors first */}
@@ -69,39 +122,56 @@ class ContentRoot extends React.Component {
         {/* Redirect for authenticated users. Navigation after a successful login operation
             occurs after the component hierarchy is rendered due to state change and causes
             /error/404 to render */}
-        <Redirect from={Pages.Login} to={StaticRoutes.HOME} exact />
-        <Redirect from={Pages.Register} to={StaticRoutes.HOME} exact />
+        <Redirect from={Pages.Login} to={StaticRoutes.MAIN} exact />
+        <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
         <Route path={DynamicRoutes.NEWS_DETAILS} component={NewsDetails} />
         {/* Static routes */}
+        <Route path={StaticRoutes.PUBS} component={Publications} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
-        <Route path={StaticRoutes.RESULTS} component={ResultPage} />
+        <Route path={StaticRoutes.RESULTS} component={MainResults} />
         {/* Default */}
-        <Route path={StaticRoutes.HOME} component={SearchPage} />
+        <Route path={StaticRoutes.MAIN} component={Main} />
       </Switch>
     );
 
     return (
       <div>
-        <ToastContainer
-          className="helix-toastify"
-          position="top-right"
-          type="default"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnHover
-        />
-        <Header
-          changeLocale={this.props.changeLocale}
-          locale={this.props.locale}
-          logout={this.props.logout}
-          profile={this.props.profile}
-        />
-        {routes}
-        <Footer />
+        {isDeveloper &&
+          <DebugConsole location={location} />
+        }
+        {isDeveloper &&
+          <img
+            id="img-debug"
+            src={this.resolveBackGroundImage()}
+            className="debug-image d-none"
+          />
+        }
+        <div className={this.resolvePageClassName()}>
+          <ToastContainer
+            className="helix-toastify"
+            position="top-right"
+            type="default"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnHover
+          />
+          <Header
+            changeLocale={this.props.changeLocale}
+            config={this.props.config}
+            locale={this.props.locale}
+            location={this.props.location}
+            logout={this.props.logout}
+            profile={this.props.profile}
+          />
+          {routes}
+          <Footer
+            location={this.props.location}
+          />
+        </div >
       </div >
     );
   }
@@ -112,6 +182,7 @@ class ContentRoot extends React.Component {
 //
 
 const mapStateToProps = (state) => ({
+  config: state.config,
   locale: state.i18n.locale,
   profile: state.user.profile,
 });

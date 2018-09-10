@@ -3,6 +3,7 @@ import * as RoleNames from './role';
 export {
   EnumCatalog,
   EnumFacet,
+  EnumRole,
 } from './enum';
 
 export {
@@ -18,6 +19,7 @@ export {
   buildPath,
   DynamicRoutes,
   ErrorPages,
+  ExternalRoutes,
   Pages,
   StaticRoutes,
 } from './routes';

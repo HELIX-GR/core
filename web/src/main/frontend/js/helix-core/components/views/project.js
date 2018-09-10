@@ -14,8 +14,8 @@ import {
 } from '../pages';
 
 import {
-  ProjectMenu,
-  ProjectPage,
+  Menu,
+  Page,
 } from './project-parts';
 
 class Project extends React.Component {
@@ -44,7 +44,7 @@ class Project extends React.Component {
               </div>
 
               <div className="col-md-3 col-xs-12">
-                <ProjectMenu />
+                <Menu />
               </div>
 
               <div className="col-md-9 col-xs-12">
@@ -55,7 +55,7 @@ class Project extends React.Component {
                     <Route path={ErrorPages.Forbidden} component={Page403} exact />
                     <Route path={ErrorPages.NotFound} component={Page404} exact />
                     {/* Detail component */}
-                    <Route path={DynamicRoutes.PROJECT_PAGE} component={ProjectPage} />
+                    <Route path={DynamicRoutes.PROJECT_PAGE} component={Page} />
                     {/* Default */}
                     <Redirect to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.About])} />
                   </Switch>

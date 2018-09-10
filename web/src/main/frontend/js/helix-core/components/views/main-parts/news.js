@@ -11,6 +11,11 @@ import {
   DynamicRoutes,
 } from '../../../model';
 
+const truncateText = (text, tag, length = 100) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
+
 class News extends React.Component {
 
   constructor(props) {
@@ -69,7 +74,11 @@ class News extends React.Component {
                   {p.title.rendered}
                 </h3>
               </NavLink>
-              <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.excerpt.rendered }}>
+              <div className="item-excerpt style-5">
+                <p dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}></p>
+                <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
+                  Read more
+                </NavLink>
               </div>
             </div>
           </div>
