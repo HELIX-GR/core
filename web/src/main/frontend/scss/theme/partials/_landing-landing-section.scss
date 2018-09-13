@@ -17,7 +17,7 @@ body {
           div.landing-section-background {
             background: white url('../images/jpg/CC_science and plants.jpg') center/cover no-repeat;
             opacity: 0.5;
-            background-position-y: 0px;
+            background-position-y: 2px;
             height: 100%;
             width: 100%;
           }
@@ -106,7 +106,7 @@ body {
           width: 955px;
           min-width: 400px;
           @include position(absolute,
-          56.5% null null 50%);
+          57% null null 50%);
           transform: translate(-50%, -50%);
           -webkit-transform: translate(-50%, -50%);
           -o-transform: translate(-50%, -50%);
