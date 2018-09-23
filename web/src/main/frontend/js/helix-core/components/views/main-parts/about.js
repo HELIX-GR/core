@@ -26,11 +26,11 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <a href="#">
+              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <h3 className="about-title">
                   What is HELIX?
                 </h3>
-              </a>
+              </NavLink>
 
               <div className="about-text style-5">
                 HELIX is an horizontal eInfrastructure for data-intensive research,
@@ -49,7 +49,7 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <a href="#">
+              <a href="https://data.hellenicdataservice.gr" target="_blank">
                 <h3 className="about-title">
                   Search for Data
                 </h3>
@@ -71,7 +71,7 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <a href="#">
+              <a href="https://lab.hellenicdataservice.gr" target="_blank">
                 <h3 className="about-title">
                   Build with data
                 </h3>
@@ -93,11 +93,11 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <a href="#">
+              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <h3 className="about-title">
                   Our partners
                 </h3>
-              </a>
+              </NavLink>
 
               <div className="about-text style-5">
                 HELIX is a collective effort of Athena RC and GRNET S.A., with the financial support

@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import {
+  Link,
   NavLink,
 } from 'react-router-dom';
 
@@ -53,6 +54,17 @@ class Header extends React.Component {
     return '/images/svg/Helix-logo.svg';
   }
 
+  get logoLink() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/pubs')) {
+        return StaticRoutes.PUBS;
+      }
+    }
+    return StaticRoutes.MAIN;
+  }
+
   render() {
     const { ckan: { host: ckanHost } } = this.props.config;
     const authenticated = (this.props.profile != null);
@@ -61,7 +73,7 @@ class Header extends React.Component {
       <header className="header">
 
         <div className="logo-area">
-          <NavLink to={StaticRoutes.MAIN}>
+          <NavLink to={this.logoLink}>
             <img className="logo-image" src={this.logoImage} alt="Helix" />
           </NavLink>
         </div>
@@ -151,9 +163,9 @@ class Header extends React.Component {
           }
 
           <div className="search-item">
-            <a href="#">
+            <Link to={StaticRoutes.MAIN}>
               <i className="fa fa-search"></i>
-            </a>
+            </Link>
           </div>
 
         </div>

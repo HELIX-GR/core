@@ -1,16 +1,27 @@
 export const EnumCatalog = {
   NONE: 'NONE',
   CKAN: 'CKAN',
+  DSPACE: 'DSPACE',
   OPENAIRE: 'OPENAIRE',
   LAB: 'LAB',
 };
 
-export const EnumFacet = {
+export const EnumCkanFacet = {
   Format: 'formats',
   Group: 'groups',
   License: 'licenses',
   Organization: 'organizations',
   Tag: 'tags',
+};
+
+export const EnumMimeType = {
+  PDF: 'application/pdf',
+};
+
+export const EnumOpenaireFilter = {
+  Authors: 'authors',
+  FromDateAccepted: 'fromDateAccepted',
+  ToDateAccepted: 'toDateAccepted',
 };
 
 export const EnumRole = {

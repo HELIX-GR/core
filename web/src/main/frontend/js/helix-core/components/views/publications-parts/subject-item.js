@@ -17,18 +17,16 @@ class SubjectItem extends React.Component {
     const { image, text } = this.props;
 
     return (
-      <a href="#">
-        <div className="subject-item">
-          <div className="featured-pubs-icon">
-            <img src={image} alt="" />
-          </div>
-          <h3 className="featured-pubs-title">
-            <a href="#">
-              {text}
-            </a>
-          </h3>
+      <div className="subject-item">
+        <div className="featured-pubs-icon">
+          <img src={image} alt="" />
         </div>
-      </a>
+        <h3 className="featured-pubs-title">
+          <a href="#">
+            {text}
+          </a>
+        </h3>
+      </div>
     );
   }
 }

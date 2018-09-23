@@ -15,31 +15,23 @@ import {
 import {
   search as searchAll,
   setText,
-  toggleAdvanced,
-  togglePill,
-  toggleCkanFacet,
   setResultVisibility,
-} from '../../ducks/ui/views/main';
+  toggleAdvanced,
+} from '../../ducks/ui/views/pubs';
 
 import {
   EnumCatalog,
-  EnumCkanFacet,
+  EnumMimeType,
 } from '../../model';
 
 import {
   Pagination,
-} from './main-results-parts';
+} from './publications-results-parts';
 
-const MIN_FACET_VALUES = 3;
-
-class MainResults extends React.Component {
+class PublicationsResults extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      more: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
-    };
 
     this.textInput = React.createRef();
   }
@@ -47,16 +39,6 @@ class MainResults extends React.Component {
   static contextTypes = {
     intl: PropTypes.object,
   };
-
-  toggleMore(e, key) {
-    e.preventDefault();
-    this.setState({
-      more: {
-        ...this.state.more,
-        [key]: !this.state.more[key],
-      }
-    });
-  }
 
   isTextValid(text) {
     return ((text) && (text.length > 2));
@@ -74,11 +56,6 @@ class MainResults extends React.Component {
     this.props.setText(value);
   }
 
-  onFacetChanged(facet, value) {
-    this.props.toggleCkanFacet(facet, value);
-    this.search();
-  }
-
   onSearch(e) {
     e.preventDefault();
 
@@ -87,7 +64,7 @@ class MainResults extends React.Component {
 
   onPageChange(index) {
     const {
-      search: { result: { catalogs: { [EnumCatalog.CKAN]: { pageIndex } } } }
+      search: { result: { catalogs: { [EnumCatalog.OPENAIRE]: { pageIndex } } } }
     } = this.props;
 
     if (index !== pageIndex) {
@@ -95,51 +72,22 @@ class MainResults extends React.Component {
     }
   }
 
-  renderParameters(key, title, valueProperty, textProperty, prefix, minOptions, showAll) {
-    const { ckan: { facets } } = this.props.search;
-    const { ckan } = this.props.config;
+  resolveResource(publication) {
+    const { format, fullTextUrl } = publication;
 
-    const items = ckan[key];
-    const size = Array.isArray(items) ? showAll ? items.length : Math.min(items.length, minOptions) : 0;
-    if (size === 0) {
+    if ((!format) || (!fullTextUrl)) {
       return null;
     }
 
-    return (
-      <div className={`${key} param-box`}>
-        <h5 className="title">{title}</h5>
-
-        <div className="switches">
-          {
-            items.slice(0, size).map((value, index) => {
-              const resolvedValue = valueProperty ? value[valueProperty] : value;
-              const checked = !!facets[key].find(value => value === resolvedValue);
-
-              return (
-                <label htmlFor={`switch-${prefix}-${index}`} key={`switch-${prefix}-${index}`}>
-                  <input
-                    type="checkbox"
-                    id={`switch-${prefix}-${index}`}
-                    name={`switch-${prefix}-${index}`}
-                    value={resolvedValue}
-                    onChange={() => { this.onFacetChanged(key, resolvedValue); }}
-                    checked={checked}
-                  />
-                  {textProperty ? value[textProperty] : value}
-                </label>
-              );
-            })
-          }
-
-          {items.length > minOptions &&
-            <div className="more-link">
-              <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? "View Less" : "View More"}</a>
-            </div>
-          }
-        </div>
-
-      </div>
-    );
+    switch (format.toLowerCase()) {
+      case EnumMimeType.PDF:
+        return {
+          text: 'PDF',
+          url: fullTextUrl,
+        };
+      default:
+        return null;
+    }
   }
 
   renderResults(data) {
@@ -147,49 +95,46 @@ class MainResults extends React.Component {
       return null;
     }
 
-    const { ckan: { host } } = this.props.config;
+    const { openaire: { host } } = this.props.config;
 
-    return data.results.map(r => {
-      const formats = r.resources.reduce((result, value) => {
-        if (!result.includes(value.format)) {
-          return [...result, value.format];
-        }
-        return result;
-      }, []);
+    return data.results.map(p => {
+      const resource = this.resolveResource(p);
 
-      const age = moment.duration(moment() - moment(r.metadata_modified));
+      const age = moment.duration(moment() - moment(p.dateOfAcceptance));
       const date = age.asHours() < 24 ?
-        moment(r.metadata_modified).fromNow() :
-        <FormattedDate value={r.metadata_modified} day='numeric' month='numeric' year='numeric' />;
+        moment(p.dateOfAcceptance).fromNow() :
+        <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
 
       return (
-        <div className="result-item data" key={r.id} >
+        <div className="result-item pubs" key={p.originalId} >
           <div className="date-of-entry">
             {date}
           </div>
           <h3 className="title">
-            <a href={`${host}/dataset/${r.id}`} target="_blank">
-              {r.title}
+            <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
+              {p.title}
             </a>
             <div className="pill data">
               DATA
             </div>
           </h3>
-          <div className="service">
-            <a href="#">{r.organization.title}</a>
-          </div>
+          {p.publisher &&
+            <div className="service">
+              <a href="">{p.publisher}</a>
+            </div>
+          }
 
           <div className="tag-list">
-            {formats.length !== 0 &&
-              formats.filter(format => !!format).map(format => {
-                return (
-                  <a href="#" className="tag-box" key={format}>
-                    <div>
-                      {format}
-                    </div>
-                  </a>
-                );
-              })
+            {resource &&
+              <a
+                href={resource.url}
+                className="tag-box"
+                target="blank"
+              >
+                <div>
+                  {resource.text}
+                </div>
+              </a>
             }
           </div>
         </div >
@@ -199,21 +144,12 @@ class MainResults extends React.Component {
 
   render() {
     const {
-      more: {
-        [EnumCkanFacet.Group]: showAllGroups,
-        [EnumCkanFacet.Organization]: showAllOrganizations,
-        [EnumCkanFacet.License]: showAllLicenses,
-        [EnumCkanFacet.Format]: showAllFormats,
-        [EnumCkanFacet.Tag]: showAllTags
-      },
-    } = this.state;
-    const {
-      search: { result: { catalogs: { [EnumCatalog.CKAN]: results = { count: 0, pageSize: 10 } } }, loading, text }
+      search: { result: { catalogs: { [EnumCatalog.OPENAIRE]: results = { count: 0, pageSize: 10 } } }, loading, text }
     } = this.props;
     const _t = this.context.intl.formatMessage;
 
     return (
-      <div className="results-main">
+      <div className="results-pubs">
         <section className="main-results-page-content">
           <div className="results-main-content">
 
@@ -278,23 +214,12 @@ class MainResults extends React.Component {
                 <h5 className="title">LOCATION</h5>
 
                 <div className="map-container">
-                  <img className="temp-map" src="../images/jpg/map.png" alt="" />
+                  <img className="temp-map" src="../../images/jpg/map.png" alt="" />
                 </div>
 
               </div>
 
-              {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
-
-              {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
-
-              {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
-
-              {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
-
-              {this.renderParameters(EnumCkanFacet.License, 'LICENSES', 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
-
             </section>
-
 
             <section className="results-main-result-set">
 
@@ -314,7 +239,7 @@ class MainResults extends React.Component {
                   </select>
                 </label>
                 <div className="main-results-result-count">
-                  Βρέθηκαν {results.count} σύνολα δεδομένων
+                  Βρέθηκαν {results.count} δημοσιεύσεις
                 </div>
               </div>
 
@@ -345,16 +270,14 @@ class MainResults extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
-  search: state.ui.main,
+  search: state.ui.pubs,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   searchAll,
   setText,
-  toggleAdvanced,
-  togglePill,
-  toggleCkanFacet,
   setResultVisibility,
+  toggleAdvanced,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -363,4 +286,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(MainResults);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(PublicationsResults);

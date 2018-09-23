@@ -15,11 +15,10 @@ class Result extends React.Component {
 
   static propTypes = {
     visible: PropTypes.bool.isRequired,
-    result: PropTypes.object.isRequired,
+    result: PropTypes.object,
   }
 
   render() {
-
     const {
       [EnumCatalog.CKAN]: packages,
       [EnumCatalog.OPENAIRE]: publications,
@@ -69,7 +68,7 @@ class Result extends React.Component {
               </a>
             </div>
             <div className="search-results">
-              {this.renderPackages(publications.results)}
+              {this.renderPublications(publications.results)}
             </div>
           </div>
         }
@@ -104,15 +103,30 @@ class Result extends React.Component {
 
     return packages.map((p, index) => {
       return (
-        <a key={`package-${index}`} href={`${host}/dataset/${p.id}`} className="result-entry" target="_blank">{p.title}</a>
+        <a
+          key={`package-${index}`}
+          href={`${host}/dataset/${p.id}`}
+          className="result-entry"
+          target="_blank"
+        >
+          {p.title}
+        </a>
       );
     });
   }
 
   renderPublications(publications) {
+    const { host } = this.props.openaire;
+
     return publications.map((p, index) => {
       return (
-        <a key={`publication-${index}`} href="#" className="result-entry">{p.title}</a>
+        <a
+          key={`publication-${index}`}
+          href={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+          className="result-entry" target="_blank"
+        >
+          {p.title}
+        </a>
       );
     });
   }

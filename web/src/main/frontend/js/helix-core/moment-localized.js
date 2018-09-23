@@ -4,6 +4,6 @@ import 'moment/locale/el';
 import 'moment/locale/en-gb';
 
 // Set default locale
-moment.locale('en-gb');
+moment.locale('en-GB');
 
 export default moment;

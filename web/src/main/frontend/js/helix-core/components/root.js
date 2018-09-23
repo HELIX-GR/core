@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { basename } from '../history';
 
 import {
+  ErrorPages,
   Pages,
 } from '../model/routes';
 
@@ -13,6 +14,8 @@ import ContentRoot from './content-root';
 
 import {
   LoginForm,
+  Page403,
+  Page404,
 } from './pages';
 
 //
@@ -42,6 +45,8 @@ class Root extends React.Component {
             {!profile &&
               <Route path={Pages.Login} component={LoginForm} exact />
             }
+            <Route path={ErrorPages.Forbidden} component={Page403} exact />
+            <Route path={ErrorPages.NotFound} component={Page404} exact />
             <Route path="/" component={ContentRoot} />
           </Switch>
         </BrowserRouter>

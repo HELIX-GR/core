@@ -14,14 +14,16 @@ import {
 } from '../../ducks/ui/views/news';
 
 import {
-  changeText,
   search as searchAll,
   searchAutoComplete,
+  setOpenaireFilter,
+  setResultVisibility,
+  setText,
   toggleAdvanced,
   togglePill,
-  toggleSearchFacet,
-  setResultVisibility,
-} from '../../ducks/ui/views/search';
+  toggleCkanFacet,
+  toggleOpenaireProvider,
+} from '../../ducks/ui/views/main';
 
 import {
   EnumCatalog,
@@ -49,6 +51,10 @@ class Main extends React.Component {
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
 
     this.textInput = React.createRef();
+
+    this.state = {
+      partialResultVisible: false,
+    };
   }
 
   static contextTypes = {
@@ -58,6 +64,7 @@ class Main extends React.Component {
   componentDidMount() {
     document.addEventListener('keydown', this.onKeyDown, false);
     this.props.getLatestPosts(2);
+    this.props.setResultVisibility(false);
   }
 
   componentWillUnmount() {
@@ -66,6 +73,11 @@ class Main extends React.Component {
 
   isTextValid(text) {
     return ((text) && (text.length > 2));
+  }
+
+  get isEnabled() {
+    const { pills } = this.props.search;
+    return !!Object.keys(pills).find(key => !!pills[key]);
   }
 
   search(advanced = false) {
@@ -78,25 +90,33 @@ class Main extends React.Component {
         });
 
         if (found) {
-          this.props.history.push(StaticRoutes.RESULTS);
+          if(advanced) {
+            this.props.toggleAdvanced();
+          }
+          this.props.history.push(StaticRoutes.MAIN_RESULTS);
         }
       });
     }
   }
 
   onPillChanged(id) {
-    const { text } = this.props.search;
+    const { text, pills } = this.props.search;
 
     this.props.togglePill(id);
     if (this.isTextValid(text)) {
-      this.searchAutoComplete(text);
+      // Get all active sections (including the one that has been toggled)
+      const active = Object.keys(pills).filter(key => pills[key]);
+      if ((active.length > 1) || (active[0] !== id)) {
+        // At least one active section must be active
+        this.searchAutoComplete(text);
+      }
     }
 
     this.textInput.current.focus();
   }
 
   onTextChanged(value, refresh = true) {
-    this.props.changeText(value);
+    this.props.setText(value);
 
     if ((refresh) && (this.isTextValid(value))) {
       this.searchAutoComplete(value);
@@ -116,7 +136,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { ckan } = this.props.config;
+    const { ckan, openaire } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
 
@@ -137,6 +157,7 @@ class Main extends React.Component {
                     type="text"
                     autoComplete="off"
                     className="landing-search-text"
+                    disabled={!this.isEnabled}
                     name="landing-search-text"
                     placeholder={_t({ id: 'search.placeholder' })}
                     value={text}
@@ -170,7 +191,7 @@ class Main extends React.Component {
                     />
                     <Pill
                       id="lab"
-                      disabled={true}
+                      disabled={loading}
                       text="pills.lab"
                       className="pill-lab"
                       selected={pills.lab}
@@ -189,9 +210,9 @@ class Main extends React.Component {
                     </div>
                   </div>
 
-                  {/* TODO: Use autoComplete result */}
                   <Result
                     ckan={ckan}
+                    openaire={openaire}
                     result={catalogs}
                     visible={visible && !loading}
                   />
@@ -202,7 +223,7 @@ class Main extends React.Component {
                   type="submit"
                   name="landing-search-button"
                   className="landing-search-button"
-                  disabled={loading}
+                  disabled={loading || !this.isEnabled}
                   onClick={(e) => this.onSearch(e)}
                 >
                   <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
@@ -221,14 +242,18 @@ class Main extends React.Component {
         </section>
 
         <AdvancedModal
-          facets={this.props.search.facets}
+          ckan={this.props.search.ckan}
+          config={this.props.config}
           loading={this.props.search.loading}
-          metadata={this.props.config.ckan}
-          visible={advanced}
-          changeText={(text) => this.onTextChanged(text, false)}
+          openaire={this.props.search.openaire}
           search={() => this.search(true)}
+          setOpenaireFilter={this.props.setOpenaireFilter}
+          setText={(text) => this.onTextChanged(text, false)}
+          text={this.props.search.text}
           toggle={this.props.toggleAdvanced}
-          toggleSearchFacet={this.props.toggleSearchFacet}
+          toggleCkanFacet={this.props.toggleCkanFacet}
+          toggleOpenaireProvider={this.props.toggleOpenaireProvider}
+          visible={advanced}
         />
       </div >
     );
@@ -240,18 +265,20 @@ const mapStateToProps = (state) => ({
   locale: state.i18n.locale,
   news: state.ui.news,
   profile: state.user.profile,
-  search: state.ui.search,
+  search: state.ui.main,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  changeText,
   getLatestPosts,
   searchAll,
   searchAutoComplete,
+  setOpenaireFilter,
+  setResultVisibility,
+  setText,
   toggleAdvanced,
   togglePill,
-  toggleSearchFacet,
-  setResultVisibility,
+  toggleCkanFacet,
+  toggleOpenaireProvider,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

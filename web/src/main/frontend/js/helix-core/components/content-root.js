@@ -6,7 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 
-import { Pages, StaticRoutes, DynamicRoutes, ErrorPages } from '../model/routes';
+import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
 
 import {
   changeLocale,
@@ -42,6 +42,7 @@ import {
   NewsDetails,
   Project,
   Publications,
+  PublicationsResults,
 } from './views';
 
 //
@@ -116,9 +117,6 @@ class ContentRoot extends React.Component {
 
     const routes = (
       <Switch>
-        {/* Handle errors first */}
-        <Route path={ErrorPages.Forbidden} component={Page403} exact />
-        <Route path={ErrorPages.NotFound} component={Page404} exact />
         {/* Redirect for authenticated users. Navigation after a successful login operation
             occurs after the component hierarchy is rendered due to state change and causes
             /error/404 to render */}
@@ -127,10 +125,11 @@ class ContentRoot extends React.Component {
         {/* Dynamic routes */}
         <Route path={DynamicRoutes.NEWS_DETAILS} component={NewsDetails} />
         {/* Static routes */}
+        <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
-        <Route path={StaticRoutes.RESULTS} component={MainResults} />
+        <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
         {/* Default */}
         <Route path={StaticRoutes.MAIN} component={Main} />
       </Switch>
@@ -169,6 +168,7 @@ class ContentRoot extends React.Component {
           />
           {routes}
           <Footer
+            config={this.props.config}
             location={this.props.location}
           />
         </div >

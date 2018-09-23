@@ -1,3 +1,4 @@
 export { default as news } from './news';
 export { default as project } from './project';
-export { default as search } from './search';
+export { default as pubs } from './pubs';
+export { default as main } from './main';

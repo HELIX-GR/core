@@ -17,21 +17,19 @@ class ExploreItem extends React.Component {
     const { description, image, text } = this.props;
 
     return (
-      <a href="#">
-        <div className="explore-item">
-          <div className="featured-pubs-icon">
-            <img src={image} alt="" />
-          </div>
-          <h3 className="featured-pubs-title">
-            <a href="#">
-              {text}
-            </a>
-          </h3>
-          <div className="explore-description">
-            {description}
-          </div>
+      <div className="explore-item">
+        <div className="featured-pubs-icon">
+          <img src={image} alt="" />
         </div>
-      </a>
+        <h3 className="featured-pubs-title">
+          <a href="#">
+            {text}
+          </a>
+        </h3>
+        <div className="explore-description">
+          {description}
+        </div>
+      </div>
     );
   }
 }

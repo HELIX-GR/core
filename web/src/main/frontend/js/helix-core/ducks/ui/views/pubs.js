@@ -4,35 +4,35 @@ import { default as catalogService } from '../../../service/search';
 // Model
 import {
   EnumCatalog,
-  EnumFacet,
+  EnumOpenaireFilter,
 } from '../../../model';
 
 // Actions
-const ADVANCED_SEARCH_TOGGLE = 'ui/search-page/ADVANCED_SEARCH_TOGGLE';
-const PILL_TOGGLE = 'ui/search-page/PILL_TOGGLE';
-const SET_RESULT_VISIBILITY = 'ui/search-page/SET_RESULT_VISIBILITY';
-const SET_SEARCH_FACET = 'ui/search-page/SET_SEARCH_FACET';
-const TEXT_CHANGE = 'ui/search-page/TEXT_CHANGE';
+const ADVANCED_SEARCH_TOGGLE = 'ui/pubs/ADVANCED_SEARCH_TOGGLE';
+const SET_OPENAIRE_FILTER = 'ui/pubs/SET_OPENAIRE_FILTER';
+const SET_OPENAIRE_PROVIDER = 'ui/pubs/SET_OPENAIRE_PROVIDER';
+const SET_RESULT_VISIBILITY = 'ui/pubs/SET_RESULT_VISIBILITY';
+const SET_TEXT = 'ui/pubs/SET_TEXT';
 
-const SEARCH_REQUEST = 'ui/search-page/SEARCH_REQUEST';
-const SEARCH_RESPONSE = 'ui/search-page/SEARCH_RESPONSE';
+const SEARCH_REQUEST = 'ui/pubs/SEARCH_REQUEST';
+const SEARCH_RESPONSE = 'ui/pubs/SEARCH_RESPONSE';
 
-const SEARCH_AUTOCOMPLETE_REQUEST = 'ui/search-page/SEARCH_AUTOCOMPLETE_REQUEST';
-const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/search-page/SEARCH_AUTOCOMPLETE_RESPONSE';
+const SEARCH_AUTOCOMPLETE_REQUEST = 'ui/pubs/SEARCH_AUTOCOMPLETE_REQUEST';
+const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/pubs/SEARCH_AUTOCOMPLETE_RESPONSE';
 
 // Reducer
 const initialState = {
   advanced: false,
-  facets: Object.keys(EnumFacet).reduce((result, key) => { result[EnumFacet[key]] = []; return result; }, {}),
   loading: false,
+  openaire: {
+    authors: [],
+    fromDateAccepted: null,
+    providers: [],
+    toDateAccepted: null,
+  },
   partialResult: {
     visible: false,
     catalogs: {},
-  },
-  pills: {
-    data: true,
-    pubs: false,
-    lab: false,
   },
   result: {
     catalogs: {},
@@ -40,14 +40,34 @@ const initialState = {
   text: '',
 };
 
-function facetReducer(state, action) {
+/**
+ * Updates OpenAIRE state
+ *
+ * @param {*} state - the current openaire state
+ * @param {*} action - the requested action
+ * @returns the new openaire state
+ */
+function openaireReducer(state, action) {
+  const { providers } = state;
+
   switch (action.type) {
-    case SET_SEARCH_FACET:
+    case SET_OPENAIRE_FILTER:
+      // Check if filter is supported
+      if (!Object.keys(EnumOpenaireFilter).find(key => EnumOpenaireFilter[key] === action.key)) {
+        console.warn(`OpenAIRE filter ${action.key} is not supported`);
+        return state;
+      }
       return {
         ...state,
-        [action.facet]: state[action.facet].find(value => value === action.value) ?
-          state[action.facet].filter(value => value !== action.value) :
-          [...state[action.facet], action.value],
+        [action.key]: action.value,
+      };
+
+    case SET_OPENAIRE_PROVIDER:
+      return {
+        ...state,
+        providers: providers.find(p => p === action.provider) ?
+          providers.filter(p => p !== action.provider) :
+          [...providers, action.provider],
       };
 
     default:
@@ -64,25 +84,11 @@ export default (state = initialState, action) => {
         advanced: !state.advanced,
       };
 
-    case PILL_TOGGLE:
+    case SET_OPENAIRE_FILTER:
+    case SET_OPENAIRE_PROVIDER:
       return {
         ...state,
-        pills: {
-          data: false,
-          pubs: false,
-          lab: false,
-          [action.id]: true,
-        },
-        partialResult: {
-          visible: false,
-          catalogs: {},
-        }
-      };
-
-    case SET_SEARCH_FACET:
-      return {
-        ...state,
-        facets: facetReducer(state.facets, action),
+        openaire: openaireReducer(state.openaire, action),
       };
 
     case SET_RESULT_VISIBILITY:
@@ -94,7 +100,7 @@ export default (state = initialState, action) => {
         },
       };
 
-    case TEXT_CHANGE:
+    case SET_TEXT:
       return {
         ...state,
         text: action.value,
@@ -142,8 +148,8 @@ export default (state = initialState, action) => {
 };
 
 // Action creators
-export const changeText = (value) => ({
-  type: TEXT_CHANGE,
+export const setText = (value) => ({
+  type: SET_TEXT,
   value,
 });
 
@@ -151,15 +157,15 @@ export const toggleAdvanced = () => ({
   type: ADVANCED_SEARCH_TOGGLE,
 });
 
-export const togglePill = (id) => ({
-  type: PILL_TOGGLE,
-  id,
+export const setOpenaireFilter = (key, value) => ({
+  type: SET_OPENAIRE_FILTER,
+  key,
+  value,
 });
 
-export const toggleSearchFacet = (facet, value) => ({
-  type: SET_SEARCH_FACET,
-  facet,
-  value,
+export const toggleOpenaireProvider = (provider) => ({
+  type: SET_OPENAIRE_PROVIDER,
+  provider,
 });
 
 export const setResultVisibility = (visible) => ({
@@ -167,9 +173,8 @@ export const setResultVisibility = (visible) => ({
   visible,
 });
 
-const catalogSearchKeywordBegin = (catalog, term) => ({
+const catalogSearchKeywordBegin = (term) => ({
   type: SEARCH_AUTOCOMPLETE_REQUEST,
-  catalog,
   term,
 });
 
@@ -191,43 +196,35 @@ const catalogSearchComplete = (data) => ({
 
 // Thunk actions
 export const searchAutoComplete = (term) => (dispatch, getState) => {
-  const { meta: { csrfToken: token }, ui: { search: { pills } } } = getState();
+  const { meta: { csrfToken: token }, } = getState();
 
-  const catalog = pills.data ? EnumCatalog.CKAN : pills.pubs ? EnumCatalog.OPENAIRE : EnumCatalog.NONE;
-
-  dispatch(catalogSearchKeywordBegin(catalog, term));
-  return catalogService.searchKeyword(token, catalog, term)
+  dispatch(catalogSearchKeywordBegin(term));
+  return catalogService.searchKeyword(token, [EnumCatalog.OPENAIRE], term)
     .then((data) => {
       dispatch(catalogSearchKeywordComplete(data));
       return data;
     })
     .catch((err) => {
       // TODO: Add error handling
-      console.error('Failed loading catalog data:', err);
+      console.error('Failed loading publications data:', err);
     });
 };
 
 export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (dispatch, getState) => {
-  const { meta: { csrfToken: token }, ui: { search: { pills, facets } } } = getState();
+  const { meta: { csrfToken: token }, ui: { pubs: { openaire } } } = getState();
 
-  const queries = {};
-  if (pills.data) {
-    queries[EnumCatalog.CKAN] = {
-      catalog: EnumCatalog.CKAN,
-      pageIndex,
-      pageSize,
-      term,
-      facets: advanced ? facets : null,
-    };
-  }
-  if (pills.pubs) {
-    queries[EnumCatalog.OPENAIRE] = {
+  const queries = {
+    [EnumCatalog.OPENAIRE]: {
       catalog: EnumCatalog.OPENAIRE,
       pageIndex,
       pageSize,
       term,
-    };
-  }
+      providers: openaire.providers || [],
+      [EnumOpenaireFilter.Authors]: openaire[EnumOpenaireFilter.Authors],
+      [EnumOpenaireFilter.FromDateAccepted]: openaire[EnumOpenaireFilter.FromDateAccepted],
+      [EnumOpenaireFilter.ToDateAccepted]: openaire[EnumOpenaireFilter.ToDateAccepted],
+    },
+  };
 
   dispatch(catalogSearchBegin(term));
   return catalogService.search(token, { queries })
@@ -237,6 +234,6 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (
     })
     .catch((err) => {
       // TODO: Add error handling
-      console.error('Failed loading catalog data:', err);
+      console.error('Failed loading publications data:', err);
     });
 };

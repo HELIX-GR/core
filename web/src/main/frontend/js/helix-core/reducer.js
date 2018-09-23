@@ -12,9 +12,10 @@ import {
 } from './ducks/ui/';
 
 import {
+  main,
   news,
   project,
-  search,
+  pubs,
 } from './ducks/ui/views';
 
 export default Redux.combineReducers({
@@ -22,9 +23,10 @@ export default Redux.combineReducers({
   i18n,
   meta,
   ui: Redux.combineReducers({
+    main,
     news,
     project,
-    search,
+    pubs,
     viewport,
   }),
   user,

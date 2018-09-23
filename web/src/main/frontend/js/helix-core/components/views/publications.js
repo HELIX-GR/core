@@ -10,17 +10,14 @@ import {
 } from 'redux';
 
 import {
-  getLatestPosts,
-} from '../../ducks/ui/views/news';
-
-import {
-  changeText,
   search as searchAll,
   searchAutoComplete,
-  toggleAdvanced,
-  toggleSearchFacet,
+  setOpenaireFilter,
   setResultVisibility,
-} from '../../ducks/ui/views/search';
+  setText,
+  toggleAdvanced,
+  toggleOpenaireProvider,
+} from '../../ducks/ui/views/pubs';
 
 import {
   EnumCatalog,
@@ -29,26 +26,37 @@ import {
 
 import {
   AdvancedModal,
-  Result,
-} from './pubs-parts';
-
-import {
   ExploreItem,
+  Result,
   SubjectItem,
-} from './publication-parts';
+} from './publications-parts';
 
 class Publications extends React.Component {
 
   constructor(props) {
     super(props);
 
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
 
     this.textInput = React.createRef();
+
+    this.state = {
+      partialResultVisible: false,
+    };
   }
 
   static contextTypes = {
     intl: PropTypes.object,
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyDown, false);
+    this.props.setResultVisibility(false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown, false);
   }
 
   isTextValid(text) {
@@ -65,14 +73,17 @@ class Publications extends React.Component {
         });
 
         if (found) {
-          this.props.history.push(StaticRoutes.RESULTS);
+          if(advanced) {
+            this.props.toggleAdvanced();
+          }
+          this.props.history.push(StaticRoutes.PUBS_RESULTS);
         }
       });
     }
   }
 
   onTextChanged(value, refresh = true) {
-    this.props.changeText(value);
+    this.props.setText(value);
 
     if ((refresh) && (this.isTextValid(value))) {
       this.searchAutoComplete(value);
@@ -85,11 +96,14 @@ class Publications extends React.Component {
     this.search(false);
   }
 
-  componentDidMount() {
-    this.props.getLatestPosts(2);
+  onKeyDown(e) {
+    if (e.key === 'Escape') {
+      this.props.setResultVisibility(false);
+    }
   }
 
   render() {
+    const { openaire } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, text } = this.props.search;
 
     const _t = this.context.intl.formatMessage;
@@ -114,7 +128,6 @@ class Publications extends React.Component {
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
                     onFocus={() => this.props.setResultVisibility(true)}
-                    onBlur={() => this.props.setResultVisibility(false)}
                     ref={this.textInput}
                   />
                   <div
@@ -138,10 +151,10 @@ class Publications extends React.Component {
                     </div>
                   </div>
 
-                  {/* TODO: Use autoComplete result */}
                   <Result
+                    openaire={openaire}
+                    result={catalogs[EnumCatalog.OPENAIRE]}
                     visible={visible && !loading}
-                    result={catalogs}
                   />
 
                 </div>
@@ -444,14 +457,16 @@ class Publications extends React.Component {
         </section>
 
         <AdvancedModal
-          facets={this.props.search.facets}
+          config={this.props.config}
           loading={this.props.search.loading}
-          metadata={this.props.config.ckan}
-          visible={advanced}
-          changeText={(text) => this.onTextChanged(text, false)}
+          openaire={this.props.search.openaire}
           search={() => this.search(true)}
+          setOpenaireFilter={this.props.setOpenaireFilter}
+          setText={(text) => this.onTextChanged(text, false)}
+          text={this.props.search.text}
           toggle={this.props.toggleAdvanced}
-          toggleSearchFacet={this.props.toggleSearchFacet}
+          toggleOpenaireProvider={this.props.toggleOpenaireProvider}
+          visible={advanced}
         />
       </div >
     );
@@ -463,17 +478,17 @@ const mapStateToProps = (state) => ({
   locale: state.i18n.locale,
   news: state.ui.news,
   profile: state.user.profile,
-  search: state.ui.search,
+  search: state.ui.pubs,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  changeText,
-  getLatestPosts,
   searchAll,
   searchAutoComplete,
-  toggleAdvanced,
-  toggleSearchFacet,
+  setOpenaireFilter,
   setResultVisibility,
+  setText,
+  toggleAdvanced,
+  toggleOpenaireProvider,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

@@ -8,12 +8,9 @@ import {
 
 import {
   EnumCatalog,
-  EnumCkanFacet,
 } from '../../../model';
 
 import {
-  DataAdvancedOptions,
-  LabAdvancedOptions,
   PubsAdvancedOptions,
 } from '../shared-parts';
 
@@ -22,52 +19,24 @@ class AdvancedModal extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      more: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
-      tab: EnumCatalog.CKAN,
-    };
-
     this.textInput = React.createRef();
   }
 
   static propTypes = {
-    ckan: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    minOptions: PropTypes.number,
     openaire: PropTypes.object.isRequired,
     search: PropTypes.func.isRequired,
     setOpenaireFilter: PropTypes.func.isRequired,
     setText: PropTypes.func.isRequired,
     text: PropTypes.string,
     toggle: PropTypes.func.isRequired,
-    toggleCkanFacet: PropTypes.func.isRequired,
     toggleOpenaireProvider: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
   }
 
-  static defaultProps = {
-    minOptions: 4,
-  }
-
   static contextTypes = {
     intl: PropTypes.object,
-  }
-
-  toggleMore(e, key) {
-    e.preventDefault();
-    this.setState({
-      more: {
-        ...this.state.more,
-        [key]: !this.state.more[key],
-      }
-    });
-  }
-
-  onTabChanged(tab) {
-    this.setState({
-      tab,
-    });
   }
 
   onTextChanged(text) {
@@ -82,7 +51,6 @@ class AdvancedModal extends React.Component {
 
   render() {
     const { text } = this.props;
-    const { tab } = this.state;
 
     const _t = this.context.intl.formatMessage;
 
@@ -122,46 +90,12 @@ class AdvancedModal extends React.Component {
                 </div>
               </div>
 
-              <div className="row">
-                <div className="col">
-                  <div className="tabs">
-                    <div className={`tab-item data text-center ${tab === EnumCatalog.CKAN ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.CKAN)}>
-                      Data
-                    </div>
-                    <div className={`tab-item pubs text-center ${tab === EnumCatalog.OPENAIRE ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.OPENAIRE)}>
-                      Publications
-                    </div>
-                    <div className={`tab-item lab text-center ${tab === EnumCatalog.LAB ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.LAB)}>
-                      Lab
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {tab === EnumCatalog.CKAN &&
-                <DataAdvancedOptions
-                  facets={this.props.ckan.facets}
-                  metadata={this.props.config.ckan}
-                  minOptions={this.props.minOptions}
-                  toggleFacet={this.props.toggleCkanFacet}
-                />
-              }
-
-              {tab === EnumCatalog.OPENAIRE &&
-                <PubsAdvancedOptions
-                  filters={this.props.openaire}
-                  metadata={this.props.config.openaire}
-                  setOpenaireFilter={this.props.setOpenaireFilter}
-                  toggleProvider={this.props.toggleOpenaireProvider}
-                />
-              }
-
-              {tab === EnumCatalog.LAB &&
-                <LabAdvancedOptions />
-              }
+              <PubsAdvancedOptions
+                filters={this.props.openaire}
+                metadata={this.props.config.openaire}
+                setOpenaireFilter={this.props.setOpenaireFilter}
+                toggleProvider={this.props.toggleOpenaireProvider}
+              />
 
               <section className="footer">
                 <button
