@@ -68,12 +68,12 @@
           padding-left: 25px;
         }
         &.featured-pubs-container {
-          padding-top: 44px;
+          padding-top: 46px;
           padding-left: 29px;
           h4.featured-pubs-header {
             margin: 0;
             padding-bottom: 18px;
-            padding-left: 7px;
+            padding-left: 9px;
             font-weight: bold;
           }
         }
@@ -133,7 +133,7 @@
         }
       }
       .search-by-subject-container {
-        padding-top: 57px;
+        padding-top: 58px;
         h4.search-by-subject-header {
           margin: 0;
           padding-bottom: 13px;
@@ -169,6 +169,7 @@
               text-align: center;
               img {
                 width: 50px;
+                max-height: 55px;
                 vertical-align: middle;
                 color: inherit;
               }

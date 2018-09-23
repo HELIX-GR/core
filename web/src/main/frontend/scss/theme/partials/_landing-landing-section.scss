@@ -3,8 +3,7 @@ body {
     max-width: $layout-fixed-width;
     margin-left: auto;
     margin-right: auto;
-    // Prevent bootstrap from updating body padding
-    padding: 0px !important
+    padding: 0px !important; // Prevent bootstrap from updating body padding
   }
 }
 
@@ -28,7 +27,6 @@ body {
       section {
         div.landing-section {
           background: white url('../images/jpg/photo2-100.jpg') center/cover no-repeat;
-          &:after {}
           .search-form-wrapper .landing-search-form .main-form-content {
             border-bottom-color: $data-color;
           }
@@ -119,6 +117,7 @@ body {
               border-bottom-width: 3px;
               position: relative;
               input.landing-search-text {
+                outline: none;
                 border: none;
                 background-color: transparent;
                 font-size: 17px;
@@ -463,6 +462,7 @@ body {
               }
             }
             button.landing-search-button {
+              outline: none;
               color: white;
               background-color: $main-black;
               border: none;

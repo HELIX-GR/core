@@ -105,8 +105,8 @@ body {
     @include position(absolute, 0 0 null 0);
     img.logo-image {
       height: 103px;
-      margin-top: 36px;
-      margin-left: 52px;
+      margin-top: 35px;
+      margin-left: 50px;
     }
     .menu-wrapper {
       @include position(absolute, 0 0 null null);
@@ -273,7 +273,7 @@ body {
           line-height: 35px;
           height: 34px;
           width: 34px;
-          line-height: 30px;
+          line-height: 34px;
           transition: all .2s ease-in-out;
           -webkit-transition: all .2s ease-in-out;
           -moz-transition: all .2s ease-in-out;

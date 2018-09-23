@@ -1,0 +1,21 @@
+/*
+ * react-datepicker
+ */
+
+@import '../../../../../node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+
+/*
+ * Custom styles
+ */
+
+.react-datepicker__close-icon::after {
+  background-color: transparent;
+  color: $black;
+}
+
+.react-datepicker__input-container {
+  .form-control:focus {
+    border-color: $gray-400;
+    box-shadow: none;
+  }
+}

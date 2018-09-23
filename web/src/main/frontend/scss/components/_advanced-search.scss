@@ -1,9 +1,41 @@
 .advanced-search {
+  .tabs {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 0px;
+    display: flex;
+    .tab-item {
+      flex-basis: 0px;
+      flex-grow: 1;
+      max-width: 100%;
+      border-bottom: 3px solid transparent;
+      padding-bottom: 10px;
+      &:hover {
+        cursor: pointer;
+      }
+      &.selected {
+        &.data {
+          border-color: $data-color;
+        }
+        &.pubs {
+          border-color: $pubs-color;
+        }
+        &.lab {
+          border-color: $lab-color;
+        }
+      }
+    }
+  }
+  .fields {
+    min-height: 60vh;
+  }
   .btn {
     cursor: pointer;
   }
   input.search-text {
     border: none;
+    outline: none;
     background-color: transparent;
     font-size: 20px;
     width: 80%;
@@ -22,24 +54,39 @@
       color: white;
       background-color: #BFBFBF;
     }
-    &:focus {
-      border: none;
-    }
   }
   .param-box {
     margin-top: 35px;
-    max-height: 312px;
+    max-height: 265px;
     overflow-y: auto;
+    &.providers {
+      max-height: unset;
+    }
+    &.filters {
+      max-height: unset;
+      padding: 0px 10px;
+      overflow-y: unset;
+    }
+    &.less {
+      overflow: hidden;
+    }
     .title {
       margin-left: 13px;
       margin-bottom: 25px;
+    }
+    .title-label {
+      font-family: $body_font;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1;
+      letter-spacing: .025em;
     }
     .switches {
       label {
         display: block;
         border-bottom: 1px solid $details-grey;
         margin-left: 15px;
-        padding: 15px 0;
+        padding: 10px 0;
         position: relative;
         font-weight: 300;
         font-size: 14px;
@@ -77,6 +124,7 @@
   section.footer {
     padding: 2rem;
     button.landing-search-button {
+      outline: none;
       color: white;
       background-color: $main-black;
       border: none;
