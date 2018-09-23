@@ -17,10 +17,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Response {
 
     @XmlElement(name = "header")
-    public Header header;
+    public ResponseHeader header;
 
     @XmlRootElement(name = "header", namespace = "")
-    public static class Header {
+    public static class ResponseHeader {
 
         @XmlElement(name = "page", namespace = "")
         public int page;
@@ -40,8 +40,19 @@ public class Response {
     @XmlRootElement(name = "result", namespace = "")
     public static class Result {
 
+        @XmlElement(name = "header", namespace = "")
+        public ResultHeader header;
+
         @XmlElement(name = "metadata", namespace = "")
         public Metadata metadata;
+
+    }
+
+    @XmlRootElement(name = "header", namespace = "")
+    public static class ResultHeader {
+
+        @XmlElement(name = "objIdentifier", namespace = "http://www.driver-repository.eu/namespace/dri")
+        public String objIdentifier;
 
     }
 

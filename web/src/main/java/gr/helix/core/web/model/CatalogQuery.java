@@ -8,11 +8,13 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
+import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "catalog")
 @JsonSubTypes({
     @Type(name = "CKAN", value = CkanCatalogQuery.class),
-    @Type(name = "OPENAIRE", value = CatalogQuery.class),
+    @Type(name = "OPENAIRE", value = OpenaireCatalogQuery.class),
+    @Type(name = "LAB", value = CatalogQuery.class),
 })
 public class CatalogQuery {
 

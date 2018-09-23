@@ -13,6 +13,7 @@ import gr.helix.core.web.model.CompositeCatalogResult;
 import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.model.ckan.Package;
+import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.model.openaire.client.Publication;
 
 @Service
@@ -24,22 +25,32 @@ public class SearchService {
     @Autowired
     private OpenaireServiceProxy openaireServiceProxy;
 
-    public CompositeCatalogResult queryCatalog(EnumCatalog catalog, String term) {
-        final CompositeCatalogResult result = new CompositeCatalogResult();
+    public CompositeCatalogResult queryCatalog(EnumCatalog[] catalogs, String term) throws InterruptedException, ExecutionException {
+        final CompositeCatalogQuery compositeQuery = new CompositeCatalogQuery();
 
-        switch (catalog) {
-            case CKAN:
-                result.add(catalog, this.queryData(term));
-                break;
-            case OPENAIRE:
-                result.add(catalog, this.queryPublications(term));
-                break;
-            default:
-                // Not supported
-                break;
+        for (final EnumCatalog catalog : catalogs) {
+            switch (catalog) {
+                case CKAN:
+                    final CkanCatalogQuery ckanQuery = new CkanCatalogQuery();
+                    ckanQuery.setPageIndex(0);
+                    ckanQuery.setPageSize(10);
+                    ckanQuery.setTerm(term);
+                    compositeQuery.getQueries().put(EnumCatalog.CKAN, ckanQuery);
+                    break;
+                case OPENAIRE:
+                    final CatalogQuery openaireQuery = new OpenaireCatalogQuery();
+                    openaireQuery.setPageIndex(0);
+                    openaireQuery.setPageSize(10);
+                    openaireQuery.setTerm(term);
+                    compositeQuery.getQueries().put(EnumCatalog.OPENAIRE, openaireQuery);
+                    break;
+                default:
+                    // Not supported
+                    break;
+            }
         }
 
-        return result;
+        return this.queryCatalog(compositeQuery);
     }
 
     public CatalogResult<?> queryData(String term) {
@@ -52,7 +63,7 @@ public class SearchService {
     }
 
     public CatalogResult<?> queryPublications(String term) {
-        final CatalogQuery query = new CatalogQuery();
+        final OpenaireCatalogQuery query = new OpenaireCatalogQuery();
         query.setPageIndex(0);
         query.setPageSize(10);
         query.setTerm(term);
@@ -60,8 +71,7 @@ public class SearchService {
         return this.openaireServiceProxy.getPublications(query);
     }
 
-    public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query)
-            throws InterruptedException, ExecutionException {
+    public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {
         final CompositeCatalogResult result = new CompositeCatalogResult();
         if (query.isParallel()) {
             result.merge(this.queryAsync(query));
@@ -73,7 +83,7 @@ public class SearchService {
                         result.add(key, this.ckanServiceProxy.getPackages((CkanCatalogQuery) catalogQuery, true));
                         break;
                     case OPENAIRE:
-                        result.add(key, this.openaireServiceProxy.getPublications(catalogQuery));
+                        result.add(key, this.openaireServiceProxy.getPublications((OpenaireCatalogQuery) catalogQuery));
                         break;
                     default:
                         // Not supported
@@ -88,7 +98,7 @@ public class SearchService {
         return this.ckanServiceProxy.getPackages(query, true);
     }
 
-    public CatalogResult<?> queryPublications(CatalogQuery query) {
+    public CatalogResult<?> queryPublications(OpenaireCatalogQuery query) {
         return this.openaireServiceProxy.getPublications(query);
     }
 
@@ -107,7 +117,7 @@ public class SearchService {
         final CatalogQuery openaireQuery = query.getQueries().get(EnumCatalog.OPENAIRE);
 
         final CompletableFuture<CatalogResult<Publication>> publications = CompletableFuture
-                .supplyAsync(() -> this.openaireServiceProxy.getPublications(openaireQuery)).handle((rs, ex) -> {
+                .supplyAsync(() -> this.openaireServiceProxy.getPublications((OpenaireCatalogQuery) openaireQuery)).handle((rs, ex) -> {
                     if (rs != null) {
                         return rs;
                     }

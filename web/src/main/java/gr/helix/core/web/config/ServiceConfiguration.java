@@ -2,44 +2,24 @@ package gr.helix.core.web.config;
 
 public class ServiceConfiguration {
 
-    private String scheme;
+    private EndpointConfiguration api;
 
-    private String host;
+    private EndpointConfiguration site;
 
-    private int    port;
-
-    private String path;
-
-    public String getScheme() {
-        return this.scheme;
+    public EndpointConfiguration getApi() {
+        return this.api;
     }
 
-    public void setScheme(String scheme) {
-        this.scheme = scheme;
+    public void setApi(EndpointConfiguration api) {
+        this.api = api;
     }
 
-    public String getHost() {
-        return this.host;
+    public EndpointConfiguration getSite() {
+        return this.site;
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return this.port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getPath() {
-        return this.path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
+    public void setSite(EndpointConfiguration site) {
+        this.site = site;
     }
 
 }

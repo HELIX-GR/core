@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Publication {
 
+    private String        objectIdentifier;
+
     private List<String>  subject      = new ArrayList<String>();
 
     private String        dateOfAcceptance;
@@ -25,6 +27,18 @@ public class Publication {
     private List<String>  contributors = new ArrayList<String>();
 
     private List<String>  originalId   = new ArrayList<String>();
+
+    private String        format;
+
+    private String        fullTextUrl;
+
+    public String getObjectIdentifier() {
+        return this.objectIdentifier;
+    }
+
+    public void setObjectIdentifier(String objectIdentifier) {
+        this.objectIdentifier = objectIdentifier;
+    }
 
     public List<String> getSubject() {
         return this.subject;
@@ -104,6 +118,22 @@ public class Publication {
 
     public void setOriginalId(List<String> originalId) {
         this.originalId = originalId;
+    }
+
+    public String getFormat() {
+        return this.format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getFullTextUrl() {
+        return this.fullTextUrl;
+    }
+
+    public void setFullTextUrl(String fullTextUrl) {
+        this.fullTextUrl = fullTextUrl;
     }
 
     public void addCreator(BigInteger rank, String name, String surname, String value) {

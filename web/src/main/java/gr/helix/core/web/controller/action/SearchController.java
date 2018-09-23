@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gr.helix.core.common.model.BasicErrorCode;
 import gr.helix.core.common.model.RestResponse;
-import gr.helix.core.web.model.CatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
 import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
+import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.service.SearchService;
 
 @RestController
@@ -25,9 +25,9 @@ public class SearchController {
     public SearchService searchService;
 
     @RequestMapping(value = "/action/catalog/query", method = RequestMethod.GET)
-    public RestResponse<?> query(Authentication authentication, @RequestParam EnumCatalog catalog, @RequestParam String search) {
+    public RestResponse<?> query(Authentication authentication, @RequestParam EnumCatalog[] catalogs, @RequestParam String search) {
         try {
-            final CompositeCatalogResult result = this.searchService.queryCatalog(catalog, search);
+            final CompositeCatalogResult result = this.searchService.queryCatalog(catalogs, search);
 
             return RestResponse.result(result);
         } catch (final Exception ex) {
@@ -73,7 +73,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/action/openaire/query", method = RequestMethod.POST)
-    public RestResponse<?> getPublications(Authentication authentication, @RequestBody CatalogQuery query) {
+    public RestResponse<?> getPublications(Authentication authentication, @RequestBody OpenaireCatalogQuery query) {
         try {
             return RestResponse.result(this.searchService.queryPublications(query));
         } catch (final Exception ex) {

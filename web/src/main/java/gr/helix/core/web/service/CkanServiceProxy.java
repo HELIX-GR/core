@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gr.helix.core.common.model.ApplicationException;
 import gr.helix.core.common.model.BasicErrorCode;
+import gr.helix.core.web.config.EndpointConfiguration;
 import gr.helix.core.web.config.ServiceConfiguration;
 import gr.helix.core.web.model.CatalogResult;
 import gr.helix.core.web.model.ckan.ArrayResponse;
@@ -60,10 +61,11 @@ public class CkanServiceProxy {
             // Documentation: http://docs.ckan.org/en/latest/api/index.html
 
             // CKAN start index starts from 0
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URIBuilder builder = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/package_search"))
                 .addParameter("q", query.getTerm())
                 .addParameter("sort", "relevance asc, metadata_modified desc")
@@ -113,10 +115,11 @@ public class CkanServiceProxy {
 
 
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final String host = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .build()
                 .toString();
             metadata.setHost(host);
@@ -146,10 +149,11 @@ public class CkanServiceProxy {
 
     private List<License> getLicenses() {
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URI uri = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/license_list"))
                 .build();
 
@@ -177,10 +181,11 @@ public class CkanServiceProxy {
 
     private List<String> getFormats() {
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URI uri = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/format_autocomplete"))
                 .setParameter("q", "")
                 .setParameter("limit", "1000")
@@ -210,10 +215,11 @@ public class CkanServiceProxy {
 
     private List<Tag> getTags() {
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URI uri = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/tag_list"))
                 .setParameter("all_fields", "true")
                 .build();
@@ -242,10 +248,11 @@ public class CkanServiceProxy {
 
     private List<Organization> getOrganizations() {
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URI uri = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/organization_list"))
                 .setParameter("limit", "1000")
                 .setParameter("all_fields", "true")
@@ -275,10 +282,11 @@ public class CkanServiceProxy {
 
     private List<Group> getGroups() {
         try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URI uri = new URIBuilder()
-                .setScheme(this.ckanConfiguration.getScheme())
-                .setHost(this.ckanConfiguration.getHost())
-                .setPort(this.ckanConfiguration.getPort())
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
                 .setPath(this.composePath("api/action/group_list"))
                 .setParameter("limit", "1000")
                 .setParameter("all_fields", "true")
@@ -376,7 +384,7 @@ public class CkanServiceProxy {
     }
 
     private String composePath(String path) {
-        final String relativePath = this.ckanConfiguration.getPath();
+        final String relativePath = this.ckanConfiguration.getApi().getPath();
         if (StringUtils.isBlank(relativePath)) {
             return path;
         }

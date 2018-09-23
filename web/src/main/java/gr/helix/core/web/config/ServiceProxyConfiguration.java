@@ -9,8 +9,8 @@ public class ServiceProxyConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "helix.openaire")
-    ServiceConfiguration openaireConfiguration() {
-        return new ServiceConfiguration();
+    OpenaireServiceConfiguration openaireConfiguration() {
+        return new OpenaireServiceConfiguration();
     }
 
     @Bean

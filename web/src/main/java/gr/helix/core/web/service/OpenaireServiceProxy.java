@@ -6,6 +6,9 @@ import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -31,9 +35,11 @@ import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.model.ApplicationException;
 import gr.helix.core.common.model.BasicErrorCode;
-import gr.helix.core.web.config.ServiceConfiguration;
-import gr.helix.core.web.model.CatalogQuery;
+import gr.helix.core.web.config.EndpointConfiguration;
+import gr.helix.core.web.config.OpenaireServiceConfiguration;
 import gr.helix.core.web.model.CatalogResult;
+import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
+import gr.helix.core.web.model.openaire.OpenaireMetadata;
 import gr.helix.core.web.model.openaire.client.Publication;
 import gr.helix.core.web.model.openaire.server.ClassedSchemedElement;
 import gr.helix.core.web.model.openaire.server.InferenceExtendedStringType;
@@ -44,28 +50,75 @@ import gr.helix.core.web.model.openaire.server.Result;
 @Service
 public class OpenaireServiceProxy {
 
-    private static final Logger  logger = LoggerFactory.getLogger(OpenaireServiceProxy.class);
+    private static final Logger          logger                  = LoggerFactory.getLogger(OpenaireServiceProxy.class);
+
+    private static final String          API_SEARCH_PUBLICATIONS = "search/publications";
+
+    private static final DateFormat      dateFormat              = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    private HttpClient           httpClient;
+    private HttpClient                   httpClient;
 
     @Autowired
-    private ServiceConfiguration openaireConfiguration;
+    private OpenaireServiceConfiguration openaireConfiguration;
 
-    public CatalogResult<Publication> getPublications(CatalogQuery query) throws ApplicationException {
+    public OpenaireMetadata getMetadata() {
+        final OpenaireMetadata metadata = new OpenaireMetadata();
+
+        try {
+            final EndpointConfiguration endpoint = this.openaireConfiguration.getSite();
+            final String host = new URIBuilder()
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
+                .build()
+                .toString();
+            metadata.setHost(host);
+            metadata.setProviders(this.openaireConfiguration.getProviders());
+        } catch (final URISyntaxException e) {
+            // Ignore
+        }
+
+        return metadata;
+    }
+
+    public CatalogResult<Publication> getPublications(OpenaireCatalogQuery query) throws ApplicationException {
         try {
             // Documentation: http://api.openaire.eu/api.html#pubs
 
             // OpenAIRE page index starts from 1
-            final URI uri = new URIBuilder()
-                .setScheme(this.openaireConfiguration.getScheme())
-                .setHost(this.openaireConfiguration.getHost())
-                .setPort(this.openaireConfiguration.getPort())
-                .setPath(this.openaireConfiguration.getPath())
+            final List<String> providers = Arrays.stream(query.getProviders())
+                .filter(p -> !StringUtils.isBlank(p))
+                .collect(Collectors.toList());
+            if(providers.isEmpty()) {
+                Arrays.stream(this.openaireConfiguration.getProviders())
+                    .forEach(p -> providers.add(p.getId()));
+            }
+
+            final EndpointConfiguration endpoint = this.openaireConfiguration.getApi();
+            final URIBuilder builder = new URIBuilder()
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
+                .setPath(API_SEARCH_PUBLICATIONS)
+                .addParameter("model", "openaire")
+                .addParameter("OA", "true")
                 .addParameter("title", query.getTerm())
                 .addParameter("page", Integer.toString(query.getPageIndex() + 1))
                 .addParameter("size", Integer.toString(query.getPageSize()))
-                .build();
+                .addParameter("openaireProviderID", String.join(",", providers));
+
+            if (query.getFromDateAccepted() != null) {
+                builder.addParameter("fromDateAccepted", dateFormat.format(query.getFromDateAccepted()));
+            }
+            if (query.getToDateAccepted() != null) {
+                builder.addParameter("toDateAccepted", dateFormat.format(query.getToDateAccepted()));
+            }
+            if ((query.getAuthors() != null) && (query.getAuthors().length != 0)) {
+                builder.addParameter("author", String.join(" ", query.getAuthors()));
+            }
+
+            final URI uri = builder.build();
 
             final HttpUriRequest request = RequestBuilder.get(uri)
                 .addHeader(HttpHeaders.ACCEPT, MediaType.TEXT_HTML_VALUE)
@@ -117,19 +170,19 @@ public class OpenaireServiceProxy {
         final CatalogResult<Publication> result = new CatalogResult<Publication>();
 
         final List<Publication> publications = response.results.stream()
-            .map(r -> r.metadata.entity)
-            .filter(e -> e != null)
-            .map(e -> {
-                final Publication pub = new Publication();
+                .filter(r -> (r.header != null) && (r.metadata.entity != null))
+                .map(r -> {
+                    final Publication pub = new Publication();
 
-                e.getResult().getSubjectOrTitleOrCreator().stream()
-                    .forEach(element -> {
-                        this.processElement(element, pub);
-                    });
+                    pub.setObjectIdentifier(r.header.objIdentifier);
+                    r.metadata.entity.getResult().getSubjectOrTitleOrCreator().stream()
+                        .forEach(element -> {
+                            this.processElement(element, pub);
+                        });
 
-                return pub;
-            })
-            .collect(Collectors.toList());
+                    return pub;
+                })
+                .collect(Collectors.toList());
 
         result.setCount(response.header.total);
         result.setResults(publications);
@@ -167,6 +220,12 @@ public class OpenaireServiceProxy {
                 break;
             case "originalId":
                 this.readOriginalId(element, pub);
+                break;
+            case "fulltext":
+                this.readFullText(element, pub);
+                break;
+            case "format":
+                this.readFormat(element, pub);
                 break;
         }
     }
@@ -234,6 +293,22 @@ public class OpenaireServiceProxy {
     private void readOriginalId(JAXBElement<?> element, Publication pub) {
         if (element.getValue() instanceof String) {
             pub.getOriginalId().add((String) element.getValue());
+        }
+    }
+
+    private void readFullText(JAXBElement<?> element, Publication pub) {
+        if(element.getValue() instanceof String) {
+            pub.setFullTextUrl((String) element.getValue());
+        }
+        if(element.getValue() instanceof InferenceExtendedStringType) {
+            final InferenceExtendedStringType value = (InferenceExtendedStringType) element.getValue();
+            pub.setFullTextUrl(value.getValue());
+        }
+    }
+
+    private void readFormat(JAXBElement<?> element, Publication pub) {
+        if(element.getValue() instanceof String) {
+            pub.setFormat((String) element.getValue());
         }
     }
 

@@ -11,6 +11,7 @@ import gr.helix.core.web.config.ExternalServiceProviderConfiguration;
 import gr.helix.core.web.config.SamlConfiguration;
 import gr.helix.core.web.model.configuration.ClientConfiguration;
 import gr.helix.core.web.service.CkanServiceProxy;
+import gr.helix.core.web.service.OpenaireServiceProxy;
 
 @RestController
 @RequestMapping(produces = "application/json")
@@ -28,6 +29,9 @@ public class ConfigurationController extends BaseController {
     @Autowired
     private CkanServiceProxy                     ckanServiceProxy;
 
+    @Autowired
+    private OpenaireServiceProxy                 openaireServiceProxy;
+
     @RequestMapping(value = "/action/configuration/{locale}", method = RequestMethod.GET)
     public RestResponse<ClientConfiguration> getConfiguration(String locale) {
         return RestResponse.result(this.createConfiguration());
@@ -42,6 +46,7 @@ public class ConfigurationController extends BaseController {
         config.setWordPress(this.serviceProviderConfiguration.getWordPress());
 
         config.setCkan(this.ckanServiceProxy.getMetadata());
+        config.setOpenaire(this.openaireServiceProxy.getMetadata());
 
         this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);
 
