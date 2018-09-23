@@ -9,19 +9,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+    private static final String clientRoutes[] = {
+        "/error/",
+        "/main/",
+        "/news/",
+        "/pages/",
+        "/project/",
+        "/pubs/",
+    };
+
     @RequestMapping("*")
     public String index(HttpSession session, HttpServletRequest request) {
         // Prevent infinite redirects
-        if(request.getServletPath().equalsIgnoreCase("/core/")) {
+        if (this.isClientRoute(request.getServletPath())) {
             return "index";
         }
-        return "redirect:/core/";
+        return "redirect:/main/";
     }
 
-    @RequestMapping("/core/**")
-    public String main(HttpSession session, HttpServletRequest request) {
-        // Handle all requests except for API calls
+    @RequestMapping({
+        "/error/**",
+        "/main/**",
+        "/news/**",
+        "/pages/**",
+        "/project/**",
+        "/pubs/**",
+    })
+    public String reactRoutes(HttpSession session, HttpServletRequest request) {
         return "index";
+    }
+
+    private boolean isClientRoute(String path) {
+        for (final String value : clientRoutes) {
+            if (path.toLowerCase().startsWith(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -70,15 +71,20 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
             .map(r -> new SimpleGrantedAuthority(r.toString()))
             .collect(Collectors.toList());
 
-        // TODO: Get user form database
+        // TODO: Get user from database
         try {
             this.userService.loadUserByUsername(authentication.getPrincipal().toString());
         }catch (final UsernameNotFoundException ex) {
             // TODO: Handle exception / Create user
         }
 
+        // An email is required
+        if (StringUtils.isBlank(account.getEmail())) {
+            throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
+        }
+
         // Replace authentication
-        final User user = new User(account,"");
+        final User user = new User(account, "");
         final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, "N/A", authorities);
         token.setDetails(user);
 

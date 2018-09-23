@@ -521,6 +521,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    public SimpleUrlAuthenticationFailureHandler oauth2FailureHandler() {
+        final SimpleUrlAuthenticationFailureHandler handler = new SimpleUrlAuthenticationFailureHandler();
+        handler.setDefaultFailureUrl("/pages/login?error");
+        return handler;
+    }
+
     @Autowired
     @Qualifier("defaultUserDetailsService")
     UserDetailsService  userService;
@@ -533,8 +539,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.antMatcher("/**")
             .authorizeRequests()
                 .antMatchers("/",
-                             "/core/**",
-                             // Public assets
+                             // Site parts
+                             "/error/**",
+                             "/main/**",
+                             "/news/**",
+                             "/pages/**",
+                             "/project/**",
+                             "/pubs/**",
+                             // Assets
                              "/favicon.ico",
                              "/css/**",
                              "/docs/**",
@@ -544,16 +556,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/js/**",
                              "/vendor/**",
                              // Authentication endpoints
-                             "/core/login**",
                              "/login**",
                              "/logged-out",
                              "/error**",
                              // SAML endpoints
                              "/saml/**",
-                             // Public endpoints
-                             "/action/configuration/**",
-                             "/action/ckan/**",
+                             // Action API endpoints
                              "/action/catalog/**",
+                             "/action/ckan/**",
+                             "/action/configuration/**",
                              "/action/openaire/**")
                 .permitAll()
             .anyRequest().authenticated()
@@ -592,23 +603,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .permitAll();
 
         http.addFilterBefore(this.metadataGeneratorFilter(), ChannelProcessingFilter.class);
-        http.addFilterBefore(this.ssoFilter(), BasicAuthenticationFilter.class);
+        http.addFilterBefore(this.oauth2Filter(), BasicAuthenticationFilter.class);
         http.addFilterAfter(this.samlFilter(), BasicAuthenticationFilter.class);
         http.addFilterAfter(new MappedDiagnosticContextFilter(), SwitchUserFilter.class);
     }
 
-    private Filter ssoFilter() {
+    private Filter oauth2Filter() {
         final CompositeFilter filter = new CompositeFilter();
         final List<Filter> filters = new ArrayList<>();
 
-        filters.add(this.ssoFilter(this.google(), "/login/google"));
-        filters.add(this.ssoFilter(this.github(), "/login/github"));
+        filters.add(this.oauth2Filter(this.google(), "/login/google"));
+        filters.add(this.oauth2Filter(this.github(), "/login/github"));
         filter.setFilters(filters);
 
         return filter;
     }
 
-    private Filter ssoFilter(ClientResources client, String path) {
+    private Filter oauth2Filter(ClientResources client, String path) {
         final OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
 
         final OAuth2RestTemplate template = new OAuth2RestTemplate(client.getClient(), this.oauth2ClientContext);
@@ -622,6 +633,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         filter.setRestTemplate(template);
         filter.setTokenServices(tokenServices);
+
+        filter.setAuthenticationFailureHandler(this.oauth2FailureHandler());
 
         return filter;
     }
