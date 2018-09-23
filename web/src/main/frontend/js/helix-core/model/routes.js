@@ -16,18 +16,21 @@ export const ExternalRoutes = {
 /**
  * Static routes
  */
-const MAIN = '/';
-const NEWS = '/news';
+const MAIN = '/main/';
+const MAIN_RESULTS = '/main/results';
+const NEWS = '/news/';
 const PROJECT = '/project/*';
-const PUBS = '/pubs';
-const RESULTS = '/results';
+const PUBS = '/pubs/';
+const PUBS_RESULTS = '/pubs/results';
+
 
 export const StaticRoutes = {
   MAIN,
+  MAIN_RESULTS,
   NEWS,
   PROJECT,
   PUBS,
-  RESULTS,
+  PUBS_RESULTS,
 };
 
 /**
@@ -44,9 +47,9 @@ export const DynamicRoutes = {
 /**
  * Routes for utility pages
  */
-const Login = '/login';
-const Register = '/register';
-const ResetPassword = '/reset-password';
+const Login = '/pages/login';
+const Register = '/pages/register';
+const ResetPassword = '/pages/reset-password';
 
 export const Pages = {
   Login,
