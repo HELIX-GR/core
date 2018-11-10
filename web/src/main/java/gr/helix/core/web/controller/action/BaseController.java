@@ -13,4 +13,8 @@ public abstract class BaseController {
         return this.authenticationFacade.getCurrentUserId();
     }
 
+    protected String currentUserEmail() {
+        return this.authenticationFacade.getCurrentUserEmail();
+    }
+
 }

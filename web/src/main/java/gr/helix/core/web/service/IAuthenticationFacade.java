@@ -37,6 +37,13 @@ public interface IAuthenticationFacade {
     String getCurrentUserName();
 
     /**
+     * Get the user email
+     *
+     * @return the user email or {@code null} if the user is not authenticated
+     */
+    String getCurrentUserEmail();
+
+    /**
      * Get the user locale
      *
      * @return the user locale or {@code null} if the user is not authenticated

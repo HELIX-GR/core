@@ -52,6 +52,15 @@ public class AuthenticationFacade implements IAuthenticationFacade {
     }
 
     @Override
+    public String getCurrentUserEmail() {
+        final Authentication authentication = this.getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+        return ((User) authentication.getPrincipal()).getEmail();
+    }
+
+    @Override
     public Locale getCurrentUserLocale() {
         final Authentication authentication = this.getAuthentication();
         if (authentication == null) {

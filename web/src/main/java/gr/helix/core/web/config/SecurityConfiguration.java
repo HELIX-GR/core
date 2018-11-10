@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -104,11 +105,17 @@ import gr.helix.core.web.service.SAMLUserDetailsServiceImpl;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private static final String                API_REG_EX  = "/api/v\\d+/.*";
+
     private Timer                              backgroundTaskTimer;
 
     private MultiThreadedHttpConnectionManager multiThreadedHttpConnectionManager;
 
     private final RegexRequestMatcher          samlMatcher = new RegexRequestMatcher("/saml/.*", null);
+
+    private final RegexRequestMatcher          apiMatcher  = new RegexRequestMatcher(API_REG_EX, null);
+
+    private final Pattern                      csrfMethods = Pattern.compile("^(POST|PUT|DELETE)$");
 
     @Autowired
     private SamlConfiguration                  samlConfiguration;
@@ -417,7 +424,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public SAMLWebSSOHoKProcessingFilter samlWebSSOHoKProcessingFilter() throws Exception {
         final SAMLWebSSOHoKProcessingFilter samlWebSSOHoKProcessingFilter = new SAMLWebSSOHoKProcessingFilter();
-        //samlWebSSOHoKProcessingFilter.setAuthenticationSuccessHandler(this.successRedirectHandler());
         samlWebSSOHoKProcessingFilter.setAuthenticationManager(this.authenticationManager());
         samlWebSSOHoKProcessingFilter.setAuthenticationFailureHandler(this.authenticationFailureHandler());
         return samlWebSSOHoKProcessingFilter;
@@ -428,7 +434,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public SAMLProcessingFilter samlWebSSOProcessingFilter() throws Exception {
         final SAMLProcessingFilter samlWebSSOProcessingFilter = new SAMLProcessingFilter();
         samlWebSSOProcessingFilter.setAuthenticationManager(this.authenticationManager());
-        //samlWebSSOProcessingFilter.setAuthenticationSuccessHandler(this.successRedirectHandler());
         samlWebSSOProcessingFilter.setAuthenticationFailureHandler(this.authenticationFailureHandler());
         return samlWebSSOProcessingFilter;
     }
@@ -567,19 +572,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/action/configuration/**",
                              "/action/openaire/**")
                 .permitAll()
+                .regexMatchers(API_REG_EX)
+                .permitAll()
             .anyRequest().authenticated()
                 .antMatchers("/admin/**")
                 .hasAuthority("ROLE_ADMIN");
 
         http.csrf().requireCsrfProtectionMatcher((HttpServletRequest req) -> {
-            final String method = req.getMethod();
-
             // Disable for SAML
             if (this.samlMatcher.matches(req)) {
                 return false;
             }
+            // Disable for API
+            if (this.apiMatcher.matches(req)) {
+                return false;
+            }
             // Include all state-changing methods
-            if (method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) {
+            if (this.csrfMethods.matcher(req.getMethod()).matches()) {
                 return true;
             }
 

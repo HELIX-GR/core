@@ -71,6 +71,10 @@ public class User implements UserDetails {
         return this.account.getLang();
     }
 
+    public String getEmail() {
+        return this.account.getEmail();
+    }
+
     public Account getAccount() {
         return this.account;
     }
