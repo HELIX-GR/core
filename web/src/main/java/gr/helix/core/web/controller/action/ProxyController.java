@@ -88,17 +88,12 @@ public class ProxyController {
 			}
 		}
 
-		OutputStream output = null;
-		InputStream input = null;
-
-		try {
-			input = proxiedResponse.getEntity().getContent();
-			output = response.getOutputStream();
-			IOUtils.copy(input, output);
-		} finally {
-			IOUtils.closeQuietly(output);
-			IOUtils.closeQuietly(input);
-		}
+        try (
+            InputStream input = proxiedResponse.getEntity().getContent();
+            OutputStream output = response.getOutputStream();
+        ) {
+            IOUtils.copy(input, output);
+        }
 	}
 
 	private void handleError(Exception ex, HttpServletResponse response) throws IOException {
