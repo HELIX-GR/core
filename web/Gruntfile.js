@@ -279,6 +279,15 @@ module.exports = function (grunt) {
           debug: false,
           includeFilters: [".*\\.js$"]
         }
+      },
+      'core-api': {
+        src: "apidoc/src/core-api",
+        dest: "apidoc/docs/core-api",
+        template: "apidoc/template",
+        options: {
+          debug: false,
+          includeFilters: [".*\\.js$"]
+        }
       }
     },
 
