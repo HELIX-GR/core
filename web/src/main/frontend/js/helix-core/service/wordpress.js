@@ -14,8 +14,8 @@ const options = {
   headers,
 };
 
-const getLatestPosts = (host, count) => {
-  return getPosts(host, 1, count);
+const getLatestPosts = (host, count, category) => {
+  return getPosts(host, 1, count, category);
 };
 
 const getPostsByCategory = (host, count, category) => {
