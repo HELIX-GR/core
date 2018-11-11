@@ -30,6 +30,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +61,7 @@ public class OpenaireServiceProxy {
     private HttpClient                   httpClient;
 
     @Autowired
+    @Qualifier("openaireConfiguration")
     private OpenaireServiceConfiguration openaireConfiguration;
 
     public OpenaireMetadata getMetadata() {
@@ -106,7 +108,8 @@ public class OpenaireServiceProxy {
                 .addParameter("title", query.getTerm())
                 .addParameter("page", Integer.toString(query.getPageIndex() + 1))
                 .addParameter("size", Integer.toString(query.getPageSize()))
-                .addParameter("openaireProviderID", String.join(",", providers));
+                .addParameter("openaireProviderID", String.join(",", providers))
+                .addParameter("sortBy", "resultdateofacceptance,descending");
 
             if (query.getFromDateAccepted() != null) {
                 builder.addParameter("fromDateAccepted", dateFormat.format(query.getFromDateAccepted()));

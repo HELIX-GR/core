@@ -22,21 +22,20 @@ import gr.helix.core.web.service.SearchService;
 public class SearchController {
 
     @Autowired
-    public SearchService searchService;
+    private SearchService searchService;
 
     @RequestMapping(value = "/action/catalog/query", method = RequestMethod.GET)
     public RestResponse<?> query(Authentication authentication, @RequestParam EnumCatalog[] catalogs, @RequestParam String search) {
         try {
             final CompositeCatalogResult result = this.searchService.queryCatalog(catalogs, search);
-
             return RestResponse.result(result);
         } catch (final Exception ex) {
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
 
-    @RequestMapping(value = "/action/ckan/query", method = RequestMethod.GET)
-    public RestResponse<?> getPackages(Authentication authentication, @RequestParam String search) {
+    @RequestMapping(value = "/action/data/query", method = RequestMethod.GET)
+    public RestResponse<?> getData(Authentication authentication, @RequestParam String search) {
         try {
             return RestResponse.result(this.searchService.queryData(search));
         } catch (final Exception ex) {
@@ -44,7 +43,16 @@ public class SearchController {
         }
     }
 
-    @RequestMapping(value = "/action/openaire/query", method = RequestMethod.GET)
+    @RequestMapping(value = "/action/notebook/query", method = RequestMethod.GET)
+    public RestResponse<?> getNotebooks(Authentication authentication, @RequestParam String search) {
+        try {
+            return RestResponse.result(this.searchService.queryNotebooks(search));
+        } catch (final Exception ex) {
+            return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
+        }
+    }
+
+    @RequestMapping(value = "/action/publication/query", method = RequestMethod.GET)
     public RestResponse<?> getPublications(Authentication authentication, @RequestParam String search) {
         try {
             return RestResponse.result(this.searchService.queryPublications(search));
@@ -63,8 +71,8 @@ public class SearchController {
         }
     }
 
-    @RequestMapping(value = "/action/ckan/query", method = RequestMethod.POST)
-    public RestResponse<?> getPackages(Authentication authentication, @RequestBody CkanCatalogQuery query) {
+    @RequestMapping(value = "/action/data/query", method = RequestMethod.POST)
+    public RestResponse<?> getData(Authentication authentication, @RequestBody CkanCatalogQuery query) {
         try {
             return RestResponse.result(this.searchService.queryData(query));
         } catch (final Exception ex) {
@@ -72,7 +80,16 @@ public class SearchController {
         }
     }
 
-    @RequestMapping(value = "/action/openaire/query", method = RequestMethod.POST)
+    @RequestMapping(value = "/action/notebook/query", method = RequestMethod.POST)
+    public RestResponse<?> getNotebooks(Authentication authentication, @RequestBody CkanCatalogQuery query) {
+        try {
+            return RestResponse.result(this.searchService.queryNotebooks(query));
+        } catch (final Exception ex) {
+            return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
+        }
+    }
+
+    @RequestMapping(value = "/action/publication/query", method = RequestMethod.POST)
     public RestResponse<?> getPublications(Authentication authentication, @RequestBody OpenaireCatalogQuery query) {
         try {
             return RestResponse.result(this.searchService.queryPublications(query));

@@ -114,8 +114,8 @@ class PublicationsResults extends React.Component {
             <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
               {p.title}
             </a>
-            <div className="pill data">
-              DATA
+            <div className="pill pubs">
+              PUBS
             </div>
           </h3>
           {p.publisher &&
@@ -232,7 +232,12 @@ class PublicationsResults extends React.Component {
 
               <div className="main-results-border-bottom">
                 <label className="order-by" htmlFor="order-by">Ταξινόμηση κατά
-                  <select name="order-by" id="order-by" value="">
+                  <select
+                    name="order-by"
+                    id="order-by"
+                    value=""
+                    onChange={(e) => { console.log(e.target.value); }}
+                  >
                     <option value="1">
                       Σχετικότητα
                     </option>

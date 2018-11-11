@@ -14,7 +14,7 @@ import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 @JsonSubTypes({
     @Type(name = "CKAN", value = CkanCatalogQuery.class),
     @Type(name = "OPENAIRE", value = OpenaireCatalogQuery.class),
-    @Type(name = "LAB", value = CatalogQuery.class),
+    @Type(name = "LAB", value = CkanCatalogQuery.class),
 })
 public class CatalogQuery {
 

@@ -77,19 +77,14 @@ class Result extends React.Component {
           <div className="landing-live-search-group lab">
             <div className="results-header">
               <div className="results-title">
-                Pubs
+                Lab
               </div>
               <a className="all-link">
-                all Lab
+                all Notebooks
               </a>
             </div>
             <div className="search-results">
-              <a href="#" className="result-entry">
-                <span className="matched-text">Water Po</span>llution Guidelines
-              </a>
-              <a href="#" className="result-entry">
-                <span className="matched-text">Water Po</span>llution Composition Annual Data 2018
-              </a>
+              {this.renderNotebooks(notebooks.results)}
             </div>
           </div>
         }
@@ -99,7 +94,7 @@ class Result extends React.Component {
   }
 
   renderPackages(packages) {
-    const { host } = this.props.ckan;
+    const { host } = this.props.data;
 
     return packages.map((p, index) => {
       return (
@@ -126,6 +121,23 @@ class Result extends React.Component {
           className="result-entry" target="_blank"
         >
           {p.title}
+        </a>
+      );
+    });
+  }
+
+  renderNotebooks(notebooks) {
+    const { host } = this.props.lab;
+
+    return notebooks.map((n, index) => {
+      return (
+        <a
+          key={`notebook-${index}`}
+          href={`${host}/dataset/${n.id}`}
+          className="result-entry"
+          target="_blank"
+        >
+          {n.title}
         </a>
       );
     });

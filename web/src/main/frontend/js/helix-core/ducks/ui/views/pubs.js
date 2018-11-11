@@ -127,7 +127,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         result: {
-          catalogs: action.data.catalogs,
+          catalogs: action.data.catalogs || {},
         },
       };
 
@@ -138,7 +138,7 @@ export default (state = initialState, action) => {
         loading: false,
         partialResult: {
           visible: true,
-          catalogs: action.data.catalogs,
+          catalogs: action.data.catalogs || {},
         },
       };
 
@@ -210,7 +210,7 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
     });
 };
 
-export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (dispatch, getState) => {
+export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => (dispatch, getState) => {
   const { meta: { csrfToken: token }, ui: { pubs: { openaire } } } = getState();
 
   const queries = {

@@ -1,9 +1,8 @@
 export const EnumCatalog = {
-  NONE: 'NONE',
   CKAN: 'CKAN',
   DSPACE: 'DSPACE',
-  OPENAIRE: 'OPENAIRE',
   LAB: 'LAB',
+  OPENAIRE: 'OPENAIRE',
 };
 
 export const EnumCkanFacet = {

@@ -11,7 +11,8 @@ import {
 // Actions
 const ADVANCED_SEARCH_TOGGLE = 'ui/search-page/ADVANCED_SEARCH_TOGGLE';
 const PILL_TOGGLE = 'ui/search-page/PILL_TOGGLE';
-const SET_CKAN_FACET = 'ui/search-page/SET_CKAN_FACET';
+const SET_DATA_FACET = 'ui/search-page/SET_DATA_FACET';
+const SET_LAB_FACET = 'ui/search-page/SET_LAB_FACET';
 const SET_OPENAIRE_FILTER = 'ui/search-page/SET_OPENAIRE_FILTER';
 const SET_OPENAIRE_PROVIDER = 'ui/search-page/SET_OPENAIRE_PROVIDER';
 const SET_RESULT_VISIBILITY = 'ui/search-page/SET_RESULT_VISIBILITY';
@@ -26,10 +27,13 @@ const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/search-page/SEARCH_AUTOCOMPLETE_RESPONS
 // Reducer
 const initialState = {
   advanced: false,
-  ckan: {
+  data: {
     facets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = []; return result; }, {}),
   },
   dspace: {},
+  lab: {
+    facets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = []; return result; }, {}),
+  },
   loading: false,
   openaire: {
     authors: [],
@@ -53,17 +57,44 @@ const initialState = {
 };
 
 /**
- * Updates CKAN state
+ * Updates Data catalog state
  *
- * @param {*} state - the current ckan state
+ * @param {*} state - the current Data catalog state
  * @param {*} action - the requested action
- * @returns the new ckan state
+ * @returns the new Data catalog state
  */
-function ckanReducer(state, action) {
+function dataReducer(state, action) {
   const { facets } = state;
 
   switch (action.type) {
-    case SET_CKAN_FACET:
+    case SET_DATA_FACET:
+      return {
+        ...state,
+        facets: {
+          ...facets,
+          [action.facet]: facets[action.facet].find(value => value === action.value) ?
+            facets[action.facet].filter(value => value !== action.value) :
+            [...facets[action.facet], action.value],
+        }
+      };
+
+    default:
+      return state;
+  }
+}
+
+/**
+ * Updates Lab catalog state
+ *
+ * @param {*} state - the current Lab catalog state
+ * @param {*} action - the requested action
+ * @returns the new Lab catalog state
+ */
+function labReducer(state, action) {
+  const { facets } = state;
+
+  switch (action.type) {
+    case SET_LAB_FACET:
       return {
         ...state,
         facets: {
@@ -136,10 +167,16 @@ export default (state = initialState, action) => {
         }
       };
 
-    case SET_CKAN_FACET:
+    case SET_DATA_FACET:
       return {
         ...state,
-        ckan: ckanReducer(state.ckan, action),
+        data: dataReducer(state.data, action),
+      };
+
+    case SET_LAB_FACET:
+      return {
+        ...state,
+        lab: labReducer(state.lab, action),
       };
 
     case SET_OPENAIRE_FILTER:
@@ -185,7 +222,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         result: {
-          catalogs: action.data.catalogs,
+          catalogs: action.data.catalogs || {},
         },
       };
 
@@ -196,7 +233,7 @@ export default (state = initialState, action) => {
         loading: false,
         partialResult: {
           visible: true,
-          catalogs: action.data.catalogs,
+          catalogs: action.data.catalogs || {},
         },
       };
 
@@ -220,8 +257,14 @@ export const togglePill = (id) => ({
   id,
 });
 
-export const toggleCkanFacet = (facet, value) => ({
-  type: SET_CKAN_FACET,
+export const toggleDataFacet = (facet, value) => ({
+  type: SET_DATA_FACET,
+  facet,
+  value,
+});
+
+export const toggleLabFacet = (facet, value) => ({
+  type: SET_LAB_FACET,
   facet,
   value,
 });
@@ -253,9 +296,10 @@ const catalogSearchAutoCompleteComplete = (data) => ({
   data,
 });
 
-const catalogSearchBegin = (term) => ({
+const catalogSearchBegin = (term, advanced) => ({
   type: SEARCH_REQUEST,
   term,
+  advanced,
 });
 
 const catalogSearchComplete = (data) => ({
@@ -285,17 +329,26 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
     });
 };
 
-export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (dispatch, getState) => {
-  const { meta: { csrfToken: token }, ui: { main: { pills, ckan, openaire } } } = getState();
-
+export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => (dispatch, getState) => {
+  const { meta: { csrfToken: token }, ui: { main: { pills, data, lab, openaire } } } = getState();
   const queries = {};
+
   if (pills.data || advanced) {
     queries[EnumCatalog.CKAN] = {
       catalog: EnumCatalog.CKAN,
       pageIndex,
       pageSize,
       term,
-      facets: advanced ? ckan.facets : null,
+      facets: advanced ? data.facets : null,
+    };
+  }
+  if (pills.lab || advanced) {
+    queries[EnumCatalog.LAB] = {
+      catalog: EnumCatalog.LAB,
+      pageIndex,
+      pageSize,
+      term,
+      facets: advanced ? lab.facets : null,
     };
   }
   if (pills.pubs || advanced) {
@@ -310,16 +363,8 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 2) => (
       [EnumOpenaireFilter.ToDateAccepted]: openaire[EnumOpenaireFilter.ToDateAccepted],
     };
   }
-  if (pills.lab || advanced) {
-    queries[EnumCatalog.LAB] = {
-      catalog: EnumCatalog.LAB,
-      pageIndex,
-      pageSize,
-      term,
-    };
-  }
 
-  dispatch(catalogSearchBegin(term));
+  dispatch(catalogSearchBegin(term, advanced));
   return catalogService.search(token, { queries })
     .then((data) => {
       dispatch(catalogSearchComplete(data));

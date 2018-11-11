@@ -16,7 +16,7 @@ public class CatalogResult<T> {
 
     private int               pageSize;
 
-    private List<T>           results;
+    private List<T>           results = new ArrayList<T>();
 
     private final List<Error> errors = new ArrayList<Error>();
 

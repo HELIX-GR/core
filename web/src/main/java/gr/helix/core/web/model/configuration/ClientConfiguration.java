@@ -24,7 +24,9 @@ public class ClientConfiguration {
 
     private WordPressConfiguration wordPress;
 
-    private CkanMetadata           ckan;
+    private CkanMetadata           data;
+
+    private CkanMetadata           lab;
 
     private OpenaireMetadata       openaire;
 
@@ -68,12 +70,20 @@ public class ClientConfiguration {
         this.identityProviders.add(identityProvider);
     }
 
-    public CkanMetadata getCkan() {
-        return this.ckan;
+    public CkanMetadata getData() {
+        return this.data;
     }
 
-    public void setCkan(CkanMetadata ckan) {
-        this.ckan = ckan;
+    public void setData(CkanMetadata data) {
+        this.data = data;
+    }
+
+    public CkanMetadata getLab() {
+        return this.lab;
+    }
+
+    public void setLab(CkanMetadata lab) {
+        this.lab = lab;
     }
 
     public OpenaireMetadata getOpenaire() {

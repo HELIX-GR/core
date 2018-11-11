@@ -66,7 +66,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { ckan: { host: ckanHost } } = this.props.config;
+    const { data: { host: dataHost } } = this.props.config;
     const authenticated = (this.props.profile != null);
 
     return (
@@ -83,7 +83,7 @@ class Header extends React.Component {
           <nav className="nav-menu">
             <ul className="menu-items">
               <li id="menu-item-data" className="menu-item domain-item">
-                <a href={ckanHost}>
+                <a href={dataHost}>
                   Data
                 </a>
               </li>

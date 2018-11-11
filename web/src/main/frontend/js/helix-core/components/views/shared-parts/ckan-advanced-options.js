@@ -5,7 +5,7 @@ import {
   EnumCkanFacet,
 } from '../../../model';
 
-class DataAdvancedOptions extends React.Component {
+class CkanAdvancedOptions extends React.Component {
 
   constructor(props) {
     super(props);
@@ -98,30 +98,35 @@ class DataAdvancedOptions extends React.Component {
     return (
       <div className="fields">
         <div className="row">
-          <div className="col-4">
-            {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', organizations, 'name', 'title', 'org', minOptions, showAllOrganizations)}
-          </div>
-          <div className="col-4">
-            {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', groups, 'name', 'title', 'grp', minOptions, showAllGroups)}
-          </div>
-          <div className="col-4">
-            {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', tags, 'name', 'display_name', 'tag', minOptions, showAllTags)}
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-4">
-            {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', formats, null, null, 'fmt', minOptions, showAllFormats)}
-          </div>
-          <div className="col-4">
-            {this.renderParameters(EnumCkanFacet.License, 'LICENSES', licenses, 'id', 'title', 'lic', minOptions, showAllLicenses)}
-          </div>
-          <div className="col-4">
-          </div>
+          {organizations.length !== 0 &&
+            <div className="col-4">
+              {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', organizations, 'name', 'title', 'org', minOptions, showAllOrganizations)}
+            </div>
+          }
+          {groups.length !== 0 &&
+            <div className="col-4">
+              {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', groups, 'name', 'title', 'grp', minOptions, showAllGroups)}
+            </div>
+          }
+          {tags.length !== 0 &&
+            <div className="col-4">
+              {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', tags, 'name', 'display_name', 'tag', minOptions, showAllTags)}
+            </div>
+          }
+          {formats.length !== 0 &&
+            <div className="col-4">
+              {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', formats, null, null, 'fmt', minOptions, showAllFormats)}
+            </div>
+          }
+          {licenses.length !== 0 &&
+            <div className="col-4">
+              {this.renderParameters(EnumCkanFacet.License, 'LICENSES', licenses, 'id', 'title', 'lic', minOptions, showAllLicenses)}
+            </div>
+          }
         </div>
       </div>
     );
   }
 }
 
-export default DataAdvancedOptions;
+export default CkanAdvancedOptions;

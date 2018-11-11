@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -18,9 +20,8 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,19 +43,34 @@ import gr.helix.core.web.model.ckan.Package;
 import gr.helix.core.web.model.ckan.Result;
 import gr.helix.core.web.model.ckan.Tag;;
 
-@Service
 public class CkanServiceProxy {
 
     private static final Logger  logger = LoggerFactory.getLogger(CkanServiceProxy.class);
 
-    @Autowired
     private ObjectMapper         objectMapper;
 
-    @Autowired
     private HttpClient           httpClient;
 
-    @Autowired
     private ServiceConfiguration ckanConfiguration;
+
+    @PostConstruct
+    public void initi() throws Exception {
+        Assert.notNull(this.objectMapper, "An instance of ObjectMapper is required");
+        Assert.notNull(this.httpClient, "An instance of HttpClient is required");
+        Assert.notNull(this.ckanConfiguration, "An instance of ServiceConfiguration is required");
+    }
+
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public void setHttpClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
+    public void setCkanConfiguration(ServiceConfiguration ckanConfiguration) {
+        this.ckanConfiguration = ckanConfiguration;
+    }
 
     public CatalogResult<Package> getPackages(CkanCatalogQuery query, boolean includeFacets) throws ApplicationException {
         try {

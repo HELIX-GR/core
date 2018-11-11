@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
@@ -17,14 +18,19 @@ import {
   setText,
   toggleAdvanced,
   togglePill,
-  toggleCkanFacet,
+  toggleDataFacet,
   setResultVisibility,
 } from '../../ducks/ui/views/main';
 
 import {
   EnumCatalog,
   EnumCkanFacet,
+  EnumMimeType,
 } from '../../model';
+
+import {
+  Pill,
+} from '../helpers';
 
 import {
   Pagination,
@@ -38,10 +44,13 @@ class MainResults extends React.Component {
     super(props);
 
     this.state = {
-      more: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
+      dataFacets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
+      labFacets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
     };
 
     this.textInput = React.createRef();
+
+    this.onPillChanged = this.onPillChanged.bind(this);
   }
 
   static contextTypes = {
@@ -51,15 +60,20 @@ class MainResults extends React.Component {
   toggleMore(e, key) {
     e.preventDefault();
     this.setState({
-      more: {
-        ...this.state.more,
-        [key]: !this.state.more[key],
+      dataFacets: {
+        ...this.state.dataFacets,
+        [key]: !this.state.dataFacets[key],
       }
     });
   }
 
   isTextValid(text) {
     return ((text) && (text.length > 2));
+  }
+
+  get isEnabled() {
+    const { pills } = this.props.search;
+    return !!Object.keys(pills).find(key => !!pills[key]);
   }
 
   search(pageIndex) {
@@ -70,12 +84,23 @@ class MainResults extends React.Component {
     }
   }
 
+  onPillChanged(id) {
+    const { pills } = this.props.search;
+
+    const active = Object.keys(pills).filter(key => pills[key]);
+    if ((active.length > 1) || (active[0] !== id)) {
+      this.props.togglePill(id);
+      this.textInput.current.focus();
+      this.search();
+    }
+  }
+
   onTextChanged(value) {
     this.props.setText(value);
   }
 
   onFacetChanged(facet, value) {
-    this.props.toggleCkanFacet(facet, value);
+    this.props.toggleDataFacet(facet, value);
     this.search();
   }
 
@@ -96,10 +121,10 @@ class MainResults extends React.Component {
   }
 
   renderParameters(key, title, valueProperty, textProperty, prefix, minOptions, showAll) {
-    const { ckan: { facets } } = this.props.search;
-    const { ckan } = this.props.config;
+    const { data: { facets } } = this.props.search;
+    const { data } = this.props.config;
 
-    const items = ckan[key];
+    const items = data[key];
     const size = Array.isArray(items) ? showAll ? items.length : Math.min(items.length, minOptions) : 0;
     if (size === 0) {
       return null;
@@ -142,64 +167,195 @@ class MainResults extends React.Component {
     );
   }
 
-  renderResults(data) {
+  renderDataset(r, host) {
+    const formats = r.resources.reduce((result, value) => {
+      if (!result.includes(value.format)) {
+        return [...result, value.format];
+      }
+      return result;
+    }, []);
+
+    const age = moment.duration(moment() - moment(r.metadata_modified));
+    const date = age.asHours() < 24 ?
+      moment(r.metadata_modified).fromNow() :
+      <FormattedDate value={r.metadata_modified} day='numeric' month='numeric' year='numeric' />;
+
+    return (
+      <div className="result-item data" key={r.id} >
+        <div className="date-of-entry">
+          {date}
+        </div>
+        <h3 className="title">
+          <a href={`${host}/dataset/${r.id}`} target="_blank">
+            {r.title}
+          </a>
+          <div className="pill data">
+            DATA
+          </div>
+        </h3>
+        <div className="service">
+          <a href="#">{r.organization.title}</a>
+        </div>
+
+        <div className="tag-list">
+          {formats.length !== 0 &&
+            formats.filter(format => !!format).map(format => {
+              return (
+                <a href="#" className="tag-box" key={format}>
+                  <div>
+                    {format}
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div >
+    );
+  }
+
+  resolvePublicationResource(publication) {
+    const { format, fullTextUrl } = publication;
+
+    if ((!format) || (!fullTextUrl)) {
+      return null;
+    }
+
+    switch (format.toLowerCase()) {
+      case EnumMimeType.PDF:
+        return {
+          text: 'PDF',
+          url: fullTextUrl,
+        };
+      default:
+        return null;
+    }
+  }
+
+  renderPublication(p, host) {
+    const resource = this.resolvePublicationResource(p);
+
+    const age = moment.duration(moment() - moment(p.dateOfAcceptance));
+    const date = age.asHours() < 24 ?
+      moment(p.dateOfAcceptance).fromNow() :
+      <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
+
+    return (
+      <div className="result-item pubs" key={p.originalId} >
+        <div className="date-of-entry">
+          {date}
+        </div>
+        <h3 className="title">
+          <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
+            {p.title}
+          </a>
+          <div className="pill pubs">
+            PUBS
+          </div>
+        </h3>
+        {p.publisher &&
+          <div className="service">
+            <a href="">{p.publisher}</a>
+          </div>
+        }
+
+        <div className="tag-list">
+          {resource &&
+            <a
+              href={resource.url}
+              className="tag-box"
+              target="blank"
+            >
+              <div>
+                {resource.text}
+              </div>
+            </a>
+          }
+        </div>
+      </div >
+    );
+  }
+
+  renderNotebook(n, host) {
+    const formats = n.resources.reduce((result, value) => {
+      if (!result.includes(value.format)) {
+        return [...result, value.format];
+      }
+      return result;
+    }, []);
+
+    const age = moment.duration(moment() - moment(n.metadata_modified));
+    const date = age.asHours() < 24 ?
+      moment(n.metadata_modified).fromNow() :
+      <FormattedDate value={n.metadata_modified} day='numeric' month='numeric' year='numeric' />;
+
+    return (
+      <div className="result-item lab" key={n.id} >
+        <div className="date-of-entry">
+          {date}
+        </div>
+        <h3 className="title">
+          <a href={`${host}/dataset/${n.id}`} target="_blank">
+            {n.title}
+          </a>
+          <div className="pill lab">
+            LAB
+          </div>
+        </h3>
+        <div className="service">
+          <a href="#">{n.organization.title}</a>
+        </div>
+
+        <div className="tag-list">
+          {formats.length !== 0 &&
+            formats.filter(format => !!format).map(format => {
+              return (
+                <a href="#" className="tag-box" key={format}>
+                  <div>
+                    {format}
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div >
+    );
+  }
+
+  renderResults(datasets, publications, notebooks) {
+    const data = _.zip(
+      datasets.results.map(d => ({ ...d, __source: EnumCatalog.CKAN })),
+      publications.results.map(p => ({ ...p, __source: EnumCatalog.OPENAIRE })),
+      notebooks.results.map(n => ({ ...n, __source: EnumCatalog.LAB })))
+      .flat()
+      .filter(r => !!r);
+
     if (data.count === 0) {
       return null;
     }
 
-    const { ckan: { host } } = this.props.config;
+    const { data: { host: dataHost }, openaire: { host: pubsHost }, lab: { host: labHost } } = this.props.config;
 
-    return data.results.map(r => {
-      const formats = r.resources.reduce((result, value) => {
-        if (!result.includes(value.format)) {
-          return [...result, value.format];
+    return data
+      .map(r => {
+        switch (r.__source) {
+          case EnumCatalog.CKAN:
+            return this.renderDataset(r, dataHost);
+          case EnumCatalog.OPENAIRE:
+            return this.renderPublication(r, pubsHost);
+          case EnumCatalog.LAB:
+            return this.renderNotebook(r, labHost);
+          default:
+            return null;
         }
-        return result;
-      }, []);
-
-      const age = moment.duration(moment() - moment(r.metadata_modified));
-      const date = age.asHours() < 24 ?
-        moment(r.metadata_modified).fromNow() :
-        <FormattedDate value={r.metadata_modified} day='numeric' month='numeric' year='numeric' />;
-
-      return (
-        <div className="result-item data" key={r.id} >
-          <div className="date-of-entry">
-            {date}
-          </div>
-          <h3 className="title">
-            <a href={`${host}/dataset/${r.id}`} target="_blank">
-              {r.title}
-            </a>
-            <div className="pill data">
-              DATA
-            </div>
-          </h3>
-          <div className="service">
-            <a href="#">{r.organization.title}</a>
-          </div>
-
-          <div className="tag-list">
-            {formats.length !== 0 &&
-              formats.filter(format => !!format).map(format => {
-                return (
-                  <a href="#" className="tag-box" key={format}>
-                    <div>
-                      {format}
-                    </div>
-                  </a>
-                );
-              })
-            }
-          </div>
-        </div >
-      );
-    });
+      })
+      .filter(r => !!r);
   }
 
   render() {
     const {
-      more: {
+      dataFacets: {
         [EnumCkanFacet.Group]: showAllGroups,
         [EnumCkanFacet.Organization]: showAllOrganizations,
         [EnumCkanFacet.License]: showAllLicenses,
@@ -208,9 +364,23 @@ class MainResults extends React.Component {
       },
     } = this.state;
     const {
-      search: { result: { catalogs: { [EnumCatalog.CKAN]: results = { count: 0, pageSize: 10 } } }, loading, text }
+      search: {
+        result: {
+          catalogs: {
+            [EnumCatalog.CKAN]: datasets = { results: [], count: 0, pageSize: 10 },
+            [EnumCatalog.OPENAIRE]: publications = { results: [], count: 0, pageSize: 10 },
+            [EnumCatalog.LAB]: notebooks = { results: [], count: 0, pageSize: 10 },
+          },
+        },
+        loading, pills, text
+      }
     } = this.props;
     const _t = this.context.intl.formatMessage;
+
+    const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
+    const pageSize = datasets.count !== 0 ? datasets.pageSize : publications.count !== 0 ? publications.pageSize : notebooks.count !== 0 ? notebooks.pageSize : 10;
+    const rowCount = datasets.count + publications.count + notebooks.count;
+    const pageCount = Math.ceil(rowCount / pageSize);
 
     return (
       <div className="results-main">
@@ -228,7 +398,8 @@ class MainResults extends React.Component {
                       type="text"
                       autoComplete="off"
                       className="landing-search-text"
-                      name="landing-search-text" value=""
+                      disabled={!this.isEnabled}
+                      name="landing-search-text"
                       placeholder={_t({ id: 'search.placeholder' })}
                       value={text}
                       onChange={(e) => this.onTextChanged(e.target.value)}
@@ -236,24 +407,39 @@ class MainResults extends React.Component {
                     />
 
                     <div className="domain-pills">
-                      <div className="filter-pill pill-data selected">
-                        DATA
-                      </div>
-                      <div className="filter-pill pill-pubs">
-                        PUBS
-                      </div>
-                      <div className="filter-pill pill-lab">
-                        LAB
-                      </div>
-
+                      <Pill
+                        id="data"
+                        disabled={loading}
+                        text="pills.data"
+                        className="pill-data"
+                        selected={pills.data}
+                        onChange={this.onPillChanged}
+                      />
+                      <Pill
+                        id="pubs"
+                        disabled={loading}
+                        text="pills.pubs"
+                        className="pill-pubs"
+                        selected={pills.pubs}
+                        onChange={this.onPillChanged}
+                      />
+                      <Pill
+                        id="lab"
+                        disabled={loading}
+                        text="pills.lab"
+                        className="pill-lab"
+                        selected={pills.lab}
+                        onChange={this.onPillChanged}
+                      />
                     </div>
+
                   </div>
 
                   <button
                     type="submit"
                     name="landing-search-button"
                     className="landing-search-button"
-                    disabled={loading}
+                    disabled={loading || !this.isEnabled}
                     onClick={(e) => this.onSearch(e)}
                   >
                     <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
@@ -300,26 +486,39 @@ class MainResults extends React.Component {
 
               <Pagination
                 className="top"
-                pageIndex={results.pageIndex}
-                pageCount={Math.ceil(results.count / results.pageSize)}
+                pageIndex={pageIndex}
+                pageCount={pageCount}
                 pageChange={(pageIndex) => this.onPageChange(pageIndex)}
               />
 
               <div className="main-results-border-bottom">
-                <label className="order-by" htmlFor="order-by">Ταξινόμηση κατά
-                  <select name="order-by" id="order-by" value="">
+                <label className="order-by d-none" htmlFor="order-by">Sort by
+                  <select
+                    name="order-by"
+                    id="order-by"
+                    value=""
+                    onChange={(e) => { console.log(e.target.value); }}
+                  >
                     <option value="1">
-                      Σχετικότητα
+                      Relevance
                     </option>
                   </select>
                 </label>
                 <div className="main-results-result-count">
-                  Βρέθηκαν {results.count} σύνολα δεδομένων
+                  {!!pills.data &&
+                    <span>{datasets.count} datasets found.</span>
+                  }
+                  {!!pills.pubs &&
+                    <span>{publications.count} publications found.</span>
+                  }
+                  {!!pills.lab &&
+                    <span>{notebooks.count} notebooks found.</span>
+                  }
                 </div>
               </div>
 
               <div className="result-items">
-                {this.renderResults(results)}
+                {this.renderResults(datasets, publications, notebooks)}
               </div>
 
               <div className="main-results-border-bottom">
@@ -328,8 +527,8 @@ class MainResults extends React.Component {
 
               <Pagination
                 className="bottom"
-                pageIndex={results.pageIndex}
-                pageCount={Math.ceil(results.count / results.pageSize)}
+                pageIndex={pageIndex}
+                pageCount={pageCount}
                 pageChange={(pageIndex) => this.onPageChange(pageIndex)}
               />
 
@@ -353,7 +552,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   setText,
   toggleAdvanced,
   togglePill,
-  toggleCkanFacet,
+  toggleDataFacet,
   setResultVisibility,
 }, dispatch);
 

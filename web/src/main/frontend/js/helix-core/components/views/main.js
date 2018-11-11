@@ -21,7 +21,8 @@ import {
   setText,
   toggleAdvanced,
   togglePill,
-  toggleCkanFacet,
+  toggleDataFacet,
+  toggleLabFacet,
   toggleOpenaireProvider,
 } from '../../ducks/ui/views/main';
 
@@ -86,11 +87,11 @@ class Main extends React.Component {
     if (this.isTextValid(text)) {
       this.props.searchAll(text, advanced).then((data) => {
         const found = Object.keys(EnumCatalog).some((key) => {
-          return (data.catalogs[key] && data.catalogs[key].count !== 0);
+          return (data.catalogs && data.catalogs[key] && data.catalogs[key].count !== 0);
         });
 
         if (found) {
-          if(advanced) {
+          if (advanced) {
             this.props.toggleAdvanced();
           }
           this.props.history.push(StaticRoutes.MAIN_RESULTS);
@@ -102,12 +103,12 @@ class Main extends React.Component {
   onPillChanged(id) {
     const { text, pills } = this.props.search;
 
-    this.props.togglePill(id);
-    if (this.isTextValid(text)) {
-      // Get all active sections (including the one that has been toggled)
-      const active = Object.keys(pills).filter(key => pills[key]);
-      if ((active.length > 1) || (active[0] !== id)) {
-        // At least one active section must be active
+    // Get all active sections (including the one that has been toggled)
+    const active = Object.keys(pills).filter(key => pills[key]);
+    if ((active.length > 1) || (active[0] !== id)) {
+      this.props.togglePill(id);
+      // At least one active section must be active
+      if (this.isTextValid(text)) {
         this.searchAutoComplete(text);
       }
     }
@@ -136,7 +137,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { ckan, openaire } = this.props.config;
+    const { data, lab, openaire } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
 
@@ -211,7 +212,8 @@ class Main extends React.Component {
                   </div>
 
                   <Result
-                    ckan={ckan}
+                    data={data}
+                    lab={lab}
                     openaire={openaire}
                     result={catalogs}
                     visible={visible && !loading}
@@ -242,8 +244,9 @@ class Main extends React.Component {
         </section>
 
         <AdvancedModal
-          ckan={this.props.search.ckan}
           config={this.props.config}
+          data={this.props.search.data}
+          lab={this.props.search.lab}
           loading={this.props.search.loading}
           openaire={this.props.search.openaire}
           search={() => this.search(true)}
@@ -251,7 +254,8 @@ class Main extends React.Component {
           setText={(text) => this.onTextChanged(text, false)}
           text={this.props.search.text}
           toggle={this.props.toggleAdvanced}
-          toggleCkanFacet={this.props.toggleCkanFacet}
+          toggleDataFacet={this.props.toggleDataFacet}
+          toggleLabFacet={this.props.toggleLabFacet}
           toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />
@@ -277,7 +281,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   setText,
   toggleAdvanced,
   togglePill,
-  toggleCkanFacet,
+  toggleDataFacet,
+  toggleLabFacet,
   toggleOpenaireProvider,
 }, dispatch);
 

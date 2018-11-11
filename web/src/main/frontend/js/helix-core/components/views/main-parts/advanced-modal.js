@@ -8,12 +8,10 @@ import {
 
 import {
   EnumCatalog,
-  EnumCkanFacet,
 } from '../../../model';
 
 import {
-  DataAdvancedOptions,
-  LabAdvancedOptions,
+  CkanAdvancedOptions,
   PubsAdvancedOptions,
 } from '../shared-parts';
 
@@ -23,7 +21,6 @@ class AdvancedModal extends React.Component {
     super(props);
 
     this.state = {
-      more: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
       tab: EnumCatalog.CKAN,
     };
 
@@ -31,8 +28,9 @@ class AdvancedModal extends React.Component {
   }
 
   static propTypes = {
-    ckan: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
+    lab: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     minOptions: PropTypes.number,
     openaire: PropTypes.object.isRequired,
@@ -41,7 +39,8 @@ class AdvancedModal extends React.Component {
     setText: PropTypes.func.isRequired,
     text: PropTypes.string,
     toggle: PropTypes.func.isRequired,
-    toggleCkanFacet: PropTypes.func.isRequired,
+    toggleDataFacet: PropTypes.func.isRequired,
+    toggleLabFacet: PropTypes.func.isRequired,
     toggleOpenaireProvider: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
   }
@@ -52,16 +51,6 @@ class AdvancedModal extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object,
-  }
-
-  toggleMore(e, key) {
-    e.preventDefault();
-    this.setState({
-      more: {
-        ...this.state.more,
-        [key]: !this.state.more[key],
-      }
-    });
   }
 
   onTabChanged(tab) {
@@ -142,11 +131,11 @@ class AdvancedModal extends React.Component {
               </div>
 
               {tab === EnumCatalog.CKAN &&
-                <DataAdvancedOptions
-                  facets={this.props.ckan.facets}
-                  metadata={this.props.config.ckan}
+                <CkanAdvancedOptions
+                  facets={this.props.data.facets}
+                  metadata={this.props.config.data}
                   minOptions={this.props.minOptions}
-                  toggleFacet={this.props.toggleCkanFacet}
+                  toggleFacet={this.props.toggleDataFacet}
                 />
               }
 
@@ -160,7 +149,12 @@ class AdvancedModal extends React.Component {
               }
 
               {tab === EnumCatalog.LAB &&
-                <LabAdvancedOptions />
+                <CkanAdvancedOptions
+                  facets={this.props.lab.facets}
+                  metadata={this.props.config.lab}
+                  minOptions={this.props.minOptions}
+                  toggleFacet={this.props.toggleLabFacet}
+                />
               }
 
               <section className="footer">

@@ -30,7 +30,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    const { ckan: { host: ckanHost } } = this.props.config;
+    const { data: { host: dataHost } } = this.props.config;
 
     return (
       <footer id="footer" className={this.resolveClassName()}>
@@ -57,7 +57,7 @@ class Footer extends React.Component {
               Έρευνα
             </h3>
             <ul>
-              <li><a href={ckanHost}>Data</a></li>
+              <li><a href={dataHost}>Data</a></li>
               <li><Link to={StaticRoutes.PUBS}>Publications</Link></li>
               <li><a href={ExternalRoutes.Lab}>Lab</a></li>
               <li><a href="#">Θεματικές</a></li>

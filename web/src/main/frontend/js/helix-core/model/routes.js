@@ -1,21 +1,16 @@
 
-/**
- * Libraries
- */
+// Libraries
 import pathToRegexp from 'path-to-regexp';
 
 /**
  * External routes
  */
-
 export const ExternalRoutes = {
   Data: 'https://data.hellenicdataservice.gr',
   Lab: 'https://lab.hellenicdataservice.gr',
 };
 
-/**
- * Static routes
- */
+ // Static routes
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
 const NEWS = '/news/';
@@ -23,7 +18,9 @@ const PROJECT = '/project/*';
 const PUBS = '/pubs/';
 const PUBS_RESULTS = '/pubs/results';
 
-
+/**
+ * Static routes
+ */
 export const StaticRoutes = {
   MAIN,
   MAIN_RESULTS,
@@ -33,36 +30,39 @@ export const StaticRoutes = {
   PUBS_RESULTS,
 };
 
-/**
- * Dynamic routes
- */
+// Dynamic routes
 const NEWS_DETAILS = '/news/view/:id';
 const PROJECT_PAGE = '/project/page/:name';
 
+/**
+ * Dynamic routes
+ */
 export const DynamicRoutes = {
   NEWS_DETAILS,
   PROJECT_PAGE,
 };
 
-/**
- * Routes for utility pages
- */
+// Routes for utility pages
 const Login = '/pages/login';
 const Register = '/pages/register';
 const ResetPassword = '/pages/reset-password';
 
+/**
+ * Routes for utility pages
+ */
 export const Pages = {
   Login,
   Register,
   ResetPassword,
 };
 
-/**
- * Routes for error pages
- */
+// Routes for error pages
 const Forbidden = '/error/403';
 const NotFound = '/error/404';
 
+/**
+ * Routes for error pages
+ */
 export const ErrorPages = {
   Forbidden,
   NotFound,
@@ -73,13 +73,12 @@ export const ErrorPages = {
  */
 export const api = {
   SearchAll: '/action/catalog/query',
-  SearchCkan: '/action/ckan/query',
-  SearchOpenaire: '/action/openaire/query',
+  SearchData: '/action/data/query',
+  SearchNotebooks: '/action/notebook/query',
+  SearchPubs: '/action/publication/query',
 };
 
-/**
- * Default links
- */
+// Default links
 const routes = {
   // Pages
   [Login]: {

@@ -1,6 +1,7 @@
 package gr.helix.core.web.controller.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.saml.metadata.MetadataManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,12 @@ public class ConfigurationController extends BaseController {
     private ExternalServiceProviderConfiguration serviceProviderConfiguration;
 
     @Autowired
-    private CkanServiceProxy                     ckanServiceProxy;
+    @Qualifier("dataCkanServiceProxy")
+    private CkanServiceProxy                     dataCkanServiceProxy;
+
+    @Autowired
+    @Qualifier("labCkanServiceProxy")
+    private CkanServiceProxy                     labCkanServiceProxy;
 
     @Autowired
     private OpenaireServiceProxy                 openaireServiceProxy;
@@ -45,7 +51,8 @@ public class ConfigurationController extends BaseController {
         config.setDefaultIdentityProvider(this.samlConfiguration.getDefaultProvider());
         config.setWordPress(this.serviceProviderConfiguration.getWordPress());
 
-        config.setCkan(this.ckanServiceProxy.getMetadata());
+        config.setData(this.dataCkanServiceProxy.getMetadata());
+        config.setLab(this.labCkanServiceProxy.getMetadata());
         config.setOpenaire(this.openaireServiceProxy.getMetadata());
 
         this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);

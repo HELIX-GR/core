@@ -69,11 +69,11 @@ class Publications extends React.Component {
     if (this.isTextValid(text)) {
       this.props.searchAll(text, advanced).then((data) => {
         const found = Object.keys(EnumCatalog).some((key) => {
-          return (data.catalogs[key] && data.catalogs[key].count !== 0);
+          return (data.catalogs && data.catalogs[key] && data.catalogs[key].count !== 0);
         });
 
         if (found) {
-          if(advanced) {
+          if (advanced) {
             this.props.toggleAdvanced();
           }
           this.props.history.push(StaticRoutes.PUBS_RESULTS);
