@@ -734,6 +734,7 @@
                 -webkit-transition: all .2s ease-in-out;
                 -moz-transition: all .2s ease-in-out;
                 -o-transition: all .1s ease-in-out;
+                z-index: 1;
               }
               &:last-child:after {
                 border-bottom: none;
@@ -758,7 +759,7 @@
               h3.title {
                 position: relative;
                 margin: 0;
-                line-height: 1;
+                line-height: 33px;
                 padding-top: 8px;
                 font-weight: 500;
                 a {
