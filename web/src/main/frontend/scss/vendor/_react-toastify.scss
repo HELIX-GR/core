@@ -2,12 +2,12 @@
  * react-toastify
  */
 
- @import '../../../../../node_modules/react-toastify/scss/main';
+@import '../../../../../node_modules/react-toastify/scss/main';
 
 /*
  * Update z-ordering for react-toastify to render on top of toolbar menu
  */
 
 .helix-toastify {
-  z-index: 1030 !important;
+  z-index: 1100 !important;
 }

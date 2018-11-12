@@ -43,7 +43,6 @@ export const DynamicRoutes = {
 };
 
 // Routes for utility pages
-const Login = '/pages/login';
 const Register = '/pages/register';
 const ResetPassword = '/pages/reset-password';
 
@@ -51,7 +50,6 @@ const ResetPassword = '/pages/reset-password';
  * Routes for utility pages
  */
 export const Pages = {
-  Login,
   Register,
   ResetPassword,
 };
@@ -81,9 +79,6 @@ export const api = {
 // Default links
 const routes = {
   // Pages
-  [Login]: {
-    description: 'Login to HELIX application',
-  },
   [Register]: {
     description: 'Register a new account',
   },

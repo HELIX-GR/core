@@ -17,17 +17,16 @@ import {
 } from '../ducks/user';
 
 import {
+  toggleDialog as toggleLoginDialog,
+} from '../ducks/ui/views/login';
+
+import {
   resize,
 } from '../ducks/ui/viewport';
 
 import {
   EnumRole,
 } from '../model';
-
-import {
-  Page403,
-  Page404,
-} from './pages';
 
 import {
   DebugConsole,
@@ -44,6 +43,10 @@ import {
   Publications,
   PublicationsResults,
 } from './views';
+
+import {
+  LoginForm,
+} from './pages';
 
 //
 // Presentational component
@@ -120,7 +123,6 @@ class ContentRoot extends React.Component {
         {/* Redirect for authenticated users. Navigation after a successful login operation
             occurs after the component hierarchy is rendered due to state change and causes
             /error/404 to render */}
-        <Redirect from={Pages.Login} to={StaticRoutes.MAIN} exact />
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
         <Route path={DynamicRoutes.NEWS_DETAILS} component={NewsDetails} />
@@ -137,6 +139,20 @@ class ContentRoot extends React.Component {
 
     return (
       <div>
+        <ToastContainer
+          className="helix-toastify"
+          position="top-right"
+          type="default"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+        />
+        <LoginForm
+          toggle={this.props.toggleLoginDialog}
+          visible={this.props.login.visible}
+        />
         {isDeveloper &&
           <DebugConsole location={location} />
         }
@@ -148,16 +164,6 @@ class ContentRoot extends React.Component {
           />
         }
         <div className={this.resolvePageClassName()}>
-          <ToastContainer
-            className="helix-toastify"
-            position="top-right"
-            type="default"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnHover
-          />
           <Header
             changeLocale={this.props.changeLocale}
             config={this.props.config}
@@ -165,6 +171,7 @@ class ContentRoot extends React.Component {
             location={this.props.location}
             logout={this.props.logout}
             profile={this.props.profile}
+            toggleLoginDialog={this.props.toggleLoginDialog}
           />
           {routes}
           <Footer
@@ -184,6 +191,7 @@ class ContentRoot extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
+  login: state.ui.login,
   profile: state.user.profile,
 });
 
@@ -191,6 +199,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   changeLocale,
   logout,
   resize,
+  toggleLoginDialog,
 }, dispatch);
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ContentRoot);

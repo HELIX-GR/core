@@ -10,7 +10,6 @@ import {
   buildPath,
   DynamicRoutes,
   ExternalRoutes,
-  Pages,
   StaticRoutes,
   WordPressPages,
 } from '../../model';
@@ -133,9 +132,9 @@ class Header extends React.Component {
 
           {!authenticated &&
             <div className="account-item">
-              <NavLink to={Pages.Login}>
+              <a href='' onClick={(e) => { e.preventDefault(); this.props.toggleLoginDialog(); }}>
                 <img className="account-icon" src="/images/svg/avatar-white.svg" alt="Account tab" />
-              </NavLink>
+              </a>
             </div>
           }
 

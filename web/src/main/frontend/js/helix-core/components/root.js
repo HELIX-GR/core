@@ -42,9 +42,6 @@ class Root extends React.Component {
       <ReactIntl.IntlProvider locale={locale} key={locale} messages={messages}>
         <BrowserRouter basename={basename} >
           <Switch>
-            {!profile &&
-              <Route path={Pages.Login} component={LoginForm} exact />
-            }
             <Route path={ErrorPages.Forbidden} component={Page403} exact />
             <Route path={ErrorPages.NotFound} component={Page404} exact />
             <Route path="/" component={ContentRoot} />
