@@ -18,6 +18,18 @@ class Footer extends React.Component {
     super(props);
   }
 
+
+  get logoImage() {
+    const { location } = this.props;
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/pubs')) {
+        return '/images/svg/Helix-logo-White-on-Pink.svg';
+      }
+    }
+    return '/images/svg/Helix-logo-White-on-Black.svg';
+  }
+
   resolveClassName() {
     const { location } = this.props;
 
@@ -38,7 +50,7 @@ class Footer extends React.Component {
           <div className="d-flex flex-wrap">
             <div className="footer-column logo">
               <Link to={StaticRoutes.MAIN}>
-                <img src="/images/svg/Helix-logo-White-on-Black.svg" alt="" />
+                <img src={this.logoImage} alt="" />
               </Link>
             </div>
             <div className="footer-column about">
