@@ -519,6 +519,7 @@
           }
           &.about-helix-container {
             padding-top: 65px;
+            max-width: $layout-fixed-width;
             h4.about-header {
               margin: 0;
               padding-bottom: 18px;

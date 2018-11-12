@@ -70,6 +70,7 @@
         &.featured-pubs-container {
           padding-top: 46px;
           padding-left: 29px;
+          max-width: $layout-fixed-width;
           h4.featured-pubs-header {
             margin: 0;
             padding-bottom: 18px;
@@ -134,6 +135,7 @@
       }
       .search-by-subject-container {
         padding-top: 58px;
+        max-width: $layout-fixed-width;
         h4.search-by-subject-header {
           margin: 0;
           padding-bottom: 13px;
@@ -213,6 +215,7 @@
       .explore-container {
         padding-top: 37px;
         padding-left: 31px;
+        max-width: $layout-fixed-width;
         h4.explore-header {
           margin: 0;
           padding-bottom: 18px;

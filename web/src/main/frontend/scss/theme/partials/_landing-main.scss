@@ -69,6 +69,7 @@
         }
         &.latest-news-container {
           padding-top: 45px;
+          max-width: $layout-fixed-width;
           h4.latest-news-header {
             margin: 0;
             padding: 2px 0px 18px 13px;
@@ -77,6 +78,7 @@
         }
         &.about-helix-container {
           padding: 70px 25px 10px 25px;
+          max-width: $layout-fixed-width;
           h4.about-header {
             margin: 0;
             padding-bottom: 19px;
@@ -308,6 +310,9 @@
         }
       }
       .about-item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         border-top: solid 10px $main-black;
         a {
           color: $main-black;
@@ -337,10 +342,10 @@
           }
         }
         .about-text {
+          flex-grow: 1;
           font-weight: 300;
           line-height: 1.73;
           padding: 25px 0 0 5px;
-          height: 205px
         }
         .about-link {
           font-size: 18px;

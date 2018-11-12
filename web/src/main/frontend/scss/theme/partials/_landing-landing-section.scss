@@ -1,12 +1,3 @@
-body {
-  &.fixed {
-    max-width: $layout-fixed-width;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px !important; // Prevent bootstrap from updating body padding
-  }
-}
-
 #root {
   div {
     &.home {

@@ -1,13 +1,3 @@
-body {
-  &.fixed {
-    header {
-      max-width: $layout-fixed-width;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-}
-
 #root {
   div {
     &.project,
