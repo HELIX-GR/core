@@ -63,7 +63,7 @@ class PubsAdvancedOptions extends React.Component {
         </div>
         <div className="fields-group">
           <div className="filters param-box">
-            <h5 class="title">Author</h5>
+            <h5 className="title">Author</h5>
             <FormGroup >
               <KeywordEditor
                 onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
@@ -72,7 +72,7 @@ class PubsAdvancedOptions extends React.Component {
               />
               <FormText color="muted">White-space separated list of names and/or surnames. Search for publications by authors.</FormText>
             </FormGroup>
-            <h5 class="title">Date Accepted From</h5>
+            <h5 className="title">Date Accepted From</h5>
             <FormGroup >
               <DatePicker
                 autoComplete="off"
@@ -84,7 +84,7 @@ class PubsAdvancedOptions extends React.Component {
               />
               <FormText color="muted">Gets the publications whose date of acceptance is greater than or equal the given date.</FormText>
             </FormGroup>
-            <h5 class="title">Date Accepted To</h5>
+            <h5 className="title">Date Accepted To</h5>
             <FormGroup >
               <DatePicker
                 autoComplete="off"

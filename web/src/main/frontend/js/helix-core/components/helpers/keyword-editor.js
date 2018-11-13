@@ -17,9 +17,13 @@ const customStyles = {
     return {
       ...base,
       boxShadow: 'none',
-      borderColor: '#CCCCCC',
+      border: 'none',
+      borderBottom: '2px solid #707070',
+      borderRadius: '0px',
+      backgroundColor: 'transparent',
       ':hover': {
-        borderColor: '#CCCCCC',
+        border: 'none',
+        borderBottom: '2px solid #707070',
       },
     };
   },
@@ -32,6 +36,14 @@ const customStyles = {
     ':hover': {
       backgroundColor: 'none',
     },
+    cursor: 'pointer',
+  }),
+  placeholder: (base, state) => ({
+    ...base,
+    fontSize: '17px',
+    lineHeight: '20px',
+    fontWeight: '300',
+    color: '#707070',
   }),
 };
 

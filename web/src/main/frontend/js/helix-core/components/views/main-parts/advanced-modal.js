@@ -80,14 +80,14 @@ class AdvancedModal extends React.Component {
     const { pills } = this.props;
     const { tab } = this.state;
 
-    let selected = tab;
-    if ((tab === EnumCatalog.CKAN) && (!pills.data)) {
-      selected = EnumCatalog.OPENAIRE;
+    let result = tab;
+    if ((result === EnumCatalog.CKAN) && (!pills.data)) {
+      result = EnumCatalog.OPENAIRE;
     }
-    if ((tab === EnumCatalog.OPENAIRE) && (!pills.pubs)) {
-      selected = EnumCatalog.LAB;
+    if ((result === EnumCatalog.OPENAIRE) && (!pills.pubs)) {
+      result = EnumCatalog.LAB;
     }
-    return selected;
+    return result;
   }
 
   renderTabs(selected) {

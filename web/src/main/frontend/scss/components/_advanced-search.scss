@@ -90,6 +90,21 @@
     .form-group {
       margin-top: 15px;
     }
+    .form-control {
+      border: none;
+      border-bottom: 2px solid #707070;
+      border-radius: 0px;
+      font-size: 17px;
+      line-height: 20px;
+      font-weight: 300;
+      color: #707070;
+    }
+    #react-select-2-input {
+      font-size: 17px !important;
+      line-height: 20px;
+      font-weight: 300;
+      color: #707070;
+    }
     .title {
       font-size: 15;
       line-height: 18px;
