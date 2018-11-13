@@ -249,6 +249,7 @@ class Main extends React.Component {
           lab={this.props.search.lab}
           loading={this.props.search.loading}
           openaire={this.props.search.openaire}
+          pills={this.props.search.pills}
           search={() => this.search(true)}
           setOpenaireFilter={this.props.setOpenaireFilter}
           setText={(text) => this.onTextChanged(text, false)}

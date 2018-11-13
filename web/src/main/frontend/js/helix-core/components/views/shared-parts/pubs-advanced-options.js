@@ -4,7 +4,9 @@ import * as PropTypes from 'prop-types';
 import { FormGroup, FormText, Label } from 'reactstrap';
 
 import { EnumOpenaireFilter } from '../../../model';
+
 import {
+  Checkbox,
   DatePicker,
   KeywordEditor
 } from '../../helpers';
@@ -34,17 +36,15 @@ class PubsAdvancedOptions extends React.Component {
               const checked = !!filters.providers.find(id => id === provider.id);
 
               return (
-                <label htmlFor={`switch-provider-${index}`} key={`switch-provider-${index}`}>
-                  <input
-                    type="checkbox"
-                    id={`switch-provider-${index}`}
-                    name={`switch-provider-${index}`}
-                    value={provider.id}
-                    onChange={() => { this.props.toggleProvider(provider.id); }}
-                    checked={checked}
-                  />
-                  {provider.name}
-                </label>
+                <Checkbox
+                  key={`switch-provider-${index}`}
+                  id={`switch-provider-${index}`}
+                  name={`switch-provider-${index}`}
+                  text={provider.name}
+                  value={checked}
+                  readOnly={false}
+                  onChange={() => { this.props.toggleProvider(provider.id); }}
+                />
               );
             })
           }
@@ -58,46 +58,44 @@ class PubsAdvancedOptions extends React.Component {
 
     return (
       <div className="fields">
-        <div className="row">
-          <div className="col-4">
-            {this.renderProviders()}
-          </div>
-          <div className="col-8">
-            <div className="filters param-box">
-              <FormGroup >
-                <Label for={EnumOpenaireFilter.Authors} className="title-label">Author</Label>
-                <KeywordEditor
-                  onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
-                  placeholder="Enter a name and press enter ..."
-                  value={filters[EnumOpenaireFilter.Authors]}
-                />
-                <FormText color="muted">White-space separated list of names and/or surnames. Search for publications by authors.</FormText>
-              </FormGroup>
-              <FormGroup >
-                <Label for={EnumOpenaireFilter.FromDateAccepted} className="title-label">Date Accepted From</Label>
-                <DatePicker
-                  autoComplete="off"
-                  className="form-control"
-                  id={EnumOpenaireFilter.FromDateAccepted}
-                  name={EnumOpenaireFilter.FromDateAccepted}
-                  onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date)}
-                  value={filters[EnumOpenaireFilter.FromDateAccepted] || null}
-                />
-                <FormText color="muted">Gets the publications whose date of acceptance is greater than or equal the given date.</FormText>
-              </FormGroup>
-              <FormGroup >
-                <Label for={EnumOpenaireFilter.ToDateAccepted} className="title-label">Date Accepted To</Label>
-                <DatePicker
-                  autoComplete="off"
-                  className="form-control"
-                  id={EnumOpenaireFilter.ToDateAccepted}
-                  name={EnumOpenaireFilter.ToDateAccepted}
-                  onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date)}
-                  value={filters[EnumOpenaireFilter.ToDateAccepted] || null}
-                />
-                <FormText color="muted">Gets the publications whose date of acceptance is less than or equal the given date.</FormText>
-              </FormGroup>
-            </div>
+        <div className="fields-group">
+          {this.renderProviders()}
+        </div>
+        <div className="fields-group">
+          <div className="filters param-box">
+            <h5 class="title">Author</h5>
+            <FormGroup >
+              <KeywordEditor
+                onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
+                placeholder="Enter a name and press enter ..."
+                value={filters[EnumOpenaireFilter.Authors]}
+              />
+              <FormText color="muted">White-space separated list of names and/or surnames. Search for publications by authors.</FormText>
+            </FormGroup>
+            <h5 class="title">Date Accepted From</h5>
+            <FormGroup >
+              <DatePicker
+                autoComplete="off"
+                className="form-control"
+                id={EnumOpenaireFilter.FromDateAccepted}
+                name={EnumOpenaireFilter.FromDateAccepted}
+                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date)}
+                value={filters[EnumOpenaireFilter.FromDateAccepted] || null}
+              />
+              <FormText color="muted">Gets the publications whose date of acceptance is greater than or equal the given date.</FormText>
+            </FormGroup>
+            <h5 class="title">Date Accepted To</h5>
+            <FormGroup >
+              <DatePicker
+                autoComplete="off"
+                className="form-control"
+                id={EnumOpenaireFilter.ToDateAccepted}
+                name={EnumOpenaireFilter.ToDateAccepted}
+                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date)}
+                value={filters[EnumOpenaireFilter.ToDateAccepted] || null}
+              />
+              <FormText color="muted">Gets the publications whose date of acceptance is less than or equal the given date.</FormText>
+            </FormGroup>
           </div>
         </div>
       </div>

@@ -1,10 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import classnames from 'classnames';
+
 import {
   Modal,
-  ModalBody,
 } from 'reactstrap';
+
+import {
+  FormattedMessage,
+} from 'react-intl';
 
 import {
   EnumCatalog,
@@ -34,6 +39,7 @@ class AdvancedModal extends React.Component {
     loading: PropTypes.bool.isRequired,
     minOptions: PropTypes.number,
     openaire: PropTypes.object.isRequired,
+    pills: PropTypes.object.isRequired,
     search: PropTypes.func.isRequired,
     setOpenaireFilter: PropTypes.func.isRequired,
     setText: PropTypes.func.isRequired,
@@ -53,7 +59,8 @@ class AdvancedModal extends React.Component {
     intl: PropTypes.object,
   }
 
-  onTabChanged(tab) {
+  onTabChanged(e, tab) {
+    e.preventDefault();
     this.setState({
       tab,
     });
@@ -69,9 +76,55 @@ class AdvancedModal extends React.Component {
     this.props.search();
   }
 
+  resolveActiveTab() {
+    const { pills } = this.props;
+    const { tab } = this.state;
+
+    let selected = tab;
+    if ((tab === EnumCatalog.CKAN) && (!pills.data)) {
+      selected = EnumCatalog.OPENAIRE;
+    }
+    if ((tab === EnumCatalog.OPENAIRE) && (!pills.pubs)) {
+      selected = EnumCatalog.LAB;
+    }
+    return selected;
+  }
+
+  renderTabs(selected) {
+    const { pills } = this.props;
+
+    const tabs = [];
+    if (pills.data) {
+      tabs.push(
+        <li key="tab-data" className={selected === EnumCatalog.CKAN ? 'active' : ''}>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.CKAN)}>Data</a>
+        </li>
+      );
+    }
+    if (pills.pubs) {
+      tabs.push(
+        <li key="tab-pubs" className={selected === EnumCatalog.OPENAIRE ? 'active' : ''}>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.OPENAIRE)}>Publications</a>
+        </li>
+      );
+    }
+    if (pills.lab) {
+      tabs.push(
+        <li key="tab-lab" className={selected === EnumCatalog.LAB ? 'active' : ''}>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.LAB)}>Lab</a>
+        </li>
+      );
+    }
+    for (let i = tabs.length; i < 3; i++) {
+      tabs.push(<li key={`tab-blank-${i}`}></li>);
+    }
+
+    return tabs;
+  }
+
   render() {
     const { text } = this.props;
-    const { tab } = this.state;
+    const tab = this.resolveActiveTab();
 
     const _t = this.context.intl.formatMessage;
 
@@ -80,98 +133,87 @@ class AdvancedModal extends React.Component {
         centered={true}
         isOpen={this.props.visible}
         keyboard={false}
-        style={{ maxWidth: '1000px', height: '80vh' }}
+        style={{ maxWidth: '1024px' }}
         toggle={this.props.toggle}>
-        <ModalBody>
 
-          <div className="advanced-search">
-            <form className="landing-search-form">
+        <div
+          className={
+            classnames({
+              "advanced-search": true,
+              "data": tab === EnumCatalog.CKAN,
+              'pubs': tab === EnumCatalog.OPENAIRE,
+              'lab': tab === EnumCatalog.LAB,
+            })
+          }
+        >
+          <a href="" className="close" onClick={(e) => { e.preventDefault(); this.props.toggle(); }}></a>
 
-              <div className="row pt-2 pb-3">
-                <div className="col">
-                  <h4 className="news-header">Advanced Search</h4>
-                </div>
-                <div className="col text-right">
-                  <i className="fa fa-remove btn" onClick={() => this.props.toggle()} />
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col text-center">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    className="search-text"
-                    name="search-text"
-                    placeholder={_t({ id: 'search.placeholder' })}
-                    value={text}
-                    onChange={(e) => this.onTextChanged(e.target.value)}
-                    ref={this.textInput}
-                  />
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col">
-                  <div className="tabs">
-                    <div className={`tab-item data text-center ${tab === EnumCatalog.CKAN ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.CKAN)}>
-                      Data
-                    </div>
-                    <div className={`tab-item pubs text-center ${tab === EnumCatalog.OPENAIRE ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.OPENAIRE)}>
-                      Publications
-                    </div>
-                    <div className={`tab-item lab text-center ${tab === EnumCatalog.LAB ? 'selected' : ''}`}
-                      onClick={() => this.onTabChanged(EnumCatalog.LAB)}>
-                      Lab
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {tab === EnumCatalog.CKAN &&
-                <CkanAdvancedOptions
-                  facets={this.props.data.facets}
-                  metadata={this.props.config.data}
-                  minOptions={this.props.minOptions}
-                  toggleFacet={this.props.toggleDataFacet}
-                />
-              }
-
-              {tab === EnumCatalog.OPENAIRE &&
-                <PubsAdvancedOptions
-                  filters={this.props.openaire}
-                  metadata={this.props.config.openaire}
-                  setOpenaireFilter={this.props.setOpenaireFilter}
-                  toggleProvider={this.props.toggleOpenaireProvider}
-                />
-              }
-
-              {tab === EnumCatalog.LAB &&
-                <CkanAdvancedOptions
-                  facets={this.props.lab.facets}
-                  metadata={this.props.config.lab}
-                  minOptions={this.props.minOptions}
-                  toggleFacet={this.props.toggleLabFacet}
-                />
-              }
-
-              <section className="footer">
-                <button
-                  type="submit"
-                  name="landing-search-button"
-                  className="landing-search-button"
-                  disabled={false}
-                  onClick={(e) => this.onSearch(e)}>
-                  <i className={this.props.loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
-                </button>
-              </section>
-
-            </form>
+          <div className="form-title">
+            <FormattedMessage id="main.search.advanced.title" defaultMessage="Advanced Search" />
           </div>
 
-        </ModalBody>
+          <form>
+            <div className="text-center">
+              <input
+                type="text"
+                autoComplete="off"
+                className="search-text"
+                name="search-text"
+                placeholder={_t({ id: 'search.placeholder' })}
+                value={text}
+                onChange={(e) => this.onTextChanged(e.target.value)}
+                ref={this.textInput}
+              />
+            </div>
+
+
+            <div className="nav-bar-wrapper">
+              <div className="nav-bar">
+                <div className="nav-menu">
+                  {this.renderTabs(tab)}
+                </div>
+              </div>
+            </div>
+
+            {tab === EnumCatalog.CKAN &&
+              <CkanAdvancedOptions
+                facets={this.props.data.facets}
+                metadata={this.props.config.data}
+                minOptions={this.props.minOptions}
+                toggleFacet={this.props.toggleDataFacet}
+              />
+            }
+
+            {tab === EnumCatalog.OPENAIRE &&
+              <PubsAdvancedOptions
+                filters={this.props.openaire}
+                metadata={this.props.config.openaire}
+                setOpenaireFilter={this.props.setOpenaireFilter}
+                toggleProvider={this.props.toggleOpenaireProvider}
+              />
+            }
+
+            {tab === EnumCatalog.LAB &&
+              <CkanAdvancedOptions
+                facets={this.props.lab.facets}
+                metadata={this.props.config.lab}
+                minOptions={this.props.minOptions}
+                toggleFacet={this.props.toggleLabFacet}
+              />
+            }
+
+            <section className="footer">
+              <button
+                type="submit"
+                name="landing-search-button"
+                className="landing-search-button"
+                disabled={false}
+                onClick={(e) => this.onSearch(e)}>
+                <i className={this.props.loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
+              </button>
+            </section>
+          </form>
+        </div>
       </Modal>
     );
   }
