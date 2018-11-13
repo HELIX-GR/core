@@ -3,16 +3,13 @@
  */
 
 $layout-fixed-width :1366px;
-
 @import 'theme/theme';
-
 /*
  * Customize styles for 3rd party components
  */
 
 @import 'vendor/react-toastify';
 @import 'vendor/react-datepicker';
-
 /*
  * Import HELIX react components
  */
@@ -22,13 +19,11 @@ $layout-fixed-width :1366px;
 @import 'components/debug-console';
 @import 'components/login';
 @import 'components/map';
-
 /*
  * Openlayers (the file is copied by grunt "copy" task)
  */
 
 @import '../vendor/ol/ol.css';
-
 /*
  * Custom rules
  */
@@ -43,4 +38,8 @@ $layout-fixed-width :1366px;
 
 .modal-open {
   overflow: auto;
+}
+
+.modal-content {
+  border-radius: 0px;
 }
