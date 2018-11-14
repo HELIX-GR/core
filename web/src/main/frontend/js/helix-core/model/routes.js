@@ -1,6 +1,7 @@
 
 // Libraries
 import pathToRegexp from 'path-to-regexp';
+import { matchPath } from 'react-router';
 
 /**
  * External routes
@@ -10,11 +11,11 @@ export const ExternalRoutes = {
   Lab: 'https://lab.hellenicdataservice.gr',
 };
 
- // Static routes
+// Static routes
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
 const NEWS = '/news/';
-const PROJECT = '/project/*';
+const PROJECT = '/project/';
 const PUBS = '/pubs/';
 const PUBS_RESULTS = '/pubs/results';
 
@@ -151,4 +152,8 @@ export function buildPath(path, params) {
     }
   }
   return result;
+}
+
+export function getParams(path, props) {
+  return matchPath(path, props);
 }

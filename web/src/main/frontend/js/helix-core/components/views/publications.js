@@ -124,7 +124,7 @@ class Publications extends React.Component {
                     autoComplete="off"
                     className="landing-search-text"
                     name="landing-search-text"
-                    placeholder={_t({ id: 'search.placeholder' })}
+                    placeholder={_t({ id: 'search.pubs.placeholder' })}
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
                     onFocus={() => this.props.setResultVisibility(true)}

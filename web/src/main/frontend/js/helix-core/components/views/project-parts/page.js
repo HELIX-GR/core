@@ -51,15 +51,15 @@ class Page extends React.Component {
         {page &&
           <a href="#">
             <h4 className="about-details-header">
-              {page.title.rendered}
+              {page.title.rendered.endsWith('-EL') ? page.title.rendered.slice(0, -3) : page.title.rendered}
             </h4>
           </a>
         }
-        {page && page.slug !== WordPressPages.FAQ &&
+        {page && !page.slug.startsWith(WordPressPages.FAQ) &&
           <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: page.content.rendered }}>
           </div>
         }
-        {page && page.slug === WordPressPages.FAQ &&
+        {page && page.slug.startsWith(WordPressPages.FAQ) &&
           <Faq page={page} />
         }
       </div >

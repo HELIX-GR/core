@@ -4,7 +4,7 @@
     "el": "Ελληνικά"
   },
   "login": {
-    "forgot-password": "Forgot password?",
+    "forgot-password": "Forgot your password?",
     "login": "Login",
     "subtitle": "Sign-in into your account"
   },
@@ -13,7 +13,25 @@
     "pubs": "PUBS",
     "lab": "LAB"
   },
+  "project": {
+    "menu": {
+      "about": "About",
+      "what-is-helix": "What is HELIX?",
+      "services": "Services",
+      "faq": "FAQ",
+      "publish-data": "Publish Data",
+      "software": "Software",
+      "the-project": "The project",
+      "media": "Media",
+      "acknowledge-helix": "Acknowledge Helix",
+      "contact": "Contact",
+      "terms-of-use": "Terms of use"
+    }
+  },
   "search": {
-    "placeholder": "Αναζητήστε δεδομένα, δημοσιεύσεις, εργαλεία έρευνας"
+    "placeholder": "Αναζητήστε δεδομένα, δημοσιεύσεις, εργαλεία έρευνας",
+    "pubs": {
+      "placeholder": "Αναζητήστε δημοσιεύσεις"
+    }
   }
 }

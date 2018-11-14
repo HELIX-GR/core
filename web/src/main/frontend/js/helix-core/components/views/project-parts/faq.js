@@ -6,9 +6,13 @@ class Faq extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { section: null };
+  }
+
+  parseSections() {
     const page = this.props.page;
 
-    this.sections = page ?
+    return (page ?
       page.content.rendered.split('<h1>')
         .filter(text => !!text)
         .reduce((sections, value) => {
@@ -20,11 +24,8 @@ class Faq extends React.Component {
 
           return sections;
         }, []) :
-      null;
-
-    this.state = { section: null };
+      null);
   }
-
   toggleSection(index) {
     const { section: current } = this.state;
     if (current === index) {
@@ -51,11 +52,13 @@ class Faq extends React.Component {
   }
 
   render() {
-    if (this.sections) {
+    const sections = this.parseSections();
+
+    if (sections) {
       return (
         <div>
           <div id="faq-accordion" className="accordion about-text">
-            {this.sections.map((section, index) => this.renderSection(section, index))}
+            {sections.map((section, index) => this.renderSection(section, index))}
           </div>
         </div >
       );

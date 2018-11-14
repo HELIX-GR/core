@@ -22,6 +22,7 @@ export {
   DynamicRoutes,
   ErrorPages,
   ExternalRoutes,
+  getParams,
   Pages,
   StaticRoutes,
 } from './routes';
