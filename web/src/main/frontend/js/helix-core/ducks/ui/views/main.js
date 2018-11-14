@@ -333,7 +333,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
   const { meta: { csrfToken: token }, ui: { main: { pills, data, lab, openaire } } } = getState();
   const queries = {};
 
-  if (pills.data || advanced) {
+  if (pills.data) {
     queries[EnumCatalog.CKAN] = {
       catalog: EnumCatalog.CKAN,
       pageIndex,
@@ -342,7 +342,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       facets: advanced ? data.facets : null,
     };
   }
-  if (pills.lab || advanced) {
+  if (pills.lab) {
     queries[EnumCatalog.LAB] = {
       catalog: EnumCatalog.LAB,
       pageIndex,
@@ -351,7 +351,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       facets: advanced ? lab.facets : null,
     };
   }
-  if (pills.pubs || advanced) {
+  if (pills.pubs) {
     queries[EnumCatalog.OPENAIRE] = {
       catalog: EnumCatalog.OPENAIRE,
       pageIndex,
