@@ -33,12 +33,13 @@ class Header extends React.Component {
     locale: 'en-GB',
   }
 
-  changeLocale() {
-    const locale = (this.props.locale === 'el' ? 'en-GB' : 'el');
+  changeLocale(e, locale) {
+    e.preventDefault();
+
     this.props.changeLocale(locale);
   }
 
-  get locale() {
+  get currentLocale() {
     return (this.props.locale === 'el' ? 'ΕΛ' : 'EN');
   }
 
@@ -121,14 +122,21 @@ class Header extends React.Component {
                 </ul>
               </li>
 
+              <li id="menu-item-lang" className="menu-item aux-item has-sub-menu">
+                <a href='' onClick={(e) => e.preventDefault()}>{this.currentLocale}</a>
+                <ul className="sub-menu">
+                  <li>
+                    <a href='' onClick={(e) => this.changeLocale(e, this.props.locale === 'el' ? 'en-GB' : 'el')}>
+                      {this.props.locale === 'el' ? 'EN' : 'ΕΛ'}
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
             </ul>
           </nav>
 
-          <div className="language-selector" onClick={this.changeLocale}>
-            <a href="#">
-              {this.locale}
-            </a>
-          </div>
+
 
           {!authenticated &&
             <div className="account-item">
