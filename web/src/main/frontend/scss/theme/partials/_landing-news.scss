@@ -81,8 +81,9 @@
           h4.news-details-header {
             margin: 0;
             padding: 12px 0px 9px 33px;
-            font-weight: 100;
-            font-size: 1.2rem;
+            font-size: 15px;
+            line-height: 18px;
+            font-weight: 400;
           }
           button.landing-search-button {
             color: white;
@@ -175,7 +176,7 @@
                 bottom: 0;
                 left: 0;
                 overflow: hidden;
-                background-size: cover;
+                background-size: contain;
                 background-repeat: no-repeat;
                 transition: all .2s ease-in-out;
                 -webkit-transition: all .2s ease-in-out;
@@ -309,7 +310,7 @@
                 bottom: 0;
                 left: 0;
                 overflow: hidden;
-                background-size: cover;
+                background-size: contain;
                 background-repeat: no-repeat;
                 transition: all .2s ease-in-out;
                 -webkit-transition: all .2s ease-in-out;
@@ -330,7 +331,8 @@
               color: #666666;
               font-size: 12px;
               padding: 26px 0px 0px 12px;
-              line-height: 1.25;
+              line-height: 14px;
+              font-weight: 400px;
               letter-spacing: .050;
               cursor: pointer;
               transition: all .2s ease-in-out;
@@ -353,16 +355,40 @@
                 color: $main-black;
               }
               h1.item-title {
-                line-height: 1.1;
-                font-size: 5rem;
-                font-weight: 100;
+                font-size: 72px;
+                line-height: 77px;
               }
             }
             .item-excerpt {
+              font-size: 18px;
+              line-height: 30px;
               font-weight: 300;
-              line-height: 1.4;
               padding-top: 14px;
-              font-size: 1.4rem;
+              h1,
+              h2 {
+                font-size: 30px;
+                line-height: 77px;
+                font-weight: 500;
+              }
+              ul,
+              ol {
+                padding-left: 20px;
+              }
+              li {
+                font-size: 20px;
+                line-height: 30px;
+                padding-bottom: 40px;
+              }
+              blockquote {
+                font-size: 25px;
+                line-height: 33px;
+                border-left: 2px solid $main-black;
+                margin: 0px;
+                padding-left: 20px;
+              }
+              p {
+                margin-bottom: 45px;
+              }
               .read-more {
                 font-family: $body_font;
                 font-size: 13px;
@@ -444,7 +470,7 @@
                 bottom: 0;
                 left: 0;
                 overflow: hidden;
-                background-size: cover;
+                background-size: contain;
                 background-repeat: no-repeat;
                 transition: all .2s ease-in-out;
                 -webkit-transition: all .2s ease-in-out;
