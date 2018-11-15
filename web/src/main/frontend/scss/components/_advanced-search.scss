@@ -12,7 +12,6 @@
     display: flex;
   }
   .nav-bar {
-    margin-bottom: 20px;
     list-style: none;
     float: left;
     width: 100%;
@@ -41,6 +40,7 @@
   .fields {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
     .fields-group {
       flex: 1 1 25%;
       margin-left: 45px;

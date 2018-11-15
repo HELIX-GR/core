@@ -18,7 +18,26 @@ import {
 import {
   CkanAdvancedOptions,
   PubsAdvancedOptions,
-} from '../shared-parts';
+} from './';
+
+const catalogValidator = (props, propName, componentName) => {
+  switch (propName) {
+    case 'data':
+      if ((props['pills']['data']) && (!props[propName])) {
+        return new Error(`Invalid prop \`${propName}\` passed to \`${componentName}\`. Expected a valid catalog configuration.`);
+      }
+      break;
+    case 'openaire':
+      if ((props['pills']['pubs']) && (!props[propName])) {
+        return new Error(`Invalid prop \`${propName}\` passed to \`${componentName}\`. Expected a valid catalog configuration.`);
+      }
+      break;
+    case 'lab':
+      if ((props['pills']['lab']) && (!props[propName])) {
+        return new Error(`Invalid prop \`${propName}\` passed to \`${componentName}\`. Expected a valid catalog configuration.`);
+      }
+  }
+};
 
 class AdvancedModal extends React.Component {
 
@@ -34,11 +53,12 @@ class AdvancedModal extends React.Component {
 
   static propTypes = {
     config: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    lab: PropTypes.object.isRequired,
+    data: catalogValidator,
+    hideTabs: PropTypes.bool,
+    lab: catalogValidator,
     loading: PropTypes.bool.isRequired,
     minOptions: PropTypes.number,
-    openaire: PropTypes.object.isRequired,
+    openaire: catalogValidator,
     pills: PropTypes.object.isRequired,
     search: PropTypes.func.isRequired,
     setOpenaireFilter: PropTypes.func.isRequired,
@@ -52,6 +72,7 @@ class AdvancedModal extends React.Component {
   }
 
   static defaultProps = {
+    hideTabs: false,
     minOptions: 4,
   }
 
@@ -172,14 +193,15 @@ class AdvancedModal extends React.Component {
               />
             </div>
 
-
-            <div className="nav-bar-wrapper">
-              <div className="nav-bar">
-                <div className="nav-menu">
-                  {this.renderTabs(tab)}
+            {!this.props.hideTabs &&
+              <div className="nav-bar-wrapper">
+                <div className="nav-bar">
+                  <div className="nav-menu">
+                    {this.renderTabs(tab)}
+                  </div>
                 </div>
               </div>
-            </div>
+            }
 
             {tab === EnumCatalog.CKAN &&
               <CkanAdvancedOptions

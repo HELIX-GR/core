@@ -36,8 +36,11 @@ import {
 } from '../helpers';
 
 import {
-  About,
   AdvancedModal,
+} from './shared-parts';
+
+import {
+  About,
   News,
   Result,
 } from './main-parts';

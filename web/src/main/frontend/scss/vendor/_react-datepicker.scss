@@ -3,14 +3,21 @@
  */
 
 @import '../../../../../node_modules/react-datepicker/src/stylesheets/datepicker.scss';
-
 /*
  * Custom styles
  */
 
+.react-datepicker {
+  border-radius: 0px;
+}
+
 .react-datepicker__close-icon::after {
   background-color: transparent;
   color: $black;
+}
+
+.react-datepicker__header {
+  background: #ffffff;
 }
 
 .react-datepicker__input-container {

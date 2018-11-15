@@ -26,6 +26,9 @@ import {
 
 import {
   AdvancedModal,
+} from './shared-parts';
+
+import {
   ExploreItem,
   Result,
   SubjectItem,
@@ -124,7 +127,7 @@ class Publications extends React.Component {
                     autoComplete="off"
                     className="landing-search-text"
                     name="landing-search-text"
-                    placeholder={_t({ id: 'search.pubs.placeholder' })}
+                    placeholder={_t({ id: 'pubs.search.placeholder' })}
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
                     onFocus={() => this.props.setResultVisibility(true)}
@@ -147,7 +150,7 @@ class Publications extends React.Component {
                       }
                       onClick={() => this.props.toggleAdvanced()}
                     >
-                      ADVANCED SEARCH
+                      {_t({ id: 'pubs.search.advanced-search' })}
                     </div>
                   </div>
 
@@ -180,7 +183,7 @@ class Publications extends React.Component {
 
               <div className="col-sm-12">
                 <h4 className="featured-pubs-header">
-                  Featured Publications
+                  {_t({ id: 'pubs.featured' })}
                 </h4>
               </div>
 
@@ -356,7 +359,7 @@ class Publications extends React.Component {
 
               <div className="col-sm-12">
                 <h4 className="search-by-subject-header">
-                  Search by subject
+                  {_t({ id: 'pubs.subject.title' })}
                 </h4>
               </div>
 
@@ -365,19 +368,19 @@ class Publications extends React.Component {
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Humanities.svg" text="Humanities and Social Sciences" />
+                <SubjectItem image="/images/svg/Humanities.svg" text={_t({ id: 'pubs.subject.items.humanities' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Business.svg" text="Business, Economics and Law" />
+                <SubjectItem image="/images/svg/Business.svg" text={_t({ id: 'pubs.subject.items.business' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Agricultural.svg" text="Agricultural and Veterinary Sciences" />
+                <SubjectItem image="/images/svg/Agricultural.svg" text={_t({ id: 'pubs.subject.items.agricultural' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Environmental.svg" text="Environmental Sciences" />
+                <SubjectItem image="/images/svg/Environmental.svg" text={_t({ id: 'pubs.subject.items.environmental' })} />
               </div>
 
             </div>
@@ -385,19 +388,19 @@ class Publications extends React.Component {
             <div className="row">
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Engineering.svg" text="Engineering, Computing and Technology" />
+                <SubjectItem image="/images/svg/Engineering.svg" text={_t({ id: 'pubs.subject.items.engineering' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Biological.svg" text="Biological Sciences" />
+                <SubjectItem image="/images/svg/Biological.svg" text={_t({ id: 'pubs.subject.items.biological' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Medical.svg" text="Medical and Health" />
+                <SubjectItem image="/images/svg/Medical.svg" text={_t({ id: 'pubs.subject.items.medical' })} />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
-                <SubjectItem image="/images/svg/Physical.svg" text="Physical, Chemical and Mathematical Sciences" />
+                <SubjectItem image="/images/svg/Physical.svg" text={_t({ id: 'pubs.subject.items.sciences' })} />
               </div>
 
             </div>
@@ -409,7 +412,7 @@ class Publications extends React.Component {
 
               <div className="col-sm-12">
                 <h4 className="explore-header">
-                  Explore
+                  {_t({ id: 'pubs.explore.title' })}
                 </h4>
               </div>
 
@@ -423,32 +426,32 @@ class Publications extends React.Component {
               <div className="col-md-3 col-sm-6 col-xs-12">
                 <ExploreItem
                   image="/images/svg/themes.svg"
-                  text="Themed Collections"
-                  description="Explore selected resources by theme"
+                  text={_t({ id: 'pubs.explore.items.themes.title' })}
+                  description={_t({ id: 'pubs.explore.items.themes.description' })}
                 />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
                 <ExploreItem
                   image="/images/svg/Services.svg"
-                  text="TServices and Tools"
-                  description="Access data-related services and tools"
+                  text={_t({ id: 'pubs.explore.items.services-tools.title' })}
+                  description={_t({ id: 'pubs.explore.items.services-tools.description' })}
                 />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
                 <ExploreItem
                   image="/images/svg/Opendata.svg"
-                  text="Open Data"
-                  description="Find open data that is reusable"
+                  text={_t({ id: 'pubs.explore.items.open-data.title' })}
+                  description={_t({ id: 'pubs.explore.items.open-data.description' })}
                 />
               </div>
 
               <div className="col-md-3 col-sm-6 col-xs-12">
                 <ExploreItem
                   image="/images/svg/Grants.svg"
-                  text="Grants and Projects"
-                  description="Search for research grants and projects"
+                  text={_t({ id: 'pubs.explore.items.projects.title' })}
+                  description={_t({ id: 'pubs.explore.items.projects.description' })}
                 />
               </div>
 
@@ -458,13 +461,17 @@ class Publications extends React.Component {
 
         <AdvancedModal
           config={this.props.config}
+          hideTabs={true}
           loading={this.props.search.loading}
           openaire={this.props.search.openaire}
+          pills={{ data: false, pubs: true, lab: false }}
           search={() => this.search(true)}
           setOpenaireFilter={this.props.setOpenaireFilter}
           setText={(text) => this.onTextChanged(text, false)}
           text={this.props.search.text}
           toggle={this.props.toggleAdvanced}
+          toggleDataFacet={() => null}
+          toggleLabFacet={() => null}
           toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />

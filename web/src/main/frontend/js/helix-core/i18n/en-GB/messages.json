@@ -163,6 +163,47 @@
     "view-less": "View Less",
     "view-more": "View More"
   },
+  "pubs": {
+    "search": {
+      "placeholder": "Search publications",
+      "advanced-search": "ADVANCED SEARCH"
+    },
+    "featured": "Featured Publications",
+    "subject": {
+      "title": "Search by subject",
+      "items": {
+        "humanities": "Humanities and Social Sciences",
+        "business": "Business, Economics and Law",
+        "agricultural": "Agricultural and Veterinary Sciences",
+        "environmental": "Environmental Sciences",
+        "engineering": "Engineering, Computing and Technology",
+        "biological": "Biological Sciences",
+        "medical": "Medical and Health",
+        "sciences": "Physical, Chemical and Mathematical Sciences"
+      }
+    },
+    "explore": {
+      "title": "Explore",
+      "items": {
+        "themes": {
+          "title": "Themed Collections",
+          "description": "Explore selected resources by theme"
+        },
+        "services-tools": {
+          "title": "Services and Tools",
+          "description": "Access data-related services and tools"
+        },
+        "open-data": {
+          "title": "Open Data",
+          "description": "Find open data that is reusable"
+        },
+        "projects": {
+          "title": "Grants and Projects",
+          "description": "Search for research grants and projects"
+        }
+      }
+    }
+  },
   "project": {
     "title": "The project"
   },
