@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
+import * as PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import moment from '../../moment-localized';
@@ -37,6 +38,10 @@ class NewsDetails extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  static contextTypes = {
+    intl: PropTypes.object,
   }
 
   get title() {
@@ -88,6 +93,7 @@ class NewsDetails extends React.Component {
 
   render() {
     const { current: post, related: relatedPosts } = this.props.news;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div>
@@ -119,7 +125,7 @@ class NewsDetails extends React.Component {
               <div className="row justify-content-center">
                 <div className="col-sm-8">
                   <h4 className="news-details-header">
-                    Related News
+                    {_t({ id: 'news.related-news' })}
                   </h4>
                 </div>
 
@@ -176,7 +182,7 @@ class NewsDetails extends React.Component {
       const date = age.asHours() < 24 ?
         moment(p.modified).fromNow() :
         <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
-
+      const _t = this.context.intl.formatMessage;
 
       return (
         <div key={`${p.id}`} className="row" ref={this.lastPageFirstItem}>
@@ -207,7 +213,7 @@ class NewsDetails extends React.Component {
                 </div>
                 <div>
                   <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
-                    Read more
+                    {_t({ id: 'news.read-more' })}
                   </NavLink>
                 </div>
               </div>

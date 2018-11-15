@@ -54,7 +54,7 @@ class Project extends React.Component {
 
               <div className="col-md-3 col-xs-12">
                 <h4 className="about-header">
-                  The project
+                  {_t({ id: 'project.title' })}
                 </h4>
               </div>
 

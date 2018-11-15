@@ -163,6 +163,15 @@
     "view-less": "View Less",
     "view-more": "View More"
   },
+  "project": {
+    "title": "The project"
+  },
+  "news": {
+    "title": "News",
+    "load-more": "More",
+    "read-more": "Read more",
+    "related-news": "Related News"
+  },
   "search": {
     "placeholder": "Search data, publications, research tools",
     "pubs": {

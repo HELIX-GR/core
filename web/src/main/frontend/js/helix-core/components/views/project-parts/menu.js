@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import {
@@ -17,6 +18,10 @@ class Menu extends React.Component {
     };
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   toggleSubMenu(e, key) {
     this.setState({
       [key]: !this.state[key],
@@ -24,68 +29,30 @@ class Menu extends React.Component {
   }
 
   render() {
+    const pages = [
+      WordPressPages.WhatIsHelix,
+      WordPressPages.Services,
+      WordPressPages.FAQ,
+      WordPressPages.PublishData,
+      WordPressPages.Software,
+      WordPressPages.Project,
+      WordPressPages.Media,
+      WordPressPages.AcknowledgeHelix,
+      WordPressPages.Contact,
+      WordPressPages.TermsOfUse,
+    ];
+    const _t = this.context.intl.formatMessage;
+
     return (
       <div className="about-item">
 
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])} activeClassName="selected">
-          <h4 className="about-title" >
-            What is HELIX?
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])} activeClassName="selected">
-          <h4 className="about-title" >
-            Services
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])} activeClassName="selected">
-          <h4 className="about-title" >
-            FAQ
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])} activeClassName="selected">
-          <h4 className="about-title" >
-            Publish Data
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])} activeClassName="selected">
-          <h4 className="about-title" >
-            Software
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])} activeClassName="selected">
-          <h4 className="about-title" >
-            The project
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])} activeClassName="selected">
-          <h4 className="about-title" >
-            Media
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])} activeClassName="selected">
-          <h4 className="about-title" >
-            Acknowledge HELIX
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])} activeClassName="selected">
-          <h4 className="about-title" >
-            Contact
-          </h4>
-        </NavLink>
-
-        <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])} activeClassName="selected">
-          <h4 className="about-title" >
-            Terms of use
-          </h4>
-        </NavLink>
+        {pages.map(key => (
+          <NavLink key={key} to={buildPath(DynamicRoutes.PROJECT_PAGE, [key])} activeClassName="selected">
+            <h4 className="about-title" >
+              {_t({ id: `header.menu.project.items.${key}` })}
+            </h4>
+          </NavLink>))
+        }
 
       </div >
     );

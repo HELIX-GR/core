@@ -37,14 +37,17 @@ class Faq extends React.Component {
   }
 
   renderSection(section, index) {
+    const isOpen = this.state.section === index;
+
     return (
       <div className="accordion-group" key={`section-${index}`}>
-        <div className="accordion-heading" onClick={() => this.toggleSection(index)}>
-          <a className="accordion-toggle">{section.header}</a>
+        <div className="accordion-header" onClick={() => this.toggleSection(index)}>
+          <a className="title">{section.header}</a>
+          <i className={isOpen ? 'fa fa-caret-up handle' : 'fa fa-caret-down handle'} />
         </div>
-        <Collapse isOpen={this.state.section === index}>
+        <Collapse isOpen={isOpen}>
           <div id={`faq-accordion-${index}`} >
-            <div className="accordion-inner" dangerouslySetInnerHTML={{ __html: section.content }} />
+            <div className="accordion-content" dangerouslySetInnerHTML={{ __html: section.content }} />
           </div>
         </Collapse>
       </ div>

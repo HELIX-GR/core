@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
+import * as PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 import moment from '../../moment-localized';
@@ -38,6 +39,10 @@ class News extends React.Component {
     this.lastPageFirstItem = React.createRef();
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   onLoadMore(e) {
     e.preventDefault();
 
@@ -54,6 +59,7 @@ class News extends React.Component {
 
   render() {
     const { page, loading } = this.props.news;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div>
@@ -69,7 +75,7 @@ class News extends React.Component {
 
               <div className="col-sm-12">
                 <h4 className="news-header">
-                  News
+                  {_t({ id: 'news.title' })}
                 </h4>
               </div>
 
@@ -90,7 +96,7 @@ class News extends React.Component {
                   onClick={(e) => this.onLoadMore(e)}
                 >
                   {!loading &&
-                    <span>More</span>
+                    <span>{_t({ id: 'news.load-more' })}</span>
                   }
                   {loading &&
                     <i className='fa fa-spin fa-spinner'></i>
@@ -117,7 +123,7 @@ class News extends React.Component {
       const date = age.asHours() < 24 ?
         moment(p.modified).fromNow() :
         <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
-
+      const _t = this.context.intl.formatMessage;
 
       return (
         <div key={`${p.id}`} className="row" ref={this.lastPageFirstItem}>
@@ -148,7 +154,7 @@ class News extends React.Component {
                 </div>
                 <div>
                   <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
-                    Read more
+                    {_t({ id: 'news.read-more' })}
                   </NavLink>
                 </div>
               </div>

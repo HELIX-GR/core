@@ -4,25 +4,29 @@
   background: #F6F6F6;
 }
 
-.accordion-heading {
+.accordion-header {
   border-bottom: 0;
+  position: relative;
+  .title {
+    display: block;
+    padding: 8px 15px;
+    background: $main-black;
+    color: white !important;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+  .handle {
+    position: absolute;
+    top: 12px;
+    color: #F1F1F1;
+    right: 10px;
+    cursor: pointer;
+  }
 }
 
-.accordion-heading .accordion-toggle {
-  display: block;
-  padding: 8px 15px;
-  background: $main-black;
-  color: white !important;
-}
-
-.accordion-toggle {
-  cursor: pointer;
-  font-size: 13px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-.accordion-inner {
+.accordion-content {
   padding: 9px 15px;
   border-top: 1px solid #e5e5e5;
 }

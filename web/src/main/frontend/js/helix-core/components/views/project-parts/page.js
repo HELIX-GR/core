@@ -48,7 +48,7 @@ class Page extends React.Component {
 
     return (
       <div>
-        {page &&
+        {page && !page.slug.startsWith(WordPressPages.FAQ) &&
           <a href="#">
             <h4 className="about-details-header">
               {page.title.rendered.endsWith('-EL') ? page.title.rendered.slice(0, -3) : page.title.rendered}
