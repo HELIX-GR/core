@@ -22,12 +22,17 @@ class News extends React.Component {
     super(props);
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   static propTypes = {
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { posts } = this.props;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div className="latest-news-container container-fluid">
@@ -36,7 +41,7 @@ class News extends React.Component {
 
             <div className="col-sm-12">
               <h4 className="latest-news-header">
-                Latest News
+                {_t({ id: 'main.news.title' })}
               </h4>
             </div>
 
@@ -49,6 +54,8 @@ class News extends React.Component {
   }
 
   renderPosts(posts) {
+    const _t = this.context.intl.formatMessage;
+
     return posts.map(p => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
@@ -77,7 +84,7 @@ class News extends React.Component {
               <div className="item-excerpt style-5">
                 <p dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}></p>
                 <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
-                  Read more
+                  {_t({ id: 'main.news.read-more' })}
                 </NavLink>
               </div>
             </div>

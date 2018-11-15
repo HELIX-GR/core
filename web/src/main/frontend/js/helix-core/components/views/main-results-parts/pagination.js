@@ -38,7 +38,7 @@ class Pagination extends React.Component {
     return (
       <div className={"breadcrumbs-pagination " + this.props.className}>
         <div className="breadcrumbs">
-          <a href="#" className="breadcrumbs-part">RESULT</a>
+          <a href="#" className="breadcrumbs-part">RESULTS</a>
           <a href="#" className="breadcrumbs-part last-part">ALL</a>
         </div>
 

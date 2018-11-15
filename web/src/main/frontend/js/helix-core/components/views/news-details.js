@@ -87,7 +87,7 @@ class NewsDetails extends React.Component {
   }
 
   render() {
-    const { current: post, relative: relativePosts } = this.props.news;
+    const { current: post, related: relatedPosts } = this.props.news;
 
     return (
       <div>
@@ -115,17 +115,17 @@ class NewsDetails extends React.Component {
 
               </div>
             }
-            {relativePosts &&
+            {relatedPosts &&
               <div className="row justify-content-center">
                 <div className="col-sm-8">
                   <h4 className="news-details-header">
-                    Relative News
+                    Related News
                   </h4>
                 </div>
 
                 <div className="col-sm-8">
-                  <div className="news-item-details-relative">
-                    {this.renderRelativePosts(relativePosts)}
+                  <div className="news-item-details-related">
+                    {this.renderRelativePosts(relatedPosts)}
                   </div>
                 </div>
 
@@ -154,7 +154,7 @@ class NewsDetails extends React.Component {
                 </h1>
               </a>
               <div className="item-date">
-                {date} \\\ Helix Team
+                {date} \\\ HELIX Team
               </div>
               <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.content.rendered }}>
               </div>

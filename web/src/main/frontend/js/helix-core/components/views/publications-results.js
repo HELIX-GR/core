@@ -25,6 +25,10 @@ import {
 } from '../../model';
 
 import {
+  LocationFilter,
+} from './shared-parts';
+
+import {
   Pagination,
 } from './publications-results-parts';
 
@@ -114,7 +118,7 @@ class PublicationsResults extends React.Component {
             <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
               {p.title}
             </a>
-            <div className="pill pubs">
+            <div className="pill pubs ml-1">
               PUBS
             </div>
           </h3>
@@ -210,14 +214,7 @@ class PublicationsResults extends React.Component {
                 </div>
               </div>
 
-              <div className="location param-box">
-                <h5 className="title">LOCATION</h5>
-
-                <div className="map-container">
-                  <img className="temp-map" src="../../images/jpg/map.png" alt="" />
-                </div>
-
-              </div>
+              <LocationFilter className="d-none" />
 
             </section>
 

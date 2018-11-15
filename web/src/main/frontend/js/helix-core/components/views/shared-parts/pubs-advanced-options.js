@@ -18,6 +18,10 @@ class PubsAdvancedOptions extends React.Component {
 
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   static propTypes = {
     filters: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
@@ -26,10 +30,11 @@ class PubsAdvancedOptions extends React.Component {
 
   renderProviders() {
     const { filters, metadata: { providers } } = this.props;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div className="providers param-box">
-        <h5 className="title">Providers</h5>
+        <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.providers' })}</h5>
         <div className="switches">
           {
             providers.map((provider, index) => {
@@ -55,6 +60,7 @@ class PubsAdvancedOptions extends React.Component {
 
   render() {
     const { filters, } = this.props;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div className="fields">
@@ -63,16 +69,16 @@ class PubsAdvancedOptions extends React.Component {
         </div>
         <div className="fields-group">
           <div className="filters param-box">
-            <h5 className="title">Author</h5>
+            <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.author' })}</h5>
             <FormGroup >
               <KeywordEditor
                 onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
-                placeholder="Enter a name and press enter ..."
+                placeholder={_t({ id: 'advanced-search.placeholder.author' })}
                 value={filters[EnumOpenaireFilter.Authors]}
               />
-              <FormText color="muted">White-space separated list of names and/or surnames. Search for publications by authors.</FormText>
+              <FormText color="muted">{_t({ id: 'advanced-search.help.author' })}</FormText>
             </FormGroup>
-            <h5 className="title">Date Accepted From</h5>
+            <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.acceptance-from' })}</h5>
             <FormGroup >
               <DatePicker
                 autoComplete="off"
@@ -82,9 +88,9 @@ class PubsAdvancedOptions extends React.Component {
                 onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date)}
                 value={filters[EnumOpenaireFilter.FromDateAccepted] || null}
               />
-              <FormText color="muted">Gets the publications whose date of acceptance is greater than or equal the given date.</FormText>
+              <FormText color="muted">{_t({ id: 'advanced-search.help.acceptance-from' })}</FormText>
             </FormGroup>
-            <h5 className="title">Date Accepted To</h5>
+            <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.acceptance-to' })}</h5>
             <FormGroup >
               <DatePicker
                 autoComplete="off"
@@ -94,7 +100,7 @@ class PubsAdvancedOptions extends React.Component {
                 onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date)}
                 value={filters[EnumOpenaireFilter.ToDateAccepted] || null}
               />
-              <FormText color="muted">Gets the publications whose date of acceptance is less than or equal the given date.</FormText>
+              <FormText color="muted">{_t({ id: 'advanced-search.help.acceptance-to' })}</FormText>
             </FormGroup>
           </div>
         </div>

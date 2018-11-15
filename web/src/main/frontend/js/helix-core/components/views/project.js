@@ -60,7 +60,7 @@ class Project extends React.Component {
 
               <div className="col-md-9 col-xs-12">
                 <h4 className="about-header">
-                  {_t({ id: `project.menu.${name}` })}
+                  {_t({ id: `header.menu.project.items.${name}` })}
                 </h4>
               </div>
 

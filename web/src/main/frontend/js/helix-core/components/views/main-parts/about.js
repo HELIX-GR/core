@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import {
@@ -13,14 +14,20 @@ class About extends React.Component {
     super(props);
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   render() {
+    const _t = this.context.intl.formatMessage;
+
     return (
       <div className="about-helix-container container-fluid">
         <div className="row">
 
           <div className="col-sm-12">
             <h4 className="about-header">
-              About Helix
+              {_t({ id: 'main.about.title' })}
             </h4>
           </div>
 
@@ -28,19 +35,17 @@ class About extends React.Component {
             <div className="about-item">
               <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <h3 className="about-title">
-                  What is HELIX?
+                  {_t({ id: 'main.about.sections.1.title' })}
                 </h3>
               </NavLink>
 
               <div className="about-text style-5">
-                HELIX is an horizontal eInfrastructure for data-intensive research,
-                handling the data management, analysis, sharing, and reuse needs of Greek scientists,
-                researchers and innovators in a cross-disciplinary, scalable, and low-cost manner.
+                {_t({ id: 'main.about.sections.1.content' })}
               </div>
 
               <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <div className="about-link">
-                  Learn more
+                  {_t({ id: 'main.about.sections.1.link' })}
                 </div>
               </NavLink>
 
@@ -51,18 +56,17 @@ class About extends React.Component {
             <div className="about-item">
               <a href="https://data.hellenicdataservice.gr" target="_blank">
                 <h3 className="about-title">
-                  Search for Data
+                  {_t({ id: 'main.about.sections.2.title' })}
                 </h3>
               </a>
 
               <div className="about-text style-5">
-                Find, use, and share open scientific data created by Greek Research organizations,
-                institutions, and innovators. Use them in your own research or line of work.
+                {_t({ id: 'main.about.sections.2.content' })}
               </div>
 
               <a href="https://data.hellenicdataservice.gr" target="_blank">
                 <div className="about-link">
-                  Find data
+                  {_t({ id: 'main.about.sections.2.link' })}
                 </div>
               </a>
 
@@ -73,18 +77,17 @@ class About extends React.Component {
             <div className="about-item">
               <a href="https://lab.hellenicdataservice.gr" target="_blank">
                 <h3 className="about-title">
-                  Build with data
+                  {_t({ id: 'main.about.sections.3.title' })}
                 </h3>
               </a>
 
               <div className="about-text style-5">
-                Learn, experiment, and work with data, without ever leaving in your browser.
-                Tap into ready to use, highly scalable Big Data and HPC infrastructures.
+                {_t({ id: 'main.about.sections.3.content' })}
               </div>
 
               <a href="https://lab.hellenicdataservice.gr" target="_blank">
                 <div className="about-link">
-                  Start coding
+                  {_t({ id: 'main.about.sections.3.link' })}
                 </div>
               </a>
 
@@ -95,18 +98,17 @@ class About extends React.Component {
             <div className="about-item">
               <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <h3 className="about-title">
-                  Our partners
+                  {_t({ id: 'main.about.sections.4.title' })}
                 </h3>
               </NavLink>
 
               <div className="about-text style-5">
-                HELIX is a collective effort of Athena RC and GRNET S.A., with the financial support
-                of the European Union, bringing together the entire Greek research community.
+                {_t({ id: 'main.about.sections.4.content' })}
               </div>
 
               <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
                 <div className="about-link">
-                  Learn more
+                  {_t({ id: 'main.about.sections.4.link' })}
                 </div>
               </NavLink>
 

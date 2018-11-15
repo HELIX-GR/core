@@ -1,4 +1,4 @@
-# Helix Web Application
+# HELIX Web Application
 
 HELIX main site
 

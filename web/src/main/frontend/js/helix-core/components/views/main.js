@@ -140,8 +140,13 @@ class Main extends React.Component {
     const { data, lab, openaire } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
-
     const _t = this.context.intl.formatMessage;
+
+    const placeholderText = [
+      pills.data ? _t({ id: 'main.search.placeholder.data' }) : null,
+      pills.pubs ? _t({ id: 'main.search.placeholder.pubs' }) : null,
+      pills.lab ? _t({ id: 'main.search.placeholder.lab' }) : null,
+    ].filter(text => text).join(', ');
 
     return (
 
@@ -160,7 +165,7 @@ class Main extends React.Component {
                     className="landing-search-text"
                     disabled={!this.isEnabled}
                     name="landing-search-text"
-                    placeholder={_t({ id: 'search.placeholder' })}
+                    placeholder={_t({ id: 'main.search.placeholder.prefix' }, { catalogs: placeholderText })}
                     value={text}
                     onChange={(e) => this.onTextChanged(e.target.value)}
                     onFocus={() => this.props.setResultVisibility(true)}
@@ -207,7 +212,7 @@ class Main extends React.Component {
                       }
                       onClick={() => this.props.toggleAdvanced()}
                     >
-                      ADVANCED SEARCH
+                      {_t({ id: 'main.search.advanced-search' })}
                     </div>
                   </div>
 

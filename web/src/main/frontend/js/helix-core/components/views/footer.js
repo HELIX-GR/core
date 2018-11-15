@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 import {
   Link,
@@ -18,6 +19,9 @@ class Footer extends React.Component {
     super(props);
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
 
   get logoImage() {
     const { location } = this.props;
@@ -43,6 +47,7 @@ class Footer extends React.Component {
 
   render() {
     const { data: { host: dataHost } } = this.props.config;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <footer id="footer" className={this.resolveClassName()}>
@@ -55,31 +60,31 @@ class Footer extends React.Component {
             </div>
             <div className="footer-column about">
               <h3 className="footer-column-title">
-                About
-            </h3>
+                {_t({ id: 'footer.columns.about.title' })}
+              </h3>
               <ul>
-                <li><Link to={StaticRoutes.MAIN}>Αρχική</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>Το έργο</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>Επικοινωνία</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>Όροι χρήσης</Link></li>
+                <li><Link to={StaticRoutes.MAIN}>{_t({ id: 'footer.columns.about.links.home' })}</Link></li>
+                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>{_t({ id: 'footer.columns.about.links.what-is-helix' })}</Link></li>
+                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>{_t({ id: 'footer.columns.about.links.contact' })}</Link></li>
+                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>{_t({ id: 'footer.columns.about.links.terms-of-use' })}</Link></li>
               </ul>
             </div>
             <div className="footer-column research">
               <h3 className="footer-column-title">
-                Έρευνα
-            </h3>
+                {_t({ id: 'footer.columns.research.title' })}
+              </h3>
               <ul>
-                <li><a href={dataHost}>Data</a></li>
-                <li><Link to={StaticRoutes.PUBS}>Publications</Link></li>
-                <li><a href={ExternalRoutes.Lab}>Lab</a></li>
-                <li><a href="#">Θεματικές</a></li>
-                <li><a href="#">Οργανισμοί</a></li>
+                <li><a href={dataHost}>{_t({ id: 'footer.columns.research.links.data' })}</a></li>
+                <li><Link to={StaticRoutes.PUBS}>{_t({ id: 'footer.columns.research.links.pubs' })}</Link></li>
+                <li><a href={ExternalRoutes.Lab}>{_t({ id: 'footer.columns.research.links.lab' })}</a></li>
+                <li><a href="#">{_t({ id: 'footer.columns.research.links.topics' })}</a></li>
+                <li><a href="#">{_t({ id: 'footer.columns.research.links.organizations' })}</a></li>
               </ul>
             </div>
             <div className="footer-column partners">
               <h3 className="footer-column-title">
-                Συνεργάτες
-            </h3>
+                {_t({ id: 'footer.columns.partners.title' })}
+              </h3>
               <ul>
                 <li>
                   <a href="https://www.athenarc.gr/" target="blank">
@@ -109,7 +114,7 @@ class Footer extends React.Component {
             </div>
           </div>
           <div className="copyright-notes">
-            © 2018 HELIX. All rights reserved.
+            {_t({ id: 'footer.copyright' })}
           </div>
         </div>
       </footer>

@@ -19,6 +19,10 @@ class CkanAdvancedOptions extends React.Component {
     };
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   static propTypes = {
     facets: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
@@ -45,7 +49,9 @@ class CkanAdvancedOptions extends React.Component {
   }
 
   renderParameters(key, title, items, valueProperty, textProperty, prefix, minOptions, showAll) {
+    const _t = this.context.intl.formatMessage;
     const size = Array.isArray(items) ? showAll ? items.length : Math.min(items.length, minOptions) : 0;
+
     if (size === 0) {
       return null;
     }
@@ -75,7 +81,7 @@ class CkanAdvancedOptions extends React.Component {
         </div>
         {items.length > minOptions &&
           <div className="more-link">
-            <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? "View Less" : "View More"}</a>
+            <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? _t({ id: 'advanced-search.view-less' }) : _t({ id: 'advanced-search.view-more' })}</a>
           </div>
         }
       </div>
@@ -96,32 +102,33 @@ class CkanAdvancedOptions extends React.Component {
         [EnumCkanFacet.Tag]: showAllTags
       },
     } = this.state;
+    const _t = this.context.intl.formatMessage;
 
     return (
       <div className="fields">
         {organizations.length !== 0 &&
           <div className="fields-group">
-            {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', organizations, 'name', 'title', 'org', minOptions, showAllOrganizations)}
+            {this.renderParameters(EnumCkanFacet.Organization, _t({ id: 'advanced-search.filters.ckan.organizations' }), organizations, 'name', 'title', 'org', minOptions, showAllOrganizations)}
           </div>
         }
         {groups.length !== 0 &&
           <div className="fields-group">
-            {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', groups, 'name', 'title', 'grp', minOptions, showAllGroups)}
+            {this.renderParameters(EnumCkanFacet.Group, _t({ id: 'advanced-search.filters.ckan.topics' }), groups, 'name', 'title', 'grp', minOptions, showAllGroups)}
           </div>
         }
         {tags.length !== 0 &&
           <div className="fields-group">
-            {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', tags, 'name', 'display_name', 'tag', minOptions, showAllTags)}
+            {this.renderParameters(EnumCkanFacet.Tag, _t({ id: 'advanced-search.filters.ckan.tags' }), tags, 'name', 'display_name', 'tag', minOptions, showAllTags)}
           </div>
         }
         {formats.length !== 0 &&
           <div className="fields-group">
-            {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', formats, null, null, 'fmt', minOptions, showAllFormats)}
+            {this.renderParameters(EnumCkanFacet.Format, _t({ id: 'advanced-search.filters.ckan.formats' }), formats, null, null, 'fmt', minOptions, showAllFormats)}
           </div>
         }
         {licenses.length !== 0 &&
           <div className="fields-group">
-            {this.renderParameters(EnumCkanFacet.License, 'LICENSES', licenses, 'id', 'title', 'lic', minOptions, showAllLicenses)}
+            {this.renderParameters(EnumCkanFacet.License, _t({ id: 'advanced-search.filters.ckan.licenses' }), licenses, 'id', 'title', 'lic', minOptions, showAllLicenses)}
           </div>
         }
       </div>

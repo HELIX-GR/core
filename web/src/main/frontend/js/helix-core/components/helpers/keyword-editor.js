@@ -121,7 +121,7 @@ export default class KeywordEditor extends React.Component {
         onChange={(e) => this.onChange(e)}
         onInputChange={(e) => this.onInputChange(e)}
         onKeyDown={(e) => this.onKeyDown(e)}
-        placeholder={this.placeholder}
+        placeholder={this.props.placeholder}
         styles={customStyles}
         value={value.map(v => createOption(v))}
       />

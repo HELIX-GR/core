@@ -38,8 +38,8 @@ const initialState = {
   },
   // Current post
   current: null,
-  // Relative posts for the current post
-  relative: [],
+  // Related posts for the current post
+  related: [],
 };
 
 export default (state = initialState, action) => {
@@ -97,13 +97,13 @@ export default (state = initialState, action) => {
     case RELATIVE_POSTS_REQUEST:
       return {
         ...state,
-        relative: [],
+        related: [],
       };
 
     case RELATIVE_POSTS_RESPONSE:
       return {
         ...state,
-        relative: action.posts,
+        related: action.posts,
       };
 
     default:

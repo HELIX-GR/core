@@ -33,6 +33,10 @@ import {
 } from '../helpers';
 
 import {
+  LocationFilter,
+} from './shared-parts';
+
+import {
   Pagination,
 } from './main-results-parts';
 
@@ -189,7 +193,7 @@ class MainResults extends React.Component {
           <a href={`${host}/dataset/${r.id}`} target="_blank">
             {r.title}
           </a>
-          <div className="pill data">
+          <div className="pill data ml-1">
             DATA
           </div>
         </h3>
@@ -249,7 +253,7 @@ class MainResults extends React.Component {
           <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
             {p.title}
           </a>
-          <div className="pill pubs">
+          <div className="pill pubs ml-1">
             PUBS
           </div>
         </h3>
@@ -298,7 +302,7 @@ class MainResults extends React.Component {
           <a href={`${host}/dataset/${n.id}`} target="_blank">
             {n.title}
           </a>
-          <div className="pill lab">
+          <div className="pill lab ml-1">
             LAB
           </div>
         </h3>
@@ -460,14 +464,7 @@ class MainResults extends React.Component {
                 </div>
               </div>
 
-              <div className="location param-box">
-                <h5 className="title">LOCATION</h5>
-
-                <div className="map-container">
-                  <img className="temp-map" src="../images/jpg/map.png" alt="" />
-                </div>
-
-              </div>
+              <LocationFilter className="d-none" />
 
               {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
 

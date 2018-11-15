@@ -7,10 +7,6 @@ import {
 } from 'reactstrap';
 
 import {
-  EnumCatalog,
-} from '../../../model';
-
-import {
   PubsAdvancedOptions,
 } from '../shared-parts';
 

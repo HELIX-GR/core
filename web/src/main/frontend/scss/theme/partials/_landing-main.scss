@@ -4,7 +4,7 @@
       background-color: $main-black;
     }
     section.landing-page-content {
-      margin: 0 20px 0px 20px;
+      margin: 0 15px 0px 15px;
       padding-bottom: 10px;
       background-color: $neutral-grey;
       .container-fluid {
@@ -71,6 +71,9 @@
           padding-top: 45px;
           max-width: $layout-fixed-width;
           h4.latest-news-header {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 24px;
             margin: 0;
             padding: 2px 0px 18px 13px;
           }
@@ -128,7 +131,6 @@
           .item-date {
             color: #666666;
             font-size: 12px;
-            padding-top: 10px;
             line-height: 14px;
             font-weight: 400;
             letter-spacing: .050;
@@ -153,9 +155,10 @@
               color: $main-black;
             }
             h3.item-title {
-              line-height: 1.1;
-              font-weight: bold;
-              padding-top: 15px;
+              font-size: 25px;
+              line-height: 28px;
+              font-weight: 500;
+              padding-top: 12px;
             }
           }
           .item-excerpt {

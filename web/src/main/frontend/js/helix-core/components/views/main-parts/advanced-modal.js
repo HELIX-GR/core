@@ -92,26 +92,27 @@ class AdvancedModal extends React.Component {
 
   renderTabs(selected) {
     const { pills } = this.props;
-
+    const _t = this.context.intl.formatMessage;
     const tabs = [];
+
     if (pills.data) {
       tabs.push(
         <li key="tab-data" className={selected === EnumCatalog.CKAN ? 'active' : ''}>
-          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.CKAN)}>Data</a>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.CKAN)}>{_t({ id: 'advanced-search.tabs.data' })}</a>
         </li>
       );
     }
     if (pills.pubs) {
       tabs.push(
         <li key="tab-pubs" className={selected === EnumCatalog.OPENAIRE ? 'active' : ''}>
-          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.OPENAIRE)}>Publications</a>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.OPENAIRE)}>{_t({ id: 'advanced-search.tabs.pubs' })}</a>
         </li>
       );
     }
     if (pills.lab) {
       tabs.push(
         <li key="tab-lab" className={selected === EnumCatalog.LAB ? 'active' : ''}>
-          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.LAB)}>Lab</a>
+          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.LAB)}>{_t({ id: 'advanced-search.tabs.lab' })}</a>
         </li>
       );
     }
@@ -123,10 +124,15 @@ class AdvancedModal extends React.Component {
   }
 
   render() {
-    const { text } = this.props;
+    const { pills, text } = this.props;
     const tab = this.resolveActiveTab();
-
     const _t = this.context.intl.formatMessage;
+
+    const catalogs = [
+      pills.data ? _t({ id: 'advanced-search.placeholder.data' }) : null,
+      pills.pubs ? _t({ id: 'advanced-search.placeholder.pubs' }) : null,
+      pills.lab ? _t({ id: 'advanced-search.placeholder.lab' }) : null,
+    ].filter(text => text).join(', ');
 
     return (
       <Modal
@@ -149,7 +155,7 @@ class AdvancedModal extends React.Component {
           <a href="" className="close" onClick={(e) => { e.preventDefault(); this.props.toggle(); }}></a>
 
           <div className="form-title">
-            <FormattedMessage id="main.search.advanced.title" defaultMessage="Advanced Search" />
+            <FormattedMessage id="advanced-search.title" defaultMessage="Advanced Search" />
           </div>
 
           <form>
@@ -159,7 +165,7 @@ class AdvancedModal extends React.Component {
                 autoComplete="off"
                 className="search-text"
                 name="search-text"
-                placeholder={_t({ id: 'search.placeholder' })}
+                placeholder={_t({ id: 'advanced-search.placeholder.prefix' }, { catalogs })}
                 value={text}
                 onChange={(e) => this.onTextChanged(e.target.value)}
                 ref={this.textInput}

@@ -5,7 +5,7 @@
       border-right: 15px solid $main-black;
     }
     section.news-landing-page-content {
-      margin: 0 20px 0px 20px;
+      margin: 0 15px 0px 15px;
       padding-bottom: 55px;
       background-color: $neutral-grey;
       padding: 0 132px 110px 132px;
@@ -75,8 +75,9 @@
           h4.news-header {
             margin: 0;
             padding: 13px 10px 13px 0px;
-            font-weight: bold;
-            font-size: 1rem;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 400;
           }
           h4.news-details-header {
             margin: 0;
@@ -196,9 +197,10 @@
             .item-date {
               color: #666666;
               font-size: 12px;
-              padding-top: 2px;
-              line-height: 1.25;
+              line-height: 14px;
+              font-weight: 400;
               letter-spacing: .050;
+              padding-top: 2px;
               cursor: pointer;
               transition: all .2s ease-in-out;
               -webkit-transition: all .2s ease-in-out;
@@ -220,20 +222,20 @@
                 color: $main-black;
               }
               h3.item-title {
-                line-height: 1.1;
-                font-weight: bold;
+                font-size: 25px;
+                line-height: 28px;
+                font-weight: 500;
                 padding-top: 20px;
               }
             }
             .item-excerpt {
+              font-size: 13px;
+              line-height: 26px;
               font-weight: 300;
-              line-height: 1.4;
               padding-top: 19px;
               .read-more {
                 font-family: $body_font;
-                font-size: 13px;
-                line-height: 1.6;
-                font-weight: bold;
+                font-weight: 700;
               }
             }
           }
@@ -330,9 +332,9 @@
             .item-date {
               color: #666666;
               font-size: 12px;
-              padding: 26px 0px 0px 12px;
               line-height: 14px;
-              font-weight: 400px;
+              font-weight: 400;
+              padding: 26px 0px 0px 12px;
               letter-spacing: .050;
               cursor: pointer;
               transition: all .2s ease-in-out;
@@ -375,9 +377,7 @@
                 padding-left: 20px;
               }
               li {
-                font-size: 20px;
-                line-height: 30px;
-                padding-bottom: 40px;
+                padding-bottom: 22px;
               }
               blockquote {
                 font-size: 25px;
@@ -387,7 +387,7 @@
                 padding-left: 20px;
               }
               p {
-                margin-bottom: 45px;
+                margin-bottom: 22px;
               }
               .read-more {
                 font-family: $body_font;
@@ -402,7 +402,7 @@
           border-bottom: none;
         }
       }
-      .news-item-details-relative {
+      .news-item-details-related {
         border-top: solid 10px $main-black;
         margin: 0px 8px 0px 4px;
         a {
@@ -490,9 +490,10 @@
             .item-date {
               color: #666666;
               font-size: 12px;
-              padding-top: 2px;
-              line-height: 1.25;
+              line-height: 14px;
+              font-weight: 400;
               letter-spacing: .050;
+              padding-top: 2px;
               cursor: pointer;
               transition: all .2s ease-in-out;
               -webkit-transition: all .2s ease-in-out;

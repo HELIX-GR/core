@@ -71,7 +71,7 @@ class Menu extends React.Component {
 
         <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])} activeClassName="selected">
           <h4 className="about-title" >
-            Acknowledge Helix
+            Acknowledge HELIX
           </h4>
         </NavLink>
 

@@ -22,6 +22,10 @@ class Header extends React.Component {
     this.changeLocale = this.changeLocale.bind(this);
   }
 
+  static contextTypes = {
+    intl: PropTypes.object,
+  }
+
   static propTypes = {
     changeLocale: PropTypes.func.isRequired,
     locale: PropTypes.string.isRequired,
@@ -68,13 +72,14 @@ class Header extends React.Component {
   render() {
     const { data: { host: dataHost } } = this.props.config;
     const authenticated = (this.props.profile != null);
+    const _t = this.context.intl.formatMessage;
 
     return (
       <header className="header">
 
         <div className="logo-area">
           <NavLink to={this.logoLink}>
-            <img className="logo-image" src={this.logoImage} alt="Helix" />
+            <img className="logo-image" src={this.logoImage} alt="HELIX" />
           </NavLink>
         </div>
 
@@ -84,41 +89,43 @@ class Header extends React.Component {
             <ul className="menu-items">
               <li id="menu-item-data" className="menu-item domain-item">
                 <a href={dataHost}>
-                  Data
+                  {_t({ id: 'header.menu.data.title' })}
                 </a>
               </li>
 
               <li id="menu-item-pubs" className="menu-item domain-item">
-                <NavLink to={StaticRoutes.PUBS} activeClassName="active-link">Pubs</NavLink>
+                <NavLink to={StaticRoutes.PUBS} activeClassName="active-link">
+                  {_t({ id: 'header.menu.pubs.title' })}
+                </NavLink>
               </li>
 
               <li id="menu-item-lab" className="menu-item domain-item">
                 <a href={ExternalRoutes.Lab}>
-                  Lab
+                  {_t({ id: 'header.menu.lab.title' })}
                 </a>
               </li>
 
               <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
-                <NavLink to={StaticRoutes.PROJECT} activeClassName="active-link" strict={false}>About</NavLink>
+                <NavLink to={StaticRoutes.PROJECT} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.project.title' })}</NavLink>
                 <ul className="sub-menu">
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>What is HELIX?</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])}>Services</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>FAQ</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])}>Publish Data</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])}>Software</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])}>The project</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])}>Media</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])}>Acknowledge Helix</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>Contact</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>Terms of use</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>{_t({ id: 'header.menu.project.items.what-is-helix' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])}>{_t({ id: 'header.menu.project.items.services' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>{_t({ id: 'header.menu.project.items.faq' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])}>{_t({ id: 'header.menu.project.items.publish-data' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])}>{_t({ id: 'header.menu.project.items.software' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])}>{_t({ id: 'header.menu.project.items.the-project' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])}>{_t({ id: 'header.menu.project.items.media' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])}>{_t({ id: 'header.menu.project.items.acknowledge-helix' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>{_t({ id: 'header.menu.project.items.contact' })}</NavLink></li>
+                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>{_t({ id: 'header.menu.project.items.terms-of-use' })}</NavLink></li>
                 </ul>
               </li>
 
               <li id="menu-item-news" className="menu-item aux-item has-sub-menu">
-                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">News</NavLink>
+                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">{_t({ id: 'header.menu.news.title' })}</NavLink>
                 <ul className="sub-menu">
-                  <li><NavLink to={StaticRoutes.NEWS}>News</NavLink></li>
-                  <li><a href="#">Events</a></li>
+                  <li><NavLink to={StaticRoutes.NEWS}>{_t({ id: 'header.menu.news.items.news' })}</NavLink></li>
+                  <li><a href="#">{_t({ id: 'header.menu.news.items.events' })}</a></li>
                 </ul>
               </li>
 
@@ -156,12 +163,12 @@ class Header extends React.Component {
                     </a>
                     <ul className="sub-menu">
                       {authenticated &&
-                        <li><a href="#">Signed in as {this.props.profile.username}</a></li>
+                        <li><a href="#">{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.username })}</a></li>
                       }
-                      <li><a href="#">Account</a></li>
-                      <li><a href="#">Help</a></li>
-                      <li><a href="#">Settings</a></li>
-                      <li><a href="#" onClick={() => this.props.logout()}>Log out</a></li>
+                      <li><a href="#">{_t({ id: 'header.menu.login.items.account' })}</a></li>
+                      <li><a href="#">{_t({ id: 'header.menu.login.items.help' })}</a></li>
+                      <li><a href="#">{_t({ id: 'header.menu.login.items.settings' })}</a></li>
+                      <li><a href="#" onClick={() => this.props.logout()}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
                     </ul>
                   </li>
                 </ul>
