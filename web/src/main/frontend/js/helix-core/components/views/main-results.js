@@ -29,6 +29,7 @@ import {
 } from '../../model';
 
 import {
+  Checkbox,
   Pill,
 } from '../helpers';
 
@@ -41,6 +42,8 @@ import {
 } from './main-results-parts';
 
 const MIN_FACET_VALUES = 3;
+const MAX_TITLE_LENGTH = 77;
+const MAX_NOTES_LENGTH = 192;
 
 class MainResults extends React.Component {
 
@@ -135,38 +138,33 @@ class MainResults extends React.Component {
     }
 
     return (
-      <div className={`${key} param-box`}>
+      <div className={`${key} param-box ${showAll ? '' : 'less'}`}>
         <h5 className="title">{title}</h5>
-
-        <div className="switches">
+        <div className={`switches ${showAll ? 'more' : 'less'}`}>
           {
             items.slice(0, size).map((value, index) => {
               const resolvedValue = valueProperty ? value[valueProperty] : value;
               const checked = !!facets[key].find(value => value === resolvedValue);
 
               return (
-                <label htmlFor={`switch-${prefix}-${index}`} key={`switch-${prefix}-${index}`}>
-                  <input
-                    type="checkbox"
-                    id={`switch-${prefix}-${index}`}
-                    name={`switch-${prefix}-${index}`}
-                    value={resolvedValue}
-                    onChange={() => { this.onFacetChanged(key, resolvedValue); }}
-                    checked={checked}
-                  />
-                  {textProperty ? value[textProperty] : value}
-                </label>
+                <Checkbox
+                  key={`switch-${prefix}-${index}`}
+                  id={`switch-${prefix}-${index}`}
+                  name={`switch-${prefix}-${index}`}
+                  text={textProperty ? value[textProperty] : value}
+                  value={checked}
+                  readOnly={false}
+                  onChange={() => { this.onFacetChanged(key, resolvedValue); }}
+                />
               );
             })
           }
-
-          {items.length > minOptions &&
-            <div className="more-link">
-              <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? "View Less" : "View More"}</a>
-            </div>
-          }
         </div>
-
+        {items.length > minOptions &&
+          <div className="more-link">
+            <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? "View Less" : "View More"}</a>
+          </div>
+        }
       </div>
     );
   }
@@ -189,23 +187,58 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
+        <div className="btn-favorite">
+          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
+            <img src="/images/png/favorite.png" />
+          </a>
+        </div>
         <h3 className="title">
           <a href={`${host}/dataset/${r.id}`} target="_blank">
-            {r.title}
+            {r.title.length > MAX_TITLE_LENGTH ? `${r.title.substring(0, MAX_TITLE_LENGTH)} ...` : r.title}
           </a>
           <div className="pill data ml-1">
             DATA
           </div>
         </h3>
+        <div className="notes">
+          {r.notes.length > MAX_NOTES_LENGTH ? `${r.notes.substring(0, MAX_NOTES_LENGTH)} ...` : r.notes}
+        </div>
         <div className="service">
           <a href="#">{r.organization.title}</a>
         </div>
 
         <div className="tag-list">
+          {r.dataset_category &&
+            r.dataset_category.map(category => (
+              <a
+                key={category}
+                href=''
+                onClick={(e) => e.preventDefault()}
+                className="tag-box tag-box-category"
+                target="blank"
+              >
+                <div>
+                  {category}
+                </div>
+              </a>
+            ))
+          }
+          {r.isopen &&
+            <a
+              href=''
+              onClick={(e) => e.preventDefault()}
+              className="tag-box tag-box-other"
+              target="blank"
+            >
+              <div>
+                OPEN
+              </div>
+            </a>
+          }
           {formats.length !== 0 &&
-            formats.filter(format => !!format).map(format => {
+            formats.filter(format => !!format).map((format, index) => {
               return (
-                <a href="#" className="tag-box" key={format}>
+                <a href="#" className={`tag-box ${index === 0 ? 'first-tag' : ''}`} key={format}>
                   <div>
                     {format}
                   </div>
@@ -249,14 +282,22 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
+        <div className="btn-favorite">
+          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
+            <img src="/images/png/favorite.png" />
+          </a>
+        </div>
         <h3 className="title">
           <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
-            {p.title}
+            {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
           </a>
           <div className="pill pubs ml-1">
             PUBS
           </div>
         </h3>
+        <div className="notes">
+          {p.description.length > MAX_NOTES_LENGTH ? `${p.description.substring(0, MAX_NOTES_LENGTH)} ...` : p.description}
+        </div>
         {p.publisher &&
           <div className="service">
             <a href="">{p.publisher}</a>
@@ -297,6 +338,11 @@ class MainResults extends React.Component {
       <div className="result-item lab" key={n.id} >
         <div className="date-of-entry">
           {date}
+        </div>
+        <div className="btn-favorite">
+          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
+            <img src="/images/png/favorite.png" />
+          </a>
         </div>
         <h3 className="title">
           <a href={`${host}/dataset/${n.id}`} target="_blank">
@@ -464,17 +510,26 @@ class MainResults extends React.Component {
                 </div>
               </div>
 
-              <LocationFilter className="d-none" />
+              <LocationFilter className="" />
 
-              {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
+              <div className="fields">
 
-              {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
-
-              {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
-
-              {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
-
-              {this.renderParameters(EnumCkanFacet.License, 'LICENSES', 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
+                <div className="fields-group">
+                  {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
+                </div>
+                <div className="fields-group">
+                  {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
+                </div>
+                <div className="fields-group">
+                  {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
+                </div>
+                <div className="fields-group">
+                  {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
+                </div>
+                <div className="fields-group">
+                  {this.renderParameters(EnumCkanFacet.License, 'LICENSES', 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
+                </div>
+              </div>
 
             </section>
 
@@ -489,7 +544,7 @@ class MainResults extends React.Component {
               />
 
               <div className="main-results-border-bottom">
-                <label className="order-by d-none" htmlFor="order-by">Sort by
+                <label className="order-by " htmlFor="order-by">Order by
                   <select
                     name="order-by"
                     id="order-by"

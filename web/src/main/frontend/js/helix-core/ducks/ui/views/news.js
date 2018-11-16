@@ -238,7 +238,7 @@ export const getPost = (id) => (dispatch, getState) => {
     });
 };
 
-export const getRelativePosts = (count) => (dispatch, getState) => {
+export const getRelatedPosts = (count) => (dispatch, getState) => {
   const {
     ui: { news: { current: post } },
     config: { wordPress: { endpoint: host } },

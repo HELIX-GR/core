@@ -114,6 +114,11 @@ class PublicationsResults extends React.Component {
           <div className="date-of-entry">
             {date}
           </div>
+          <div className="btn-favorite">
+            <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
+              <img src="/images/png/favorite.png" />
+            </a>
+          </div>
           <h3 className="title">
             <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
               {p.title}
@@ -214,7 +219,7 @@ class PublicationsResults extends React.Component {
                 </div>
               </div>
 
-              <LocationFilter className="d-none" />
+              <LocationFilter className="" />
 
             </section>
 

@@ -40,7 +40,11 @@ class Page extends React.Component {
     if (locale !== 'en-GB') {
       name = `${name}-${locale.toLowerCase()}`;
     }
-    this.props.getPage(name);
+    this.props.getPage(name).then(() => this.scrollToTop());
+  }
+
+  scrollToTop() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
   render() {

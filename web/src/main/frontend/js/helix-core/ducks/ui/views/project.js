@@ -79,7 +79,7 @@ export const getPage = (name) => (dispatch, getState) => {
   // Check configuration
   if (!host) {
     dispatch(getPageNotFound());
-    return null;
+    return Promise.resolve(null);
   }
 
   // Refresh cache only after 30 minutes since the last update
@@ -90,7 +90,7 @@ export const getPage = (name) => (dispatch, getState) => {
     const interval = moment.duration(now.diff(cachedPage.lastUpdate)).asMinutes();
     if (interval < 30) {
       dispatch(getPageComplete(cachedPage.page));
-      return cachedPage.page;
+      return Promise.resolve(cachedPage.page);
     }
   }
 

@@ -19,7 +19,7 @@ import {
 
 import {
   getPost,
-  getRelativePosts,
+  getRelatedPosts,
 } from '../../ducks/ui/views/news';
 
 import {
@@ -63,7 +63,9 @@ class NewsDetails extends React.Component {
   }
 
   getPost(id) {
-    this.props.getPost(id).then(() => this.props.getRelativePosts(3));
+    this.props.getPost(id)
+      .then(() => this.props.getRelatedPosts(3))
+      .then(() => this.scrollToTop());
   }
 
   getPostFirstCategory(post) {
@@ -89,6 +91,10 @@ class NewsDetails extends React.Component {
     }
 
     return true;
+  }
+
+  scrollToTop() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
   render() {
@@ -131,7 +137,7 @@ class NewsDetails extends React.Component {
 
                 <div className="col-sm-8">
                   <div className="news-item-details-related">
-                    {this.renderRelativePosts(relatedPosts)}
+                    {this.renderRelatedPosts(relatedPosts)}
                   </div>
                 </div>
 
@@ -171,7 +177,7 @@ class NewsDetails extends React.Component {
     );
   }
 
-  renderRelativePosts(posts) {
+  renderRelatedPosts(posts) {
     return posts.map((p, index, posts) => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
@@ -232,7 +238,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getPost,
-  getRelativePosts,
+  getRelatedPosts,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

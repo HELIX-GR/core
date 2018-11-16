@@ -45,6 +45,10 @@ public class Package {
     private String                           revisionId;
     @JsonProperty("identifier")
     private List<String>                     identifier;
+    @JsonProperty("dataset_category")
+    private List<String>                     categories;
+    @JsonProperty("isopen")
+    private boolean                          oepn;
 
     public String getCreatorUserId() {
         return this.creatorUserId;
@@ -196,6 +200,22 @@ public class Package {
 
     public void setIdentifier(List<String> identifier) {
         this.identifier = identifier;
+    }
+
+    public List<String> getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public boolean isOepn() {
+        return this.oepn;
+    }
+
+    public void setOepn(boolean oepn) {
+        this.oepn = oepn;
     }
 
 }
