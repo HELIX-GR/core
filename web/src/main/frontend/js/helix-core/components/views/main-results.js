@@ -35,11 +35,8 @@ import {
 
 import {
   LocationFilter,
-} from './shared-parts';
-
-import {
   Pagination,
-} from './main-results-parts';
+} from './shared-parts';
 
 const MIN_FACET_VALUES = 3;
 const MAX_TITLE_LENGTH = 77;
@@ -432,6 +429,12 @@ class MainResults extends React.Component {
     const rowCount = datasets.count + publications.count + notebooks.count;
     const pageCount = Math.ceil(rowCount / pageSize);
 
+    const catalogNames = [
+      pills.data ? _t({ id: 'results.main.search.placeholder.data' }) : null,
+      pills.pubs ? _t({ id: 'results.main.search.placeholder.pubs' }) : null,
+      pills.lab ? _t({ id: 'results.main.search.placeholder.lab' }) : null,
+    ].filter(text => text).join(', ')
+
     return (
       <div className="results-main">
         <section className="main-results-page-content">
@@ -450,7 +453,7 @@ class MainResults extends React.Component {
                       className="landing-search-text"
                       disabled={!this.isEnabled}
                       name="landing-search-text"
-                      placeholder={_t({ id: 'search.placeholder' })}
+                      placeholder={_t({ id: 'results.main.search.placeholder.prefix' }, { catalogs: catalogNames })}
                       value={text}
                       onChange={(e) => this.onTextChanged(e.target.value)}
                       ref={this.textInput}
@@ -501,7 +504,7 @@ class MainResults extends React.Component {
               <div className="main-results-advanced-search">
 
                 <h4 className="header">
-                  Σύνθετη Αναζήτηση
+                  {_t({ id: 'results.shared.search.advanced-search' })}
                 </h4>
 
 
@@ -515,19 +518,19 @@ class MainResults extends React.Component {
               <div className="fields">
 
                 <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Organization, 'ORGANIZATIONS', 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
+                  {this.renderParameters(EnumCkanFacet.Organization, _t({ id: 'advanced-search.filters.ckan.organizations' }), 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
                 </div>
                 <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Group, 'TOPICS', 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
+                  {this.renderParameters(EnumCkanFacet.Group, _t({ id: 'advanced-search.filters.ckan.topics' }), 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
                 </div>
                 <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Tag, 'TAGS', 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
+                  {this.renderParameters(EnumCkanFacet.Tag, _t({ id: 'advanced-search.filters.ckan.tags' }), 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
                 </div>
                 <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Format, 'FORMATS', null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
+                  {this.renderParameters(EnumCkanFacet.Format, _t({ id: 'advanced-search.filters.ckan.formats' }), null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
                 </div>
                 <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.License, 'LICENSES', 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
+                  {this.renderParameters(EnumCkanFacet.License, _t({ id: 'advanced-search.filters.ckan.licenses' }), 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
                 </div>
               </div>
 
@@ -544,7 +547,7 @@ class MainResults extends React.Component {
               />
 
               <div className="main-results-border-bottom">
-                <label className="order-by " htmlFor="order-by">Order by
+                <label className="order-by " htmlFor="order-by">{_t({ id: 'results.shared.search.order-by.label' })}
                   <select
                     name="order-by"
                     id="order-by"
@@ -552,19 +555,19 @@ class MainResults extends React.Component {
                     onChange={(e) => { console.log(e.target.value); }}
                   >
                     <option value="1">
-                      Relevance
+                      {_t({ id: 'results.shared.search.order-by.options.relevance' })}
                     </option>
                   </select>
                 </label>
                 <div className="main-results-result-count">
                   {!!pills.data &&
-                    <span>{datasets.count} datasets found.</span>
+                    <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
                   }
                   {!!pills.pubs &&
-                    <span>{publications.count} publications found.</span>
+                    <span className="pl-2">{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
                   }
                   {!!pills.lab &&
-                    <span>{notebooks.count} notebooks found.</span>
+                    <span className="pl-2">{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
                   }
                 </div>
               </div>

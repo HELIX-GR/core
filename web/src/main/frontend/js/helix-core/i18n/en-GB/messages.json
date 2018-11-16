@@ -44,6 +44,10 @@
       }
     }
   },
+  "breadcrumb": {
+    "results": "RESULTS",
+    "all": "ALL"
+  },
   "footer": {
     "columns": {
       "about": {
@@ -213,10 +217,40 @@
     "read-more": "Read more",
     "related-news": "Related News"
   },
-  "search": {
-    "placeholder": "Search data, publications, research tools",
+  "results": {
+    "shared": {
+      "search": {
+        "advanced-search": "Advanced Search",
+        "order-by": {
+          "label": "Order by",
+          "options": {
+            "relevance": "Relevance"
+          }
+        },
+        "location": {
+          "title": "LOCATION"
+        }
+      },
+      "count": {
+        "data": "{count} datasets found",
+        "pubs": "{count} publications found",
+        "lab": "{count} notebooks found"
+      }
+    },
+    "main": {
+      "search": {
+        "placeholder": {
+          "prefix": "Search {catalogs}",
+          "data": "data",
+          "pubs": "publications",
+          "lab": "research tools"
+        }
+      }
+    },
     "pubs": {
-      "placeholder": "Search publications"
+      "search": {
+        "placeholder": "Search publications"
+      }
     }
   }
 }

@@ -26,11 +26,8 @@ import {
 
 import {
   LocationFilter,
-} from './shared-parts';
-
-import {
   Pagination,
-} from './publications-results-parts';
+} from './shared-parts';
 
 class PublicationsResults extends React.Component {
 
@@ -174,24 +171,11 @@ class PublicationsResults extends React.Component {
                       autoComplete="off"
                       className="landing-search-text"
                       name="landing-search-text" value=""
-                      placeholder={_t({ id: 'search.placeholder' })}
+                      placeholder={_t({ id: 'results.pubs.search.placeholder' })}
                       value={text}
                       onChange={(e) => this.onTextChanged(e.target.value)}
                       ref={this.textInput}
                     />
-
-                    <div className="domain-pills">
-                      <div className="filter-pill pill-data selected">
-                        DATA
-                      </div>
-                      <div className="filter-pill pill-pubs">
-                        PUBS
-                      </div>
-                      <div className="filter-pill pill-lab">
-                        LAB
-                      </div>
-
-                    </div>
                   </div>
 
                   <button
@@ -210,7 +194,7 @@ class PublicationsResults extends React.Component {
               <div className="main-results-advanced-search">
 
                 <h4 className="header">
-                  Σύνθετη Αναζήτηση
+                  {_t({ id: 'results.shared.search.advanced-search' })}
                 </h4>
 
 
@@ -233,7 +217,7 @@ class PublicationsResults extends React.Component {
               />
 
               <div className="main-results-border-bottom">
-                <label className="order-by" htmlFor="order-by">Ταξινόμηση κατά
+                <label className="order-by" htmlFor="order-by">{_t({ id: 'results.shared.search.order-by.label' })}
                   <select
                     name="order-by"
                     id="order-by"
@@ -241,12 +225,12 @@ class PublicationsResults extends React.Component {
                     onChange={(e) => { console.log(e.target.value); }}
                   >
                     <option value="1">
-                      Σχετικότητα
+                      {_t({ id: 'results.shared.search.order-by.options.relevance' })}
                     </option>
                   </select>
                 </label>
                 <div className="main-results-result-count">
-                  Βρέθηκαν {results.count} δημοσιεύσεις
+                  {_t({ id: 'results.shared.count.pubs' }, { count: results.count })}
                 </div>
               </div>
 

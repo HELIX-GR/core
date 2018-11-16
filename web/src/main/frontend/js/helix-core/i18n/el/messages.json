@@ -44,6 +44,10 @@
       }
     }
   },
+  "breadcrumb": {
+    "results": "RESULTS",
+    "all": "ALL"
+  },
   "footer": {
     "columns": {
       "about": {
@@ -213,10 +217,40 @@
     "read-more": "Read more",
     "related-news": "Related News"
   },
-  "search": {
-    "placeholder": "Search data, publications, research tools",
+  "results": {
+    "shared": {
+      "search": {
+        "advanced-search": "Σύνθετη Αναζήτηση",
+        "order-by": {
+          "label": "Ταξινόμηση κατά",
+          "options": {
+            "relevance": "Σχετικότητα"
+          }
+        },
+        "location": {
+          "title": "Τοποθεσία"
+        }
+      },
+      "count": {
+        "data": "Βρέθηκαν {count} σύνολα δεδομένων",
+        "pubs": "Βρέθηκαν {count} δημοσιεύσεις",
+        "lab": " Βρέθηκαν {count} notebooks"
+      }
+    },
+    "main": {
+      "search": {
+        "placeholder": {
+          "prefix": "Search {catalogs}",
+          "data": "data",
+          "pubs": "publications",
+          "lab": "research tools"
+        }
+      }
+    },
     "pubs": {
-      "placeholder": "Search publications"
+      "search": {
+        "placeholder": "Search publications"
+      }
     }
   }
 }

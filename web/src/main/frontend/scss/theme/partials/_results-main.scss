@@ -84,17 +84,15 @@
         max-width: 1024px;
         margin: auto;
         padding-top: 200px;
-        min-height: 1550px;
+        display: flex;
+        justify-content: space-between;
         section.results-main-sidebar {
           padding: 0;
           width: 270px;
           max-width: 320px;
           position: relative;
-          top: 0;
-          left: 0;
           margin-top: 2px;
           margin-bottom: 30px;
-          float: left;
           z-index: 2;
           .search-form-wrapper {
             position: relative;
@@ -348,11 +346,7 @@
           }
         }
         section.results-main-result-set {
-          position: relative;
-          top: 0;
-          right: 0;
-          padding-left: 319px;
-          width: 100%;
+          width: 705px;
           padding-bottom: 70px;
           .breadcrumbs-pagination {
             display: block;
@@ -416,6 +410,20 @@
               position: absolute;
               top: 0;
               right: 0;
+              ul {
+                li {
+                  display: inline;
+                  &.current-item {
+                    a {
+                      position: relative;
+                      top: 1px;
+                      font-weight: 500;
+                      font-size: 17px;
+                      text-decoration: none;
+                    }
+                  }
+                }
+              }
               .pagination-item {
                 margin: 0 10px;
                 font-weight: 300;
@@ -424,25 +432,13 @@
                 letter-spacing: .025em;
                 line-height: 1.2;
                 opacity: 1;
+                cursor: pointer;
                 transition: all .2s ease-in-out;
                 -webkit-transition: all .2s ease-in-out;
                 -moz-transition: all .2s ease-in-out;
                 -o-transition: all .1s ease-in-out;
                 &:hover {
                   opacity: .5;
-                }
-                &:first-child {
-                  margin-left: 0;
-                }
-                &:last-child {
-                  margin-right: 0;
-                }
-                &.current-item {
-                  position: relative;
-                  top: 1px;
-                  font-weight: 500;
-                  font-size: 17px;
-                  text-decoration: none;
                 }
               }
             }
