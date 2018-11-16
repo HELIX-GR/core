@@ -46,7 +46,9 @@
   },
   "breadcrumb": {
     "results": "RESULTS",
-    "all": "ALL"
+    "all": "ALL",
+    "helix-team": "HELIX Team",
+    "news": "News"
   },
   "footer": {
     "columns": {

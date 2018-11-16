@@ -44,10 +44,10 @@ class NewsDetails extends React.Component {
     intl: PropTypes.object,
   }
 
-  get title() {
+  title(_t) {
     const { current: post } = this.props.news;
     const parts = [
-      'News',
+      _t({ id: 'breadcrumb.news' }),
       moment(post.modified).year().toString(),
       post.title.rendered,
     ];
@@ -115,13 +115,13 @@ class NewsDetails extends React.Component {
               <div className="row justify-content-center">
                 <div className="col-sm-8">
                   <h4 className="news-details-header">
-                    {this.title}
+                    {this.title(_t)}
                   </h4>
                 </div>
 
                 <div className="col-sm-8">
                   <div className="news-item-details">
-                    {this.renderPost(post)}
+                    {this.renderPost(post, _t)}
                   </div>
                 </div>
 
@@ -151,7 +151,7 @@ class NewsDetails extends React.Component {
     );
   }
 
-  renderPost(p) {
+  renderPost(p, _t) {
     const date = moment(p.modified).format("DD MMM YYYY");
 
     return (
@@ -166,7 +166,7 @@ class NewsDetails extends React.Component {
                 </h1>
               </a>
               <div className="item-date">
-                {date} \\\ HELIX Team
+                {date} \\\ {_t({ id: 'breadcrumb.helix-team' })}
               </div>
               <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.content.rendered }}>
               </div>
