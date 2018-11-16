@@ -25,7 +25,12 @@ class PubsAdvancedOptions extends React.Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
+    readOnly: PropTypes.bool.isRequired,
     toggleProvider: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    readOnly: false,
   }
 
   renderProviders() {
@@ -47,7 +52,7 @@ class PubsAdvancedOptions extends React.Component {
                   name={`switch-provider-${index}`}
                   text={provider.name}
                   value={checked}
-                  readOnly={false}
+                  readOnly={this.props.readOnly}
                   onChange={() => { this.props.toggleProvider(provider.id); }}
                 />
               );
@@ -75,6 +80,7 @@ class PubsAdvancedOptions extends React.Component {
                 onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
                 placeholder={_t({ id: 'advanced-search.placeholder.author' })}
                 value={filters[EnumOpenaireFilter.Authors]}
+                readOnly={this.props.readOnly}
               />
               <FormText color="muted">{_t({ id: 'advanced-search.help.author' })}</FormText>
             </FormGroup>
@@ -87,6 +93,7 @@ class PubsAdvancedOptions extends React.Component {
                 name={EnumOpenaireFilter.FromDateAccepted}
                 onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date)}
                 value={filters[EnumOpenaireFilter.FromDateAccepted] || null}
+                readOnly={this.props.readOnly}
               />
               <FormText color="muted">{_t({ id: 'advanced-search.help.acceptance-from' })}</FormText>
             </FormGroup>
@@ -99,6 +106,7 @@ class PubsAdvancedOptions extends React.Component {
                 name={EnumOpenaireFilter.ToDateAccepted}
                 onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date)}
                 value={filters[EnumOpenaireFilter.ToDateAccepted] || null}
+                readOnly={this.props.readOnly}
               />
               <FormText color="muted">{_t({ id: 'advanced-search.help.acceptance-to' })}</FormText>
             </FormGroup>

@@ -21,8 +21,13 @@
 }
 
 .react-datepicker__input-container {
+  display: block;
   .form-control:focus {
     border-color: $gray-400;
     box-shadow: none;
   }
+}
+
+.react-datepicker-wrapper {
+  display: block;
 }

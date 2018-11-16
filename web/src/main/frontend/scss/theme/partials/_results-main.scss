@@ -255,7 +255,6 @@
             }
             &.filters {
               max-height: unset;
-              padding: 0px 10px;
               overflow-y: unset;
             }
             &.less {
@@ -269,6 +268,7 @@
               line-height: 20px;
               font-weight: 300;
               color: #707070;
+              background: none;
             }
             #react-select-2-input {
               font-size: 17px !important;
@@ -342,6 +342,9 @@
           .location.param-box {
             .title {
               margin-bottom: 0px;
+            }
+            img.temp-map {
+              width: 100%;
             }
           }
         }

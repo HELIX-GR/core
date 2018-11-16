@@ -14,9 +14,11 @@ import {
 
 import {
   search as searchAll,
+  setOpenaireFilter,
   setText,
   setResultVisibility,
   toggleAdvanced,
+  toggleOpenaireProvider,
 } from '../../ducks/ui/views/pubs';
 
 import {
@@ -27,12 +29,15 @@ import {
 import {
   LocationFilter,
   Pagination,
+  PubsAdvancedOptions,
 } from './shared-parts';
 
 class PublicationsResults extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.onProviderToggle = this.onProviderToggle.bind(this);
 
     this.textInput = React.createRef();
   }
@@ -55,6 +60,12 @@ class PublicationsResults extends React.Component {
 
   onTextChanged(value) {
     this.props.setText(value);
+  }
+
+  onProviderToggle(id) {
+    this.props.toggleOpenaireProvider(id);
+    this.search();
+
   }
 
   onSearch(e) {
@@ -205,6 +216,14 @@ class PublicationsResults extends React.Component {
 
               <LocationFilter className="" />
 
+              <PubsAdvancedOptions
+                filters={this.props.search.openaire}
+                metadata={this.props.config.openaire}
+                setOpenaireFilter={this.props.setOpenaireFilter}
+                toggleProvider={this.onProviderToggle}
+                readOnly={loading}
+              />
+
             </section>
 
             <section className="results-main-result-set">
@@ -266,9 +285,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   searchAll,
+  setOpenaireFilter,
   setText,
   setResultVisibility,
   toggleAdvanced,
+  toggleOpenaireProvider,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

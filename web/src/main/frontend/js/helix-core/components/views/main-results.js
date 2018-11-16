@@ -433,7 +433,7 @@ class MainResults extends React.Component {
       pills.data ? _t({ id: 'results.main.search.placeholder.data' }) : null,
       pills.pubs ? _t({ id: 'results.main.search.placeholder.pubs' }) : null,
       pills.lab ? _t({ id: 'results.main.search.placeholder.lab' }) : null,
-    ].filter(text => text).join(', ')
+    ].filter(text => text).join(', ');
 
     return (
       <div className="results-main">

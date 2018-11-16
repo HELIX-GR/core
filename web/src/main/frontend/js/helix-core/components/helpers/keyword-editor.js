@@ -61,11 +61,13 @@ export default class KeywordEditor extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    readOnly: PropTypes.bool.isRequired,
     value: PropTypes.arrayOf(PropTypes.string),
   }
 
   static defaultProps = {
     placeholder: '',
+    readOnly: false,
     value: [],
   }
 
@@ -122,6 +124,7 @@ export default class KeywordEditor extends React.Component {
         onInputChange={(e) => this.onInputChange(e)}
         onKeyDown={(e) => this.onKeyDown(e)}
         placeholder={this.props.placeholder}
+        isDisabled={this.props.readOnly}
         styles={customStyles}
         value={value.map(v => createOption(v))}
       />
