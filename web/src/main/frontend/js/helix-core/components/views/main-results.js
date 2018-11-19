@@ -14,6 +14,10 @@ import {
 } from 'react-intl';
 
 import {
+  Link,
+} from 'react-router-dom';
+
+import {
   search as searchAll,
   setText,
   toggleAdvanced,
@@ -23,6 +27,8 @@ import {
 } from '../../ducks/ui/views/main';
 
 import {
+  buildPath,
+  DynamicRoutes,
   EnumCatalog,
   EnumCkanFacet,
   EnumMimeType,
@@ -190,9 +196,9 @@ class MainResults extends React.Component {
           </a>
         </div>
         <h3 className="title">
-          <a href={`${host}/dataset/${r.id}`} target="_blank">
+          <Link to={buildPath(DynamicRoutes.DATASET_PAGE, [r.id])}>
             {r.title.length > MAX_TITLE_LENGTH ? `${r.title.substring(0, MAX_TITLE_LENGTH)} ...` : r.title}
-          </a>
+          </Link>
           <div className="pill data ml-1">
             DATA
           </div>
@@ -285,9 +291,9 @@ class MainResults extends React.Component {
           </a>
         </div>
         <h3 className="title">
-          <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
+          <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
             {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
-          </a>
+          </Link>
           <div className="pill pubs ml-1">
             PUBS
           </div>
@@ -342,13 +348,16 @@ class MainResults extends React.Component {
           </a>
         </div>
         <h3 className="title">
-          <a href={`${host}/dataset/${n.id}`} target="_blank">
-            {n.title}
-          </a>
+          <Link to={buildPath(DynamicRoutes.NOTEBOOK_PAGE, [n.id])}>
+            {n.title.length > MAX_TITLE_LENGTH ? `${n.title.substring(0, MAX_TITLE_LENGTH)} ...` : n.title}
+          </Link>
           <div className="pill lab ml-1">
             LAB
           </div>
         </h3>
+        <div className="notes">
+          {n.notes.length > MAX_NOTES_LENGTH ? `${n.notes.substring(0, MAX_NOTES_LENGTH)} ...` : n.notes}
+        </div>
         <div className="service">
           <a href="#">{n.organization.title}</a>
         </div>
@@ -598,7 +607,6 @@ class MainResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
-  locale: state.i18n.locale,
   search: state.ui.main,
 });
 

@@ -364,6 +364,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
     };
   }
 
+  dispatch(setText(term));
   dispatch(catalogSearchBegin(term, advanced));
   return catalogService.search(token, { queries })
     .then((data) => {

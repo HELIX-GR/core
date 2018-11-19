@@ -30,6 +30,15 @@ class Footer extends React.Component {
       if (location.pathname.startsWith('/pubs')) {
         return '/images/svg/Helix-logo-White-on-Pink.svg';
       }
+      if (location.pathname.startsWith('/publications')) {
+        return '/images/svg/Helix-logo-White-on-Pink.svg';
+      }
+      if (location.pathname.startsWith('/datasets')) {
+        return '/images/svg/Helix-logo-White-on-Blue.svg';
+      }
+      if (location.pathname.startsWith('/notebooks')) {
+        return '/images/svg/Helix-logo-White-on-Purple.svg';
+      }
     }
     return '/images/svg/Helix-logo-White-on-Black.svg';
   }
@@ -40,6 +49,15 @@ class Footer extends React.Component {
     if (location.pathname) {
       if (location.pathname.startsWith('/pubs')) {
         return 'pubs-footer';
+      }
+      if (location.pathname.startsWith('/publications')) {
+        return 'pubs-footer';
+      }
+      if (location.pathname.startsWith('/datasets')) {
+        return 'data-footer';
+      }
+      if (location.pathname.startsWith('/notebooks')) {
+        return 'lab-footer';
       }
     }
     return "main-footer";

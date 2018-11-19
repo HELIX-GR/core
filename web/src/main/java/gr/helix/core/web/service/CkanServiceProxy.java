@@ -45,6 +45,8 @@ import gr.helix.core.web.model.ckan.Tag;;
 
 public class CkanServiceProxy {
 
+    // Documentation: http://docs.ckan.org/en/latest/api/index.html
+
     private static final Logger  logger = LoggerFactory.getLogger(CkanServiceProxy.class);
 
     private ObjectMapper         objectMapper;
@@ -74,8 +76,6 @@ public class CkanServiceProxy {
 
     public CatalogResult<Package> getPackages(CkanCatalogQuery query, boolean includeFacets) throws ApplicationException {
         try {
-            // Documentation: http://docs.ckan.org/en/latest/api/index.html
-
             // CKAN start index starts from 0
             final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
             final URIBuilder builder = new URIBuilder()
@@ -120,15 +120,40 @@ public class CkanServiceProxy {
         return null;
     }
 
+    public Package getPackage(String id) {
+        try {
+            final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
+
+            final URIBuilder builder = new URIBuilder()
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
+                .setPath(this.composePath("api/action/package_show"))
+                .addParameter("id", id);
+
+            final URI uri = builder.build();
+
+            final HttpUriRequest request = RequestBuilder.post(uri)
+                .addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .build();
+
+            try (CloseableHttpResponse response = (CloseableHttpResponse) this.httpClient.execute(request)) {
+                if (response.getStatusLine().getStatusCode() != 200) {
+                    throw ApplicationException.fromMessage("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+                }
+                return this.parsePackage(response);
+            }
+        } catch (final ApplicationException ex) {
+            throw ex;
+        } catch (final Exception ex) {
+            this.handleException(ex);
+        }
+        return null;
+    }
+
     public CkanMetadata getMetadata() {
         final CkanMetadata metadata = new CkanMetadata();
-
-        metadata.setLicenses(this.getLicenses());
-        metadata.setFormats(this.getFormats());
-        metadata.setTags(this.getTags());
-        metadata.setGroups(this.getGroups());
-        metadata.setOrganizations(this.getOrganizations());
-
 
         try {
             final EndpointConfiguration endpoint = this.ckanConfiguration.getApi();
@@ -139,7 +164,15 @@ public class CkanServiceProxy {
                 .build()
                 .toString();
             metadata.setHost(host);
+
+            metadata.setLicenses(this.getLicenses());
+            metadata.setFormats(this.getFormats());
+            metadata.setTags(this.getTags());
+            metadata.setGroups(this.getGroups());
+            metadata.setOrganizations(this.getOrganizations());
         } catch (final URISyntaxException e) {
+            // Ignore
+        } catch (final Exception e) {
             // Ignore
         }
 
@@ -341,6 +374,23 @@ public class CkanServiceProxy {
             result.setFacets(ckanResponse.getResult().getFacets());
             result.setSearchFacets(ckanResponse.getResult().getSearchFacets());
             return result;
+
+        } catch (final IOException ex) {
+            logger.error("An I/O exception has occured while reading the response content", ex);
+        }
+
+        throw ApplicationException.fromMessage("Failed to read response");
+    }
+
+    private Package parsePackage(HttpResponse response) {
+        try (InputStream contentStream = response.getEntity().getContent()) {
+            final ObjectResponse<Package> ckanResponse =
+                this.objectMapper.readValue(contentStream, new TypeReference<ObjectResponse<Package>>() { });
+
+            if(ckanResponse.isSuccess()) {
+                return ckanResponse.getResult();
+            }
+            return null;
 
         } catch (final IOException ex) {
             logger.error("An I/O exception has occured while reading the response content", ex);

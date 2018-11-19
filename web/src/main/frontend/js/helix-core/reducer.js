@@ -12,6 +12,7 @@ import {
 } from './ducks/ui/';
 
 import {
+  dataset,
   login,
   main,
   news,
@@ -24,6 +25,7 @@ export default Redux.combineReducers({
   i18n,
   meta,
   ui: Redux.combineReducers({
+    dataset,
     login,
     main,
     news,

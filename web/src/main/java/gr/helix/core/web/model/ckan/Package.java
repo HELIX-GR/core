@@ -15,8 +15,6 @@ public class Package {
     private String                           authorEmail;
     @JsonProperty("id")
     private String                           id;
-    @JsonProperty("license_title")
-    private String                           licenseTitle;
     @JsonProperty("maintainer")
     private String                           maintainer;
     @JsonProperty("maintainer_email")
@@ -48,7 +46,17 @@ public class Package {
     @JsonProperty("dataset_category")
     private List<String>                     categories;
     @JsonProperty("isopen")
-    private boolean                          oepn;
+    private boolean                          open;
+    @JsonProperty("closed_tag")
+    private List<String>                     tags;
+    @JsonProperty("license_url")
+    private String                           licenseUrl;
+    @JsonProperty("license_title")
+    private String                           licenseTitle;
+    @JsonProperty("datacite")
+    private DataCite                         datacite;
+    @JsonProperty("name")
+    private String                           name;
 
     public String getCreatorUserId() {
         return this.creatorUserId;
@@ -210,12 +218,44 @@ public class Package {
         this.categories = categories;
     }
 
-    public boolean isOepn() {
-        return this.oepn;
+    public boolean isOpen() {
+        return this.open;
     }
 
-    public void setOepn(boolean oepn) {
-        this.oepn = oepn;
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    public List<String> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public String getLicenseUrl() {
+        return this.licenseUrl;
+    }
+
+    public void setLicenseUrl(String licenseUrl) {
+        this.licenseUrl = licenseUrl;
+    }
+
+    public DataCite getDatacite() {
+        return this.datacite;
+    }
+
+    public void setDatacite(DataCite datacite) {
+        this.datacite = datacite;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

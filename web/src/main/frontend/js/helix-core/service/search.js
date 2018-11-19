@@ -1,5 +1,8 @@
 import * as actions from './api/fetch-actions';
-import { api as routes } from '../model/routes';
+import {
+  api as routes,
+  buildPath,
+} from '../model/routes';
 
 export default {
 
@@ -10,5 +13,9 @@ export default {
   search: (token, query) => {
     return actions.post(routes.SearchAll, token, query);
   },
+
+  getDataset: (token, id) => {
+    return actions.get(buildPath(routes.GetDataset, [id]), token);
+  }
 
 };

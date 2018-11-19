@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     private static final String clientRoutes[] = {
+        "/datasets/",
         "/error/",
         "/main/",
         "/news/",
+        "/notebooks/",
         "/pages/",
         "/project/",
         "/pubs/",
+        "/publications/",
     };
 
     @RequestMapping("*")
@@ -28,12 +31,15 @@ public class HomeController {
     }
 
     @RequestMapping({
+        "/datasets/**",
         "/error/**",
         "/main/**",
         "/news/**",
+        "/notebooks/**",
         "/pages/**",
         "/project/**",
         "/pubs/**",
+        "/publications/**",
     })
     public String reactRoutes(HttpSession session, HttpServletRequest request) {
         return "index";

@@ -33,13 +33,16 @@ import {
 } from './helpers';
 
 import {
+  DatasetDetails,
   Footer,
   Header,
   Main,
   MainResults,
   News,
   NewsDetails,
+  NotebookDetails,
   Project,
+  PublicationDetails,
   Publications,
   PublicationsResults,
 } from './views';
@@ -109,6 +112,15 @@ class ContentRoot extends React.Component {
       if (location.pathname.startsWith('/pubs')) {
         return 'pubs';
       }
+      if (location.pathname.startsWith('/publications')) {
+        return 'pubs';
+      }
+      if (location.pathname.startsWith('/datasets')) {
+        return 'data';
+      }
+      if (location.pathname.startsWith('/notebooks')) {
+        return 'lab';
+      }
     }
 
     return 'home';
@@ -125,7 +137,10 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
-        <Route path={DynamicRoutes.NEWS_DETAILS} component={NewsDetails} />
+        <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
+        <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
+        <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
+        <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
         {/* Static routes */}
         <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />

@@ -76,14 +76,14 @@ class News extends React.Component {
               <div className="item-date">
                 <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />
               </div>
-              <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])}>
+              <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])}>
                 <h3 className="item-title">
                   {p.title.rendered}
                 </h3>
               </NavLink>
               <div className="item-excerpt style-5">
                 <p dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}></p>
-                <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
+                <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])} className="read-more">
                   {_t({ id: 'main.news.read-more' })}
                 </NavLink>
               </div>

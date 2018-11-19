@@ -13,6 +13,10 @@ import {
 } from 'react-intl';
 
 import {
+  Link,
+} from 'react-router-dom';
+
+import {
   search as searchAll,
   setOpenaireFilter,
   setText,
@@ -22,8 +26,10 @@ import {
 } from '../../ducks/ui/views/pubs';
 
 import {
+  buildPath,
   EnumCatalog,
   EnumMimeType,
+  DynamicRoutes,
 } from '../../model';
 
 import {
@@ -31,6 +37,9 @@ import {
   Pagination,
   PubsAdvancedOptions,
 } from './shared-parts';
+
+const MAX_TITLE_LENGTH = 77;
+const MAX_NOTES_LENGTH = 192;
 
 class PublicationsResults extends React.Component {
 
@@ -128,13 +137,16 @@ class PublicationsResults extends React.Component {
             </a>
           </div>
           <h3 className="title">
-            <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
-              {p.title}
-            </a>
+            <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
+              {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
+            </Link>
             <div className="pill pubs ml-1">
               PUBS
             </div>
           </h3>
+          <div className="notes">
+            {p.description.length > MAX_NOTES_LENGTH ? `${p.description.substring(0, MAX_NOTES_LENGTH)} ...` : p.description}
+          </div>
           {p.publisher &&
             <div className="service">
               <a href="">{p.publisher}</a>

@@ -32,15 +32,21 @@ export const StaticRoutes = {
 };
 
 // Dynamic routes
-const NEWS_DETAILS = '/news/view/:id';
+const DATASET_PAGE = '/datasets/:id';
+const NEWS_PAGE = '/news/view/:id';
+const NOTEBOOK_PAGE = '/notebooks/:id';
 const PROJECT_PAGE = '/project/page/:name';
+const PUBLICATION_PAGE = '/publications/:id';
 
 /**
  * Dynamic routes
  */
 export const DynamicRoutes = {
-  NEWS_DETAILS,
+  DATASET_PAGE,
+  NEWS_PAGE,
+  NOTEBOOK_PAGE,
   PROJECT_PAGE,
+  PUBLICATION_PAGE,
 };
 
 // Routes for utility pages
@@ -75,6 +81,7 @@ export const api = {
   SearchData: '/action/data/query',
   SearchNotebooks: '/action/notebook/query',
   SearchPubs: '/action/publication/query',
+  GetDataset: '/action/dataset/:id'
 };
 
 // Default links

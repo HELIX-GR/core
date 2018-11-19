@@ -79,6 +79,10 @@ public class SearchService {
         return this.dataCkanServiceProxy.getPackages(query, false);
     }
 
+    public Package getDataset(String id) {
+        return this.dataCkanServiceProxy.getPackage(id);
+    }
+
     public CatalogResult<?> queryNotebooks(String term) {
         final CkanCatalogQuery query = new CkanCatalogQuery();
         query.setPageIndex(0);

@@ -40,6 +40,11 @@
     }
     &.results-data,
     &.data {
+      header {
+        .logo-area {
+          border-top: 15px solid $data-color;
+        }
+      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $data-color;

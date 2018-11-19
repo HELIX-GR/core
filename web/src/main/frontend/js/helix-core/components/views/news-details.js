@@ -210,7 +210,7 @@ class NewsDetails extends React.Component {
                 <div className="item-date">
                   {date}
                 </div>
-                <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])}>
+                <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])}>
                   <h3 className="item-title">
                     {p.title.rendered}
                   </h3>
@@ -218,7 +218,7 @@ class NewsDetails extends React.Component {
                 <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}>
                 </div>
                 <div>
-                  <NavLink to={buildPath(DynamicRoutes.NEWS_DETAILS, [p.id])} className="read-more">
+                  <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])} className="read-more">
                     {_t({ id: 'news.read-more' })}
                   </NavLink>
                 </div>

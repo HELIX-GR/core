@@ -254,5 +254,20 @@
         "placeholder": "Search publications"
       }
     }
-  }
+  },
+  "dataset": {
+    "publisher": "Publisher",
+    "subjects": "Subjects",
+    "license": "License",
+    "publication": "PUBLICATION: ",
+    "last-revision": "LAST REVISION: ",
+    "dataset": "Dataset",
+    "resources": "DATA AND RESOURCES",
+    "no-description": "No description",
+    "buttons": {
+      "download": "DOWNLOAD"
+    }
+  },
+  "publication": {},
+  "notebook": {}
 }

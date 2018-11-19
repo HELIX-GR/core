@@ -545,12 +545,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/",
                              // Site parts
+                             "/datasets/**",
                              "/error/**",
                              "/main/**",
                              "/news/**",
+                             "/notebooks/**",
                              "/pages/**",
                              "/project/**",
                              "/pubs/**",
+                             "/publications/**",
                              // Assets
                              "/favicon.ico",
                              "/css/**",
@@ -570,6 +573,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/action/catalog/**",
                              "/action/ckan/**",
                              "/action/configuration/**",
+                             "/action/dataset/**",
                              "/action/openaire/**")
                 .permitAll()
                 .regexMatchers(API_REG_EX)
