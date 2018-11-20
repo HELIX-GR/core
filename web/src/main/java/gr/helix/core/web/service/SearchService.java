@@ -92,6 +92,10 @@ public class SearchService {
         return this.labCkanServiceProxy.getPackages(query, false);
     }
 
+    public Package getNotebook(String id) {
+        return this.labCkanServiceProxy.getPackage(id);
+    }
+
     public CatalogResult<?> queryPublications(String term) {
         final OpenaireCatalogQuery query = new OpenaireCatalogQuery();
         query.setPageIndex(0);

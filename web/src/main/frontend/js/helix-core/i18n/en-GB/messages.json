@@ -263,11 +263,25 @@
     "last-revision": "LAST REVISION: ",
     "dataset": "Dataset",
     "resources": "DATA AND RESOURCES",
-    "no-description":"No description",
+    "no-description": "No description",
+    "open-data-license": "This dataset satisfies the Open Definition.",
     "buttons": {
       "download": "DOWNLOAD"
     }
   },
   "publication": {},
-  "notebook": {}
+  "notebook": {
+    "publisher": "Publisher",
+    "subjects": "Subjects",
+    "license": "License",
+    "publication": "PUBLICATION: ",
+    "last-revision": "LAST REVISION: ",
+    "notebook": "Notebook",
+    "resources": "DATA AND RESOURCES",
+    "no-description": "No description",
+    "open-data-license": "This notebook satisfies the Open Definition.",
+    "buttons": {
+      "download": "DOWNLOAD"
+    }
+  }
 }

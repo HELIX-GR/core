@@ -574,6 +574,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/action/ckan/**",
                              "/action/configuration/**",
                              "/action/dataset/**",
+                             "/action/notebook/**",
                              "/action/openaire/**")
                 .permitAll()
                 .regexMatchers(API_REG_EX)

@@ -81,7 +81,8 @@ export const api = {
   SearchData: '/action/data/query',
   SearchNotebooks: '/action/notebook/query',
   SearchPubs: '/action/publication/query',
-  GetDataset: '/action/dataset/:id'
+  GetDataset: '/action/dataset/:id',
+  GetNotebook: '/action/notebook/:id',
 };
 
 // Default links

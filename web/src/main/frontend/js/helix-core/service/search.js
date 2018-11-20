@@ -16,6 +16,10 @@ export default {
 
   getDataset: (token, id) => {
     return actions.get(buildPath(routes.GetDataset, [id]), token);
-  }
+  },
+
+  getNotebook: (token, id) => {
+    return actions.get(buildPath(routes.GetNotebook, [id]), token);
+  },
 
 };

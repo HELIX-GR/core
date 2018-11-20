@@ -47,6 +47,12 @@
           color: $data-color;
         }
       }
+      .resource-component {
+        a,
+        a:hover {
+          color: $data-color;
+        }
+      }
       .result-items {
         .separator {
           border-top: 1px solid $data-color;
@@ -101,6 +107,12 @@
           color: $pubs-color;
         }
       }
+      .resource-component {
+        a,
+        a:hover {
+          color: $pubs-color;
+        }
+      }
       .result-items {
         .separator {
           border-top: 1px solid $pubs-color;
@@ -150,6 +162,12 @@
       }
       .package-title {
         color: $lab-color;
+        a,
+        a:hover {
+          color: $lab-color;
+        }
+      }
+      .resource-component {
         a,
         a:hover {
           color: $lab-color;
@@ -835,6 +853,9 @@
                     margin-bottom: -1px;
                     font-weight: 500;
                   }
+                  i.fa {
+                    letter-spacing: 0.23rem;
+                  }
                 }
               }
             }
@@ -854,31 +875,33 @@
               .inline {
                 padding-left: 25px;
               }
-              .resource-component {
-                position: relative;
-                padding: 10px 0 10px 60px;
-                margin-bottom: 0;
-                border-radius: 3px;
-                max-height: 80px;
-                .format-label {
-                  background-repeat: no-repeat;
-                  background-position: 0 0;
-                  background-size: 62%;
-                  position: absolute;
-                  width: 50px;
-                  height: 42px;
-                  top: 5px;
-                  left: 5px;
-                }
-                .description {
-                  font-weight: 300;
-                  font-size: 11px;
-                  line-height: 12px;
-                  width: 60%;
-                }
-                .btn-download {
-                  float: right;
-                  display: inline;
+              .package-resource-list {
+                .resource-component {
+                  position: relative;
+                  padding: 10px 0 10px 60px;
+                  margin-bottom: 0;
+                  border-radius: 3px;
+                  max-height: 80px;
+                  .format-label {
+                    background-repeat: no-repeat;
+                    background-position: 0 0;
+                    background-size: 62%;
+                    position: absolute;
+                    width: 50px;
+                    height: 42px;
+                    top: 5px;
+                    left: 5px;
+                  }
+                  .description {
+                    font-weight: 300;
+                    font-size: 11px;
+                    line-height: 12px;
+                    width: 60%;
+                  }
+                  .btn-download {
+                    float: right;
+                    display: inline;
+                  }
                 }
               }
             }
