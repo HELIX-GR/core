@@ -41,15 +41,25 @@ import gr.helix.core.web.config.OpenaireServiceConfiguration;
 import gr.helix.core.web.model.CatalogResult;
 import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.model.openaire.OpenaireMetadata;
+import gr.helix.core.web.model.openaire.OpenaireProvider;
+import gr.helix.core.web.model.openaire.client.Journal;
 import gr.helix.core.web.model.openaire.client.Publication;
+import gr.helix.core.web.model.openaire.client.PublicationRef;
 import gr.helix.core.web.model.openaire.server.ClassedSchemedElement;
 import gr.helix.core.web.model.openaire.server.InferenceExtendedStringType;
+import gr.helix.core.web.model.openaire.server.JournalType;
+import gr.helix.core.web.model.openaire.server.NamedIdElement;
 import gr.helix.core.web.model.openaire.server.OptionalClassedSchemedElement;
+import gr.helix.core.web.model.openaire.server.RelsType;
 import gr.helix.core.web.model.openaire.server.Response;
 import gr.helix.core.web.model.openaire.server.Result;
+import gr.helix.core.web.model.openaire.server.ResultChildrenType;
+import gr.helix.core.web.model.openaire.server.WebresourceType;
 
 @Service
 public class OpenaireServiceProxy {
+
+    // Documentation: http://api.openaire.eu/api.html#pubs
 
     private static final Logger          logger                  = LoggerFactory.getLogger(OpenaireServiceProxy.class);
 
@@ -86,8 +96,6 @@ public class OpenaireServiceProxy {
 
     public CatalogResult<Publication> getPublications(OpenaireCatalogQuery query) throws ApplicationException {
         try {
-            // Documentation: http://api.openaire.eu/api.html#pubs
-
             // OpenAIRE page index starts from 1
             final List<String> providers = Arrays.stream(query.getProviders())
                 .filter(p -> !StringUtils.isBlank(p))
@@ -136,6 +144,45 @@ public class OpenaireServiceProxy {
                 openaireResponse.setPageIndex(query.getPageIndex());
                 openaireResponse.setPageSize(query.getPageSize());
                 return openaireResponse;
+            }
+        } catch (final URISyntaxException ex) {
+            logger.error("The input is not a valid URI", ex);
+            throw ApplicationException.fromPattern(ex, BasicErrorCode.URI_SYNTAX_ERROR);
+        } catch (final ClientProtocolException ex) {
+            logger.error("An http protocol error has occured", ex);
+            throw ApplicationException.fromPattern(ex, BasicErrorCode.HTTP_ERROR);
+        } catch (final IOException ex) {
+            logger.error("An I/O exception has occurrend or the connection was aborted", ex);
+            throw ApplicationException.fromPattern(ex, BasicErrorCode.IO_ERROR);
+        }
+    }
+
+
+    public Publication getPublication(String id) throws ApplicationException {
+        try {
+            final EndpointConfiguration endpoint = this.openaireConfiguration.getApi();
+            final URIBuilder builder = new URIBuilder()
+                .setScheme(endpoint.getScheme())
+                .setHost(endpoint.getHost())
+                .setPort(endpoint.getPort())
+                .setPath(API_SEARCH_PUBLICATIONS)
+                .addParameter("model", "openaire")
+                .addParameter("OA", "true")
+                .addParameter("openairePublicationID", id);
+
+            final URI uri = builder.build();
+
+            final HttpUriRequest request = RequestBuilder.get(uri)
+                .addHeader(HttpHeaders.ACCEPT, MediaType.TEXT_HTML_VALUE)
+                .addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_XHTML_XML_VALUE)
+                .addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML_VALUE).build();
+
+            try (CloseableHttpResponse response = (CloseableHttpResponse) this.httpClient.execute(request)) {
+                if (response.getStatusLine().getStatusCode() != 200) {
+                    throw ApplicationException.fromMessage("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+                }
+                final CatalogResult<Publication> openaireResponse = this.parse(response);
+                return openaireResponse.getResults().size() == 1 ? openaireResponse.getResults().get(0) : null;
             }
         } catch (final URISyntaxException ex) {
             logger.error("The input is not a valid URI", ex);
@@ -230,13 +277,96 @@ public class OpenaireServiceProxy {
             case "format":
                 this.readFormat(element, pub);
                 break;
+            case "journal":
+                this.readJournal(element, pub);
+                break;
+            case "source":
+                this.readSource(element, pub);
+                break;
+            case "collectedfrom":
+                this.readCollectedFrom(element, pub);
+                break;
+            case "bestaccessright":
+                this.readBestAccessRight(element, pub);
+                break;
+            case "children":
+                this.readChildren(element, pub);
+                break;
+            case "rels":
+                this.readRelated(element, pub);
+                break;
+
+        }
+    }
+
+    private void readRelated(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof RelsType) {
+            final RelsType node = (RelsType) element.getValue();
+            node.getRel().stream().forEach(r -> {
+                pub.addRelatedPublication(PublicationRef.from(r));
+            });
+        }
+    }
+
+    private void readChildren(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof ResultChildrenType) {
+            final ResultChildrenType node = (ResultChildrenType) element.getValue();
+            node.getInstance().stream().forEach(item -> {
+                final List<JAXBElement<?>> elements = item.getAccessrightOrLicenseOrInstancetype();
+                if (elements != null) {
+                    elements.forEach(e -> {
+                        switch (e.getName().toString()) {
+                            case "instancetype":
+                                if (e.getValue() instanceof ClassedSchemedElement) {
+                                    pub.setType (((ClassedSchemedElement) e.getValue()).getClassname());
+                                }
+                                break;
+                            case "hostedby":
+                                if (e.getValue() instanceof NamedIdElement) {
+                                    pub.setHostedBy(OpenaireProvider.from((NamedIdElement) e.getValue()));
+                                }
+                                break;
+                            case "webresource":
+                                if (e.getValue() instanceof WebresourceType) {
+                                    final WebresourceType resource = (WebresourceType) e.getValue();
+                                    pub.setUrl(resource.getUrl());
+                                }
+                                break;
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    private void readBestAccessRight(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof ClassedSchemedElement) {
+            pub.setBestAccessRight(((ClassedSchemedElement) element.getValue()).getClassid());
+        }
+    }
+
+    private void readCollectedFrom(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof NamedIdElement) {
+            pub.setCollectedFrom(OpenaireProvider.from((NamedIdElement) element.getValue()));
+        }
+    }
+
+    private void readSource(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof String) {
+            pub.getSources().add((String) element.getValue());
+        }
+    }
+
+    private void readJournal(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof JournalType) {
+            pub.setJournal(Journal.from((JournalType) element.getValue()));
         }
     }
 
     private void readSubject(JAXBElement<?> element, Publication pub) {
         if(element.getValue() instanceof OptionalClassedSchemedElement) {
             final OptionalClassedSchemedElement value = (OptionalClassedSchemedElement) element.getValue();
-            pub.getSubject().add(value.getContent());
+            pub.getSubjects().add(value.getContent());
         }
     }
 
@@ -275,8 +405,8 @@ public class OpenaireServiceProxy {
     }
 
     private void readDescription(JAXBElement<?> element, Publication pub) {
-        if(element.getValue() instanceof String) {
-            pub.setDescription((String) element.getValue());
+        if (element.getValue() instanceof String) {
+            pub.getDescription().add((String) element.getValue());
         }
     }
 

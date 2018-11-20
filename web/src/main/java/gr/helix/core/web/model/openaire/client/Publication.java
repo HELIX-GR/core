@@ -4,33 +4,51 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import gr.helix.core.web.model.openaire.OpenaireProvider;
+
 public class Publication {
 
-    private String        objectIdentifier;
+    private String               objectIdentifier;
 
-    private List<String>  subject      = new ArrayList<String>();
+    private List<String>         subjects     = new ArrayList<String>();
 
-    private String        dateOfAcceptance;
+    private String               dateOfAcceptance;
 
-    private String        embargoEndDate;
+    private String               embargoEndDate;
 
-    private String        publisher;
+    private String               publisher;
 
-    private String        language;
+    private String               language;
 
-    private String        title;
+    private String               title;
 
-    private String        description;
+    private List<String>         description  = new ArrayList<String>();
 
-    private List<Creator> creators     = new ArrayList<Creator>();
+    private List<Creator>        creators     = new ArrayList<Creator>();
 
-    private List<String>  contributors = new ArrayList<String>();
+    private List<String>         contributors = new ArrayList<String>();
 
-    private List<String>  originalId   = new ArrayList<String>();
+    private List<String>         originalId   = new ArrayList<String>();
 
-    private String        format;
+    private String               format;
 
-    private String        fullTextUrl;
+    private String               fullTextUrl;
+
+    private Journal              journal;
+
+    private List<String>         sources      = new ArrayList<String>();
+
+    private String               bestAccessRight;
+
+    private OpenaireProvider     collectedFrom;
+
+    private OpenaireProvider     hostedBy;
+
+    private List<PublicationRef> related      = new ArrayList<PublicationRef>();
+
+    private String               url;
+
+    private String               type;
 
     public String getObjectIdentifier() {
         return this.objectIdentifier;
@@ -40,12 +58,12 @@ public class Publication {
         this.objectIdentifier = objectIdentifier;
     }
 
-    public List<String> getSubject() {
-        return this.subject;
+    public List<String> getSubjects() {
+        return this.subjects;
     }
 
-    public void setSubject(List<String> subject) {
-        this.subject = subject;
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
     }
 
     public String getDateOfAcceptance() {
@@ -73,7 +91,7 @@ public class Publication {
     }
 
     public String getLanguage() {
-        return this.language;
+        return this.language.equalsIgnoreCase("Undetermined") ? null : this.language;
     }
 
     public void setLanguage(String language) {
@@ -88,11 +106,11 @@ public class Publication {
         this.title = title;
     }
 
-    public String getDescription() {
+    public List<String> getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(List<String> description) {
         this.description = description;
     }
 
@@ -136,6 +154,70 @@ public class Publication {
         this.fullTextUrl = fullTextUrl;
     }
 
+    public Journal getJournal() {
+        return this.journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
+
+    public List<String> getSources() {
+        return this.sources;
+    }
+
+    public void setSources(List<String> sources) {
+        this.sources = sources;
+    }
+
+    public String getBestAccessRight() {
+        return this.bestAccessRight;
+    }
+
+    public void setBestAccessRight(String bestAccessRight) {
+        this.bestAccessRight = bestAccessRight;
+    }
+
+    public OpenaireProvider getCollectedFrom() {
+        return this.collectedFrom;
+    }
+
+    public void setCollectedFrom(OpenaireProvider collectedFrom) {
+        this.collectedFrom = collectedFrom;
+    }
+
+    public List<PublicationRef> getRelated() {
+        return this.related;
+    }
+
+    public void setRelated(List<PublicationRef> related) {
+        this.related = related;
+    }
+
+    public OpenaireProvider getHostedBy() {
+        return this.hostedBy;
+    }
+
+    public void setHostedBy(OpenaireProvider hostedBy) {
+        this.hostedBy = hostedBy;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void addCreator(BigInteger rank, String name, String surname, String value) {
         final Creator creator = new Creator();
         creator.setRank(rank.intValue());
@@ -143,5 +225,18 @@ public class Publication {
         creator.setSurname(surname);
         creator.setValue(value);
         this.creators.add(creator);
+    }
+
+    public void addRelatedPublication(PublicationRef ref) {
+        if (ref != null) {
+            final PublicationRef existing = this.related.stream()
+                .filter(r -> r.getId().equals(ref.getId()))
+                .findFirst()
+                .orElse(null);
+
+            if (existing == null) {
+                this.related.add(ref);
+            }
+        }
     }
 }

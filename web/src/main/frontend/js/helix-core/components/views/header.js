@@ -54,6 +54,9 @@ class Header extends React.Component {
       if (location.pathname.startsWith('/pubs')) {
         return '/images/svg/Pubs-logo.svg';
       }
+      if (location.pathname.startsWith('/publications')) {
+        return '/images/svg/Pubs-logo.svg';
+      }
     }
     return '/images/svg/Helix-logo.svg';
   }

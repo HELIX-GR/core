@@ -83,6 +83,7 @@ export const api = {
   SearchPubs: '/action/publication/query',
   GetDataset: '/action/dataset/:id',
   GetNotebook: '/action/notebook/:id',
+  GetPublication: '/action/publication/:id',
 };
 
 // Default links

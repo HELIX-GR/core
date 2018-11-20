@@ -20,6 +20,8 @@ $layout-fixed-width :1366px;
 @import 'components/debug-console';
 @import 'components/login';
 @import 'components/map';
+@import 'components/progress-bar';
+
 /*
  * Openlayers (the file is copied by grunt "copy" task)
  */

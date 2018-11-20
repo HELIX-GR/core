@@ -1,0 +1,13 @@
+.hx-progress-bar {
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+  .hx-filled {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+}

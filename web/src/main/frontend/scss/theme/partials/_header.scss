@@ -79,6 +79,11 @@
     }
     &.results-lab,
     &.lab {
+      header {
+        .logo-area {
+          border-top: 15px solid $lab-color;
+        }
+      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $lab-color;

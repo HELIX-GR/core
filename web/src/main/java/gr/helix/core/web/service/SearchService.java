@@ -105,6 +105,10 @@ public class SearchService {
         return this.openaireServiceProxy.getPublications(query);
     }
 
+    public Publication getPublication(String id) {
+        return this.openaireServiceProxy.getPublication(id);
+    }
+
     public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {
         final CompositeCatalogResult result = new CompositeCatalogResult();
         if (query.isParallel()) {

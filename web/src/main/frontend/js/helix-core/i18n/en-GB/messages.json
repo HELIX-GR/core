@@ -269,7 +269,21 @@
       "download": "DOWNLOAD"
     }
   },
-  "publication": {},
+  "publication": {
+    "publisher": "Publisher",
+    "subjects": "Subjects",
+    "date-of-acceptance": "Acceptance Date",
+    "embargo-end-date": "Embargo End Date",
+    "publication": "Publication",
+    "no-description": "No description",
+    "related-publications": "Similar Research Results ({count})",
+    "hosted-by": "Hosted By: {host}",
+    "similarity": "Similarity",
+    "download-section":"Download From",
+    "buttons": {
+      "view": "VIEW"
+    }
+  },
   "notebook": {
     "publisher": "Publisher",
     "subjects": "Subjects",

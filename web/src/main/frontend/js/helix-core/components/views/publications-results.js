@@ -145,7 +145,7 @@ class PublicationsResults extends React.Component {
             </div>
           </h3>
           <div className="notes">
-            {p.description.length > MAX_NOTES_LENGTH ? `${p.description.substring(0, MAX_NOTES_LENGTH)} ...` : p.description}
+            {p.description[0].length > MAX_NOTES_LENGTH ? `${p.description[0].substring(0, MAX_NOTES_LENGTH)} ...` : p.description[0]}
           </div>
           {p.publisher &&
             <div className="service">

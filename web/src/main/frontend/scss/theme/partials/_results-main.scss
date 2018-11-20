@@ -107,7 +107,7 @@
           color: $pubs-color;
         }
       }
-      .resource-component {
+      .publication-component {
         a,
         a:hover {
           color: $pubs-color;
@@ -469,6 +469,7 @@
               font-size: 15px;
               color: #67676A;
               line-height: 21px;
+              word-break: break-word;
             }
           }
           .license {
@@ -819,6 +820,13 @@
                   display: inline-block;
                 }
               }
+              .btn-save {
+                float: right;
+                margin-left: 15px;
+                a {
+                  display: inline-block;
+                }
+              }
               .package-title {
                 margin-bottom: 10px;
                 font-weight: 300;
@@ -899,6 +907,32 @@
                     width: 60%;
                   }
                   .btn-download {
+                    float: right;
+                    display: inline;
+                  }
+                }
+              }
+            }
+            .related-publications {
+              list-style: none;
+              margin-top: 30px;
+              .inline {
+                padding-left: 25px;
+              }
+              .related-publication-list {
+                .publication-component {
+                  position: relative;
+                  padding: 10px 0 10px 0px;
+                  margin-bottom: 0;
+                  border-radius: 3px;
+                  max-height: 80px;
+                  .description {
+                    font-weight: 300;
+                    font-size: 11px;
+                    line-height: 12px;
+                    width: 60%;
+                  }
+                  .btn-view {
                     float: right;
                     display: inline;
                   }
