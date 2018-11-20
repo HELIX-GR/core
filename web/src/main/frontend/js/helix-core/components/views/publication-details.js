@@ -212,7 +212,7 @@ class PublicationDetails extends React.Component {
                             {`${creator.surname}, ${creator.name}`}
                           </div>
                         </a>
-                      )
+                      );
                     })
                   }
                 </div>
