@@ -38,14 +38,26 @@ class NotebookDetails extends React.Component {
     this.props.getNotebook(params[PARAM_ID]);
   }
 
-  get getOrganizationLogo() {
-    const { notebook: { data: r }, config: { lab: { host } } } = this.props;
+  get organizationLogo() {
+    const {
+      config: { lab: { host } },
+      notebook: { data: n },
+    } = this.props;
 
-    if (r.organization) {
-      const url = r.organization.image_url;
-      if (url) {
-        return url.startsWith('http') ? url : `${host}/uploads/group/${url}`;
+    if (n.organization) {
+      const image = n.organization.image_url;
+      if (image) {
+        const url = image.startsWith('http') ? image : `${host}/uploads/group/${image}`;
+
+        return (
+          <div className="image">
+            <a href="/organization/helix">
+              <img src={url} width="200" alt={n.organization.title} />
+            </a>
+          </div>
+        )
       }
+      return n.organization.title;
     }
     return null;
   }
@@ -74,11 +86,7 @@ class NotebookDetails extends React.Component {
 
               <h5 className="side-heading org-heading">{_t({ id: 'notebook.publisher' })}</h5>
               <section className="side-content">
-                <div className="image">
-                  <a href="/organization/helix">
-                    <img src={this.getOrganizationLogo} width="200" alt={r.organization.title} />
-                  </a>
-                </div>
+                {this.organizationLogo}
               </section>
 
               <h5 className="side-heading">{_t({ id: 'notebook.subjects' })}</h5>

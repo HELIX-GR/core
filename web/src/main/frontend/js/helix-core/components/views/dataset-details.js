@@ -38,14 +38,26 @@ class DatasetDetails extends React.Component {
     this.props.getDataset(params[PARAM_ID]);
   }
 
-  get getOrganizationLogo() {
-    const { dataset: { data: r }, config: { data: { host } } } = this.props;
+  get organizationLogo() {
+    const {
+      config: { data: { host } },
+      dataset: { data: r },
+    } = this.props;
 
     if (r.organization) {
-      const url = r.organization.image_url;
-      if (url) {
-        return url.startsWith('http') ? url : `${host}/uploads/group/${url}`;
+      const image = r.organization.image_url;
+      if (image) {
+        const url = image.startsWith('http') ? image : `${host}/uploads/group/${image}`;
+
+        return (
+          <div className="image">
+            <a href="/organization/helix">
+              <img src={url} width="200" alt={r.organization.title} />
+            </a>
+          </div>
+        )
       }
+      return r.organization.title;
     }
     return null;
   }
@@ -74,11 +86,7 @@ class DatasetDetails extends React.Component {
 
               <h5 className="side-heading org-heading">{_t({ id: 'dataset.publisher' })}</h5>
               <section className="side-content">
-                <div className="image">
-                  <a href="/organization/helix">
-                    <img src={this.getOrganizationLogo} width="200" alt={r.organization.title} />
-                  </a>
-                </div>
+                {this.organizationLogo}
               </section>
 
               <h5 className="side-heading">{_t({ id: 'dataset.subjects' })}</h5>
