@@ -293,6 +293,10 @@
     .format-label[data-format*=csv] {
       background-image: url("../../images/icons/filetypes/svg/csv.svg");
     }
+    .format-label[data-format=ipynb],
+    .format-label[data-format*=ipynb] {
+      background-image: url("../../images/icons/filetypes/svg/ipynb.svg");
+    }
     .format-label[data-format=zip],
     .format-label[data-format*=zip] {
       background-image: url("../../images/icons/filetypes/svg/zip.svg");

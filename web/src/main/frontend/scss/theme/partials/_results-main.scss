@@ -459,6 +459,10 @@
           }
           .side-content {
             padding: 25px 30px 30px;
+            text-align: center;
+            img {
+              max-width: 200px;
+            }
           }
           .side-tags {
             font-weight: 300;
