@@ -13,7 +13,7 @@ public class PublicationRef {
     private String publisher;
     private String dateOfAcceptance;
     private String title;
-    private Double  similarity;
+    private Double similarity;
     private String id;
 
     public String getPublisher() {

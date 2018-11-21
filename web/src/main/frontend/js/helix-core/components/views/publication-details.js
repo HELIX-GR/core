@@ -57,6 +57,17 @@ class PublicationDetails extends React.Component {
     }
   }
 
+  get hostedBy() {
+    const {
+      publication: { data: pub },
+    } = this.props;
+
+    if (pub && pub.instances.length !== 0) {
+      return pub.instances[0].hostedBy || null;
+    }
+    return null;
+  }
+
   get getRepositoryLogo() {
     const {
       config: { openaire: { providers } },
@@ -64,14 +75,14 @@ class PublicationDetails extends React.Component {
     } = this.props;
     const _t = this.context.intl.formatMessage;
 
-    if (pub.hostedBy) {
-      const provider = providers.find(p => p.id === pub.hostedBy.id) || null;
+    if (this.hostedBy) {
+      const provider = providers.find(p => p.id === this.hostedBy.id) || null;
       if (provider) {
-        const src = `/images/providers/${pub.hostedBy.id}.png`;
+        const src = `/images/providers/${this.hostedBy.id}.png`;
         return (
           <div className="image">
             <a>
-              <img src={src} width="200" alt={pub.publisher} />
+              <img src={src} alt={pub.publisher} />
             </a>
           </div>
         );
@@ -79,7 +90,7 @@ class PublicationDetails extends React.Component {
       return (
         <React.Fragment>
           <div className="mb-3">{pub.publisher}</div>
-          <div>{_t({ id: 'publication.hosted-by' }, { host: pub.hostedBy.name })}</div>
+          <div>{_t({ id: 'publication.hosted-by' }, { host: this.hostedBy.name })}</div>
         </React.Fragment>
       );
     }
@@ -146,7 +157,7 @@ class PublicationDetails extends React.Component {
 
               <div className="breadcrumbs-pagination top">
                 <div className="breadcrumbs">
-                  <a className="breadcrumbs-part">{p.publisher || (p.hostedBy ? p.hostedBy.name : '')}</a>
+                  <a className="breadcrumbs-part">{p.publisher || (this.hostedBy ? this.hostedBy.name : '')}</a>
                   <a className="breadcrumbs-part">{p.title}</a>
                 </div>
               </div>
@@ -161,9 +172,9 @@ class PublicationDetails extends React.Component {
                       <img src="/images/png/favorite.png" />
                     </a>
                   </div>
-                  {p.url &&
+                  {p.instances.length !== 0 && p.instances[0].url &&
                     <div className="btn-save">
-                      <a href={p.url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
+                      <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
                         <img src="/images/png/save.png" />
                       </a>
                     </div>
@@ -222,7 +233,7 @@ class PublicationDetails extends React.Component {
                 </div>
 
                 <div className="tag-list">
-                  {p.type &&
+                  {p.instances.length !== 0 && p.instances[0].type &&
                     <a
                       href=''
                       onClick={(e) => e.preventDefault()}
@@ -230,7 +241,7 @@ class PublicationDetails extends React.Component {
                       target="blank"
                     >
                       <div>
-                        {p.type}
+                        {p.instances[0].type}
                       </div>
                     </a>
                   }
@@ -289,7 +300,7 @@ class PublicationDetails extends React.Component {
                             </span>
                           }
                           <div className="btn-view btn-group" title={_t({ id: 'publication.similarity' })}>
-                            <ProgressBar value={pub.similarity * 100} width={40} />
+                            <ProgressBar value={pub.similarity * 100} width={'40px'} />
                           </div>
                         </li>
                       ))}

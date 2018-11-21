@@ -8,47 +8,26 @@ import gr.helix.core.web.model.openaire.OpenaireProvider;
 
 public class Publication {
 
-    private String               objectIdentifier;
-
-    private List<String>         subjects     = new ArrayList<String>();
-
-    private String               dateOfAcceptance;
-
-    private String               embargoEndDate;
-
-    private String               publisher;
-
-    private String               language;
-
-    private String               title;
-
-    private List<String>         description  = new ArrayList<String>();
-
-    private List<Creator>        creators     = new ArrayList<Creator>();
-
-    private List<String>         contributors = new ArrayList<String>();
-
-    private List<String>         originalId   = new ArrayList<String>();
-
-    private String               format;
-
-    private String               fullTextUrl;
-
-    private Journal              journal;
-
-    private List<String>         sources      = new ArrayList<String>();
-
-    private String               bestAccessRight;
-
-    private OpenaireProvider     collectedFrom;
-
-    private OpenaireProvider     hostedBy;
-
-    private List<PublicationRef> related      = new ArrayList<PublicationRef>();
-
-    private String               url;
-
-    private String               type;
+    private String                       bestAccessRight;
+    private final List<OpenaireProvider> collectedFrom = new ArrayList<OpenaireProvider>();
+    private final List<String>           contributors  = new ArrayList<String>();
+    private final List<Creator>          creators      = new ArrayList<Creator>();
+    private String                       dateOfAcceptance;
+    private final List<String>           description   = new ArrayList<String>();
+    private String                       embargoEndDate;
+    private String                       format;
+    private String                       fullTextUrl;
+    private final List<Instance>         instances     = new ArrayList<Instance>();
+    private Journal                      journal;
+    private String                       language;
+    private String                       objectIdentifier;
+    private final List<String>           originalId    = new ArrayList<String>();
+    private String                       publisher;
+    private final List<PublicationRef>   related       = new ArrayList<PublicationRef>();
+    private String                       resultType;
+    private final List<String>           sources       = new ArrayList<String>();
+    private final List<String>           subjects      = new ArrayList<String>();
+    private String                       title;
 
     public String getObjectIdentifier() {
         return this.objectIdentifier;
@@ -60,10 +39,6 @@ public class Publication {
 
     public List<String> getSubjects() {
         return this.subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
     }
 
     public String getDateOfAcceptance() {
@@ -110,32 +85,16 @@ public class Publication {
         return this.description;
     }
 
-    public void setDescription(List<String> description) {
-        this.description = description;
-    }
-
     public List<Creator> getCreators() {
         return this.creators;
-    }
-
-    public void setCreators(List<Creator> creators) {
-        this.creators = creators;
     }
 
     public List<String> getContributors() {
         return this.contributors;
     }
 
-    public void setContributors(List<String> contributors) {
-        this.contributors = contributors;
-    }
-
     public List<String> getOriginalId() {
         return this.originalId;
-    }
-
-    public void setOriginalId(List<String> originalId) {
-        this.originalId = originalId;
     }
 
     public String getFormat() {
@@ -166,10 +125,6 @@ public class Publication {
         return this.sources;
     }
 
-    public void setSources(List<String> sources) {
-        this.sources = sources;
-    }
-
     public String getBestAccessRight() {
         return this.bestAccessRight;
     }
@@ -178,44 +133,24 @@ public class Publication {
         this.bestAccessRight = bestAccessRight;
     }
 
-    public OpenaireProvider getCollectedFrom() {
+    public List<OpenaireProvider> getCollectedFrom() {
         return this.collectedFrom;
-    }
-
-    public void setCollectedFrom(OpenaireProvider collectedFrom) {
-        this.collectedFrom = collectedFrom;
     }
 
     public List<PublicationRef> getRelated() {
         return this.related;
     }
 
-    public void setRelated(List<PublicationRef> related) {
-        this.related = related;
+    public String getResultType() {
+        return this.resultType;
     }
 
-    public OpenaireProvider getHostedBy() {
-        return this.hostedBy;
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
     }
 
-    public void setHostedBy(OpenaireProvider hostedBy) {
-        this.hostedBy = hostedBy;
-    }
-
-    public String getUrl() {
-        return this.url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public List<Instance> getInstances() {
+        return this.instances;
     }
 
     public void addCreator(BigInteger rank, String name, String surname, String value) {
@@ -239,4 +174,11 @@ public class Publication {
             }
         }
     }
+
+    public void addInstance(Instance instance) {
+        if (instance != null) {
+            this.instances.add(instance);
+        }
+    }
+
 }

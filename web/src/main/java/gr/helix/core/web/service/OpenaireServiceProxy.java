@@ -42,6 +42,7 @@ import gr.helix.core.web.model.CatalogResult;
 import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.model.openaire.OpenaireMetadata;
 import gr.helix.core.web.model.openaire.OpenaireProvider;
+import gr.helix.core.web.model.openaire.client.Instance;
 import gr.helix.core.web.model.openaire.client.Journal;
 import gr.helix.core.web.model.openaire.client.Publication;
 import gr.helix.core.web.model.openaire.client.PublicationRef;
@@ -54,7 +55,6 @@ import gr.helix.core.web.model.openaire.server.RelsType;
 import gr.helix.core.web.model.openaire.server.Response;
 import gr.helix.core.web.model.openaire.server.Result;
 import gr.helix.core.web.model.openaire.server.ResultChildrenType;
-import gr.helix.core.web.model.openaire.server.WebresourceType;
 
 @Service
 public class OpenaireServiceProxy {
@@ -295,7 +295,17 @@ public class OpenaireServiceProxy {
             case "rels":
                 this.readRelated(element, pub);
                 break;
+            case "resulttype":
+                this.readResultType(element, pub);
+                break;
 
+        }
+    }
+
+    private void readResultType(JAXBElement<?> element, Publication pub) {
+        if (element.getValue() instanceof ClassedSchemedElement) {
+            final ClassedSchemedElement value = (ClassedSchemedElement) element.getValue();
+            pub.setResultType(value.getClassname());
         }
     }
 
@@ -312,29 +322,7 @@ public class OpenaireServiceProxy {
         if (element.getValue() instanceof ResultChildrenType) {
             final ResultChildrenType node = (ResultChildrenType) element.getValue();
             node.getInstance().stream().forEach(item -> {
-                final List<JAXBElement<?>> elements = item.getAccessrightOrLicenseOrInstancetype();
-                if (elements != null) {
-                    elements.forEach(e -> {
-                        switch (e.getName().toString()) {
-                            case "instancetype":
-                                if (e.getValue() instanceof ClassedSchemedElement) {
-                                    pub.setType (((ClassedSchemedElement) e.getValue()).getClassname());
-                                }
-                                break;
-                            case "hostedby":
-                                if (e.getValue() instanceof NamedIdElement) {
-                                    pub.setHostedBy(OpenaireProvider.from((NamedIdElement) e.getValue()));
-                                }
-                                break;
-                            case "webresource":
-                                if (e.getValue() instanceof WebresourceType) {
-                                    final WebresourceType resource = (WebresourceType) e.getValue();
-                                    pub.setUrl(resource.getUrl());
-                                }
-                                break;
-                        }
-                    });
-                }
+                pub.addInstance(Instance.from(item));
             });
         }
     }
@@ -347,7 +335,7 @@ public class OpenaireServiceProxy {
 
     private void readCollectedFrom(JAXBElement<?> element, Publication pub) {
         if (element.getValue() instanceof NamedIdElement) {
-            pub.setCollectedFrom(OpenaireProvider.from((NamedIdElement) element.getValue()));
+            pub.getCollectedFrom().add(OpenaireProvider.from((NamedIdElement) element.getValue()));
         }
     }
 
