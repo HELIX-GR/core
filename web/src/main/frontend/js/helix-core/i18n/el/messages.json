@@ -11,49 +11,49 @@
         "title": "Lab"
       },
       "project": {
-        "title": "About",
+        "title": "Σχετικά",
         "items": {
-          "about": "About",
-          "what-is-helix": "What is HELIX?",
-          "services": "Services",
+          "about": "Σχετικά",
+          "what-is-helix": "Τί είναι το HELIX;",
+          "services": "Υπηρεσίες",
           "faq": "FAQ",
-          "publish-data": "Publish Data",
-          "software": "Software",
-          "the-project": "The project",
-          "media": "Media",
-          "acknowledge-helix": "Acknowledge HELIX",
-          "contact": "Contact",
-          "terms-of-use": "Terms of use"
+          "publish-data": "Δημοσιεύστε Δεδομένα",
+          "software": "Λογισμικό",
+          "the-project": "Το έργο",
+          "media": "Μέσα",
+          "acknowledge-helix": "Αναφέρετε το HELIX",
+          "contact": "Επικοινωνία΄",
+          "terms-of-use": "Όροι χρήσης"
         }
       },
       "news": {
-        "title": "News",
+        "title": "Νέα",
         "items": {
-          "news": "News",
-          "events": "Events"
+          "news": "Νέα",
+          "events": "Εκδηλώσεις"
         }
       },
       "login": {
         "items": {
-          "signed-in": "Signed in as {username}",
-          "account": "Account",
-          "help": "Help",
-          "settings": "Settings",
-          "logout": "Log out"
+          "signed-in": "Είσοδος ως {username}",
+          "account": "Λογαριασμός",
+          "help": "Βοήθεια",
+          "settings": "Ρυθμίσεις",
+          "logout": "Έξοδος"
         }
       }
     }
   },
   "breadcrumb": {
-    "results": "RESULTS",
-    "all": "ALL",
-    "helix-team": "HELIX Team",
-    "news": "News"
+    "results": "ΑΠΟΤΕΛΕΣΜΑΤΑ",
+    "all": "ΟΛΑ",
+    "helix-team": "Ομάδα HELIX",
+    "news": "Νέα"
   },
   "footer": {
     "columns": {
       "about": {
-        "title": "About",
+        "title": "Σχετικά",
         "links": {
           "home": "Αρχική",
           "what-is-helix": "Το έργο",
@@ -78,13 +78,13 @@
     "copyright": "© 2018 HELIX. All rights reserved."
   },
   "locales": {
-    "en": "English",
-    "el": "Greek"
+    "en": "Αγγλικά",
+    "el": "Ελληνικά"
   },
   "login": {
-    "forgot-password": "Forgot your password?",
-    "login": "Login",
-    "subtitle": "Sign-in into your account"
+    "forgot-password": "Ξεχάσατε το κωδικό σας;",
+    "login": "Είσοδος",
+    "subtitle": "Εισοδος στο λογαριασμό σας"
   },
   "pills": {
     "data": "DATA",
@@ -94,52 +94,52 @@
   "main": {
     "search": {
       "placeholder": {
-        "prefix": "Search {catalogs}",
+        "prefix": "Αναζήτηση {catalogs}",
         "data": "data",
         "pubs": "publications",
         "lab": "research tools",
-        "author": "Enter a name and press enter ..."
+        "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
       },
-      "advanced-search": "ADVANCED SEARCH"
+      "advanced-search": "ΠΡΟΧΩΡΗΜΕΝΗ ΑΝΑΖΗΤΗΣΗ"
     },
     "news": {
-      "title": "Latest News",
-      "read-more": "Read more"
+      "title": "Τελευταία Νέα",
+      "read-more": "Περισσότερα"
     },
     "about": {
-      "title": "About HELIX",
+      "title": "Σχετικά με το HELIX",
       "sections": {
         "1": {
-          "title": "What is HELIX?",
-          "content": "HELIX is an horizontal eInfrastructure for data-intensive research, handling the data management, analysis, sharing, and reuse needs of Greek scientists, researchers and innovators in a cross-disciplinary, scalable, and low-cost manner.",
-          "link": "Learn more"
+          "title": "Τι είναι το HELIX;",
+          "content": "Το HELIX είναι μία οριζόντια ψηφιακή επιστημονική υποδομή για την υποστήριξη της έρευνας έντασης δεδομένων, καλύπτοντας το σύνολο των αναγκών διαμοιρασμού, ανακάλυψης, διαχείρισης, επεξεργασίας και δημοσίευσης επιστημονικών δεδομένων της Ελληνικής Επιστημονικής κοινότητας.",
+          "link": "Μάθετε περισσότερα"
         },
         "2": {
-          "title": "Search for Data",
-          "content": "Find, use, and share open scientific data created by Greek Research organizations, institutions, and innovators. Use them in your own research or line of work.",
-          "link": "Find data"
+          "title": "Αναζητήστε Δεδομένα",
+          "content": "Βρείτε, χρησιμοποιείστε και μοιραστείτε ανοικτά επιστημονικά δεδομένα από Ελληνικούς Ερευνητικους οργανισμούς, ιδρύματα και ερευνητές. Χρησιμοποιείστε τα στη δική σας έρευνα ή εργασία.",
+          "link": "Βρείτε δεδομένα"
         },
         "3": {
-          "title": "Build with data",
-          "content": "Learn, experiment, and work with data, without ever leaving in your browser. Tap into ready to use, highly scalable Big Data and HPC infrastructures.",
-          "link": "Start coding"
+          "title": "Φτιάξτε με δεδομένα",
+          "content": "Μάθετε, πειραματιστείτε και δουλέψτε με δεδομένα χωρίς να φύγετε από το διαφυλλιστή σας. Αξιοποιήστε κλιμακώσιμες υποδομές Μεγάλων Δεδομένων και HPC.",
+          "link": "Γράψτε κώδικα"
         },
         "4": {
-          "title": "Our partners",
-          "content": "HELIX is a collective effort of Athena RC and GRNET S.A., with the financial support of the European Union, bringing together the entire Greek research community.",
+          "title": "Συνεργάτες",
+          "content": "Το HELIX είναι μία συλλογική προσπάθεια του ΕΚ Αθηνά και του ΕΔΕΤ Α.Ε., με την οικονομική στήριξη της Ευρωπαικής Ένωσης, φέρνοντας κοντά το σύνολο της Εληνικής ερευνητικής κοινότητας.",
           "link": "Learn more"
         }
       }
     }
   },
   "advanced-search": {
-    "title": "Advanced Search",
+    "title": "Προχωρημένη Αναζήτηση",
     "placeholder": {
-      "prefix": "Search {catalogs}",
-      "data": "data",
-      "pubs": "publications",
-      "lab": "research tools",
-      "author": "Enter a name and press enter ..."
+      "prefix": "Αναζήτηση {catalogs}",
+      "data": "δεδομένα",
+      "pubs": "δημοσιεύσεις",
+      "lab": "ερευνητικά εργαλεία",
+      "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
     },
     "tabs": {
       "data": "DATA",
@@ -148,76 +148,76 @@
     },
     "filters": {
       "ckan": {
-        "organizations": "ORGANIZATIONS",
-        "topics": "TOPICS",
+        "organizations": "ΟΡΓΑΝΙΣΜΟΙ",
+        "topics": "ΘΕΜΑΤΑ",
         "tags": "TAGS",
-        "formats": "FORMATS",
-        "licenses": "LICENSES"
+        "formats": "ΜΟΡΦΟΤΥΠΟΙ",
+        "licenses": "ΑΔΕΙΕΣ"
       },
       "pubs": {
-        "providers": "Providers",
-        "author": "Author",
-        "acceptance-from": "Date Accepted From",
-        "acceptance-to": "Date Accepted To"
+        "providers": "Πάροχοι",
+        "author": "Συγγραφείς",
+        "acceptance-from": "Ημερομηνία Αποδοχής Από",
+        "acceptance-to": "Ημερομηνία Αποδοχής Έως"
       }
     },
     "help": {
-      "author": "White-space separated list of names and/or surnames. Search for publications by authors.",
-      "acceptance-from": "Gets the publications whose date of acceptance is greater than or equal the given date.",
-      "acceptance-to": "Gets the publications whose date of acceptance is less than or equal the given date."
+      "author": "Λίστα ονομάτων ή/και επιθέτων. Αναζητήστε δημοσιεύσεις ανά συγγραφέα.",
+      "acceptance-from": "Επιστρέφει τις δημοσιεύσεις με ημερομηνία αποδοχής μεγαλύτερη ή ίση από τη δοθείσα ημερομηνία.",
+      "acceptance-to": "Επιστρέφει τις δημοσιεύσεις με ημερομηνία αποδοχής μικρότερη από τη δοθείσα ημερομηνία."
     },
-    "view-less": "View Less",
-    "view-more": "View More"
+    "view-less": "Λιγότερα",
+    "view-more": "Περισσότερα"
   },
   "pubs": {
     "search": {
-      "placeholder": "Search publications",
-      "advanced-search": "ADVANCED SEARCH"
+      "placeholder": "Αναζητήστε δημοσίευσεις",
+      "advanced-search": "ΠΡΟΧΩΡΗΜΕΝΗ ΑΝΑΖΗΤΗΣΗ"
     },
-    "featured": "Featured Publications",
+    "featured": "Επιλεγμένες Δημοσιεύσεις",
     "subject": {
-      "title": "Search by subject",
+      "title": "Αναζήτηση ανά Θέμα",
       "items": {
-        "humanities": "Humanities and Social Sciences",
-        "business": "Business, Economics and Law",
-        "agricultural": "Agricultural and Veterinary Sciences",
-        "environmental": "Environmental Sciences",
-        "engineering": "Engineering, Computing and Technology",
-        "biological": "Biological Sciences",
-        "medical": "Medical and Health",
-        "sciences": "Physical, Chemical and Mathematical Sciences"
+        "humanities": "Ανθρωπιστικές και Κοινωνικές Επιστήμες",
+        "business": "Επιχειρήσεις, Οικονομία και Δίκαιο",
+        "agricultural": "Αγροτικές και Κτηνιατρικές Επιστήμες",
+        "environmental": "Περιβαλλοντικές Επιστήμες",
+        "engineering": "Μηχανική, Υπολογιστική και Τεχνολογία",
+        "biological": "Βιολογικές Επιστήμες",
+        "medical": "Ιατρική και Υγεία",
+        "sciences": "Φυσική, Χημεία και Μαθηματικά"
       }
     },
     "explore": {
-      "title": "Explore",
+      "title": "Εξερευνήστε",
       "items": {
         "themes": {
-          "title": "Themed Collections",
-          "description": "Explore selected resources by theme"
+          "title": "Θεματικές Συλλογές",
+          "description": "Εξερευνήστε επιλεγμένους πόρους ανά θεματική περιοχή"
         },
         "services-tools": {
-          "title": "Services and Tools",
-          "description": "Access data-related services and tools"
+          "title": "Υπηρεσίες και Εργαλεία",
+          "description": "Αποκτήστε πρόσβαση σε υπηρεσίες και εργαλεία"
         },
         "open-data": {
-          "title": "Open Data",
-          "description": "Find open data that is reusable"
+          "title": "Ανοικτά Δεδομένα",
+          "description": "Βρείτε επαναχρησιμοποιήσιμα ανοικτά δεδομένα"
         },
         "projects": {
-          "title": "Grants and Projects",
-          "description": "Search for research grants and projects"
+          "title": "Χορηγήσεις και Έργα",
+          "description": "Βρείτε ερευνητικές χορηγίες και έργα"
         }
       }
     }
   },
   "project": {
-    "title": "The project"
+    "title": "Το έργο"
   },
   "news": {
-    "title": "News",
-    "load-more": "More",
-    "read-more": "Read more",
-    "related-news": "Related News"
+    "title": "Νέα",
+    "load-more": "Περισσότερα",
+    "read-more": "Περισσότερα",
+    "related-news": "Σχετικά Νέα"
   },
   "results": {
     "shared": {
@@ -242,60 +242,60 @@
     "main": {
       "search": {
         "placeholder": {
-          "prefix": "Search {catalogs}",
-          "data": "data",
-          "pubs": "publications",
-          "lab": "research tools"
+          "prefix": "Αναζήτηση {catalogs}",
+          "data": "δεδομένα",
+          "pubs": "δημοσίευσεις",
+          "lab": "ερευνητικά εργαλεία"
         }
       }
     },
     "pubs": {
       "search": {
-        "placeholder": "Search publications"
+        "placeholder": "Αναζητείστε δημοσίευσεις"
       }
     }
   },
   "dataset": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
-    "dataset": "Dataset",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This dataset satisfies the Open Definition.",
+    "publisher": "Εκδότης",
+    "subjects": "Θέματα",
+    "license": "Άδεια",
+    "publication": "ΔΗΜΟΣΙΕΥΣΗ: ",
+    "last-revision": "ΤΕΛΕΥΤΑΙΑ ΑΝΑΝΕΩΣΗ: ",
+    "dataset": "Σύνολο δεδομένων",
+    "resources": "Δεδομένα και Πόροι",
+    "no-description": "Καμία περιγραφή",
+    "open-data-license": "Το σύνολο δεδομένων είναι Ανοικτό",
     "buttons": {
-      "download": "DOWNLOAD"
+      "download": "ΜΕΤΑΦΟΡΤΩΣΗ"
     }
   },
   "publication": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "date-of-acceptance": "Acceptance Date",
-    "embargo-end-date": "Embargo End Date",
-    "publication": "Publication",
-    "no-description": "No description",
-    "related-publications": "Similar Research Results ({count})",
-    "hosted-by": "Hosted By: {host}",
-    "similarity": "Similarity",
-    "download-section": "Download From",
+    "publisher": "Εκδότης",
+    "subjects": "Θέματα",
+    "date-of-acceptance": "Ημερομηνία Αποδοχής",
+    "embargo-end-date": "Ημερομηνία Λήξης Εμπάργκο",
+    "publication": "Δημοσίευση",
+    "no-description": "Καμία περιγραφή",
+    "related-publications": "Παρόμοια Ερευνητικά Αποτελέσματα ({count})",
+    "hosted-by": "Διαθέσιμο Από: {host}",
+    "similarity": "Ομοιότητα",
+    "download-section": "Μεταφόρτωση Από",
     "buttons": {
-      "view": "VIEW"
+      "view": "ΠΡΟΒΟΛΗ"
     }
   },
   "notebook": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
+    "publisher": "Εκδότης",
+    "subjects": "Θέματα",
+    "license": "Άδεια",
+    "publication": "ΔΗΜΟΣΙΕΥΣΗ: ",
+    "last-revision": "ΤΕΛΕΥΤΑΙΑ ΑΝΑΝΕΩΣΗ: ",
     "notebook": "Notebook",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This notebook satisfies the Open Definition.",
+    "resources": "ΔΕΔΟΜΕΝΑ ΚΑΙ ΠΟΡΟΙ",
+    "no-description": "Καμία περιγραφή",
+    "open-data-license": "Το notebook είναι Ανοικτό.",
     "buttons": {
-      "download": "DOWNLOAD"
+      "download": "ΜΕΤΑΦΟΡΤΩΣΗ"
     }
   }
 }
