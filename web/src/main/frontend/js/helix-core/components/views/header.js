@@ -9,6 +9,7 @@ import {
 import {
   buildPath,
   DynamicRoutes,
+  EnumLocale,
   ExternalRoutes,
   StaticRoutes,
   WordPressPages,
@@ -34,7 +35,7 @@ class Header extends React.Component {
   }
 
   static defaultProps = {
-    locale: 'en-GB',
+    locale: EnumLocale.EN,
   }
 
   changeLocale(e, locale) {
@@ -44,7 +45,7 @@ class Header extends React.Component {
   }
 
   get currentLocale() {
-    return (this.props.locale === 'el' ? 'ΕΛ' : 'EN');
+    return (this.props.locale === EnumLocale.EL ? 'ΕΛ' : 'EN');
   }
 
   get logoImage() {
@@ -136,8 +137,8 @@ class Header extends React.Component {
                 <a href='' onClick={(e) => e.preventDefault()}>{this.currentLocale}</a>
                 <ul className="sub-menu">
                   <li>
-                    <a href='' onClick={(e) => this.changeLocale(e, this.props.locale === 'el' ? 'en-GB' : 'el')}>
-                      {this.props.locale === 'el' ? 'EN' : 'ΕΛ'}
+                    <a href='' onClick={(e) => this.changeLocale(e, this.props.locale === EnumLocale.EL ? EnumLocale.EN : EnumLocale.EL)}>
+                      {this.props.locale === EnumLocale.EL ? 'EN' : 'ΕΛ'}
                     </a>
                   </li>
                 </ul>

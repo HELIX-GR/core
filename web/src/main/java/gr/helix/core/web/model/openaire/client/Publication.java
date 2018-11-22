@@ -114,7 +114,7 @@ public class Publication {
     }
 
     public Journal getJournal() {
-        return this.journal;
+        return this.journal.isEmpty() ? null : this.journal;
     }
 
     public void setJournal(Journal journal) {

@@ -1,5 +1,7 @@
 package gr.helix.core.web.model.openaire.client;
 
+import org.apache.commons.lang3.StringUtils;
+
 import gr.helix.core.web.model.openaire.server.JournalType;
 
 public class Journal {
@@ -75,6 +77,10 @@ public class Journal {
 
     public void setSp(String sp) {
         this.sp = sp;
+    }
+
+    public boolean isEmpty() {
+        return StringUtils.isBlank(this.issn) && StringUtils.isBlank(this.eissn) && StringUtils.isBlank(this.lissn);
     }
 
     public static Journal from(JournalType value) {

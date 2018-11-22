@@ -280,6 +280,8 @@
     "hosted-by": "Διαθέσιμο Από: {host}",
     "similarity": "Ομοιότητα",
     "download-section": "Μεταφόρτωση Από",
+    "citation": "Παραπομπή",
+    "select-citation-style": "Επιλογή μορφοποίησης παραπομπής ...",
     "buttons": {
       "view": "ΠΡΟΒΟΛΗ"
     }

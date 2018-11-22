@@ -30,6 +30,10 @@ import {
   ProgressBar,
 } from '../helpers';
 
+import {
+  Citation,
+} from './publications-parts';
+
 const PARAM_ID = 'id';
 
 class PublicationDetails extends React.Component {
@@ -307,6 +311,16 @@ class PublicationDetails extends React.Component {
                     </div>
                   </section>
                 }
+
+                <section className="citation">
+                  <div className="section-title">
+                    <h5 className="inline">{_t({ id: 'publication.citation' }, { count: p.related.length })}</h5>
+                    <hr className="separator" />
+                  </div>
+                  <div className="citation-component">
+                    <Citation publication={p} />
+                  </div>
+                </section>
 
               </div>
             </section>

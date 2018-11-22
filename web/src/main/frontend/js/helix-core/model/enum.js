@@ -28,3 +28,8 @@ export const EnumRole = {
   Admin: 'ROLE_ADMIN',
   Developer: 'ROLE_DEVELOPER',
 };
+
+export const EnumLocale = {
+  'EL': 'el',
+  'EN': 'en-GB',
+};

@@ -55,7 +55,7 @@ class DatasetDetails extends React.Component {
               <img src={url} width="200" alt={r.organization.title} />
             </a>
           </div>
-        )
+        );
       }
       return r.organization.title;
     }

@@ -3,6 +3,7 @@ import * as RoleNames from './role';
 export {
   EnumCatalog,
   EnumCkanFacet,
+  EnumLocale,
   EnumMimeType,
   EnumOpenaireFilter,
   EnumRole,

@@ -2,6 +2,7 @@ import store from './store';
 import renderRoot from './root';
 import * as api from './service/api/index';
 
+import { EnumLocale } from './model';
 import { setCsrfToken } from './ducks/meta';
 import { changeLocale } from './ducks/i18n';
 import { refreshProfile } from './ducks/user';
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var rootEl = document.querySelector(rootSelector);
 
   // TODO: read from non-httponly "locale" cookie
-  const locale = 'en-GB';
+  const locale = EnumLocale.EN;
 
   const token = document.querySelector('meta[name=_csrf]').getAttribute('content');
 

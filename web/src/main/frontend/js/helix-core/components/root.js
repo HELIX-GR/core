@@ -6,14 +6,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { basename } from '../history';
 
 import {
+  EnumLocale,
   ErrorPages,
-  Pages,
-} from '../model/routes';
+} from '../model';
 
 import ContentRoot from './content-root';
 
 import {
-  LoginForm,
   Page403,
   Page404,
 } from './pages';
@@ -31,7 +30,7 @@ ReactIntl.addLocaleData(el);
 class Root extends React.Component {
 
   static defaultProps = {
-    locale: 'en-GB',
+    locale: EnumLocale.EN,
     messages: {},
   }
 

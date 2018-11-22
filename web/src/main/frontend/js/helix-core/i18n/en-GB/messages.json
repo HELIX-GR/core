@@ -280,6 +280,8 @@
     "hosted-by": "Hosted By: {host}",
     "similarity": "Similarity",
     "download-section":"Download From",
+    "citation": "Citation",
+    "select-citation-style":"Select citation style ...",
     "buttons": {
       "view": "VIEW"
     }

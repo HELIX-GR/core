@@ -55,7 +55,7 @@ class NotebookDetails extends React.Component {
               <img src={url} width="200" alt={n.organization.title} />
             </a>
           </div>
-        )
+        );
       }
       return n.organization.title;
     }

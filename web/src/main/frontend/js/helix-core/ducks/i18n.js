@@ -2,12 +2,16 @@ import moment from '../moment-localized';
 
 import i18n from '../service/i18n';
 
+import {
+  EnumLocale,
+} from '../model';
+
 // Actions
 const REQUEST_MESSAGES = 'locale/REQUEST_MESSAGES';
 const LOAD_MESSAGES = 'locale/LOAD_MESSAGES';
 
 const initialState = {
-  locale: 'en-GB',
+  locale: EnumLocale.EN,
   messages: {},
 };
 

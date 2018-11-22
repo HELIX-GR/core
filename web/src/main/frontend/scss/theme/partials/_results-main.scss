@@ -917,6 +917,23 @@
                 }
               }
             }
+            .citation {
+              margin-top: 30px;
+              .inline {
+                padding-left: 25px;
+              }
+              .citation-component {
+                position: relative;
+                padding: 10px 0 10px 0px;
+                margin-bottom: 0;
+                .citation-text {
+                  margin: 10px 0px;
+                  border: 1px dashed #6F6F6F;
+                  background: lightgray;
+                  padding: 10px;
+                }
+              }
+            }
             .related-publications {
               list-style: none;
               margin-top: 30px;

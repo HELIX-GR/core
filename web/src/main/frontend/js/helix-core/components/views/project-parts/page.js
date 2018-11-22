@@ -10,6 +10,7 @@ import {
 } from '../../../ducks/ui/views/project';
 
 import {
+  EnumLocale,
   WordPressPages,
 } from '../../../model';
 
@@ -37,7 +38,7 @@ class Page extends React.Component {
 
   getPage(name) {
     const { locale } = this.props;
-    if (locale !== 'en-GB') {
+    if (locale !== EnumLocale.EN) {
       name = `${name}-${locale.toLowerCase()}`;
     }
     this.props.getPage(name).then(() => this.scrollToTop());
