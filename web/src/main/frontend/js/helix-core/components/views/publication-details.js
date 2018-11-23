@@ -301,16 +301,20 @@ class PublicationDetails extends React.Component {
                     <div className="related-publication-list">
                       {p.related.map(pub => (
                         <li key={pub.id} className="publication-component clearfix" data-id={pub.id}>
-                          <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [pub.id])} title={pub.title}>
-                            {pub.title}
-                          </Link>
-                          {pub.dateOfAcceptance &&
-                            <span className="pl-1">
-                              ({moment(pub.dateOfAcceptance).year()})
+                          <div className="publication-component-group">
+                            <div className="publication-component-title">
+                              <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [pub.id])} title={pub.title}>
+                                {pub.title}
+                              </Link>
+                              {pub.dateOfAcceptance &&
+                                <span className="pl-1">
+                                  ({moment(pub.dateOfAcceptance).year()})
                             </span>
-                          }
-                          <div className="btn-view btn-group" title={_t({ id: 'publication.similarity' })}>
-                            <ProgressBar value={pub.similarity * 100} width={'40px'} />
+                              }
+                            </div>
+                            <div className=" btn-group publication-component-similarity" title={_t({ id: 'publication.similarity' })}>
+                              <ProgressBar value={pub.similarity * 100} width={'40px'} />
+                            </div>
                           </div>
                         </li>
                       ))}
