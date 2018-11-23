@@ -74,16 +74,20 @@ class PubsAdvancedOptions extends React.Component {
         </div>
         <div className="fields-group">
           <div className="filters param-box">
-            <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.author' })}</h5>
-            <FormGroup >
-              <KeywordEditor
-                onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
-                placeholder={_t({ id: 'advanced-search.placeholder.author' })}
-                value={filters[EnumOpenaireFilter.Authors]}
-                readOnly={this.props.readOnly}
-              />
-              <FormText color="muted">{_t({ id: 'advanced-search.help.author' })}</FormText>
-            </FormGroup>
+            {true === false &&
+              <React.Fragment>
+                <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.author' })}</h5>
+                <FormGroup >
+                  <KeywordEditor
+                    onChange={authors => this.props.setOpenaireFilter(EnumOpenaireFilter.Authors, authors)}
+                    placeholder={_t({ id: 'advanced-search.placeholder.author' })}
+                    value={filters[EnumOpenaireFilter.Authors]}
+                    readOnly={this.props.readOnly}
+                  />
+                  <FormText color="muted">{_t({ id: 'advanced-search.help.author' })}</FormText>
+                </FormGroup>
+              </React.Fragment>
+            }
             <h5 className="title">{_t({ id: 'advanced-search.filters.pubs.acceptance-from' })}</h5>
             <FormGroup >
               <DatePicker

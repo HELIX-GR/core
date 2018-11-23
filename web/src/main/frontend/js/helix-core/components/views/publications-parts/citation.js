@@ -34,19 +34,22 @@ const customStyles = {
     ...base,
     display: 'flex',
   }),
-  multiValueRemove: (base, state) => ({
-    ...base,
-    ':hover': {
-      backgroundColor: 'none',
-    },
-    cursor: 'pointer',
-  }),
   placeholder: (base, state) => ({
     ...base,
     fontSize: '15px',
     lineHeight: '24px',
     fontWeight: '300',
     color: '#707070',
+  }),
+  option: (base, { isFocused, isSelected }) => ({
+    ...base,
+    cursor: isSelected ? 'default' : 'pointer',
+    backgroundColor: isFocused ? '#DDDDDD' : isSelected ? '#DDDDDD' : base.backgroundColor,
+    opacity: isSelected ? 1 : isFocused ? 0.5 : 1,
+    color: '#707070',
+    ':active': {
+      backgroundColor: isFocused ? '#DDDDDD' : isSelected ? '#DDDDDD' : base.backgroundColor,
+    }
   }),
 };
 

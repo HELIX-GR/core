@@ -45,6 +45,8 @@ import {
   Result,
 } from './main-parts';
 
+const KEYSTROKE_INTERVAL = 800;
+
 class Main extends React.Component {
 
   constructor(props) {
@@ -52,7 +54,7 @@ class Main extends React.Component {
 
     this.onPillChanged = this.onPillChanged.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
-    this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
+    this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, KEYSTROKE_INTERVAL);
 
     this.textInput = React.createRef();
 
@@ -84,22 +86,23 @@ class Main extends React.Component {
     return !!Object.keys(pills).find(key => !!pills[key]);
   }
 
-  search(advanced = false) {
+  search(advanced = false, catalog = null) {
     const { text } = this.props.search;
 
     if (this.isTextValid(text)) {
-      this.props.searchAll(text, advanced).then((data) => {
-        const found = Object.keys(EnumCatalog).some((key) => {
-          return (data.catalogs && data.catalogs[key] && data.catalogs[key].count !== 0);
-        });
+      (catalog ? this.props.searchAll(text, false, 0, 10, catalog) : this.props.searchAll(text, advanced))
+        .then((data) => {
+          const found = Object.keys(EnumCatalog).some((key) => {
+            return (data.catalogs && data.catalogs[key] && data.catalogs[key].count !== 0);
+          });
 
-        if (found) {
-          if (advanced) {
-            this.props.toggleAdvanced();
+          if (found) {
+            if (advanced) {
+              this.props.toggleAdvanced();
+            }
+            this.props.history.push(StaticRoutes.MAIN_RESULTS);
           }
-          this.props.history.push(StaticRoutes.MAIN_RESULTS);
-        }
-      });
+        });
     }
   }
 
@@ -221,9 +224,12 @@ class Main extends React.Component {
 
                   <Result
                     data={data}
+                    hide={() => this.props.setResultVisibility(false)}
                     lab={lab}
+                    navigate={(url) => this.props.history.push(url)}
                     openaire={openaire}
                     result={catalogs}
+                    searchCatalog={(catalog) => this.search(false, catalog)}
                     visible={visible && !loading}
                   />
 

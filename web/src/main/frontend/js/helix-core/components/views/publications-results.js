@@ -226,7 +226,9 @@ class PublicationsResults extends React.Component {
                 </div>
               </div>
 
-              <LocationFilter className="" />
+              {true === false &&
+                <LocationFilter />
+              }
 
               <PubsAdvancedOptions
                 filters={this.props.search.openaire}

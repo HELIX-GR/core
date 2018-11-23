@@ -522,7 +522,9 @@ class MainResults extends React.Component {
                 </div>
               </div>
 
-              <LocationFilter className="" />
+              {true === false &&
+                <LocationFilter />
+              }
 
               <div className="fields">
 

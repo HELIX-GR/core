@@ -10,6 +10,7 @@ import {
 
 // Actions
 const ADVANCED_SEARCH_TOGGLE = 'ui/search-page/ADVANCED_SEARCH_TOGGLE';
+const PILL_SET = 'ui/search-page/PILL_SET';
 const PILL_TOGGLE = 'ui/search-page/PILL_TOGGLE';
 const SET_DATA_FACET = 'ui/search-page/SET_DATA_FACET';
 const SET_LAB_FACET = 'ui/search-page/SET_LAB_FACET';
@@ -154,6 +155,15 @@ export default (state = initialState, action) => {
         advanced: !state.advanced,
       };
 
+    case PILL_SET:
+      return {
+        ...state,
+        pills: {
+          ...state.pills,
+          [action.id]: action.value,
+        },
+      };
+
     case PILL_TOGGLE:
       return {
         ...state,
@@ -252,6 +262,12 @@ export const toggleAdvanced = () => ({
   type: ADVANCED_SEARCH_TOGGLE,
 });
 
+const setPill = (id, value) => ({
+  type: PILL_SET,
+  id,
+  value,
+});
+
 export const togglePill = (id) => ({
   type: PILL_TOGGLE,
   id,
@@ -329,11 +345,17 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
     });
 };
 
-export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => (dispatch, getState) => {
+export const search = (term, advanced = false, pageIndex = 0, pageSize = 10, catalog = null) => (dispatch, getState) => {
   const { meta: { csrfToken: token }, ui: { main: { pills, data, lab, openaire } } } = getState();
   const queries = {};
 
-  if (pills.data) {
+  if (catalog) {
+    dispatch(setPill('data', catalog === EnumCatalog.CKAN));
+    dispatch(setPill('lab', catalog === EnumCatalog.LAB));
+    dispatch(setPill('pubs', catalog === EnumCatalog.OPENAIRE));
+  }
+
+  if ((!catalog && pills.data) || (catalog === EnumCatalog.CKAN)) {
     queries[EnumCatalog.CKAN] = {
       catalog: EnumCatalog.CKAN,
       pageIndex,
@@ -342,7 +364,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       facets: advanced ? data.facets : null,
     };
   }
-  if (pills.lab) {
+  if ((!catalog && pills.lab) || (catalog === EnumCatalog.LAB)) {
     queries[EnumCatalog.LAB] = {
       catalog: EnumCatalog.LAB,
       pageIndex,
@@ -351,7 +373,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       facets: advanced ? lab.facets : null,
     };
   }
-  if (pills.pubs) {
+  if ((!catalog && pills.pubs) || (catalog === EnumCatalog.OPENAIRE)) {
     queries[EnumCatalog.OPENAIRE] = {
       catalog: EnumCatalog.OPENAIRE,
       pageIndex,

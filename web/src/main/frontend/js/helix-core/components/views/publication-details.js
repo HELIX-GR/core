@@ -27,6 +27,10 @@ import {
 } from '../../model';
 
 import {
+  removeAccent
+} from '../../util';
+
+import {
   ProgressBar,
 } from '../helpers';
 
@@ -135,7 +139,7 @@ class PublicationDetails extends React.Component {
               <section className="side-tags">
                 {p.subjects &&
                   p.subjects.map(tag => (
-                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{tag}</a>
+                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{removeAccent(tag)}</a>
                   ))
                 }
               </section>
@@ -171,24 +175,26 @@ class PublicationDetails extends React.Component {
 
               <div className="result-items clearfix">
                 <div className="nav-bar">
-                  <div className="btn-favorite">
-                    <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
-                      <img src="/images/png/favorite.png" />
-                    </a>
-                  </div>
-                  {p.instances.length !== 0 && p.instances[0].url &&
-                    <div className="btn-save">
-                      <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
-                        <img src="/images/png/save.png" />
-                      </a>
-                    </div>
-                  }
                   <div>
                     <h1 className="package-title">
                       <a href={`${host}/search/publication?articleId=${p.objectIdentifier}`} target="_blank">
                         {p.title}
                       </a>
                     </h1>
+                  </div>
+                  <div className="result-icons">
+                    <div className="btn-favorite">
+                      <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
+                        <img src="/images/png/favorite.png" />
+                      </a>
+                    </div>
+                    {p.instances.length !== 0 && p.instances[0].url &&
+                      <div className="btn-save">
+                        <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
+                          <img src="/images/png/save.png" />
+                        </a>
+                      </div>
+                    }
                   </div>
                   <div className="dataset-dates">
                     {p.embargoEndDate &&

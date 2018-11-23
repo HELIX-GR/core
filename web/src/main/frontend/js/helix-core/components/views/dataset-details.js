@@ -20,6 +20,10 @@ import {
   StaticRoutes,
 } from '../../model';
 
+import {
+  removeAccent
+} from '../../util';
+
 const PARAM_ID = 'id';
 
 class DatasetDetails extends React.Component {
@@ -93,7 +97,7 @@ class DatasetDetails extends React.Component {
               <section className="side-tags">
                 {r.closed_tag &&
                   r.closed_tag.map(tag => (
-                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{tag}</a>
+                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{removeAccent(tag)}</a>
                   ))
                 }
               </section>
@@ -129,18 +133,20 @@ class DatasetDetails extends React.Component {
 
               <div className="result-items clearfix">
                 <div className="nav-bar">
-                  <div className="package-language">
-                    <a href="#"> {r.datacite.languagecode}</a>
-                  </div>
-                  <div className="btn-favorite">
-                    <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
-                      <img className="" src="/images/png/favorite.png" />
-                    </a>
-                  </div>
                   <div>
                     <h1 className="package-title">
                       <a href={`${host}/dataset/${r.id}`}>{r.title}</a>
                     </h1>
+                  </div>
+                  <div className="result-icons">
+                    <div className="btn-favorite">
+                      <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
+                        <img className="" src="/images/png/favorite.png" />
+                      </a>
+                    </div>
+                    <div className="package-language">
+                      <a href="#"> {r.datacite.languagecode}</a>
+                    </div>
                   </div>
                   <div className="dataset-dates">
                     <div className="title">{_t({ id: 'dataset.publication' })}</div>

@@ -4,6 +4,8 @@ import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import {
+  buildPath,
+  DynamicRoutes,
   EnumCatalog,
 } from '../../../model';
 
@@ -11,11 +13,52 @@ class Result extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.onDocumentClick = this.onDocumentClick.bind(this);
   }
 
   static propTypes = {
-    visible: PropTypes.bool.isRequired,
+    hide: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
     result: PropTypes.object,
+    searchCatalog: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired,
+  }
+
+  componentDidMount() {
+    document.getElementById('root').addEventListener('click', this.onDocumentClick, false);
+  }
+
+  componentWillUnmount() {
+    document.getElementById('root').removeEventListener('click', this.onDocumentClick, false);
+  }
+
+  onDocumentClick(e) {
+    const elements = document.getElementsByClassName('main-form-content');
+    if (elements.length === 0) {
+      return;
+    }
+    const container = elements[0];
+    if (!container.contains(e.target)) {
+      this.props.hide();
+    }
+  }
+
+  handleLink(e, catalog, id) {
+    e.preventDefault();
+
+    if (id === null) {
+      this.props.searchCatalog(catalog);
+    } else {
+      switch (catalog) {
+        case EnumCatalog.OPENAIRE:
+          this.props.navigate(buildPath(DynamicRoutes.PUBLICATION_PAGE, [id]));
+          break;
+        case EnumCatalog.LAB:
+          this.props.navigate(buildPath(DynamicRoutes.NOTEBOOK_PAGE, [id]));
+          break;
+      }
+    }
   }
 
   render() {
@@ -47,7 +90,7 @@ class Result extends React.Component {
               <div className="results-title">
                 Data
               </div>
-              <a className="all-link">
+              <a className="all-link" onClick={(e) => this.handleLink(e, EnumCatalog.CKAN, null)}>
                 all Data
               </a>
             </div>
@@ -63,7 +106,7 @@ class Result extends React.Component {
               <div className="results-title">
                 Pubs
               </div>
-              <a className="all-link">
+              <a className="all-link" onClick={(e) => this.handleLink(e, EnumCatalog.OPENAIRE, null)}>
                 all Pubs
               </a>
             </div>
@@ -79,7 +122,7 @@ class Result extends React.Component {
               <div className="results-title">
                 Lab
               </div>
-              <a className="all-link">
+              <a className="all-link" onClick={(e) => this.handleLink(e, EnumCatalog.LAB, null)}>
                 all Notebooks
               </a>
             </div>
@@ -111,13 +154,11 @@ class Result extends React.Component {
   }
 
   renderPublications(publications) {
-    const { host } = this.props.openaire;
-
     return publications.map((p, index) => {
       return (
         <a
           key={`publication-${index}`}
-          href={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+          onClick={(e) => this.handleLink(e, EnumCatalog.OPENAIRE, p.objectIdentifier)}
           className="result-entry" target="_blank"
         >
           {p.title}
@@ -127,13 +168,11 @@ class Result extends React.Component {
   }
 
   renderNotebooks(notebooks) {
-    const { host } = this.props.lab;
-
     return notebooks.map((n, index) => {
       return (
         <a
           key={`notebook-${index}`}
-          href={`${host}/dataset/${n.id}`}
+          onClick={(e) => this.handleLink(e, EnumCatalog.LAB, n.id)}
           className="result-entry"
           target="_blank"
         >

@@ -155,8 +155,11 @@ class Publications extends React.Component {
                   </div>
 
                   <Result
+                    hide={() => this.props.setResultVisibility(false)}
+                    navigate={(url) => this.props.history.push(url)}
                     openaire={openaire}
                     result={catalogs[EnumCatalog.OPENAIRE]}
+                    searchCatalog={() => this.search(false)}
                     visible={visible && !loading}
                   />
 
