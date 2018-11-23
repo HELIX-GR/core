@@ -114,16 +114,19 @@ h6,
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
+  cursor: default;
   &:first-child {
     margin-left: 0;
     margin-right: 0;
   }
   &:hover {
-    opacity: .5;
     color: $details-grey;
     text-decoration: none;
   }
   &.first-tag {
     margin-left: 18px;
+  }
+  &.link {
+    cursor: pointer;
   }
 }

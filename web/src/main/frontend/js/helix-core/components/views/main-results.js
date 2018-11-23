@@ -196,9 +196,9 @@ class MainResults extends React.Component {
           </a>
         </div>
         <h3 className="title">
-          <Link to={buildPath(DynamicRoutes.DATASET_PAGE, [r.id])}>
+          <a href={`${host}/dataset/${r.id}`} target="_blank">
             {r.title.length > MAX_TITLE_LENGTH ? `${r.title.substring(0, MAX_TITLE_LENGTH)} ...` : r.title}
-          </Link>
+          </a>
           <div className="pill data ml-1">
             DATA
           </div>
@@ -207,7 +207,7 @@ class MainResults extends React.Component {
           {r.notes.length > MAX_NOTES_LENGTH ? `${r.notes.substring(0, MAX_NOTES_LENGTH)} ...` : r.notes}
         </div>
         <div className="service">
-          <a href="#">{r.organization.title}</a>
+          <a href="" onClick={(e) => e.preventDefault()}>{r.organization.title}</a>
         </div>
 
         <div className="tag-list">
@@ -241,7 +241,11 @@ class MainResults extends React.Component {
           {formats.length !== 0 &&
             formats.filter(format => !!format).map((format, index) => {
               return (
-                <a href="#" className={`tag-box ${index === 0 ? 'first-tag' : ''}`} key={format}>
+                <a
+                  href=''
+                  onClick={(e) => e.preventDefault()}
+                  className={`tag-box ${index === 0 ? 'first-tag' : ''}`} key={format}
+                >
                   <div>
                     {format}
                   </div>
@@ -303,7 +307,7 @@ class MainResults extends React.Component {
         </div>
         {p.publisher &&
           <div className="service">
-            <a href="">{p.publisher}</a>
+            <a href="" onClick={(e) => e.preventDefault()}>{p.publisher}</a>
           </div>
         }
 
@@ -359,14 +363,14 @@ class MainResults extends React.Component {
           {n.notes.length > MAX_NOTES_LENGTH ? `${n.notes.substring(0, MAX_NOTES_LENGTH)} ...` : n.notes}
         </div>
         <div className="service">
-          <a href="#">{n.organization.title}</a>
+          <a href='' onClick={(e) => e.preventDefault()}>{n.organization.title}</a>
         </div>
 
         <div className="tag-list">
           {formats.length !== 0 &&
             formats.filter(format => !!format).map(format => {
               return (
-                <a href="#" className="tag-box" key={format}>
+                <a href='' className="tag-box" key={format}>
                   <div>
                     {format}
                   </div>
@@ -571,14 +575,24 @@ class MainResults extends React.Component {
                   </select>
                 </label>
                 <div className="main-results-result-count">
-                  {!!pills.data &&
+                  {pills.data &&
                     <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
                   }
-                  {!!pills.pubs &&
-                    <span className="pl-2">{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
+                  {pills.pubs &&
+                    <React.Fragment>
+                      {pills.data &&
+                        <span className="pr-2 pl-2">|</span>
+                      }
+                      <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
+                    </React.Fragment>
                   }
-                  {!!pills.lab &&
-                    <span className="pl-2">{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
+                  {pills.lab &&
+                    <React.Fragment>
+                      {(pills.data || pills.pubs) &&
+                        <span className="pr-2 pl-2">|</span>
+                      }
+                      <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
+                    </React.Fragment>
                   }
                 </div>
               </div>

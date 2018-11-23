@@ -228,6 +228,7 @@ class Main extends React.Component {
                     lab={lab}
                     navigate={(url) => this.props.history.push(url)}
                     openaire={openaire}
+                    pills={pills}
                     result={catalogs}
                     searchCatalog={(catalog) => this.search(false, catalog)}
                     visible={visible && !loading}

@@ -43,8 +43,8 @@ class Pagination extends React.Component {
     return (
       <div className={"breadcrumbs-pagination " + this.props.className}>
         <div className="breadcrumbs">
-          <a href="#" className="breadcrumbs-part">{_t({ id: 'breadcrumb.results' })}</a>
-          <a href="#" className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
+          <a href='' className="breadcrumbs-part">{_t({ id: 'breadcrumb.results' })}</a>
+          <a href='' className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
         </div>
 
         <ul className="pagination-block">

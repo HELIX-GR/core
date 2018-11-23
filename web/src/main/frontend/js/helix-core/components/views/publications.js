@@ -194,34 +194,34 @@ class Publications extends React.Component {
                 <div className="featured-pubs-item">
 
                   <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href="#">ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
+                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
                   </div>
 
-                  <a href="#">
+                  <a href=''>
                     <h3 className="featured-pubs-title">
                       Places of Ancient Monuments
                     </h3>
                   </a>
 
                   <div className="pubs-service">
-                    <a href="#">ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
+                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
                   </div>
 
                   <div className="tag-list">
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         SHAPEFILE
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WMS
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WFS
                       </div>
@@ -235,34 +235,34 @@ class Publications extends React.Component {
                 <div className="featured-pubs-item">
 
                   <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href="#">ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
+                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
                   </div>
 
-                  <a href="#">
+                  <a href=''>
                     <h3 className="featured-pubs-title">
                       Research for Data
                     </h3>
                   </a>
 
                   <div className="pubs-service">
-                    <a href="#">ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
+                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
                   </div>
 
                   <div className="tag-list">
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         SHAPEFILE
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WMS
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WFS
                       </div>
@@ -276,34 +276,34 @@ class Publications extends React.Component {
                 <div className="featured-pubs-item">
 
                   <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href="#">ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
+                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
                   </div>
 
-                  <a href="#">
+                  <a href=''>
                     <h3 className="featured-pubs-title">
                       Research for Data
                     </h3>
                   </a>
 
                   <div className="pubs-service">
-                    <a href="#">ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
+                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
                   </div>
 
                   <div className="tag-list">
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         SHAPEFILE
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WMS
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WFS
                       </div>
@@ -317,34 +317,34 @@ class Publications extends React.Component {
                 <div className="featured-pubs-item">
 
                   <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href="#">ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
+                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
                   </div>
 
-                  <a href="#">
+                  <a href=''>
                     <h3 className="featured-pubs-title">
                       Research for Data
                     </h3>
                   </a>
 
                   <div className="pubs-service">
-                    <a href="#">ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
+                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
                   </div>
 
                   <div className="tag-list">
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         SHAPEFILE
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WMS
                       </div>
                     </a>
 
-                    <a href="#" className="tag-box">
+                    <a href='' className="tag-box">
                       <div>
                         WFS
                       </div>

@@ -22,7 +22,7 @@ class SubjectItem extends React.Component {
           <img src={image} alt="" />
         </div>
         <h3 className="featured-pubs-title">
-          <a href="#">
+          <a href=''>
             {text}
           </a>
         </h3>

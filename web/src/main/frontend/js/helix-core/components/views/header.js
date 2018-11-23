@@ -69,6 +69,9 @@ class Header extends React.Component {
       if (location.pathname.startsWith('/pubs')) {
         return StaticRoutes.PUBS;
       }
+      if (location.pathname.startsWith('/publications')) {
+        return StaticRoutes.PUBS;
+      }
     }
     return StaticRoutes.MAIN;
   }
@@ -129,7 +132,7 @@ class Header extends React.Component {
                 <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">{_t({ id: 'header.menu.news.title' })}</NavLink>
                 <ul className="sub-menu">
                   <li><NavLink to={StaticRoutes.NEWS}>{_t({ id: 'header.menu.news.items.news' })}</NavLink></li>
-                  <li><a href="#">{_t({ id: 'header.menu.news.items.events' })}</a></li>
+                  <li><a href=''>{_t({ id: 'header.menu.news.items.events' })}</a></li>
                 </ul>
               </li>
 
@@ -167,12 +170,12 @@ class Header extends React.Component {
                     </a>
                     <ul className="sub-menu">
                       {authenticated &&
-                        <li><a href="#">{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.username })}</a></li>
+                        <li><a href=''>{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.username })}</a></li>
                       }
-                      <li><a href="#">{_t({ id: 'header.menu.login.items.account' })}</a></li>
-                      <li><a href="#">{_t({ id: 'header.menu.login.items.help' })}</a></li>
-                      <li><a href="#">{_t({ id: 'header.menu.login.items.settings' })}</a></li>
-                      <li><a href="#" onClick={() => this.props.logout()}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
+                      <li><a href=''>{_t({ id: 'header.menu.login.items.account' })}</a></li>
+                      <li><a href=''>{_t({ id: 'header.menu.login.items.help' })}</a></li>
+                      <li><a href=''>{_t({ id: 'header.menu.login.items.settings' })}</a></li>
+                      <li><a href='' onClick={() => this.props.logout()}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
                     </ul>
                   </li>
                 </ul>

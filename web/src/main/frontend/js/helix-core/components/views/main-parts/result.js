@@ -63,14 +63,17 @@ class Result extends React.Component {
 
   render() {
     const {
-      [EnumCatalog.CKAN]: packages,
-      [EnumCatalog.OPENAIRE]: publications,
-      [EnumCatalog.LAB]: notebooks,
-    } = this.props.result;
+      pills,
+      result: {
+        [EnumCatalog.CKAN]: packages,
+        [EnumCatalog.OPENAIRE]: publications,
+        [EnumCatalog.LAB]: notebooks,
+      },
+    } = this.props;
 
-    const showPackages = (packages && packages.results && packages.results.length !== 0);
-    const showPublications = (publications && publications.results && publications.results.length !== 0);
-    const showNotebooks = (notebooks && notebooks.results && notebooks.results.length !== 0);
+    const showPackages = (pills.data && packages && packages.results && packages.results.length !== 0);
+    const showPublications = (pills.pubs && publications && publications.results && publications.results.length !== 0);
+    const showNotebooks = (pills.lab && notebooks && notebooks.results && notebooks.results.length !== 0);
 
     const visible = this.props.visible && (showPackages || showPublications || showNotebooks);
 

@@ -149,7 +149,7 @@ class PublicationsResults extends React.Component {
           </div>
           {p.publisher &&
             <div className="service">
-              <a href="">{p.publisher}</a>
+              <a href="" onClick={(e) => e.preventDefault()}>{p.publisher}</a>
             </div>
           }
 
@@ -157,7 +157,7 @@ class PublicationsResults extends React.Component {
             {resource &&
               <a
                 href={resource.url}
-                className="tag-box"
+                className="tag-box link"
                 target="blank"
               >
                 <div>

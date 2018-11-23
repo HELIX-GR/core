@@ -24,6 +24,10 @@ import {
   removeAccent
 } from '../../util';
 
+import {
+  Tag,
+} from '../helpers';
+
 const PARAM_ID = 'id';
 
 class DatasetDetails extends React.Component {
@@ -96,8 +100,8 @@ class DatasetDetails extends React.Component {
               <h5 className="side-heading">{_t({ id: 'dataset.subjects' })}</h5>
               <section className="side-tags">
                 {r.closed_tag &&
-                  r.closed_tag.map(tag => (
-                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{removeAccent(tag)}</a>
+                  r.closed_tag.sort().map(tag => (
+                    <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }
               </section>
@@ -145,7 +149,7 @@ class DatasetDetails extends React.Component {
                       </a>
                     </div>
                     <div className="package-language">
-                      <a href="#"> {r.datacite.languagecode}</a>
+                      <a href=''> {r.datacite.languagecode}</a>
                     </div>
                   </div>
                   <div className="dataset-dates">

@@ -95,8 +95,8 @@ class Footer extends React.Component {
                 <li><a href={dataHost}>{_t({ id: 'footer.columns.research.links.data' })}</a></li>
                 <li><Link to={StaticRoutes.PUBS}>{_t({ id: 'footer.columns.research.links.pubs' })}</Link></li>
                 <li><a href={ExternalRoutes.Lab}>{_t({ id: 'footer.columns.research.links.lab' })}</a></li>
-                <li><a href="#">{_t({ id: 'footer.columns.research.links.topics' })}</a></li>
-                <li><a href="#">{_t({ id: 'footer.columns.research.links.organizations' })}</a></li>
+                <li><a href=''>{_t({ id: 'footer.columns.research.links.topics' })}</a></li>
+                <li><a href=''>{_t({ id: 'footer.columns.research.links.organizations' })}</a></li>
               </ul>
             </div>
             <div className="footer-column partners">

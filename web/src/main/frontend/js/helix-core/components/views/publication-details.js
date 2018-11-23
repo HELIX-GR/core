@@ -27,11 +27,8 @@ import {
 } from '../../model';
 
 import {
-  removeAccent
-} from '../../util';
-
-import {
   ProgressBar,
+  Tag,
 } from '../helpers';
 
 import {
@@ -138,8 +135,8 @@ class PublicationDetails extends React.Component {
               <h5 className="side-heading">{_t({ id: 'publication.subjects' })}</h5>
               <section className="side-tags">
                 {p.subjects &&
-                  p.subjects.map(tag => (
-                    <a key={tag} className="topics" onClick={(e) => this.onSearchTag(e, tag)}>{removeAccent(tag)}</a>
+                  p.subjects.sort().map(tag => (
+                    <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }
               </section>
@@ -282,7 +279,7 @@ class PublicationDetails extends React.Component {
                   {p.fullTextUrl &&
                     <a
                       href={p.fullTextUrl}
-                      className="tag-box tag-box-other"
+                      className="tag-box tag-box-other link"
                       target="blank"
                     >
                       <div>
