@@ -171,7 +171,7 @@
   },
   "pubs": {
     "search": {
-      "placeholder": "Αναζητήστε δημοσίευσεις",
+      "placeholder": "Αναζητήστε δημοσιεύσεις",
       "advanced-search": "ΠΡΟΧΩΡΗΜΕΝΗ ΑΝΑΖΗΤΗΣΗ"
     },
     "featured": "Επιλεγμένες Δημοσιεύσεις",
@@ -280,7 +280,7 @@
     "hosted-by": "Διαθέσιμο Από: {host}",
     "similarity": "Ομοιότητα",
     "download-section": "Μεταφόρτωση Από",
-    "citation": "Παραπομπή",
+    "citation": "Παραπομπές",
     "select-citation-style": "Επιλογή μορφοποίησης παραπομπής ...",
     "buttons": {
       "view": "ΠΡΟΒΟΛΗ"
