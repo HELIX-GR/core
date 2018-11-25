@@ -61,12 +61,12 @@ class ContentRoot extends React.Component {
   }
 
   componentDidMount() {
-    this._listener = _.debounce(this._setViewport.bind(this), 150);
-    window.addEventListener('resize', this._listener);
+    this._viewportListener = _.debounce(this._setViewport.bind(this), 150);
+    window.addEventListener('resize', this._viewportListener);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this._listener);
+    window.removeEventListener('resize', this._viewportListener);
   }
 
   _setViewport() {
@@ -148,7 +148,8 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.PROJECT} component={Project} />
         <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
         {/* Default */}
-        <Route path={StaticRoutes.MAIN} component={Main} />
+        <Route path={StaticRoutes.MAIN} component={Main} exact />
+        <Redirect to={StaticRoutes.MAIN} />
       </Switch>
     );
 

@@ -30,6 +30,13 @@ export const EnumRole = {
 };
 
 export const EnumLocale = {
-  'EL': 'el',
-  'EN': 'en-GB',
+  EL: 'el',
+  EN: 'en-GB',
+};
+
+export const EnumAuthProvider = {
+  Forms: 'Forms',
+  Google: 'Google',
+  GitHub: 'GitHub',
+  SAML: 'SAML',
 };

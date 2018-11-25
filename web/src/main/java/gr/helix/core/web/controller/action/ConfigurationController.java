@@ -1,7 +1,10 @@
 package gr.helix.core.web.controller.action;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.saml.metadata.MetadataManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.web.config.ExternalServiceProviderConfiguration;
 import gr.helix.core.web.config.SamlConfiguration;
+import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.configuration.ClientConfiguration;
 import gr.helix.core.web.service.CkanServiceProxy;
 import gr.helix.core.web.service.OpenaireServiceProxy;
@@ -17,6 +21,9 @@ import gr.helix.core.web.service.OpenaireServiceProxy;
 @RestController
 @RequestMapping(produces = "application/json")
 public class ConfigurationController extends BaseController {
+
+    @Value("${helix.authentication-providers:cookie}")
+    private String                               authProviders;
 
     @Autowired
     private SamlConfiguration                    samlConfiguration;
@@ -56,6 +63,12 @@ public class ConfigurationController extends BaseController {
         config.setOpenaire(this.openaireServiceProxy.getMetadata());
 
         this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);
+
+        Arrays.stream(this.authProviders.split(","))
+            .map(String::trim)
+            .map(EnumAuthProvider::fromString)
+            .filter(s -> s != null)
+            .forEach(s -> config.getAuthProviders().add(s));
 
         return config;
     }

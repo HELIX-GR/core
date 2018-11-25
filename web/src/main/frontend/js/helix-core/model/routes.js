@@ -64,6 +64,7 @@ export const Pages = {
 // Routes for error pages
 const Forbidden = '/error/403';
 const NotFound = '/error/404';
+const Unauthorized = '/error/401';
 
 /**
  * Routes for error pages
@@ -71,6 +72,7 @@ const NotFound = '/error/404';
 export const ErrorPages = {
   Forbidden,
   NotFound,
+  Unauthorized,
 };
 
 /**

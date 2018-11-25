@@ -20,8 +20,9 @@ import {
 } from 'react-toastify';
 
 import {
-  Pages
-} from '../../model/routes';
+  EnumAuthProvider,
+  Pages,
+} from '../../model';
 
 import {
   getConfiguration,
@@ -69,7 +70,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { defaultIdentityProvider: idp } = this.props.config;
+    const { authProviders, defaultIdentityProvider: idp } = this.props.config;
 
     return (
       <Modal
@@ -87,59 +88,72 @@ class LoginForm extends React.Component {
 
             <form onSubmit={this._submit}>
 
-              <div className="text-center username">
-                <input type="text" className="input-text" placeholder="username"
-                  value={this.state.username}
-                  onChange={(ev) => this.setState({ username: ev.target.value })}
-                />
-              </div>
+              {authProviders.indexOf(EnumAuthProvider.Forms) !== -1 &&
+                <React.Fragment>
+                  <div className="text-center username">
+                    <input type="text" className="input-text" placeholder="username"
+                      value={this.state.username}
+                      onChange={(ev) => this.setState({ username: ev.target.value })}
+                    />
+                  </div>
 
-              <div className="text-center password">
-                <input type="password" className="input-text" placeholder="password"
-                  value={this.state.password}
-                  onChange={(ev) => this.setState({ password: ev.target.value })}
-                />
-              </div>
+                  <div className="text-center password">
+                    <input type="password" className="input-text" placeholder="password"
+                      value={this.state.password}
+                      onChange={(ev) => this.setState({ password: ev.target.value })}
+                    />
+                  </div>
 
-              <div className="text-center forgot-password" >
-                <NavLink className="forgot-password" to={Pages.ResetPassword}>
-                  <FormattedMessage id="login.forgot-password" defaultMessage="Forgot your password?" />
-                </NavLink>
-              </div>
+                  <div className="text-center forgot-password" >
+                    <NavLink className="forgot-password" to={Pages.ResetPassword}>
+                      <FormattedMessage id="login.forgot-password" defaultMessage="Forgot your password?" />
+                    </NavLink>
+                  </div>
 
-              <div className="login-helix">
-                <button type="submit" name="helix" className="helix">
-                  <FormattedMessage id="login.login" defaultMessage="Login" />
-                </button>
-              </div>
+                  <div className="login-helix">
+                    <button type="submit" name="helix" className="helix">
+                      <FormattedMessage id="login.login" defaultMessage="Login" />
+                    </button>
+                  </div>
 
-              <div className="text-separator">
-                <span className="text-center">OR</span>
-              </div>
+                  {authProviders.length !== 1 &&
+                    <div className="text-separator">
+                      <span className="text-center">OR</span>
+                    </div>
+                  }
 
-              <div className="login-google">
-                <a href="/login/google">
-                  <button type="button" name="google" className="oauth">
-                    <span>Google</span>
-                  </button>
-                </a>
-              </div>
+                </React.Fragment>
+              }
 
-              <div className="login-github">
-                <a href="/login/github">
-                  <button type="button" name="github" className="oauth">
-                    <span>GitHub</span>
-                  </button>
-                </a>
-              </div>
+              {authProviders.indexOf(EnumAuthProvider.Google) !== -1 &&
+                <div className="login-google">
+                  <a href="/login/google">
+                    <button type="button" name="google" className="oauth">
+                      <span>Google</span>
+                    </button>
+                  </a>
+                </div>
+              }
 
-              <div className="login-academic">
-                <a href={idp ? `/saml/login?idp=${idp}` : '/saml/login'}>
-                  <button type="button" name="academic" className="academic">
-                    <span>Academic Login</span>
-                  </button>
-                </a>
-              </div>
+              {authProviders.indexOf(EnumAuthProvider.GitHub) !== -1 &&
+                <div className="login-github">
+                  <a href="/login/github">
+                    <button type="button" name="github" className="oauth">
+                      <span>GitHub</span>
+                    </button>
+                  </a>
+                </div>
+              }
+
+              {authProviders.indexOf(EnumAuthProvider.SAML) !== -1 &&
+                <div className="login-academic">
+                  <a href={idp ? `/saml/login?idp=${idp}` : '/saml/login'}>
+                    <button type="button" name="academic" className="academic">
+                      <span>Academic Login</span>
+                    </button>
+                  </a>
+                </div>
+              }
 
             </form>
 
@@ -171,7 +185,7 @@ const mapDispatchToProps = (dispatch) => ({
         },
         () => {
           toast.dismiss();
-          toast.error(<FormattedMessage id="login.failure" defaultMessage="The username or password is incorrect." />);
+          toast.error(<FormattedMessage id="login.failure" />);
         })
       .catch(() => null)
   ),

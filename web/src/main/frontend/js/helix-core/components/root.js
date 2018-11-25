@@ -13,6 +13,7 @@ import {
 import ContentRoot from './content-root';
 
 import {
+  Page401,
   Page403,
   Page404,
 } from './pages';
@@ -35,12 +36,13 @@ class Root extends React.Component {
   }
 
   render() {
-    var { locale, messages, profile } = this.props;
+    var { locale, messages } = this.props;
 
     return (
       <ReactIntl.IntlProvider locale={locale} key={locale} messages={messages}>
         <BrowserRouter basename={basename} >
           <Switch>
+            <Route path={ErrorPages.Unauthorized} component={Page401} />
             <Route path={ErrorPages.Forbidden} component={Page403} exact />
             <Route path={ErrorPages.NotFound} component={Page404} exact />
             <Route path="/" component={ContentRoot} />

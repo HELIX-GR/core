@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -83,16 +84,20 @@ import org.springframework.security.saml.websso.WebSSOProfileConsumerHoKImpl;
 import org.springframework.security.saml.websso.WebSSOProfileConsumerImpl;
 import org.springframework.security.saml.websso.WebSSOProfileImpl;
 import org.springframework.security.saml.websso.WebSSOProfileOptions;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
 import gr.helix.core.web.logging.filter.MappedDiagnosticContextFilter;
@@ -105,17 +110,19 @@ import gr.helix.core.web.service.SAMLUserDetailsServiceImpl;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String                API_REG_EX  = "/api/v\\d+/.*";
+    private static final String                API_REG_EX    = "/api/v\\d+/.*";
+
+    private static final String                ACTION_REG_EX = "/action/.*";
 
     private Timer                              backgroundTaskTimer;
 
     private MultiThreadedHttpConnectionManager multiThreadedHttpConnectionManager;
 
-    private final RegexRequestMatcher          samlMatcher = new RegexRequestMatcher("/saml/.*", null);
+    private final RegexRequestMatcher          samlMatcher   = new RegexRequestMatcher("/saml/.*", null);
 
-    private final RegexRequestMatcher          apiMatcher  = new RegexRequestMatcher(API_REG_EX, null);
+    private final RegexRequestMatcher          apiMatcher    = new RegexRequestMatcher(API_REG_EX, null);
 
-    private final Pattern                      csrfMethods = Pattern.compile("^(POST|PUT|DELETE)$");
+    private final Pattern                      csrfMethods   = Pattern.compile("^(POST|PUT|DELETE)$");
 
     @Autowired
     private SamlConfiguration                  samlConfiguration;
@@ -528,7 +535,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public SimpleUrlAuthenticationFailureHandler oauth2FailureHandler() {
         final SimpleUrlAuthenticationFailureHandler handler = new SimpleUrlAuthenticationFailureHandler();
-        handler.setDefaultFailureUrl("/pages/login?error");
+        handler.setDefaultFailureUrl("/error/401");
         return handler;
     }
 
@@ -538,6 +545,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
+
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        final LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> map = new LinkedHashMap<RequestMatcher, AuthenticationEntryPoint>();
+
+        map.put(new RegexRequestMatcher(API_REG_EX, null), new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+        map.put(new RegexRequestMatcher(ACTION_REG_EX, null), new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+
+        final DelegatingAuthenticationEntryPoint entryPoint = new DelegatingAuthenticationEntryPoint(map);
+        entryPoint.setDefaultEntryPoint(new LoginUrlAuthenticationEntryPoint("/"));
+
+        return entryPoint;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -601,11 +620,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             return false;
         });
 
-        http.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint());
 
         http.formLogin()
             .loginPage("/login")
-            .failureUrl("/login?error")
+            .failureUrl("/error/401")
             .defaultSuccessUrl("/logged-in", true)
             .usernameParameter("username")
             .passwordParameter("password");

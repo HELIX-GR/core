@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.ckan.CkanMetadata;
 import gr.helix.core.web.model.openaire.OpenaireMetadata;
 
@@ -13,22 +14,24 @@ import gr.helix.core.web.model.openaire.OpenaireMetadata;
  */
 public class ClientConfiguration {
 
+    private final List<EnumAuthProvider> authProviders     = new ArrayList<EnumAuthProvider>();
+
     @JsonIgnore
-    private final List<String>     identityProviders = new ArrayList<String>();
+    private final List<String>           identityProviders = new ArrayList<String>();
 
-    private String                 defaultIdentityProvider;
+    private String                       defaultIdentityProvider;
 
-    private OsmConfiguration       osm;
+    private OsmConfiguration             osm;
 
-    private BingMapsConfiguration  bingMaps;
+    private BingMapsConfiguration        bingMaps;
 
-    private WordPressConfiguration wordPress;
+    private WordPressConfiguration       wordPress;
 
-    private CkanMetadata           data;
+    private CkanMetadata                 data;
 
-    private CkanMetadata           lab;
+    private CkanMetadata                 lab;
 
-    private OpenaireMetadata       openaire;
+    private OpenaireMetadata             openaire;
 
     public List<String> getIdentityProviders() {
         return this.identityProviders;
@@ -92,6 +95,10 @@ public class ClientConfiguration {
 
     public void setOpenaire(OpenaireMetadata openaire) {
         this.openaire = openaire;
+    }
+
+    public List<EnumAuthProvider> getAuthProviders() {
+        return this.authProviders;
     }
 
 }
