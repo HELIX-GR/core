@@ -20,6 +20,9 @@ const SEARCH_RESPONSE = 'ui/pubs/SEARCH_RESPONSE';
 const SEARCH_AUTOCOMPLETE_REQUEST = 'ui/pubs/SEARCH_AUTOCOMPLETE_REQUEST';
 const SEARCH_AUTOCOMPLETE_RESPONSE = 'ui/pubs/SEARCH_AUTOCOMPLETE_RESPONSE';
 
+const FEATURED_PUBLICATIONS_REQUEST = 'ui/pubs/FEATURED_PUBLICATIONS_REQUEST';
+const FEATURED_PUBLICATIONS_RESPONSE = 'ui/pubs/FEATURED_PUBLICATIONS_RESPONSE';
+
 // Reducer
 const initialState = {
   advanced: false,
@@ -37,6 +40,7 @@ const initialState = {
   result: {
     catalogs: {},
   },
+  featured: [],
   text: '',
 };
 
@@ -142,6 +146,12 @@ export default (state = initialState, action) => {
         },
       };
 
+    case FEATURED_PUBLICATIONS_RESPONSE:
+      return {
+        ...state,
+        featured: action.publications,
+      };
+
     default:
       return state;
   }
@@ -192,6 +202,15 @@ const catalogSearchBegin = (term) => ({
 const catalogSearchComplete = (data) => ({
   type: SEARCH_RESPONSE,
   data,
+});
+
+const getFeaturedPublicationBegin = () => ({
+  type: FEATURED_PUBLICATIONS_REQUEST,
+});
+
+const getFeaturedPublicationComplete = (publications) => ({
+  type: FEATURED_PUBLICATIONS_RESPONSE,
+  publications,
 });
 
 // Thunk actions
@@ -245,3 +264,20 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       return data;
     });
 };
+
+export const getFeaturedPublications = () => (dispatch, getState) => {
+  const { meta: { csrfToken: token } } = getState();
+
+  dispatch(getFeaturedPublicationBegin());
+  return catalogService.getFeaturedPublications(token)
+    .then((publications) => {
+      dispatch(getFeaturedPublicationComplete(publications));
+      return publications;
+    })
+    .catch((err) => {
+      console.error('Failed loading featured publications data:', err);
+
+      dispatch(getFeaturedPublicationComplete([]));
+      return [];
+    });
+}

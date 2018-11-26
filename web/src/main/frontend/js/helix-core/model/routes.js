@@ -85,6 +85,7 @@ export const api = {
   SearchPubs: '/action/publication/query',
   GetDataset: '/action/dataset/:id',
   GetNotebook: '/action/notebook/:id',
+  GetFeaturedPublications: '/action/featured-publications',
   GetPublication: '/action/publication/:id',
 };
 

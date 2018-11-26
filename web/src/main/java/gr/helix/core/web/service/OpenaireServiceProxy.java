@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,9 @@ public class OpenaireServiceProxy {
     private static final String          API_SEARCH_PUBLICATIONS = "search/publications";
 
     private static final DateFormat      dateFormat              = new SimpleDateFormat("yyyy-MM-dd");
+
+    @Value("${helix.pubs.featured-publications}")
+    private String                       featuredPublicationIds;
 
     @Autowired
     private HttpClient                   httpClient;
@@ -158,7 +162,7 @@ public class OpenaireServiceProxy {
     }
 
 
-    public Publication getPublication(String id) throws ApplicationException {
+    public List<Publication> getPublications(String id) throws ApplicationException {
         try {
             final EndpointConfiguration endpoint = this.openaireConfiguration.getApi();
             final URIBuilder builder = new URIBuilder()
@@ -182,7 +186,7 @@ public class OpenaireServiceProxy {
                     throw ApplicationException.fromMessage("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
                 }
                 final CatalogResult<Publication> openaireResponse = this.parse(response);
-                return openaireResponse.getResults().size() == 1 ? openaireResponse.getResults().get(0) : null;
+                return openaireResponse.getResults();
             }
         } catch (final URISyntaxException ex) {
             logger.error("The input is not a valid URI", ex);
@@ -194,6 +198,10 @@ public class OpenaireServiceProxy {
             logger.error("An I/O exception has occurrend or the connection was aborted", ex);
             throw ApplicationException.fromPattern(ex, BasicErrorCode.IO_ERROR);
         }
+    }
+
+    public List<Publication> getFeaturedPublications() throws ApplicationException {
+        return this.getPublications(this.featuredPublicationIds);
     }
 
     private CatalogResult<Publication> parse(HttpResponse response) {

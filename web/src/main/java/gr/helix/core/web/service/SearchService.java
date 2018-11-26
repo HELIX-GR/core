@@ -1,5 +1,6 @@
 package gr.helix.core.web.service;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +23,9 @@ import gr.helix.core.web.model.openaire.client.Publication;
 @Service
 public class SearchService {
 
-    private static final Logger  logger = LoggerFactory.getLogger(SearchService.class);
+    private static final Logger  logger                     = LoggerFactory.getLogger(SearchService.class);
+
+    private List<Publication>    cachedFeaturedPublications = null;
 
     @Autowired
     @Qualifier("dataCkanServiceProxy")
@@ -106,7 +109,16 @@ public class SearchService {
     }
 
     public Publication getPublication(String id) {
-        return this.openaireServiceProxy.getPublication(id);
+        final List<Publication> result = this.openaireServiceProxy.getPublications(id);
+        return ((result != null) && (result.size() == 1) ? result.get(0) : null);
+    }
+
+    public synchronized List<Publication> getFeaturedPublications() {
+        if (this.cachedFeaturedPublications != null) {
+            return this.cachedFeaturedPublications;
+        }
+
+        return (this.cachedFeaturedPublications = this.openaireServiceProxy.getFeaturedPublications());
     }
 
     public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {

@@ -590,14 +590,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/error**",
                              // SAML endpoints
                              "/saml/**",
-                             // Action API endpoints
+                             // Public action API endpoints
                              "/action/catalog/**",
                              "/action/ckan/**",
                              "/action/configuration/**",
                              "/action/dataset/**",
                              "/action/notebook/**",
                              "/action/openaire/**",
-                             "/action/publication/**")
+                             "/action/publication/**",
+                             "/action/featured-publications")
                 .permitAll()
                 .regexMatchers(API_REG_EX)
                 .permitAll()

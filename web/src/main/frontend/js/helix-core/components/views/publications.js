@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
 
+import moment from '../../moment-localized';
 import classnames from 'classnames';
 
 import {
@@ -10,6 +11,7 @@ import {
 } from 'redux';
 
 import {
+  getFeaturedPublications,
   search as searchAll,
   searchAutoComplete,
   setOpenaireFilter,
@@ -20,9 +22,19 @@ import {
 } from '../../ducks/ui/views/pubs';
 
 import {
+  buildPath,
+  DynamicRoutes,
   EnumCatalog,
   StaticRoutes,
 } from '../../model';
+
+import {
+  FormattedDate,
+} from 'react-intl';
+
+import {
+  Link,
+} from 'react-router-dom';
 
 import {
   AdvancedModal,
@@ -33,6 +45,8 @@ import {
   Result,
   SubjectItem,
 } from './publications-parts';
+
+const MAX_TITLE_LENGTH = 77;
 
 class Publications extends React.Component {
 
@@ -56,6 +70,10 @@ class Publications extends React.Component {
   componentDidMount() {
     document.addEventListener('keydown', this.onKeyDown, false);
     this.props.setResultVisibility(false);
+
+    if (this.props.featured.length === 0) {
+      this.props.getFeaturedPublications();
+    }
   }
 
   componentWillUnmount() {
@@ -105,9 +123,91 @@ class Publications extends React.Component {
     }
   }
 
+  renderFeaturedPublication(p, host) {
+    const age = moment.duration(moment() - moment(p.dateOfAcceptance));
+    const date = age.asHours() < 24 ?
+      moment(p.dateOfAcceptance).fromNow() :
+      <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
+
+    return (
+      <div key={p.objectIdentifier} className="col-md-3 col-sm-6 col-xs-12">
+        <div className="featured-pubs-item">
+
+          <div className="date-of-entry">
+            {date}
+          </div>
+
+          <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
+            <h3 className="featured-pubs-title">
+              {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
+            </h3>
+          </Link>
+
+          <div className="pubs-service">
+            <a onClick={(e) => e.preventDefault()}>{p.publisher}</a>
+          </div>
+
+          <div className="tag-list">
+
+            {p.instances.length !== 0 && p.instances[0].type &&
+              <a
+                href=''
+                onClick={(e) => e.preventDefault()}
+                className="tag-box tag-box-category"
+                target="blank"
+              >
+                <div>
+                  {p.instances[0].type}
+                </div>
+              </a>
+            }
+            {p.language &&
+              <a
+                href=''
+                onClick={(e) => e.preventDefault()}
+                className="tag-box tag-box-other"
+                target="blank"
+              >
+                <div>
+                  {p.language}
+                </div>
+              </a>
+            }
+            {p.bestAccessRight &&
+              <a
+                href=''
+                onClick={(e) => e.preventDefault()}
+                className="tag-box tag-box-other"
+                target="blank"
+              >
+                <div>
+                  {p.bestAccessRight}
+                </div>
+              </a>
+            }
+            {p.fullTextUrl &&
+              <a
+                href={p.fullTextUrl}
+                className="tag-box tag-box-other link"
+                target="blank"
+              >
+                <div>
+                  PDF
+                </div>
+              </a>
+            }
+
+          </div>
+
+        </div>
+      </div >
+    );
+  }
+
   render() {
-    const { openaire } = this.props.config;
+    const { openaire, } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, text } = this.props.search;
+    const { featured } = this.props;
 
     const _t = this.context.intl.formatMessage;
 
@@ -190,172 +290,11 @@ class Publications extends React.Component {
                 </h4>
               </div>
 
-              <div className="col-md-3 col-sm-6 col-xs-12">
-                <div className="featured-pubs-item">
-
-                  <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
-                  </div>
-
-                  <a href=''>
-                    <h3 className="featured-pubs-title">
-                      Places of Ancient Monuments
-                    </h3>
-                  </a>
-
-                  <div className="pubs-service">
-                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
-                  </div>
-
-                  <div className="tag-list">
-
-                    <a href='' className="tag-box">
-                      <div>
-                        SHAPEFILE
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WMS
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WFS
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="col-md-3 col-sm-6 col-xs-12">
-                <div className="featured-pubs-item">
-
-                  <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
-                  </div>
-
-                  <a href=''>
-                    <h3 className="featured-pubs-title">
-                      Research for Data
-                    </h3>
-                  </a>
-
-                  <div className="pubs-service">
-                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
-                  </div>
-
-                  <div className="tag-list">
-
-                    <a href='' className="tag-box">
-                      <div>
-                        SHAPEFILE
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WMS
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WFS
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="col-md-3 col-sm-6 col-xs-12">
-                <div className="featured-pubs-item">
-
-                  <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
-                  </div>
-
-                  <a href=''>
-                    <h3 className="featured-pubs-title">
-                      Research for Data
-                    </h3>
-                  </a>
-
-                  <div className="pubs-service">
-                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
-                  </div>
-
-                  <div className="tag-list">
-
-                    <a href='' className="tag-box">
-                      <div>
-                        SHAPEFILE
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WMS
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WFS
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="col-md-3 col-sm-6 col-xs-12">
-                <div className="featured-pubs-item">
-
-                  <div className="date-of-entry">
-                    Πριν από 8 ημέρες @ <a href=''>ΕΠΙΧΕΙΡΗΣΕΙΣ</a>
-                  </div>
-
-                  <a href=''>
-                    <h3 className="featured-pubs-title">
-                      Research for Data
-                    </h3>
-                  </a>
-
-                  <div className="pubs-service">
-                    <a href=''>ΓΕΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</a>
-                  </div>
-
-                  <div className="tag-list">
-
-                    <a href='' className="tag-box">
-                      <div>
-                        SHAPEFILE
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WMS
-                      </div>
-                    </a>
-
-                    <a href='' className="tag-box">
-                      <div>
-                        WFS
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {featured.length !== 0 &&
+                featured.map((p) => this.renderFeaturedPublication(p, openaire.host))
+              }
             </div>
           </div>
-
-
 
           <div className="search-by-subject-container container-fluid">
             <div className="row">
@@ -489,9 +428,11 @@ const mapStateToProps = (state) => ({
   news: state.ui.news,
   profile: state.user.profile,
   search: state.ui.pubs,
+  featured: state.ui.pubs.featured,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getFeaturedPublications,
   searchAll,
   searchAutoComplete,
   setOpenaireFilter,
