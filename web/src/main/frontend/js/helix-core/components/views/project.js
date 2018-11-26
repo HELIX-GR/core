@@ -88,7 +88,7 @@ class Project extends React.Component {
           </div>
 
         </section>
-      </div >
+      </div>
 
     );
   }

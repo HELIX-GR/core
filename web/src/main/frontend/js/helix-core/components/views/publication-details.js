@@ -380,7 +380,7 @@ class PublicationDetails extends React.Component {
 
           </div>
         </section>
-      </div >
+      </div>
     );
   }
 }

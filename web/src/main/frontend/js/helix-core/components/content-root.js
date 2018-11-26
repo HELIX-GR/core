@@ -124,7 +124,7 @@ class ContentRoot extends React.Component {
     );
 
     return (
-      <div>
+      <React.Fragment>
         <ToastContainer
           className="helix-toastify"
           position="top-right"
@@ -154,8 +154,8 @@ class ContentRoot extends React.Component {
             config={this.props.config}
             location={this.props.location}
           />
-        </div >
-      </div >
+        </div>
+      </React.Fragment>
     );
   }
 }

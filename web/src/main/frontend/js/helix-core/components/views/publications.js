@@ -200,7 +200,7 @@ class Publications extends React.Component {
           </div>
 
         </div>
-      </div >
+      </div>
     );
   }
 
@@ -417,7 +417,7 @@ class Publications extends React.Component {
           toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />
-      </div >
+      </div>
     );
   }
 }

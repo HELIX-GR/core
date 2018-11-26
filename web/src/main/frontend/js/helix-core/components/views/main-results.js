@@ -299,7 +299,7 @@ class MainResults extends React.Component {
             })
           }
         </div>
-      </div >
+      </div>
     );
   }
 
@@ -373,7 +373,7 @@ class MainResults extends React.Component {
             </a>
           }
         </div>
-      </div >
+      </div>
     );
   }
 
@@ -432,7 +432,7 @@ class MainResults extends React.Component {
             })
           }
         </div>
-      </div >
+      </div>
     );
   }
 
@@ -669,7 +669,7 @@ class MainResults extends React.Component {
 
           </div>
         </section>
-      </div >
+      </div>
     );
   }
 }

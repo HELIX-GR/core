@@ -54,7 +54,7 @@ class Menu extends React.Component {
           </NavLink>))
         }
 
-      </div >
+      </div>
     );
   }
 }

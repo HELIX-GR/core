@@ -158,16 +158,13 @@
         }
         div {
           .subject-item {
-            padding: 0 19px 15px 34px; // border-top: solid 10px $pubs-color;
+            padding: 0 19px 15px 34px;
             transition: all .2s ease-in-out;
             -webkit-transition: all .2s ease-in-out;
             -moz-transition: all .2s ease-in-out;
             -o-transition: all .2s ease-in-out;
             height: 260px;
             opacity: 0.5;
-            &:hover {
-              // background-color: white;
-            }
             .featured-pubs-icon {
               height: 138px;
               line-height: 150px;

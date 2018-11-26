@@ -212,7 +212,7 @@ class PublicationsResults extends React.Component {
               </a>
             }
           </div>
-        </div >
+        </div>
       );
     });
   }
@@ -332,7 +332,7 @@ class PublicationsResults extends React.Component {
 
           </div>
         </section>
-      </div >
+      </div>
     );
   }
 }

@@ -275,7 +275,7 @@ class Main extends React.Component {
           toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />
-      </div >
+      </div>
     );
   }
 }

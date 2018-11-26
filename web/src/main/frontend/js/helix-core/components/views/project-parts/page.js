@@ -67,7 +67,7 @@ class Page extends React.Component {
         {page && page.slug.startsWith(WordPressPages.FAQ) &&
           <Faq page={page} />
         }
-      </div >
+      </div>
 
     );
   }

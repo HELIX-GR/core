@@ -63,7 +63,7 @@ class Faq extends React.Component {
           <div id="faq-accordion" className="accordion about-text">
             {sections.map((section, index) => this.renderSection(section, index))}
           </div>
-        </div >
+        </div>
       );
     }
     return null;

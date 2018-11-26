@@ -146,7 +146,7 @@ class NewsDetails extends React.Component {
           </div>
 
         </section>
-      </div >
+      </div>
 
     );
   }

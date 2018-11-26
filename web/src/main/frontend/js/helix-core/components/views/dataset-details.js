@@ -240,7 +240,7 @@ class DatasetDetails extends React.Component {
 
           </div>
         </section>
-      </div >
+      </div>
     );
   }
 }

@@ -1,13 +1,22 @@
 #root {
+  > div {
+    &.home {
+      border-top: 15px solid $main-black;
+    }
+    &.data {
+      border-top: 15px solid $data-color;
+    }
+    &.pubs {
+      border-top: 15px solid $pubs-color;
+    }
+    &.lab {
+      border-top: 15px solid $lab-color;
+    }
+  }
   div {
     &.project,
     &.results-main,
     &.home {
-      header {
-        .logo-area {
-          border-top: 15px solid $main-black;
-        }
-      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $details-grey;
@@ -21,11 +30,7 @@
       }
     }
     &.news {
-      header {
-        .logo-area {
-          border-top: 15px solid $main-black;
-        }
-      }
+      border-top: 15px solid $main-black;
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $details-grey;
@@ -40,11 +45,6 @@
     }
     &.results-data,
     &.data {
-      header {
-        .logo-area {
-          border-top: 15px solid $data-color;
-        }
-      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $data-color;
@@ -60,11 +60,6 @@
     }
     &.results-pubs,
     &.pubs {
-      header {
-        .logo-area {
-          border-top: 15px solid $pubs-color;
-        }
-      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $pubs-color;
@@ -79,11 +74,6 @@
     }
     &.results-lab,
     &.lab {
-      header {
-        .logo-area {
-          border-top: 15px solid $lab-color;
-        }
-      }
       header .menu-wrapper nav.nav-menu ul.menu-items {
         li.menu-item.current-item a {
           border-color: $lab-color;
@@ -105,7 +95,7 @@
     @include position(absolute, 0 0 null 0);
     img.logo-image {
       height: 103px;
-      margin-top: 30px;
+      margin-top: 45px;
       margin-left: 50px;
     }
     .menu-wrapper {

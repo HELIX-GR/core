@@ -29,7 +29,7 @@ export class ProgressBar extends React.Component {
           </div>
         </div>
         {text}
-      </div >
+      </div>
     );
   }
 }
