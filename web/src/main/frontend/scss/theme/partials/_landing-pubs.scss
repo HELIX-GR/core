@@ -164,6 +164,7 @@
             -moz-transition: all .2s ease-in-out;
             -o-transition: all .2s ease-in-out;
             height: 260px;
+            opacity: 0.5;
             &:hover {
               // background-color: white;
             }
@@ -189,6 +190,7 @@
               a {
                 color: $main-black;
                 line-height: 1.3;
+                cursor: default;
               }
             }
             .pubs-service {
@@ -240,6 +242,7 @@
             -moz-transition: all .2s ease-in-out;
             -o-transition: all .2s ease-in-out;
             height: 250px;
+            opacity: 0.5;
             &:hover {
               // background-color: white;
             }
@@ -267,6 +270,7 @@
               min-height: 34px;
               a {
                 color: $main-black;
+                cursor: default;
               }
             }
             .explore-description {
