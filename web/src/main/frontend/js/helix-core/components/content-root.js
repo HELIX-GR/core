@@ -29,10 +29,6 @@ import {
 } from '../model';
 
 import {
-  DebugConsole,
-} from './helpers';
-
-import {
   DatasetDetails,
   Footer,
   Header,
@@ -76,29 +72,6 @@ class ContentRoot extends React.Component {
     );
   }
 
-  resolveBackGroundImage() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/project/page/')) {
-        return '/images/mockups/core-faq-scaled.png';
-      }
-      if (location.pathname.startsWith('/pubs')) {
-        return '/images/mockups/pubs-scaled.png';
-      }
-      if (location.pathname.startsWith('/news/view')) {
-        return '/images/mockups/news-item-scaled.png';
-      }
-      if (location.pathname.startsWith('/news')) {
-        return '/images/mockups/news-scaled.png';
-      }
-      if (location.pathname.startsWith('/results')) {
-        return '/images/mockups/result-all-scaled.png';
-      }
-    }
-    return '/images/mockups/core-main-scaled.png';
-  }
-
   resolvePageClassName() {
     const { location } = this.props;
 
@@ -127,9 +100,6 @@ class ContentRoot extends React.Component {
   }
 
   render() {
-    const { location, profile } = this.props;
-    const isDeveloper = profile && profile.roles ? profile.roles.indexOf(EnumRole.Developer) > -1 : false;
-
     const routes = (
       <Switch>
         {/* Redirect for authenticated users. Navigation after a successful login operation
@@ -169,16 +139,6 @@ class ContentRoot extends React.Component {
           toggle={this.props.toggleLoginDialog}
           visible={this.props.login.visible}
         />
-        {isDeveloper &&
-          <DebugConsole location={location} />
-        }
-        {isDeveloper &&
-          <img
-            id="img-debug"
-            src={this.resolveBackGroundImage()}
-            className="debug-image d-none"
-          />
-        }
         <div className={this.resolvePageClassName()}>
           <Header
             changeLocale={this.props.changeLocale}
