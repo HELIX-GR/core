@@ -280,4 +280,4 @@ export const getFeaturedPublications = () => (dispatch, getState) => {
       dispatch(getFeaturedPublicationComplete([]));
       return [];
     });
-}
+};
