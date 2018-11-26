@@ -302,6 +302,7 @@
     }
   },
   "favorite": {
+    "login-required": "Please login to add result to favorites",
     "add-error-dataset": "Failed to add dataset to favorites",
     "add-error-publication": "Failed to add publication to favorites",
     "add-error-notebook": "Failed to add notebook to favorites",

@@ -116,17 +116,23 @@ class PublicationsResults extends React.Component {
   }
 
   toggleFavorite(data) {
+    const authenticated = (this.props.profile != null);
     const active = this.isFavoriteActive(data.handle);
 
-    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
-      .catch((err) => {
-        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
-          // Ignore
-          return;
-        }
-        toast.dismiss();
-        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
-      });
+    if (authenticated) {
+      (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+        .catch((err) => {
+          if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+            // Ignore
+            return;
+          }
+          toast.dismiss();
+          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+        });
+    } else {
+      toast.dismiss();
+      toast.error(<FormattedMessage id='favorite.login-required' />);
+    }
   }
 
   resolveResource(publication) {
@@ -334,7 +340,7 @@ class PublicationsResults extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   favorites: state.user.favorites,
-  locale: state.i18n.locale,
+  profile: state.user.profile,
   search: state.ui.pubs,
 });
 

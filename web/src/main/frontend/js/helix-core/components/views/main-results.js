@@ -150,19 +150,25 @@ class MainResults extends React.Component {
   }
 
   toggleFavorite(data) {
+    const authenticated = (this.props.profile != null);
     const active = this.isFavoriteActive(data.catalog, data.handle);
 
-    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
-      .catch((err) => {
-        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
-          // Ignore
-          return;
-        }
-        const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : data.catalog === EnumCatalog.OPENAIRE ? 'publication' : 'notebook';
+    if (authenticated) {
+      (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+        .catch((err) => {
+          if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+            // Ignore
+            return;
+          }
+          const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : data.catalog === EnumCatalog.OPENAIRE ? 'publication' : 'notebook';
 
-        toast.dismiss();
-        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-${type}`} />);
-      });
+          toast.dismiss();
+          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-${type}`} />);
+        });
+    } else {
+      toast.dismiss();
+      toast.error(<FormattedMessage id='favorite.login-required' />);
+    }
   }
 
   renderParameters(key, title, valueProperty, textProperty, prefix, minOptions, showAll) {
@@ -671,6 +677,7 @@ class MainResults extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   favorites: state.user.favorites,
+  profile: state.user.profile,
   search: state.ui.main,
 });
 

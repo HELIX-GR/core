@@ -134,18 +134,24 @@ class PublicationDetails extends React.Component {
   }
 
   toggleFavorite(data) {
+    const authenticated = (this.props.profile != null);
     const active = this.isFavoriteActive(data.handle);
 
-    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
-      .catch((err) => {
-        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
-          // Ignore
-          return;
-        }
+    if (authenticated) {
+      (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+        .catch((err) => {
+          if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+            // Ignore
+            return;
+          }
 
-        toast.dismiss();
-        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
-      });
+          toast.dismiss();
+          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+        });
+    } else {
+      toast.dismiss();
+      toast.error(<FormattedMessage id='favorite.login-required' />);
+    }
   }
 
   render() {
@@ -383,6 +389,7 @@ const mapStateToProps = (state) => ({
   config: state.config,
   publication: state.ui.publication,
   favorites: state.user.favorites,
+  profile: state.user.profile,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
