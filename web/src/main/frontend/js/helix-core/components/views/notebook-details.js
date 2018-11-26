@@ -17,14 +17,25 @@ import {
 } from '../../ducks/ui/views/notebook';
 
 import {
+  addFavorite,
+  removeFavorite,
+} from '../../ducks/user';
+
+import {
+  EnumCatalog,
   StaticRoutes,
 } from '../../model';
 
 import {
-  removeAccent
-} from '../../util';
+  FormattedMessage,
+} from 'react-intl';
 
 import {
+  toast,
+} from 'react-toastify';
+
+import {
+  Favorite,
   Tag,
 } from '../helpers';
 
@@ -34,6 +45,8 @@ class NotebookDetails extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   static contextTypes = {
@@ -75,6 +88,25 @@ class NotebookDetails extends React.Component {
 
     this.props.searchAll(tag);
     this.props.history.push(StaticRoutes.MAIN_RESULTS);
+  }
+
+  isFavoriteActive(handle) {
+    return !!this.props.favorites.find(f => f.catalog === EnumCatalog.LAB && f.handle === handle);
+  }
+
+  toggleFavorite(data) {
+    const active = this.isFavoriteActive(data.handle);
+
+    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+      .catch((err) => {
+        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+          // Ignore
+          return;
+        }
+
+        toast.dismiss();
+        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+      });
   }
 
   render() {
@@ -143,11 +175,15 @@ class NotebookDetails extends React.Component {
                     </h1>
                   </div>
                   <div className="result-icons">
-                    <div className="btn-favorite">
-                      <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
-                        <img className="" src="/images/png/favorite.png" />
-                      </a>
-                    </div>
+                    <Favorite
+                      active={this.isFavoriteActive(r.id)}
+                      catalog={EnumCatalog.LAB}
+                      description={r.notes}
+                      handle={r.id}
+                      onClick={this.toggleFavorite}
+                      title={r.title}
+                      url={`${host}/dataset/${r.id}`}
+                    />
                     {r.datacite &&
                       <div className="package-language">
                         <a href=''> {r.datacite.languagecode}</a>
@@ -210,11 +246,14 @@ class NotebookDetails extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
+  favorites: state.user.favorites,
   notebook: state.ui.notebook,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addFavorite,
   getNotebook,
+  removeFavorite,
   searchAll,
 }, dispatch);
 

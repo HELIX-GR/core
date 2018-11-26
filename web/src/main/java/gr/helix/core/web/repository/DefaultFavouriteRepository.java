@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import gr.helix.core.common.model.ApplicationException;
 import gr.helix.core.web.domain.FavoriteEntity;
@@ -36,7 +35,6 @@ public class DefaultFavouriteRepository implements IFavoriteRepository {
     }
 
     @Override
-    @Transactional
     public void add(
         String email, EnumCatalog catalog, String handle, String url, String title, String description, String clientId
     ) throws EntityExistsException {
@@ -59,7 +57,6 @@ public class DefaultFavouriteRepository implements IFavoriteRepository {
     }
 
     @Override
-    @Transactional
     public void remove(String email, EnumCatalog catalog, String handle) throws ApplicationException {
         final Optional<FavoriteEntity> existing = this.findByEmailAndHandle(email, handle);
 

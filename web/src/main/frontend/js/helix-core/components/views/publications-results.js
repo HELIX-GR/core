@@ -26,11 +26,28 @@ import {
 } from '../../ducks/ui/views/pubs';
 
 import {
+  addFavorite,
+  removeFavorite,
+} from '../../ducks/user';
+
+import {
   buildPath,
   EnumCatalog,
   EnumMimeType,
   DynamicRoutes,
 } from '../../model';
+
+import {
+  FormattedMessage,
+} from 'react-intl';
+
+import {
+  toast,
+} from 'react-toastify';
+
+import {
+  Favorite,
+} from '../helpers';
 
 import {
   LocationFilter,
@@ -47,6 +64,7 @@ class PublicationsResults extends React.Component {
     super(props);
 
     this.onProviderToggle = this.onProviderToggle.bind(this);
+    this.toggleFavorite = this.toggleFavorite.bind(this);
 
     this.textInput = React.createRef();
   }
@@ -93,6 +111,24 @@ class PublicationsResults extends React.Component {
     }
   }
 
+  isFavoriteActive(handle) {
+    return !!this.props.favorites.find(f => f.catalog === EnumCatalog.OPENAIRE && f.handle === handle);
+  }
+
+  toggleFavorite(data) {
+    const active = this.isFavoriteActive(data.handle);
+
+    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+      .catch((err) => {
+        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+          // Ignore
+          return;
+        }
+        toast.dismiss();
+        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+      });
+  }
+
   resolveResource(publication) {
     const { format, fullTextUrl } = publication;
 
@@ -131,11 +167,15 @@ class PublicationsResults extends React.Component {
           <div className="date-of-entry">
             {date}
           </div>
-          <div className="btn-favorite">
-            <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
-              <img src="/images/png/favorite.png" />
-            </a>
-          </div>
+          <Favorite
+            active={this.isFavoriteActive(p.objectIdentifier)}
+            catalog={EnumCatalog.OPENAIRE}
+            description={p.description[0] || null}
+            handle={p.objectIdentifier}
+            onClick={this.toggleFavorite}
+            title={p.title}
+            url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+          />
           <h3 className="title">
             <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
               {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
@@ -293,11 +333,14 @@ class PublicationsResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
+  favorites: state.user.favorites,
   locale: state.i18n.locale,
   search: state.ui.pubs,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addFavorite,
+  removeFavorite,
   searchAll,
   setOpenaireFilter,
   setText,

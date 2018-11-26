@@ -21,12 +21,27 @@ import {
 } from '../../ducks/ui/views/publication';
 
 import {
+  addFavorite,
+  removeFavorite,
+} from '../../ducks/user';
+
+import {
   buildPath,
   DynamicRoutes,
+  EnumCatalog,
   StaticRoutes,
 } from '../../model';
 
 import {
+  FormattedMessage,
+} from 'react-intl';
+
+import {
+  toast,
+} from 'react-toastify';
+
+import {
+  Favorite,
   ProgressBar,
   Tag,
 } from '../helpers';
@@ -41,6 +56,8 @@ class PublicationDetails extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   static contextTypes = {
@@ -112,6 +129,25 @@ class PublicationDetails extends React.Component {
     this.props.history.push(StaticRoutes.MAIN_RESULTS);
   }
 
+  isFavoriteActive(handle) {
+    return !!this.props.favorites.find(f => f.catalog === EnumCatalog.OPENAIRE && f.handle === handle);
+  }
+
+  toggleFavorite(data) {
+    const active = this.isFavoriteActive(data.handle);
+
+    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+      .catch((err) => {
+        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+          // Ignore
+          return;
+        }
+
+        toast.dismiss();
+        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+      });
+  }
+
   render() {
     const { config: { openaire: { host } }, publication: { data: p }, loading } = this.props;
     const _t = this.context.intl.formatMessage;
@@ -180,11 +216,15 @@ class PublicationDetails extends React.Component {
                     </h1>
                   </div>
                   <div className="result-icons">
-                    <div className="btn-favorite">
-                      <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
-                        <img src="/images/png/favorite.png" />
-                      </a>
-                    </div>
+                    <Favorite
+                      active={this.isFavoriteActive(p.objectIdentifier)}
+                      catalog={EnumCatalog.OPENAIRE}
+                      description={p.description[0] || null}
+                      handle={p.objectIdentifier}
+                      onClick={this.toggleFavorite}
+                      title={p.title}
+                      url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+                    />
                     {p.instances.length !== 0 && p.instances[0].url &&
                       <div className="btn-save">
                         <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
@@ -342,10 +382,13 @@ class PublicationDetails extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   publication: state.ui.publication,
+  favorites: state.user.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addFavorite,
   getPublication,
+  removeFavorite,
   searchAll,
 }, dispatch);
 

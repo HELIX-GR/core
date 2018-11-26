@@ -43,7 +43,7 @@ public class FavoriteController {
     private IFavoriteValidationService favoriteValidationService;
 
     @PostMapping(value = "/api/v1/favorite")
-    public RestResponse<?> query(
+    public RestResponse<?> action(
         @RequestHeader(required = false, value = AUTHENTICATION_HEADER) String applicationKey,
         @RequestBody FavouriteRequest request
     ) {

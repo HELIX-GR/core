@@ -741,6 +741,10 @@
                 float: right;
                 margin-right: 11px;
                 display: none;
+                opacity: 0.5;
+                &.active {
+                  opacity: 1;
+                }
               }
               h3.title {
                 position: relative;
@@ -841,6 +845,11 @@
               }
               .btn-favorite {
                 margin-left: -5px;
+                cursor: pointer;
+                opacity: 0.5;
+                &.active {
+                  opacity: 1;
+                }
                 a {
                   display: inline-block;
                 }

@@ -300,5 +300,13 @@
     "buttons": {
       "download": "DOWNLOAD"
     }
+  },
+  "favorite": {
+    "add-error-dataset": "Failed to add dataset to favorites",
+    "add-error-publication": "Failed to add publication to favorites",
+    "add-error-notebook": "Failed to add notebook to favorites",
+    "remove-error-dataset": "Failed to remove dataset from favorites",
+    "remove-error-publication": "Failed remove add publication from favorites",
+    "remove-error-notebook": "Failed to remove notebook from favorites"
   }
 }

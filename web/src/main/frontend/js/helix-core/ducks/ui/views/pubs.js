@@ -205,8 +205,12 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
       return data;
     })
     .catch((err) => {
-      // TODO: Add error handling
       console.error('Failed loading publications data:', err);
+      const data = {
+        catalogs: {},
+      };
+      dispatch(catalogSearchKeywordComplete(data));
+      return data;
     });
 };
 
@@ -220,9 +224,9 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       pageSize,
       term,
       providers: openaire.providers || [],
-      [EnumOpenaireFilter.Authors]: openaire[EnumOpenaireFilter.Authors],
-      [EnumOpenaireFilter.FromDateAccepted]: openaire[EnumOpenaireFilter.FromDateAccepted],
-      [EnumOpenaireFilter.ToDateAccepted]: openaire[EnumOpenaireFilter.ToDateAccepted],
+      [EnumOpenaireFilter.Authors]: advanced ? openaire[EnumOpenaireFilter.Authors] : null,
+      [EnumOpenaireFilter.FromDateAccepted]: advanced ? openaire[EnumOpenaireFilter.FromDateAccepted] : null,
+      [EnumOpenaireFilter.ToDateAccepted]: advanced ? openaire[EnumOpenaireFilter.ToDateAccepted] : null,
     },
   };
 
@@ -233,7 +237,11 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       return (data);
     })
     .catch((err) => {
-      // TODO: Add error handling
       console.error('Failed loading publications data:', err);
+      const data = {
+        catalogs: {},
+      };
+      dispatch(catalogSearchComplete(data));
+      return data;
     });
 };

@@ -546,6 +546,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
 
+    @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         final LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> map = new LinkedHashMap<RequestMatcher, AuthenticationEntryPoint>();
 
@@ -584,6 +585,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/vendor/**",
                              // Authentication endpoints
                              "/login**",
+                             "/logged-in",
                              "/logged-out",
                              "/error**",
                              // SAML endpoints

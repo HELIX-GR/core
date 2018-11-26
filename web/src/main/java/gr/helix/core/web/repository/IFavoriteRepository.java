@@ -2,10 +2,13 @@ package gr.helix.core.web.repository;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import gr.helix.core.common.model.ApplicationException;
 import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.model.user.Favorite;
 
+@Transactional
 public interface IFavoriteRepository {
 
     /**

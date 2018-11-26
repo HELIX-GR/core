@@ -9,6 +9,7 @@ public class FavouriteRequest {
         LIST,
         ADD,
         REMOVE,
+        ;
     }
 
     private EnumAction  action;

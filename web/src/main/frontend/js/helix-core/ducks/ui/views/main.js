@@ -340,8 +340,12 @@ export const searchAutoComplete = (term) => (dispatch, getState) => {
       return data;
     })
     .catch((err) => {
-      // TODO: Add error handling
       console.error('Failed loading catalog data:', err);
+      const data = {
+        catalogs: {},
+      };
+      dispatch(catalogSearchAutoCompleteComplete(data));
+      return data;
     });
 };
 
@@ -391,10 +395,14 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10, cat
   return catalogService.search(token, { queries })
     .then((data) => {
       dispatch(catalogSearchComplete(data));
-      return (data);
+      return data;
     })
     .catch((err) => {
-      // TODO: Add error handling
       console.error('Failed loading catalog data:', err);
+      const data = {
+        catalogs: {},
+      };
+      dispatch(catalogSearchComplete(data));
+      return data;
     });
 };

@@ -23,7 +23,7 @@ import gr.helix.core.web.model.user.Favorite;
 @Table(
     schema = "web", name = "`favorite`",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uq_favorite_handle", columnNames = {"`handle`"}),
+        @UniqueConstraint(name = "uq_favorite_handle", columnNames = {"`email`", "`catalog`", "`handle`"}),
     })
 public class FavoriteEntity {
 

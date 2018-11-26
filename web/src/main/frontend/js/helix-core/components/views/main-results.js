@@ -27,6 +27,11 @@ import {
 } from '../../ducks/ui/views/main';
 
 import {
+  addFavorite,
+  removeFavorite,
+} from '../../ducks/user';
+
+import {
   buildPath,
   DynamicRoutes,
   EnumCatalog,
@@ -35,7 +40,16 @@ import {
 } from '../../model';
 
 import {
+  FormattedMessage,
+} from 'react-intl';
+
+import {
+  toast,
+} from 'react-toastify';
+
+import {
   Checkbox,
+  Favorite,
   Pill,
 } from '../helpers';
 
@@ -61,6 +75,7 @@ class MainResults extends React.Component {
     this.textInput = React.createRef();
 
     this.onPillChanged = this.onPillChanged.bind(this);
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   static contextTypes = {
@@ -130,6 +145,26 @@ class MainResults extends React.Component {
     }
   }
 
+  isFavoriteActive(catalog, handle) {
+    return !!this.props.favorites.find(f => f.catalog === catalog && f.handle === handle);
+  }
+
+  toggleFavorite(data) {
+    const active = this.isFavoriteActive(data.catalog, data.handle);
+
+    (active ? this.props.removeFavorite(data) : this.props.addFavorite(data))
+      .catch((err) => {
+        if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
+          // Ignore
+          return;
+        }
+        const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : data.catalog === EnumCatalog.OPENAIRE ? 'publication' : 'notebook';
+
+        toast.dismiss();
+        toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-${type}`} />);
+      });
+  }
+
   renderParameters(key, title, valueProperty, textProperty, prefix, minOptions, showAll) {
     const { data: { facets } } = this.props.search;
     const { data } = this.props.config;
@@ -190,11 +225,15 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <div className="btn-favorite">
-          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
-            <img src="/images/png/favorite.png" />
-          </a>
-        </div>
+        <Favorite
+          active={this.isFavoriteActive(EnumCatalog.CKAN, r.id)}
+          catalog={EnumCatalog.CKAN}
+          description={r.notes}
+          handle={r.id}
+          onClick={this.toggleFavorite}
+          title={r.title}
+          url={`${host}/dataset/${r.id}`}
+        />
         <h3 className="title">
           <a href={`${host}/dataset/${r.id}`} target="_blank">
             {r.title.length > MAX_TITLE_LENGTH ? `${r.title.substring(0, MAX_TITLE_LENGTH)} ...` : r.title}
@@ -289,11 +328,15 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <div className="btn-favorite">
-          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
-            <img src="/images/png/favorite.png" />
-          </a>
-        </div>
+        <Favorite
+          active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
+          catalog={EnumCatalog.OPENAIRE}
+          description={p.description[0] || null}
+          handle={p.objectIdentifier}
+          onClick={this.toggleFavorite}
+          title={p.title}
+          url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+        />
         <h3 className="title">
           <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
             {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
@@ -346,11 +389,15 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <div className="btn-favorite">
-          <a href="" data-toggle="tooltip" data-placement="bottom" target="_blank" title="" data-original-title="Favorite">
-            <img src="/images/png/favorite.png" />
-          </a>
-        </div>
+        <Favorite
+          active={this.isFavoriteActive(EnumCatalog.LAB, n.id)}
+          catalog={EnumCatalog.LAB}
+          description={n.notes}
+          handle={n.id}
+          onClick={this.toggleFavorite}
+          title={n.title}
+          url={`${host}/dataset/${n.id}`}
+        />
         <h3 className="title">
           <Link to={buildPath(DynamicRoutes.NOTEBOOK_PAGE, [n.id])}>
             {n.title.length > MAX_TITLE_LENGTH ? `${n.title.substring(0, MAX_TITLE_LENGTH)} ...` : n.title}
@@ -623,10 +670,13 @@ class MainResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
+  favorites: state.user.favorites,
   search: state.ui.main,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addFavorite,
+  removeFavorite,
   searchAll,
   setText,
   toggleAdvanced,

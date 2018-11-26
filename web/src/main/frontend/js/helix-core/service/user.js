@@ -2,12 +2,8 @@ import * as actions from './api/fetch-actions';
 
 const api = {
 
-  getProfile: () => {
-    return actions.get('/action/user/profile');
-  },
-
-  saveProfile: (profileData, token) => {
-    return actions.post('/action/user/profile/save', token, JSON.stringify(profileData));
+  getProfile: (token) => {
+    return actions.get('/action/user/profile', token);
   },
 
   login: (username, password, token) => {
