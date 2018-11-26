@@ -1,9 +1,8 @@
 import moment from '../../../moment-localized';
 
-const EnumCategory = {
-  News: 'news',
-  Events: 'events',
-};
+import {
+  EnumPostCategory,
+} from '../../../model';
 
 // Services
 import { default as wordPressService } from '../../../service/wordpress';
@@ -165,7 +164,7 @@ export const getLatestPosts = (count) => (dispatch, getState) => {
     config: { wordPress: { endpoint: host, categories } },
   } = getState();
 
-  const category = categories.find(c => c.name === EnumCategory.News).id;
+  const category = categories.find(c => c.name === EnumPostCategory.News).id;
 
   // Check configuration
   if (!host) {
@@ -193,12 +192,12 @@ export const getLatestPosts = (count) => (dispatch, getState) => {
     });
 };
 
-export const getPosts = (pageIndex, pageSize) => (dispatch, getState) => {
+export const getPosts = (pageIndex, pageSize, categoryName) => (dispatch, getState) => {
   const {
     config: { wordPress: { endpoint: host, categories } },
   } = getState();
 
-  const category = categories.find(c => c.name === EnumCategory.News).id;
+  const categoryId = categories.find(c => c.name === categoryName).id;
 
   // Check configuration
   if (!host) {
@@ -206,7 +205,7 @@ export const getPosts = (pageIndex, pageSize) => (dispatch, getState) => {
   }
 
   dispatch(getPostPageBegin(pageIndex, pageSize));
-  return wordPressService.getPosts(host, pageIndex, pageSize, category)
+  return wordPressService.getPosts(host, pageIndex, pageSize, categoryId)
     .then((data) => {
       dispatch(getPostPageComplete(pageIndex, pageSize, data.count, data.posts));
     })

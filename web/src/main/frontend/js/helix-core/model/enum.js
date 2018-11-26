@@ -40,3 +40,8 @@ export const EnumAuthProvider = {
   GitHub: 'GitHub',
   SAML: 'SAML',
 };
+
+export const EnumPostCategory = {
+  News: 'news',
+  Events: 'events',
+};

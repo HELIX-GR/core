@@ -47,6 +47,7 @@
   "breadcrumb": {
     "results": "RESULTS",
     "all": "ALL",
+    "events": "Events",
     "helix-team": "HELIX Team",
     "news": "News"
   },
@@ -213,6 +214,10 @@
   },
   "project": {
     "title": "The project"
+  },
+  "events": {
+    "title": "Events",
+    "load-more": "More"
   },
   "news": {
     "title": "News",

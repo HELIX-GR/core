@@ -8,14 +8,14 @@ import {
   Posts,
 } from './wordpress-parts';
 
-class News extends React.Component {
+class Events extends React.Component {
 
   render() {
     return (
-      <Posts category={EnumPostCategory.News} />
+      <Posts category={EnumPostCategory.Events} />
     );
   }
 
 }
 
-export default News;
+export default Events;

@@ -47,6 +47,7 @@
   "breadcrumb": {
     "results": "ΑΠΟΤΕΛΕΣΜΑΤΑ",
     "all": "ΟΛΑ",
+    "events": "Εκδηλώσεις",
     "helix-team": "Ομάδα HELIX",
     "news": "Νέα"
   },
@@ -214,6 +215,10 @@
   "project": {
     "title": "Το έργο"
   },
+  "events": {
+    "title": "Εκδηλώσεις",
+    "load-more": "Περισσότερα"
+  },
   "news": {
     "title": "Νέα",
     "load-more": "Περισσότερα",
@@ -302,12 +307,12 @@
     }
   },
   "favorite": {
-    "login-required": "Please login to add result to favorites",
-    "add-error-dataset": "Failed to add dataset to favorites",
-    "add-error-publication": "Failed to add publication to favorites",
-    "add-error-notebook": "Failed to add notebook to favorites",
-    "remove-error-dataset": "Failed to remove dataset from favorites",
-    "remove-error-publication": "Failed remove add publication from favorites",
-    "remove-error-notebook": "Failed to remove notebook from favorites"
+    "login-required": "Παρακαλώ συνδεθείτε για να προσθέσετε το αποτέλεσμα στα αγαπημένα σας",
+    "add-error-dataset": "Αποτυχία προσθήκης συνόλου δεδομένων στα αγαπημένα",
+    "add-error-publication": "Αποτυχία προσθήκης δημοσίευσης στα αγαπημένα",
+    "add-error-notebook": "Αποτυχία προσθήκης notebook δεδομένων στα αγαπημένα",
+    "remove-error-dataset": "Αποτυχία διαγραφής συνόλου δεδομένων από τα αγαπημένα",
+    "remove-error-publication": "Αποτυχία διαγραφής δημοσίευσης από τα αγαπημένα",
+    "remove-error-notebook": "Αποτυχία διαγραφής notebook από τα αγαπημένα"
   }
 }

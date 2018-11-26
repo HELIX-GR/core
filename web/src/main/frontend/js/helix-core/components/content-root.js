@@ -25,11 +25,9 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
-  EnumRole,
-} from '../model';
-
-import {
   DatasetDetails,
+  Events,
+  EventsDetails,
   Footer,
   Header,
   Main,
@@ -108,12 +106,14 @@ class ContentRoot extends React.Component {
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
         <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
+        <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
         <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
         {/* Static routes */}
         <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />
+        <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
         <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />

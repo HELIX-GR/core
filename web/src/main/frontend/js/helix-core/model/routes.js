@@ -12,6 +12,7 @@ export const ExternalRoutes = {
 };
 
 // Static routes
+const EVENTS = '/news/events/';
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
 const NEWS = '/news/';
@@ -23,6 +24,7 @@ const PUBS_RESULTS = '/pubs/results';
  * Static routes
  */
 export const StaticRoutes = {
+  EVENTS,
   MAIN,
   MAIN_RESULTS,
   NEWS,
@@ -33,6 +35,7 @@ export const StaticRoutes = {
 
 // Dynamic routes
 const DATASET_PAGE = '/datasets/:id';
+const EVENT_PAGE = '/news/events/view/:id';
 const NEWS_PAGE = '/news/view/:id';
 const NOTEBOOK_PAGE = '/notebooks/:id';
 const PROJECT_PAGE = '/project/page/:name';
@@ -43,6 +46,7 @@ const PUBLICATION_PAGE = '/publications/:id';
  */
 export const DynamicRoutes = {
   DATASET_PAGE,
+  EVENT_PAGE,
   NEWS_PAGE,
   NOTEBOOK_PAGE,
   PROJECT_PAGE,

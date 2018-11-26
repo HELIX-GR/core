@@ -132,7 +132,7 @@ class Header extends React.Component {
                 <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">{_t({ id: 'header.menu.news.title' })}</NavLink>
                 <ul className="sub-menu">
                   <li><NavLink to={StaticRoutes.NEWS}>{_t({ id: 'header.menu.news.items.news' })}</NavLink></li>
-                  <li><a href=''>{_t({ id: 'header.menu.news.items.events' })}</a></li>
+                  <li><NavLink to={StaticRoutes.EVENTS}>{_t({ id: 'header.menu.news.items.events' })}</NavLink></li>
                 </ul>
               </li>
 
