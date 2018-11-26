@@ -77,6 +77,7 @@ const publicationToCitation = (p) => {
     citation.eissn = p.journal.eissn;
     citation.issn = p.journal.issn;
     citation.lissn = p.journal.lissn;
+    citation.page = (p.journal.sp && p.journal.ep ? `${p.journal.sp}-${p.journal.ep}` : p.journal.sp);
   }
 
   return citation;
