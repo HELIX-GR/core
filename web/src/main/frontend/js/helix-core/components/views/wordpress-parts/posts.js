@@ -27,6 +27,10 @@ import {
   EnumPostCategory,
 } from '../../../model';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const truncateText = (text, tag, length = 200) => {
   const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
   return result.length > length ? result.substring(0, length) + '...' : result;
@@ -90,7 +94,15 @@ class News extends React.Component {
 
               <div className="col">
                 <div className="news-item-list">
-                  {this.renderPosts(page.posts)}
+                  {page.posts.length === 0 &&
+                    <div className="mt-3">
+                      <Code />
+                      <Code />
+                    </div>
+                  }
+                  {page.posts.length !== 0 &&
+                    this.renderPosts(page.posts)
+                  }
                 </div>
               </div>
 

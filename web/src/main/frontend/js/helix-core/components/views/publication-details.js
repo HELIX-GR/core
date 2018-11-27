@@ -50,6 +50,10 @@ import {
   Citation,
 } from './publications-parts';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const PARAM_ID = 'id';
 
 class PublicationDetails extends React.Component {
@@ -122,6 +126,11 @@ class PublicationDetails extends React.Component {
     );
   }
 
+  get isLoading() {
+    const { publication: { data: p }, loading } = this.props;
+    return ((!p) || (loading));
+  }
+
   onSearchTag(e, tag) {
     e.preventDefault();
 
@@ -155,11 +164,28 @@ class PublicationDetails extends React.Component {
   }
 
   render() {
-    const { config: { openaire: { host } }, publication: { data: p }, loading } = this.props;
+    const { config: { openaire: { host } }, publication: { data: p } } = this.props;
     const _t = this.context.intl.formatMessage;
 
-    if ((!p) || (loading)) {
-      return null;
+    if (this.isLoading) {
+      return (
+        <div className="results-pubs">
+          <section className="main-results-page-content">
+            <div className="results-main-content">
+              <section className="results-main-sidebar">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+              <section className="results-main-result-set">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+            </div>
+          </section>
+        </div >
+      );
     }
 
     return (

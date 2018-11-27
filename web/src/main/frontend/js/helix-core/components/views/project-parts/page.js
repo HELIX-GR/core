@@ -18,6 +18,10 @@ import {
   Faq,
 } from './';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 class Page extends React.Component {
 
   constructor(props) {
@@ -50,6 +54,16 @@ class Page extends React.Component {
 
   render() {
     const page = this.props.page;
+
+    if (!page) {
+      return (
+        <div className="mt-3">
+          <Code />
+          <Code />
+          <Code />
+        </div>
+      );
+    }
 
     return (
       <div>

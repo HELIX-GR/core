@@ -39,6 +39,10 @@ import {
   Tag,
 } from '../helpers';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const PARAM_ID = 'id';
 
 class NotebookDetails extends React.Component {
@@ -83,6 +87,11 @@ class NotebookDetails extends React.Component {
     return null;
   }
 
+  get isLoading() {
+    const { notebook: { data: n }, loading } = this.props;
+    return ((!n) || (loading));
+  }
+
   onSearchTag(e, tag) {
     e.preventDefault();
 
@@ -116,11 +125,28 @@ class NotebookDetails extends React.Component {
   }
 
   render() {
-    const { config: { lab: { host } }, notebook: { data: r }, loading } = this.props;
+    const { config: { lab: { host } }, notebook: { data: r } } = this.props;
     const _t = this.context.intl.formatMessage;
 
-    if ((!r) || (loading)) {
-      return null;
+    if (this.isLoading) {
+      return (
+        <div className="results-lab">
+          <section className="main-results-page-content">
+            <div className="results-main-content">
+              <section className="results-main-sidebar">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+              <section className="results-main-result-set">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+            </div>
+          </section>
+        </div >
+      );
     }
 
     return (

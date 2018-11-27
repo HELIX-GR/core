@@ -28,6 +28,10 @@ import {
   EnumPostCategory,
 } from '../../../model';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const PARAM_ID = 'id';
 
 const truncateText = (text, tag, length = 200) => {
@@ -123,6 +127,12 @@ class NewsDetails extends React.Component {
         <section className="news-landing-page-content">
 
           <div className="news-helix-container container-fluid">
+            {!post &&
+              <div className="mt-3">
+                <Code />
+                <Code />
+              </div>
+            }
             {post &&
               <div className="row justify-content-center">
                 <div className="col-sm-8">

@@ -38,6 +38,10 @@ import {
   Tag,
 } from '../helpers';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const PARAM_ID = 'id';
 
 class DatasetDetails extends React.Component {
@@ -82,6 +86,11 @@ class DatasetDetails extends React.Component {
     return null;
   }
 
+  get isLoading() {
+    const { dataset: { data: d }, loading } = this.props;
+    return ((!d) || (loading));
+  }
+
   isFavoriteActive(handle) {
     return !!this.props.favorites.find(f => f.catalog === EnumCatalog.CKAN && f.handle === handle);
   }
@@ -108,11 +117,28 @@ class DatasetDetails extends React.Component {
   }
 
   render() {
-    const { config: { data: { host } }, dataset: { data: r }, loading } = this.props;
+    const { config: { data: { host } }, dataset: { data: r } } = this.props;
     const _t = this.context.intl.formatMessage;
 
-    if ((!r) || (loading)) {
-      return null;
+    if (this.isLoading) {
+      return (
+        <div className="results-data">
+          <section className="main-results-page-content">
+            <div className="results-main-content">
+              <section className="results-main-sidebar">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+              <section className="results-main-result-set">
+                <Code />
+                <Code />
+                <Code />
+              </section>
+            </div>
+          </section>
+        </div >
+      );
     }
 
     return (
