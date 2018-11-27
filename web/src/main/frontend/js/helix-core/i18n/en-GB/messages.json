@@ -288,6 +288,7 @@
     "download-section": "Download From",
     "citation": "Citation",
     "select-citation-style": "Select citation style ...",
+    "not-found": "Publication was not found",
     "buttons": {
       "view": "VIEW"
     }

@@ -60,6 +60,7 @@ class NotebookDetails extends React.Component {
   componentDidMount() {
     const { match: { params } } = this.props;
 
+    this.scrollToTop();
     this.props.getNotebook(params[PARAM_ID]);
   }
 
@@ -132,6 +133,10 @@ class NotebookDetails extends React.Component {
       return `${jupyterNotebookViewer}${url.substring(index + 3)}`;
     }
     return `${jupyterNotebookViewer}${url}`;
+  }
+
+  scrollToTop() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
   render() {

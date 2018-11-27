@@ -71,7 +71,7 @@ class PublicationDetails extends React.Component {
   componentDidMount() {
     const { match: { params } } = this.props;
 
-    this.props.getPublication(params[PARAM_ID]);
+    this.getPublication(params[PARAM_ID]);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,8 +79,18 @@ class PublicationDetails extends React.Component {
     const { match: { params: nextParams } } = nextProps;
 
     if (previousParams[PARAM_ID] !== nextParams[PARAM_ID]) {
-      this.props.getPublication(nextParams[PARAM_ID]);
+      this.getPublication(nextParams[PARAM_ID]);
     }
+  }
+
+  getPublication(id) {
+    this.scrollToTop();
+    this.props.getPublication(id).then(data => {
+      if (!data) {
+        this.toast('publication.not-found');
+        this.props.history.goBack();
+      }
+    })
   }
 
   get hostedBy() {
@@ -154,13 +164,20 @@ class PublicationDetails extends React.Component {
             return;
           }
 
-          toast.dismiss();
-          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+          this.toast(`favorite.${active ? 'remove' : 'add'}-error-publication`);
         });
     } else {
-      toast.dismiss();
-      toast.error(<FormattedMessage id='favorite.login-required' />);
+      this.toast('favorite.login-required');
     }
+  }
+
+  scrollToTop() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
+  toast(id) {
+    toast.dismiss();
+    toast.error(<FormattedMessage id={id} />);
   }
 
   render() {
