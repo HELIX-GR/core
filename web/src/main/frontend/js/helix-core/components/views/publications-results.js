@@ -308,9 +308,11 @@ class PublicationsResults extends React.Component {
                     </option>
                   </select>
                 </label>
-                <div className="main-results-result-count">
-                  {_t({ id: 'results.shared.count.pubs' }, { count: results.count })}
-                </div>
+                {!loading &&
+                  <div className="main-results-result-count">
+                    {_t({ id: 'results.shared.count.pubs' }, { count: results.count })}
+                  </div>
+                }
               </div>
 
               <div className="result-items">

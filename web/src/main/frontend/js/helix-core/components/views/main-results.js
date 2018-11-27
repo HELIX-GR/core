@@ -627,27 +627,29 @@ class MainResults extends React.Component {
                     </option>
                   </select>
                 </label>
-                <div className="main-results-result-count">
-                  {pills.data &&
-                    <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
-                  }
-                  {pills.pubs &&
-                    <React.Fragment>
-                      {pills.data &&
-                        <span className="pr-2 pl-2">|</span>
-                      }
-                      <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
-                    </React.Fragment>
-                  }
-                  {pills.lab &&
-                    <React.Fragment>
-                      {(pills.data || pills.pubs) &&
-                        <span className="pr-2 pl-2">|</span>
-                      }
-                      <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
-                    </React.Fragment>
-                  }
-                </div>
+                {!loading &&
+                  <div className="main-results-result-count">
+                    {pills.data &&
+                      <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
+                    }
+                    {pills.pubs &&
+                      <React.Fragment>
+                        {pills.data &&
+                          <span className="pr-2 pl-2">|</span>
+                        }
+                        <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
+                      </React.Fragment>
+                    }
+                    {pills.lab &&
+                      <React.Fragment>
+                        {(pills.data || pills.pubs) &&
+                          <span className="pr-2 pl-2">|</span>
+                        }
+                        <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
+                      </React.Fragment>
+                    }
+                  </div>
+                }
               </div>
 
               <div className="result-items">
