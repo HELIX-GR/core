@@ -249,7 +249,7 @@ class DatasetDetails extends React.Component {
                             {resource.name}
                             <span className="format-label" property="dc:format" data-format={resource.format.toLowerCase()}></span>
                           </a>
-                          <div className="btn-download btn-group ">
+                          <div className="btn-group ">
                             <a className=" btn-group-main" href={resource.url}>{_t({ id: 'dataset.buttons.download' })}</a>
                           </div>
                           <p className="description">

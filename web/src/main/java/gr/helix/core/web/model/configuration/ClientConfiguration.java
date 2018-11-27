@@ -16,6 +16,8 @@ public class ClientConfiguration {
 
     private final List<EnumAuthProvider> authProviders     = new ArrayList<EnumAuthProvider>();
 
+    private String                       jupyterNotebookViewer;
+
     @JsonIgnore
     private final List<String>           identityProviders = new ArrayList<String>();
 
@@ -99,6 +101,14 @@ public class ClientConfiguration {
 
     public List<EnumAuthProvider> getAuthProviders() {
         return this.authProviders;
+    }
+
+    public String getJupyterNotebookViewer() {
+        return this.jupyterNotebookViewer;
+    }
+
+    public void setJupyterNotebookViewer(String jupyterNotebookViewer) {
+        this.jupyterNotebookViewer = jupyterNotebookViewer;
     }
 
 }

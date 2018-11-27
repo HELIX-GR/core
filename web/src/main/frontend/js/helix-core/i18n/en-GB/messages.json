@@ -303,7 +303,8 @@
     "no-description": "No description",
     "open-data-license": "This notebook satisfies the Open Definition.",
     "buttons": {
-      "download": "DOWNLOAD"
+      "download": "DOWNLOAD",
+      "view": "VIEW"
     }
   },
   "favorite": {

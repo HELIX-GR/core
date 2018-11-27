@@ -25,6 +25,9 @@ public class ConfigurationController extends BaseController {
     @Value("${helix.authentication-providers:cookie}")
     private String                               authProviders;
 
+    @Value("${helix.jupyter.notebook-viewer}")
+    private String                               jupyterNotebookViewer;
+
     @Autowired
     private SamlConfiguration                    samlConfiguration;
 
@@ -57,6 +60,7 @@ public class ConfigurationController extends BaseController {
         config.setBingMaps(this.serviceProviderConfiguration.getBingMaps());
         config.setDefaultIdentityProvider(this.samlConfiguration.getDefaultProvider());
         config.setWordPress(this.serviceProviderConfiguration.getWordPress());
+        config.setJupyterNotebookViewer(this.jupyterNotebookViewer);
 
         config.setData(this.dataCkanServiceProxy.getMetadata());
         config.setLab(this.labCkanServiceProxy.getMetadata());

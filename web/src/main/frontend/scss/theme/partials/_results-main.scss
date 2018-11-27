@@ -941,9 +941,17 @@
                     line-height: 12px;
                     width: 60%;
                   }
-                  .btn-download {
+                  .btn-group {
                     float: right;
-                    display: inline;
+                    display: flex;
+                    flex-direction: column;
+                    a {
+                      text-align: center;
+                      margin-top: 7px;
+                    }
+                    a:first-child {
+                      margin-top: 0px;
+                    }
                   }
                 }
               }

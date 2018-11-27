@@ -124,6 +124,16 @@ class NotebookDetails extends React.Component {
     }
   }
 
+  getViewerUrl(url) {
+    const { config: { jupyterNotebookViewer } } = this.props;
+    const index = url.indexOf('://');
+
+    if (index !== -1) {
+      return `${jupyterNotebookViewer}${url.substring(index + 3)}`;
+    }
+    return `${jupyterNotebookViewer}${url}`;
+  }
+
   render() {
     const { config: { lab: { host } }, notebook: { data: r } } = this.props;
     const _t = this.context.intl.formatMessage;
@@ -254,8 +264,13 @@ class NotebookDetails extends React.Component {
                             {resource.name}
                             <span className="format-label" property="dc:format" data-format={resource.format.toLowerCase()}></span>
                           </a>
-                          <div className="btn-download btn-group ">
-                            <a className=" btn-group-main" href={resource.url}>{_t({ id: 'notebook.buttons.download' })}</a>
+                          <div className="btn-group ">
+                            <a className=" btn-group-main" href={resource.url}>
+                              {_t({ id: 'notebook.buttons.download' })}
+                            </a>
+                            <a className=" btn-group-main" href={this.getViewerUrl(resource.url)} target="_blank">
+                              {_t({ id: 'notebook.buttons.view' })}
+                            </a>
                           </div>
                           <p className="description">
                             {resource.description || _t({ id: 'notebook.no-description' })}

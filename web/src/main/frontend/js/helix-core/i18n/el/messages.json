@@ -303,7 +303,8 @@
     "no-description": "Καμία περιγραφή",
     "open-data-license": "Το notebook είναι Ανοικτό.",
     "buttons": {
-      "download": "ΜΕΤΑΦΟΡΤΩΣΗ"
+      "download": "ΜΕΤΑΦΟΡΤΩΣΗ",
+      "view": "ΠΡΟΒΟΛΗ"
     }
   },
   "favorite": {
