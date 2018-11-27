@@ -56,7 +56,7 @@ class Result extends React.Component {
   render() {
     const { result: data } = this.props;
 
-    const visible = this.props.visible && data;
+    const visible = this.props.visible && data && data.results.length !== 0;
 
     return (
       <div
@@ -87,8 +87,6 @@ class Result extends React.Component {
   }
 
   renderPublications(publications) {
-    const { host } = this.props.openaire;
-
     return publications.map((p, index) => {
       return (
         <a
