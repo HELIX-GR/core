@@ -294,7 +294,7 @@ class PublicationDetails extends React.Component {
                   </div>
                   <div className="nav-menu">
                     <li className="active">
-                      <a href="">
+                      <a onClick={(e) => e.preventDefault()}>
                         <i className="fa fa-sitemap"></i>{_t({ id: 'publication.publication' })}
                       </a>
                     </li>

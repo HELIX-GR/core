@@ -225,7 +225,7 @@ class DatasetDetails extends React.Component {
                   </div>
                   <div className="nav-menu">
                     <li className="active">
-                      <a href={`${host}/dataset/${r.name}`}>
+                      <a onClick={(e) => e.preventDefault()}>
                         <i className="fa fa-sitemap"></i>{_t({ id: 'dataset.dataset' })}
                       </a>
                     </li>
