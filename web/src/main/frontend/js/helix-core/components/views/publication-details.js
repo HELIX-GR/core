@@ -90,7 +90,7 @@ class PublicationDetails extends React.Component {
         this.toast('publication.not-found');
         this.props.history.goBack();
       }
-    })
+    });
   }
 
   get hostedBy() {
