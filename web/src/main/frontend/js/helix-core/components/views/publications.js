@@ -46,6 +46,10 @@ import {
   SubjectItem,
 } from './publications-parts';
 
+import {
+  Code,
+} from 'react-content-loader';
+
 const MAX_TITLE_LENGTH = 77;
 
 class Publications extends React.Component {
@@ -290,6 +294,22 @@ class Publications extends React.Component {
                 </h4>
               </div>
 
+              {featured.length === 0 &&
+                <React.Fragment>
+                  <div className="col-md-3 col-sm-6 col-xs-12">
+                    <Code />
+                  </div>
+                  <div className="col-md-3 col-sm-6 col-xs-12">
+                    <Code />
+                  </div>
+                  <div className="col-md-3 col-sm-6 col-xs-12">
+                    <Code />
+                  </div>
+                  <div className="col-md-3 col-sm-6 col-xs-12">
+                    <Code />
+                  </div>
+                </React.Fragment>
+              }
               {featured.length !== 0 &&
                 featured.map((p) => this.renderFeaturedPublication(p, openaire.host))
               }
@@ -417,7 +437,7 @@ class Publications extends React.Component {
           toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />
-      </div>
+      </div >
     );
   }
 }
