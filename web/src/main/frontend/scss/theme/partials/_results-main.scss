@@ -210,7 +210,7 @@
             width: 100%;
             .landing-search-form {
               .main-form-content {
-                width: calc(100% - 41px);
+                width: calc(100% - 45px);
                 border-bottom: solid 3px black;
                 position: relative;
                 input.landing-search-text {
@@ -226,6 +226,7 @@
                   font-weight: 400;
                   outline: none;
                   padding-left: 8px;
+                  text-overflow: ellipsis;
                   &::-moz-selection {
                     color: white;
                     background-color: #BFBFBF;
