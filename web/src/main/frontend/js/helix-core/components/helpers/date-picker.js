@@ -22,7 +22,7 @@ class DatePicker extends React.Component {
 
   handleChange(date) {
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(date ? date.isValid() ? date.format('YYYY-MM-DD') : null : null);
+      this.props.onChange(date ? moment(date).format('YYYY-MM-DD') : null);
     }
   }
 
@@ -33,6 +33,7 @@ class DatePicker extends React.Component {
       this.props.onChange(date ? date.isValid() ? date.format('YYYY-MM-DD') : null : null);
     }
   }
+
   render() {
     const { value, onChange, ...rest } = this.props;
     const date = value ? moment(value) : null;
@@ -40,11 +41,11 @@ class DatePicker extends React.Component {
     return (
       <ReactDatePicker
         {...rest}
-        dateFormat="DD/MM/YYYY"
+        dateFormat="dd/MM/yyyy"
         isClearable={true}
         onChange={(e) => this.handleChange(e)}
         onChangeRaw={(e) => this.handleChangeRaw(e.target.value)}
-        selected={date ? date.isValid() ? date : null : null}
+        selected={date ? date.isValid() ? date.toDate() : null : null}
       />
     );
   }
