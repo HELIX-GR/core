@@ -20,10 +20,12 @@ import {
 import {
   search as searchAll,
   setText,
-  toggleAdvanced,
+  setOpenaireFilter,
+  setResultVisibility,
   togglePill,
   toggleDataFacet,
-  setResultVisibility,
+  toggleLabFacet,
+  toggleOpenaireProvider,
 } from '../../ducks/ui/views/main';
 
 import {
@@ -48,17 +50,17 @@ import {
 } from 'react-toastify';
 
 import {
-  Checkbox,
   Favorite,
   Pill,
 } from '../helpers';
 
 import {
+  CkanAdvancedOptions,
   LocationFilter,
   Pagination,
+  PubsAdvancedOptions,
 } from './shared-parts';
 
-const MIN_FACET_VALUES = 3;
 const MAX_TITLE_LENGTH = 77;
 const MAX_NOTES_LENGTH = 192;
 
@@ -75,6 +77,10 @@ class MainResults extends React.Component {
     this.textInput = React.createRef();
 
     this.onPillChanged = this.onPillChanged.bind(this);
+    this.onDataFacetChanged = this.onDataFacetChanged.bind(this);
+    this.onLabFacetChanged = this.onLabFacetChanged.bind(this);
+    this.onProviderToggle = this.onProviderToggle.bind(this);
+    this.onOpenaireFilterChanged = this.onOpenaireFilterChanged.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
@@ -102,10 +108,11 @@ class MainResults extends React.Component {
   }
 
   search(pageIndex) {
-    const { text } = this.props.search;
+    const { pills, text } = this.props.search;
+    const advanced = Object.keys(pills).filter(key => pills[key]).length === 1;
 
     if (this.isTextValid(text)) {
-      this.props.searchAll(text, true, pageIndex);
+      this.props.searchAll(text, advanced, pageIndex);
     }
   }
 
@@ -114,9 +121,10 @@ class MainResults extends React.Component {
 
     const active = Object.keys(pills).filter(key => pills[key]);
     if ((active.length > 1) || (active[0] !== id)) {
-      this.props.togglePill(id);
-      this.textInput.current.focus();
-      this.search();
+      this.props.togglePill(id).then(() => {
+        this.textInput.current.focus();
+        this.search();
+      });
     }
   }
 
@@ -124,8 +132,23 @@ class MainResults extends React.Component {
     this.props.setText(value);
   }
 
-  onFacetChanged(facet, value) {
+  onDataFacetChanged(facet, value) {
     this.props.toggleDataFacet(facet, value);
+    this.search();
+  }
+
+  onLabFacetChanged(facet, value) {
+    this.props.toggleLabFacet(facet, value);
+    this.search();
+  }
+
+  onProviderToggle(id) {
+    this.props.toggleOpenaireProvider(id);
+    this.search();
+  }
+
+  onOpenaireFilterChanged(key, value) {
+    this.props.setOpenaireFilter(key, value);
     this.search();
   }
 
@@ -137,8 +160,19 @@ class MainResults extends React.Component {
 
   onPageChange(index) {
     const {
-      search: { result: { catalogs: { [EnumCatalog.CKAN]: { pageIndex } } } }
+      search: {
+        result: {
+          catalogs: {
+            [EnumCatalog.CKAN]: datasets = {},
+            [EnumCatalog.OPENAIRE]: publications = {},
+            [EnumCatalog.LAB]: notebooks = {},
+          },
+        },
+        pills,
+      }
     } = this.props;
+
+    const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
 
     if (index !== pageIndex) {
       this.search(index);
@@ -169,48 +203,6 @@ class MainResults extends React.Component {
       toast.dismiss();
       toast.error(<FormattedMessage id='favorite.login-required' />);
     }
-  }
-
-  renderParameters(key, title, valueProperty, textProperty, prefix, minOptions, showAll) {
-    const { data: { facets } } = this.props.search;
-    const { data } = this.props.config;
-
-    const items = data[key];
-    const size = Array.isArray(items) ? showAll ? items.length : Math.min(items.length, minOptions) : 0;
-    if (size === 0) {
-      return null;
-    }
-
-    return (
-      <div className={`${key} param-box ${showAll ? '' : 'less'}`}>
-        <h5 className="title">{title}</h5>
-        <div className={`switches ${showAll ? 'more' : 'less'}`}>
-          {
-            items.slice(0, size).map((value, index) => {
-              const resolvedValue = valueProperty ? value[valueProperty] : value;
-              const checked = !!facets[key].find(value => value === resolvedValue);
-
-              return (
-                <Checkbox
-                  key={`switch-${prefix}-${index}`}
-                  id={`switch-${prefix}-${index}`}
-                  name={`switch-${prefix}-${index}`}
-                  text={textProperty ? value[textProperty] : value}
-                  value={checked}
-                  readOnly={false}
-                  onChange={() => { this.onFacetChanged(key, resolvedValue); }}
-                />
-              );
-            })
-          }
-        </div>
-        {items.length > minOptions &&
-          <div className="more-link">
-            <a onClick={(e) => this.toggleMore(e, key)}>{showAll ? "View Less" : "View More"}</a>
-          </div>
-        }
-      </div>
-    );
   }
 
   renderDataset(r, host) {
@@ -468,15 +460,6 @@ class MainResults extends React.Component {
 
   render() {
     const {
-      dataFacets: {
-        [EnumCkanFacet.Group]: showAllGroups,
-        [EnumCkanFacet.Organization]: showAllOrganizations,
-        [EnumCkanFacet.License]: showAllLicenses,
-        [EnumCkanFacet.Format]: showAllFormats,
-        [EnumCkanFacet.Tag]: showAllTags
-      },
-    } = this.state;
-    const {
       search: {
         result: {
           catalogs: {
@@ -490,6 +473,7 @@ class MainResults extends React.Component {
     } = this.props;
     const _t = this.context.intl.formatMessage;
 
+    const advanced = Object.keys(pills).filter(key => pills[key]).length === 1;
     const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
     const pageSize = datasets.count !== 0 ? datasets.pageSize : publications.count !== 0 ? publications.pageSize : notebooks.count !== 0 ? notebooks.pageSize : 10;
     const rowCount = datasets.count + publications.count + notebooks.count;
@@ -567,40 +551,53 @@ class MainResults extends React.Component {
                 </form>
               </div>
 
-              <div className="main-results-advanced-search">
+              {advanced &&
+                <React.Fragment>
+                  <div className="main-results-advanced-search">
 
-                <h4 className="header">
-                  {_t({ id: 'results.shared.search.advanced-search' })}
-                </h4>
+                    <h4 className="header">
+                      {_t({ id: 'results.shared.search.advanced-search' })}
+                    </h4>
 
 
-                <div className="border-bottom-bar">
+                    <div className="border-bottom-bar">
 
-                </div>
-              </div>
+                    </div>
+                  </div>
 
-              {true === false &&
-                <LocationFilter />
+                  {true === false &&
+                    <LocationFilter />
+                  }
+
+                  {pills.data &&
+                    <CkanAdvancedOptions
+                      facets={this.props.search.data.facets}
+                      metadata={this.props.config.data}
+                      minOptions={4}
+                      toggleFacet={this.onDataFacetChanged}
+                    />
+                  }
+
+                  {pills.pubs &&
+                    <PubsAdvancedOptions
+                      filters={this.props.search.openaire}
+                      metadata={this.props.config.openaire}
+                      setOpenaireFilter={this.onOpenaireFilterChanged}
+                      toggleProvider={this.onProviderToggle}
+                    />
+                  }
+
+                  {pills.lab &&
+                    <CkanAdvancedOptions
+                      facets={this.props.search.lab.facets}
+                      metadata={this.props.config.lab}
+                      minOptions={4}
+                      toggleFacet={this.onLabFacetChanged}
+                    />
+                  }
+
+                </React.Fragment>
               }
-
-              <div className="fields">
-
-                <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Organization, _t({ id: 'advanced-search.filters.ckan.organizations' }), 'name', 'title', 'org', MIN_FACET_VALUES, showAllOrganizations)}
-                </div>
-                <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Group, _t({ id: 'advanced-search.filters.ckan.topics' }), 'name', 'title', 'grp', MIN_FACET_VALUES, showAllGroups)}
-                </div>
-                <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Tag, _t({ id: 'advanced-search.filters.ckan.tags' }), 'name', 'display_name', 'tag', MIN_FACET_VALUES, showAllTags)}
-                </div>
-                <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.Format, _t({ id: 'advanced-search.filters.ckan.formats' }), null, null, 'fmt', MIN_FACET_VALUES, showAllFormats)}
-                </div>
-                <div className="fields-group">
-                  {this.renderParameters(EnumCkanFacet.License, _t({ id: 'advanced-search.filters.ckan.licenses' }), 'id', 'title', 'lic', MIN_FACET_VALUES, showAllLicenses)}
-                </div>
-              </div>
 
             </section>
 
@@ -687,11 +684,13 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   addFavorite,
   removeFavorite,
   searchAll,
-  setText,
-  toggleAdvanced,
-  togglePill,
-  toggleDataFacet,
+  setOpenaireFilter,
   setResultVisibility,
+  setText,
+  toggleDataFacet,
+  toggleLabFacet,
+  toggleOpenaireProvider,
+  togglePill,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

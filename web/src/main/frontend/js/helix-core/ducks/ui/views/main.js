@@ -268,11 +268,6 @@ const setPill = (id, value) => ({
   value,
 });
 
-export const togglePill = (id) => ({
-  type: PILL_TOGGLE,
-  id,
-});
-
 export const toggleDataFacet = (facet, value) => ({
   type: SET_DATA_FACET,
   facet,
@@ -405,4 +400,13 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10, cat
       dispatch(catalogSearchComplete(data));
       return data;
     });
+};
+
+export const togglePill = (id) => (dispatch) => {
+  dispatch({
+    type: PILL_TOGGLE,
+    id,
+  });
+
+  return Promise.resolve(id);
 };

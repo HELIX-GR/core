@@ -92,7 +92,6 @@ class PublicationsResults extends React.Component {
   onProviderToggle(id) {
     this.props.toggleOpenaireProvider(id);
     this.search();
-
   }
 
   onSearch(e) {
