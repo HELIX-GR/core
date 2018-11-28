@@ -125,13 +125,18 @@ class NotebookDetails extends React.Component {
     }
   }
 
-  getViewerUrl(url) {
-    const { config: { jupyterNotebookViewer } } = this.props;
-    const index = url.indexOf('://');
+  getViewerUrl() {
+    const { config: { jupyterNotebookViewer }, notebook: { data: n } } = this.props;
+    const url = n.resources && n.resources.length === 1 ? n.resources[0].url : null;
+    if (!url) {
+      return null;
+    }
 
+    const index = url.indexOf('://');
     if (index !== -1) {
       return `${jupyterNotebookViewer}${url.substring(index + 3)}`;
     }
+
     return `${jupyterNotebookViewer}${url}`;
   }
 
@@ -218,7 +223,7 @@ class NotebookDetails extends React.Component {
                 <div className="nav-bar">
                   <div>
                     <h1 className="package-title">
-                      <a href={`${host}/dataset/${r.id}`}>{r.title}</a>
+                      <a href={this.getViewerUrl()} target="_blank">{r.title}</a>
                     </h1>
                   </div>
                   <div className="result-icons">
@@ -265,7 +270,7 @@ class NotebookDetails extends React.Component {
                     {r.resources.length !== 0 &&
                       r.resources.map(resource => (
                         <li key={resource.id} className="resource-component clearfix" data-id={resource.id}>
-                          <a className="resource-title" href={`${host}/dataset/${r.name}/resource/${resource.id}`} title={resource.name}>
+                          <a className="resource-title" href={resource.url} title={resource.name}>
                             {resource.name}
                             <span className="format-label" property="dc:format" data-format={resource.format.toLowerCase()}></span>
                           </a>
@@ -273,7 +278,7 @@ class NotebookDetails extends React.Component {
                             <a className=" btn-group-main" href={resource.url}>
                               {_t({ id: 'notebook.buttons.download' })}
                             </a>
-                            <a className=" btn-group-main" href={this.getViewerUrl(resource.url)} target="_blank">
+                            <a className=" btn-group-main" href={this.getViewerUrl()} target="_blank">
                               {_t({ id: 'notebook.buttons.view' })}
                             </a>
                           </div>
