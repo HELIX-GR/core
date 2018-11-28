@@ -208,11 +208,6 @@ class DatasetDetails extends React.Component {
                       title={r.title}
                       url={`${host}/dataset/${r.id}`}
                     />
-                    <div className="btn-favorite">
-                      <a href="" data-toggle="tooltip" data-placement="bottom" title="" >
-                        <img className="" src="/images/png/favorite.png" />
-                      </a>
-                    </div>
                     <div className="package-language">
                       <a href=''> {r.datacite.languagecode}</a>
                     </div>

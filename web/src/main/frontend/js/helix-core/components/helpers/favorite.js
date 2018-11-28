@@ -1,5 +1,8 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+
+import { Tooltip } from 'reactstrap';
 
 import {
   EnumCatalog
@@ -11,6 +14,16 @@ class Favorite extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      tooltipOpen: false
+    };
+    this.id = _.uniqueId('btn-favorite-');
+  }
+
+  static contextTypes = {
+    intl: PropTypes.object,
   }
 
   static propTypes = {
@@ -21,6 +34,12 @@ class Favorite extends React.Component {
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
+  }
+
+  toggle() {
+    this.setState({
+      tooltipOpen: !this.state.tooltipOpen
+    });
   }
 
   onClick(e) {
@@ -39,13 +58,22 @@ class Favorite extends React.Component {
 
   render() {
     const { active } = this.props;
+    const _t = this.context.intl.formatMessage;
 
     return (
-      <div className={`btn-favorite ${active ? 'active' : ''}`}>
-        <a onClick={(e) => this.onClick(e)} data-toggle="tooltip" data-placement="bottom" title="" >
-          <img className="" src="/images/png/favorite.png" />
-        </a>
-      </div>
+      <React.Fragment>
+        <div className={`btn-favorite ${active ? 'active' : ''}`} id={this.id}>
+          <a onClick={(e) => this.onClick(e)}  >
+            <img
+              src={`/images/icons/various/favorite_${active ? 'remove' : 'add'}.svg`}
+              style={{ width: (active ? 20 : 22), marginTop: 5 }}
+            />
+          </a>
+        </div>
+        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target={this.id} toggle={this.toggle}>
+          {_t({ id: active ? 'tooltip.remove-favorite' : 'tooltip.add-favorite' })}
+        </Tooltip>
+      </React.Fragment>
     );
   }
 }

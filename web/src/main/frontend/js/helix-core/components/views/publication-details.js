@@ -40,6 +40,8 @@ import {
   toast,
 } from 'react-toastify';
 
+import { Tooltip } from 'reactstrap';
+
 import {
   Favorite,
   ProgressBar,
@@ -61,6 +63,12 @@ class PublicationDetails extends React.Component {
   constructor(props) {
     super(props);
 
+
+    this.state = {
+      tooltipOpen: false
+    };
+
+    this.toggleTooltip = this.toggleTooltip.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
@@ -150,6 +158,12 @@ class PublicationDetails extends React.Component {
 
   isFavoriteActive(handle) {
     return !!this.props.favorites.find(f => f.catalog === EnumCatalog.OPENAIRE && f.handle === handle);
+  }
+
+  toggleTooltip() {
+    this.setState({
+      tooltipOpen: !this.state.tooltipOpen
+    });
   }
 
   toggleFavorite(data) {
@@ -275,11 +289,16 @@ class PublicationDetails extends React.Component {
                       url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
                     />
                     {p.instances.length !== 0 && p.instances[0].url &&
-                      <div className="btn-save">
-                        <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
-                          <img src="/images/png/save.png" />
-                        </a>
-                      </div>
+                      <React.Fragment>
+                        <div className="btn-save" id="img-btn-save">
+                          <a href={p.instances[0].url} target="_blank" data-toggle="tooltip" data-placement="bottom" title="">
+                            <img src="/images/png/save.png" />
+                          </a>
+                        </div>
+                        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target="img-btn-save" toggle={this.toggleTooltip}>
+                          {_t({ id: 'tooltip.view-publication' })}
+                        </Tooltip>
+                      </React.Fragment>
                     }
                   </div>
                   <div className="dataset-dates">

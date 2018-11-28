@@ -316,5 +316,10 @@
     "remove-error-dataset": "Αποτυχία διαγραφής συνόλου δεδομένων από τα αγαπημένα",
     "remove-error-publication": "Αποτυχία διαγραφής δημοσίευσης από τα αγαπημένα",
     "remove-error-notebook": "Αποτυχία διαγραφής notebook από τα αγαπημένα"
+  },
+  "tooltip": {
+    "add-favorite": "Προσθήκη στα αγαπημένα",
+    "remove-favorite": "Διαγραφή από τα αγαπημένα",
+    "view-publication": "Προβολή δημοσίευσης"
   }
 }
