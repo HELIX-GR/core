@@ -63,16 +63,6 @@ class Header extends React.Component {
   }
 
   get logoLink() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/pubs')) {
-        return StaticRoutes.PUBS;
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return StaticRoutes.PUBS;
-      }
-    }
     return StaticRoutes.MAIN;
   }
 
