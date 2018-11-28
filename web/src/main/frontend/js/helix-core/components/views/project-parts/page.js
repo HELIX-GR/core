@@ -52,6 +52,10 @@ class Page extends React.Component {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
   render() {
     const page = this.props.page;
 
@@ -75,7 +79,7 @@ class Page extends React.Component {
           </a>
         }
         {page && !page.slug.startsWith(WordPressPages.FAQ) &&
-          <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: page.content.rendered }}>
+          <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: this.toggleSecureUrl(page.content.rendered) }}>
           </div>
         }
         {page && page.slug.startsWith(WordPressPages.FAQ) &&
