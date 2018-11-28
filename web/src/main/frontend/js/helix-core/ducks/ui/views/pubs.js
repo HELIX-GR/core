@@ -242,7 +242,7 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10) => 
       pageIndex,
       pageSize,
       term,
-      providers: openaire.providers || [],
+      providers: advanced ? openaire.providers || [] : [],
       [EnumOpenaireFilter.Authors]: advanced ? openaire[EnumOpenaireFilter.Authors] : null,
       [EnumOpenaireFilter.FromDateAccepted]: advanced ? openaire[EnumOpenaireFilter.FromDateAccepted] : null,
       [EnumOpenaireFilter.ToDateAccepted]: advanced ? openaire[EnumOpenaireFilter.ToDateAccepted] : null,

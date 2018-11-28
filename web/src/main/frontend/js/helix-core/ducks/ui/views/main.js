@@ -378,10 +378,10 @@ export const search = (term, advanced = false, pageIndex = 0, pageSize = 10, cat
       pageIndex,
       pageSize,
       term,
-      providers: openaire.providers || [],
-      [EnumOpenaireFilter.Authors]: openaire[EnumOpenaireFilter.Authors],
-      [EnumOpenaireFilter.FromDateAccepted]: openaire[EnumOpenaireFilter.FromDateAccepted],
-      [EnumOpenaireFilter.ToDateAccepted]: openaire[EnumOpenaireFilter.ToDateAccepted],
+      providers: advanced ? openaire.providers || [] : [],
+      [EnumOpenaireFilter.Authors]: advanced ? openaire[EnumOpenaireFilter.Authors] : null,
+      [EnumOpenaireFilter.FromDateAccepted]: advanced ? openaire[EnumOpenaireFilter.FromDateAccepted] : null,
+      [EnumOpenaireFilter.ToDateAccepted]: advanced ? openaire[EnumOpenaireFilter.ToDateAccepted] : null,
     };
   }
 
