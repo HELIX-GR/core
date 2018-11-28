@@ -1,5 +1,5 @@
 #root {
-  > div {
+  >div {
     &.home {
       border-top: 15px solid $main-black;
     }
@@ -88,9 +88,6 @@
     }
   }
   header {
-    .account-icon {
-      border-radius: 15px;
-    }
     z-index: 2;
     @include position(absolute, 0 0 null 0);
     img.logo-image {
@@ -231,7 +228,16 @@
           -o-transition: all .2s ease-in-out;
           line-height: 35px;
           img {
-            height: 26px;
+            height: 30px;
+            margin-bottom: 2px;
+          }
+        }
+        .account-icon {
+          border-radius: 50px;
+        }
+        &.logged-off {
+          .account-icon {
+            opacity: 0.5;
           }
         }
       }
