@@ -113,6 +113,10 @@ class NewsDetails extends React.Component {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
   render() {
     const { current: post, related: relatedPosts } = this.props.news;
     const _t = this.context.intl.formatMessage;
@@ -190,7 +194,7 @@ class NewsDetails extends React.Component {
               <div className="item-date">
                 {date} \\\ {_t({ id: 'breadcrumb.helix-team' })}
               </div>
-              <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: p.content.rendered }}>
+              <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: this.toggleSecureUrl(p.content.rendered) }}>
               </div>
             </div>
           </div>
@@ -203,7 +207,7 @@ class NewsDetails extends React.Component {
     return posts.map((p, index, posts) => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
-          p._embedded['wp:featuredmedia'][0].source_url :
+          this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
           '/images/jpg/news-1.jpg'
       );
       const age = moment.duration(moment() - moment(p.modified));
@@ -237,7 +241,7 @@ class NewsDetails extends React.Component {
                     {p.title.rendered}
                   </h3>
                 </NavLink>
-                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}>
+                <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}>
                 </div>
                 <div>
                   <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])} className="read-more">

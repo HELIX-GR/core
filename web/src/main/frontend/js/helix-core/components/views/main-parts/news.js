@@ -53,13 +53,17 @@ class News extends React.Component {
     );
   }
 
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
   renderPosts(posts) {
     const _t = this.context.intl.formatMessage;
 
     return posts.map(p => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
-          p._embedded['wp:featuredmedia'][0].source_url :
+          this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
           '/images/jpg/news-1.jpg'
       );
 
@@ -82,7 +86,7 @@ class News extends React.Component {
                 </h3>
               </NavLink>
               <div className="item-excerpt style-5">
-                <p dangerouslySetInnerHTML={{ __html: truncateText(p.excerpt.rendered, 'p') }}></p>
+                <p dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></p>
                 <NavLink to={buildPath(DynamicRoutes.NEWS_PAGE, [p.id])} className="read-more">
                   {_t({ id: 'main.news.read-more' })}
                 </NavLink>

@@ -26,6 +26,7 @@ class Faq extends React.Component {
         }, []) :
       null);
   }
+
   toggleSection(index) {
     const { section: current } = this.state;
     if (current === index) {
@@ -34,6 +35,10 @@ class Faq extends React.Component {
       this.setState({ section: index });
     }
 
+  }
+
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
   }
 
   renderSection(section, index) {
@@ -47,7 +52,7 @@ class Faq extends React.Component {
         </div>
         <Collapse isOpen={isOpen}>
           <div id={`faq-accordion-${index}`} >
-            <div className="accordion-content" dangerouslySetInnerHTML={{ __html: section.content }} />
+            <div className="accordion-content" dangerouslySetInnerHTML={{ __html: this.toggleSecureUrl(section.content) }} />
           </div>
         </Collapse>
       </ div>
