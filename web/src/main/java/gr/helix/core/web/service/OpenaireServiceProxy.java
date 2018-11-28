@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
@@ -98,6 +99,7 @@ public class OpenaireServiceProxy {
         return metadata;
     }
 
+    @Cacheable(value="queries", key="#query.toString()")
     public CatalogResult<Publication> getPublications(OpenaireCatalogQuery query) throws ApplicationException {
         try {
             // OpenAIRE page index starts from 1
@@ -161,7 +163,7 @@ public class OpenaireServiceProxy {
         }
     }
 
-
+    @Cacheable("publications")
     public List<Publication> getPublications(String id) throws ApplicationException {
         try {
             final EndpointConfiguration endpoint = this.openaireConfiguration.getApi();

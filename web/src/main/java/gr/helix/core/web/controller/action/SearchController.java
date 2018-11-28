@@ -1,5 +1,7 @@
 package gr.helix.core.web.controller.action;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +23,10 @@ import gr.helix.core.web.service.SearchService;
 @RequestMapping(produces = "application/json")
 public class SearchController {
 
+    private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
+
     @Autowired
-    private SearchService searchService;
+    private SearchService       searchService;
 
     @RequestMapping(value = "/action/catalog/query", method = RequestMethod.GET)
     public RestResponse<?> query(Authentication authentication, @RequestParam EnumCatalog[] catalogs, @RequestParam String search) {
@@ -30,6 +34,7 @@ public class SearchController {
             final CompositeCatalogResult result = this.searchService.queryCatalog(catalogs, search);
             return RestResponse.result(result);
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -39,6 +44,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryData(search));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -48,6 +54,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryNotebooks(search));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -57,6 +64,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryPublications(search));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, ex.getMessage());
         }
     }
@@ -67,6 +75,7 @@ public class SearchController {
             final CompositeCatalogResult result = this.searchService.queryCatalog(query);
             return RestResponse.result(result);
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -76,6 +85,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryData(query));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -85,6 +95,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryNotebooks(query));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
         }
     }
@@ -94,6 +105,7 @@ public class SearchController {
         try {
             return RestResponse.result(this.searchService.queryPublications(query));
         } catch (final Exception ex) {
+            logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, ex.getMessage());
         }
     }

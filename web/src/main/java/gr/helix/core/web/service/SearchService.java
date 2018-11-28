@@ -23,9 +23,7 @@ import gr.helix.core.web.model.openaire.client.Publication;
 @Service
 public class SearchService {
 
-    private static final Logger  logger                     = LoggerFactory.getLogger(SearchService.class);
-
-    private List<Publication>    cachedFeaturedPublications = null;
+    private static final Logger  logger = LoggerFactory.getLogger(SearchService.class);
 
     @Autowired
     @Qualifier("dataCkanServiceProxy")
@@ -114,11 +112,7 @@ public class SearchService {
     }
 
     public synchronized List<Publication> getFeaturedPublications() {
-        if (this.cachedFeaturedPublications != null) {
-            return this.cachedFeaturedPublications;
-        }
-
-        return (this.cachedFeaturedPublications = this.openaireServiceProxy.getFeaturedPublications());
+        return this.openaireServiceProxy.getFeaturedPublications();
     }
 
     public CompositeCatalogResult queryCatalog(CompositeCatalogQuery query) throws InterruptedException, ExecutionException {
