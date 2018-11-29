@@ -57,10 +57,6 @@ class Main extends React.Component {
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, KEYSTROKE_INTERVAL);
 
     this.textInput = React.createRef();
-
-    this.state = {
-      partialResultVisible: false,
-    };
   }
 
   static contextTypes = {

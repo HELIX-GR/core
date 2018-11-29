@@ -65,8 +65,8 @@ class Favorite extends React.Component {
         <div className={`btn-favorite ${active ? 'active' : ''}`} id={this.id}>
           <a onClick={(e) => this.onClick(e)}  >
             <img
-              src={`/images/icons/various/favorite_${active ? 'remove' : 'add'}.svg`}
-              style={{ width: (active ? 20 : 22), marginTop: 7 }}
+              src={`/images/icons/various/Favorite_${active ? 'active' : 'inactive'}.svg`}
+              style={{ width: 22, marginTop: 7 }}
             />
           </a>
         </div>

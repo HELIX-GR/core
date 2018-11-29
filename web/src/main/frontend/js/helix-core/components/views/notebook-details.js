@@ -183,8 +183,8 @@ class NotebookDetails extends React.Component {
 
               <h5 className="side-heading">{_t({ id: 'notebook.subjects' })}</h5>
               <section className="side-tags">
-                {r.closed_tag &&
-                  r.closed_tag.sort().map(tag => (
+                {r.tags &&
+                  r.tags.sort().map(tag => (
                     <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }
@@ -251,7 +251,7 @@ class NotebookDetails extends React.Component {
                   <div className="nav-menu">
                     <li className="active">
                       <a onClick={(e) => e.preventDefault()}>
-                        <i className="fa fa-sitemap"></i>{_t({ id: 'notebook.notebook' })}
+                        <i className="fa fa-flask"></i>{_t({ id: 'notebook.notebook' })}
                       </a>
                     </li>
                   </div>

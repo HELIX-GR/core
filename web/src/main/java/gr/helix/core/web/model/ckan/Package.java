@@ -1,8 +1,11 @@
 package gr.helix.core.web.model.ckan;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Package {
@@ -47,8 +50,10 @@ public class Package {
     private List<String>                     categories;
     @JsonProperty("isopen")
     private boolean                          open;
-    @JsonProperty("closed_tag")
-    private List<String>                     tags;
+    @JsonIgnore()
+    private List<String>                     closedTags;
+    @JsonIgnore()
+    private List<Tag>                        tags;
     @JsonProperty("license_url")
     private String                           licenseUrl;
     @JsonProperty("license_title")
@@ -226,14 +231,6 @@ public class Package {
         this.open = open;
     }
 
-    public List<String> getTags() {
-        return this.tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
     public String getLicenseUrl() {
         return this.licenseUrl;
     }
@@ -256,6 +253,28 @@ public class Package {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @JsonProperty("tags")
+    public List<String> getTags() {
+        final List<String> result = new ArrayList<String>();
+        if (this.tags != null) {
+            result.addAll(this.tags.stream().map(Tag::getDisplayName).collect(Collectors.toList()));
+        }
+        if (this.closedTags != null) {
+            result.addAll(this.closedTags);
+        }
+        return result;
+    }
+
+    @JsonProperty("tags")
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    @JsonProperty("closed_tag")
+    public void setClosedTags(List<String> closedTags) {
+        this.closedTags = closedTags;
     }
 
 }

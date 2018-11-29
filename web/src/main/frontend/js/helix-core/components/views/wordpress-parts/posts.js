@@ -146,9 +146,11 @@ class News extends React.Component {
           this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
           '/images/jpg/news-1.jpg'
       );
-      const age = moment.duration(moment() - moment(p.modified));
+
+      const modifiedAt = moment(p.modified).parseZone();
+      const age = moment.duration(moment() - modifiedAt);
       const date = age.asHours() < 24 ?
-        moment(p.modified).fromNow() :
+        moment(modifiedAt).fromNow() :
         <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
       const _t = this.context.intl.formatMessage;
 

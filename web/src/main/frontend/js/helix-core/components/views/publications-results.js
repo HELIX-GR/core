@@ -162,9 +162,10 @@ class PublicationsResults extends React.Component {
     return data.results.map(p => {
       const resource = this.resolveResource(p);
 
-      const age = moment.duration(moment() - moment(p.dateOfAcceptance));
+      const modifiedAt = moment(p.dateOfAcceptance).parseZone();
+      const age = moment.duration(moment() - modifiedAt);
       const date = age.asHours() < 24 ?
-        moment(p.dateOfAcceptance).fromNow() :
+        moment(modifiedAt).fromNow() :
         <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
 
       return (

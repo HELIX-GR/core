@@ -11,6 +11,7 @@ import {
 
 import {
   FormattedDate,
+  FormattedMessage,
 } from 'react-intl';
 
 import {
@@ -40,10 +41,6 @@ import {
   EnumCkanFacet,
   EnumMimeType,
 } from '../../model';
-
-import {
-  FormattedMessage,
-} from 'react-intl';
 
 import {
   toast,
@@ -87,16 +84,6 @@ class MainResults extends React.Component {
   static contextTypes = {
     intl: PropTypes.object,
   };
-
-  toggleMore(e, key) {
-    e.preventDefault();
-    this.setState({
-      dataFacets: {
-        ...this.state.dataFacets,
-        [key]: !this.state.dataFacets[key],
-      }
-    });
-  }
 
   isTextValid(text) {
     return ((text) && (text.length > 2));
@@ -213,9 +200,10 @@ class MainResults extends React.Component {
       return result;
     }, []);
 
-    const age = moment.duration(moment() - moment(r.metadata_modified));
+    const modifiedAt = moment(r.metadata_modified).parseZone();
+    const age = moment.duration(moment() - modifiedAt);
     const date = age.asHours() < 24 ?
-      moment(r.metadata_modified).fromNow() :
+      moment(modifiedAt).fromNow() :
       <FormattedDate value={r.metadata_modified} day='numeric' month='numeric' year='numeric' />;
 
     return (
@@ -316,9 +304,10 @@ class MainResults extends React.Component {
   renderPublication(p, host) {
     const resource = this.resolvePublicationResource(p);
 
-    const age = moment.duration(moment() - moment(p.dateOfAcceptance));
+    const modifiedAt = moment(p.dateOfAcceptance).parseZone();
+    const age = moment.duration(moment() - modifiedAt);
     const date = age.asHours() < 24 ?
-      moment(p.dateOfAcceptance).fromNow() :
+      moment(modifiedAt).fromNow() :
       <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
 
     return (
@@ -377,9 +366,10 @@ class MainResults extends React.Component {
       return result;
     }, []);
 
-    const age = moment.duration(moment() - moment(n.metadata_modified));
+    const modifiedAt = moment(n.metadata_modified).parseZone();
+    const age = moment.duration(moment() - modifiedAt);
     const date = age.asHours() < 24 ?
-      moment(n.metadata_modified).fromNow() :
+      moment(modifiedAt).fromNow() :
       <FormattedDate value={n.metadata_modified} day='numeric' month='numeric' year='numeric' />;
 
     return (
@@ -476,7 +466,7 @@ class MainResults extends React.Component {
     const advanced = Object.keys(pills).filter(key => pills[key]).length === 1;
     const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
     const pageSize = datasets.count !== 0 ? datasets.pageSize : publications.count !== 0 ? publications.pageSize : notebooks.count !== 0 ? notebooks.pageSize : 10;
-    const rowCount = datasets.count + publications.count + notebooks.count;
+    const rowCount = Math.max(datasets.count, publications.count, notebooks.count);
     const pageCount = Math.ceil(rowCount / pageSize);
 
     const catalogNames = [
@@ -600,7 +590,6 @@ class MainResults extends React.Component {
               }
 
             </section>
-
 
             <section className="results-main-result-set">
 

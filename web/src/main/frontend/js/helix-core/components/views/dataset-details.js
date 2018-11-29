@@ -155,8 +155,8 @@ class DatasetDetails extends React.Component {
 
               <h5 className="side-heading">{_t({ id: 'dataset.subjects' })}</h5>
               <section className="side-tags">
-                {r.closed_tag &&
-                  r.closed_tag.sort().map(tag => (
+                {r.tags &&
+                  r.tags.sort().map(tag => (
                     <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }

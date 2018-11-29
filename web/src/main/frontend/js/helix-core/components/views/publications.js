@@ -127,10 +127,11 @@ class Publications extends React.Component {
     }
   }
 
-  renderFeaturedPublication(p, host) {
-    const age = moment.duration(moment() - moment(p.dateOfAcceptance));
+  renderFeaturedPublication(p) {
+    const modifiedAt = moment(p.dateOfAcceptance).parseZone();
+    const age = moment.duration(moment() - modifiedAt);
     const date = age.asHours() < 24 ?
-      moment(p.dateOfAcceptance).fromNow() :
+      moment(modifiedAt).fromNow() :
       <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
 
     return (
