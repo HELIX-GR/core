@@ -13,6 +13,7 @@ export const WordPressPages = {
   PublishData: 'publish-data',
   Services: 'services',
   Software: 'software',
+  Subjects: 'subjects',
   TermsOfUse: 'terms-of-use',
   Use: 'use',
   WhatIsHelix: 'what-is-helix',

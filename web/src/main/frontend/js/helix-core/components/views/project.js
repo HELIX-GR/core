@@ -39,6 +39,7 @@ class Project extends React.Component {
 
     const { name } = match ? match.params : WordPressPages.About;
     const _t = this.context.intl.formatMessage;
+    const singleColumn = name === WordPressPages.Subjects;
 
     return (
       <div>
@@ -52,23 +53,29 @@ class Project extends React.Component {
           <div className="about-helix-container container-fluid">
             <div className="row">
 
-              <div className="col-md-3 col-xs-12">
-                <h4 className="about-header">
-                  {_t({ id: 'project.title' })}
-                </h4>
-              </div>
+              {!singleColumn &&
+                <div className="col-md-3 col-xs-12">
+                  <h4 className="about-header">
+                    {_t({ id: 'project.title' })}
+                  </h4>
+                </div>
+              }
 
-              <div className="col-md-9 col-xs-12">
-                <h4 className="about-header">
-                  {_t({ id: `header.menu.project.items.${name}` })}
-                </h4>
-              </div>
+              {!singleColumn &&
+                <div className={`col-md-${singleColumn ? 12 : 9} col-xs-12`}>
+                  <h4 className="about-header">
+                    {_t({ id: `header.menu.project.items.${name}` })}
+                  </h4>
+                </div>
+              }
 
-              <div className="col-md-3 col-xs-12">
-                <Menu />
-              </div>
+              {!singleColumn &&
+                <div className="col-md-3 col-xs-12">
+                  <Menu />
+                </div>
+              }
 
-              <div className="col-md-9 col-xs-12">
+              <div className={`col-md-${singleColumn ? 12 : 9} col-xs-12`}>
                 <div className="about-item">
 
                   <Switch>
