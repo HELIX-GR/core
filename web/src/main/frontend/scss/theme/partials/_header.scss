@@ -12,6 +12,9 @@
     &.lab {
       border-top: 15px solid $lab-color;
     }
+    &.project {
+      border-top: 15px solid $main-black;
+    }
   }
   div {
     &.project,
