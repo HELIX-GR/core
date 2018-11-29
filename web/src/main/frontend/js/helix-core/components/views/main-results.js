@@ -387,9 +387,9 @@ class MainResults extends React.Component {
           url={`${host}/dataset/${n.id}`}
         />
         <h3 className="title">
-          <Link to={buildPath(DynamicRoutes.NOTEBOOK_PAGE, [n.id])}>
+          <a href={`https://lab.hellenicdataservice.gr/notebook/${n.id}`} target="_blank">
             {n.title.length > MAX_TITLE_LENGTH ? `${n.title.substring(0, MAX_TITLE_LENGTH)} ...` : n.title}
-          </Link>
+          </a>
           <div className="pill lab ml-1">
             LAB
           </div>

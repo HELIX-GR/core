@@ -61,10 +61,6 @@ class Publications extends React.Component {
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
 
     this.textInput = React.createRef();
-
-    this.state = {
-      partialResultVisible: false,
-    };
   }
 
   static contextTypes = {
