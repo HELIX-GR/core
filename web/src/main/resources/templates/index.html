@@ -43,4 +43,8 @@
   <script th:if="${@environment.getActiveProfiles()[0] == 'development'}"
           th:src="@{/js/helix-core.js}"></script>
 
+  <th:block th:if="${@environment.getProperty('helix.googleanalytics.tracker-id') != null}">
+    <th:block th:replace="googleanalytics-tracker.html" />
+  </th:block>  
+
 </html>
