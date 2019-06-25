@@ -38,6 +38,7 @@ export const EnumAuthProvider = {
   Forms: 'Forms',
   Google: 'Google',
   GitHub: 'GitHub',
+  HELIX: 'HELIX',
   SAML: 'SAML',
 };
 

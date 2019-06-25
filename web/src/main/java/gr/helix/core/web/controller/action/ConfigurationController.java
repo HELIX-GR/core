@@ -22,7 +22,7 @@ import gr.helix.core.web.service.OpenaireServiceProxy;
 @RequestMapping(produces = "application/json")
 public class ConfigurationController extends BaseController {
 
-    @Value("${helix.authentication-providers:cookie}")
+    @Value("${helix.authentication-providers:forms}")
     private String                               authProviders;
 
     @Value("${helix.jupyter.notebook-viewer}")

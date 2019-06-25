@@ -22,6 +22,7 @@ import {
 import {
   EnumAuthProvider,
   Pages,
+  StaticRoutes,
 } from '../../model';
 
 import {
@@ -127,7 +128,7 @@ class LoginForm extends React.Component {
 
               {authProviders.indexOf(EnumAuthProvider.Google) !== -1 &&
                 <div className="login-google">
-                  <a href="/login/google">
+                  <a href={StaticRoutes.LOGIN.GOOGLE}>
                     <button type="button" name="google" className="oauth">
                       <span>Google</span>
                     </button>
@@ -137,7 +138,7 @@ class LoginForm extends React.Component {
 
               {authProviders.indexOf(EnumAuthProvider.GitHub) !== -1 &&
                 <div className="login-github">
-                  <a href="/login/github">
+                  <a href={StaticRoutes.LOGIN.GITHUB}>
                     <button type="button" name="github" className="oauth">
                       <span>GitHub</span>
                     </button>
@@ -145,9 +146,19 @@ class LoginForm extends React.Component {
                 </div>
               }
 
+              {authProviders.indexOf(EnumAuthProvider.HELIX) !== -1 &&
+                <div className="login-helix">
+                  <a href={StaticRoutes.LOGIN.HELIX}>
+                    <button type="button" name="helix" className="oauth">
+                      <span>HELIX</span>
+                    </button>
+                  </a>
+                </div>
+              }
+
               {authProviders.indexOf(EnumAuthProvider.SAML) !== -1 &&
                 <div className="login-academic">
-                  <a href={idp ? `/saml/login?idp=${idp}` : '/saml/login'}>
+                  <a href={idp ? `${StaticRoutes.LOGIN.SAML}?idp=${idp}` : StaticRoutes.LOGIN.SAML}>
                     <button type="button" name="academic" className="academic">
                       <span>Academic Login</span>
                     </button>

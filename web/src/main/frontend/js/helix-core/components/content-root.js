@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 
+import { EnumAuthProvider } from '../model';
 import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
 
 import {
@@ -52,6 +53,8 @@ class ContentRoot extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.toggleLoginDialog = this.toggleLoginDialog.bind(this);
   }
 
   componentDidMount() {
@@ -97,6 +100,16 @@ class ContentRoot extends React.Component {
     return 'home';
   }
 
+  toggleLoginDialog() {
+    const { authProviders = [] } = this.props.config;
+
+    if ((authProviders.length === 1) && (authProviders[0] === EnumAuthProvider.HELIX)) {
+      window.location = StaticRoutes.LOGIN.HELIX;
+    } else {
+      this.props.toggleLoginDialog();
+    }
+  }
+
   render() {
     const routes = (
       <Switch>
@@ -136,7 +149,7 @@ class ContentRoot extends React.Component {
           pauseOnHover
         />
         <LoginForm
-          toggle={this.props.toggleLoginDialog}
+          toggle={this.toggleLoginDialog}
           visible={this.props.login.visible}
         />
         <div className={this.resolvePageClassName()}>
@@ -147,7 +160,7 @@ class ContentRoot extends React.Component {
             location={this.props.location}
             logout={this.props.logout}
             profile={this.props.profile}
-            toggleLoginDialog={this.props.toggleLoginDialog}
+            toggleLoginDialog={this.toggleLoginDialog}
           />
           {routes}
           <Footer

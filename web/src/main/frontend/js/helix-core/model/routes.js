@@ -20,6 +20,11 @@ const PROJECT = '/project/';
 const PUBS = '/pubs/';
 const PUBS_RESULTS = '/pubs/results';
 
+const GOOGLE = '/login/google';
+const GITHUB = '/login/github';
+const HELIX = '/login/helix';
+const SAML = '/saml/login';
+
 /**
  * Static routes
  */
@@ -31,6 +36,12 @@ export const StaticRoutes = {
   PROJECT,
   PUBS,
   PUBS_RESULTS,
+  LOGIN: {
+    GITHUB,
+    GOOGLE,
+    HELIX,
+    SAML,
+  },
 };
 
 // Dynamic routes

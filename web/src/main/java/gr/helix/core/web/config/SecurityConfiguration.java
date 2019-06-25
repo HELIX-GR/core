@@ -125,6 +125,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final Pattern                      csrfMethods   = Pattern.compile("^(POST|PUT|DELETE)$");
 
     @Autowired
+    OAuthUserInfoDetailResolver                userInfoDetailResolver;
+
+    @Autowired
     private SamlConfiguration                  samlConfiguration;
 
     @PostConstruct
@@ -651,6 +654,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         filters.add(this.oauth2Filter(this.google(), "/login/google"));
         filters.add(this.oauth2Filter(this.github(), "/login/github"));
+        filters.add(this.oauth2Filter(this.helix(), "/login/helix"));
         filter.setFilters(filters);
 
         return filter;
@@ -664,7 +668,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         final OAuthUserInfoTokenServices tokenServices = new OAuthUserInfoTokenServices(
             client.getResource().getUserInfoUri(),
             client.getClient().getClientId(),
-            this.userService);
+            this.userService,
+            this.userInfoDetailResolver);
 
         tokenServices.setRestTemplate(template);
 
@@ -685,6 +690,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     @ConfigurationProperties("google")
     public ClientResources google() {
+        return new ClientResources();
+    }
+
+    @Bean
+    @ConfigurationProperties("helix")
+    public ClientResources helix() {
         return new ClientResources();
     }
 

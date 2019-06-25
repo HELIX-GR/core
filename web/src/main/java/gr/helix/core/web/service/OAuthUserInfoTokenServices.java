@@ -17,15 +17,21 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import gr.helix.core.common.model.EnumRole;
 import gr.helix.core.common.model.user.Account;
+import gr.helix.core.web.config.OAuthUserInfoDetailResolver;
 import gr.helix.core.web.model.security.User;
 
 public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
 
-    private final UserDetailsService userService;
+    private final OAuthUserInfoDetailResolver userInfoDetailResolver;
 
-    public OAuthUserInfoTokenServices(String userInfoEndpointUrl, String clientId, UserDetailsService userService) {
+    private final UserDetailsService          userService;
+
+    public OAuthUserInfoTokenServices(
+        String userInfoEndpointUrl, String clientId, UserDetailsService userService, OAuthUserInfoDetailResolver userInfoDetailResolver
+    ) {
         super(userInfoEndpointUrl, clientId);
 
+        this.userInfoDetailResolver = userInfoDetailResolver;
         this.userService = userService;
     }
 
@@ -41,20 +47,23 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
         final AbstractMap<String, String> details = (AbstractMap<String, String>) authentication.getUserAuthentication().getDetails();
 
         details.keySet().stream().forEach(key -> {
-            switch (key) {
-                case "name":
-                    account.setName(details.get(key));
-                    break;
-                case "email":
-                    account.setEmail(details.get(key));
-                    break;
-                case "avatar_url":
-                case "picture":
-                    account.setImageUrl(details.get(key));
-                    break;
-                case "locale":
-                    account.setLang(details.get(key));
-                    break;
+            final String property = this.userInfoDetailResolver.resolve(key);
+
+            if(!StringUtils.isBlank(property)) {
+                switch (property) {
+                    case OAuthUserInfoDetailResolver.NAME_PROPERTY:
+                        account.setName(details.get(key));
+                        break;
+                    case OAuthUserInfoDetailResolver.EMAIL_PROPERTY:
+                        account.setEmail(details.get(key));
+                        break;
+                    case OAuthUserInfoDetailResolver.IMAGE_PROPERTY:
+                        account.setImageUrl(details.get(key));
+                        break;
+                    case OAuthUserInfoDetailResolver.LOCALE_PROPERTY:
+                        account.setLang(details.get(key));
+                        break;
+                }
             }
         });
 

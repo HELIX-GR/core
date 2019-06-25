@@ -4,6 +4,7 @@ public enum EnumAuthProvider {
     Forms,
     Google,
     GitHub,
+    HELIX,
     SAML,
     ;
 
