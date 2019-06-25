@@ -62,7 +62,6 @@ module.exports = function (grunt) {
             'fetch',
             'flat',
             'history',
-            'immutable',
             'intl-messageformat',
             'lodash',
             'moment',
@@ -81,7 +80,6 @@ module.exports = function (grunt) {
             'redux',
             'redux-logger',
             'redux-thunk',
-            'url-search-params',
           ]
         },
         files: {
@@ -96,12 +94,10 @@ module.exports = function (grunt) {
           require: [
             'flat',
             'history',
-            'immutable',
             'intl-messageformat',
             'lodash',
             'moment',
             'moment/locale/el',
-            'url-search-params',
           ],
         },
         files: {
@@ -128,7 +124,6 @@ module.exports = function (grunt) {
             'redux',
             'redux-logger',
             'redux-thunk',
-            'url-search-params',
           ],
         },
         files: {
