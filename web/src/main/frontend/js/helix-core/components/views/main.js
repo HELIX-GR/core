@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import classnames from 'classnames';
 
@@ -57,10 +58,6 @@ class Main extends React.Component {
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, KEYSTROKE_INTERVAL);
 
     this.textInput = React.createRef();
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   componentDidMount() {
@@ -142,7 +139,7 @@ class Main extends React.Component {
     const { data, lab, openaire } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     const placeholderText = [
       pills.data ? _t({ id: 'main.search.placeholder.data' }) : null,
@@ -304,4 +301,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Main);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Main));

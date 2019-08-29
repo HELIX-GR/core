@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+import { injectIntl } from 'react-intl';
+
 import {
   FormattedDate,
 } from 'react-intl';
@@ -22,17 +24,13 @@ class News extends React.Component {
     super(props);
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   static propTypes = {
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { posts } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div className="latest-news-container container-fluid">
@@ -58,7 +56,7 @@ class News extends React.Component {
   }
 
   renderPosts(posts) {
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return posts.map(p => {
       const imageUrl = (
@@ -100,4 +98,4 @@ class News extends React.Component {
 
 }
 
-export default News;
+export default injectIntl(News);

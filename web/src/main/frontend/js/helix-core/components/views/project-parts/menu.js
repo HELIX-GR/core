@@ -1,6 +1,7 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+
+import { injectIntl } from 'react-intl';
 
 import {
   buildPath,
@@ -16,10 +17,6 @@ class Menu extends React.Component {
     this.state = {
       TechnicalDetails: false,
     };
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   toggleSubMenu(e, key) {
@@ -41,7 +38,7 @@ class Menu extends React.Component {
       WordPressPages.Contact,
       WordPressPages.TermsOfUse,
     ];
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div className="about-item">
@@ -59,4 +56,4 @@ class Menu extends React.Component {
   }
 }
 
-export default Menu;
+export default injectIntl(Menu);

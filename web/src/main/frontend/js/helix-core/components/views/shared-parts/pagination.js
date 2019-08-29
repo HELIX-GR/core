@@ -1,16 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import classnames from 'classnames';
 
 class Pagination extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   static propTypes = {
@@ -34,7 +32,7 @@ class Pagination extends React.Component {
     const index = pageIndex + 1;
     const isFirst = index === 1;
     const isLast = index === count;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     if (count === 0) {
       return null;
@@ -114,4 +112,4 @@ class Pagination extends React.Component {
 
 }
 
-export default Pagination;
+export default injectIntl(Pagination);

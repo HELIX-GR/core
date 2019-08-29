@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
     this._submit = this._submit.bind(this);
 
     this.state = {
-      username: props.username || '',
+      username: '',
       password: '',
     };
   }
@@ -53,13 +53,6 @@ class LoginForm extends React.Component {
   static propTypes = {
     toggle: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      username: nextProps.username || '',
-      password: '',
-    });
   }
 
   _submit($event) {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import classnames from 'classnames';
 
 import {
@@ -76,10 +78,6 @@ class AdvancedModal extends React.Component {
     minOptions: 4,
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   onTabChanged(e, tab) {
     e.preventDefault();
     this.setState({
@@ -113,7 +111,7 @@ class AdvancedModal extends React.Component {
 
   renderTabs(selected) {
     const { pills } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
     const tabs = [];
 
     if (pills.data) {
@@ -147,7 +145,7 @@ class AdvancedModal extends React.Component {
   render() {
     const { pills, text } = this.props;
     const tab = this.resolveActiveTab();
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     const catalogs = [
       pills.data ? _t({ id: 'advanced-search.placeholder.data' }) : null,
@@ -247,4 +245,4 @@ class AdvancedModal extends React.Component {
   }
 }
 
-export default AdvancedModal;
+export default injectIntl(AdvancedModal);

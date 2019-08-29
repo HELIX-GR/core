@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import moment from '../../moment-localized';
 
@@ -80,10 +81,6 @@ class MainResults extends React.Component {
     this.onOpenaireFilterChanged = this.onOpenaireFilterChanged.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
-
-  static contextTypes = {
-    intl: PropTypes.object,
-  };
 
   isTextValid(text) {
     return ((text) && (text.length > 2));
@@ -461,7 +458,7 @@ class MainResults extends React.Component {
         loading, pills, text
       }
     } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     const advanced = Object.keys(pills).filter(key => pills[key]).length === 1;
     const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
@@ -688,4 +685,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(MainResults);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(MainResults));

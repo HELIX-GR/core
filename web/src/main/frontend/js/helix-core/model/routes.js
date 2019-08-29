@@ -132,10 +132,7 @@ const routes = {
 export function getRoute(path) {
   const prop = matchRoute(path);
 
-  if (routes.hasOwnProperty(prop)) {
-    return routes[prop];
-  }
-  return null;
+  return routes[prop] || null;
 }
 
 /**

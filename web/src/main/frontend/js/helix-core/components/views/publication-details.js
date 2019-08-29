@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import moment from '../../moment-localized';
 
@@ -72,19 +73,15 @@ class PublicationDetails extends React.Component {
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  };
-
   componentDidMount() {
     const { match: { params } } = this.props;
 
     this.getPublication(params[PARAM_ID]);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { match: { params: previousParams } } = this.props;
-    const { match: { params: nextParams } } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { match: { params: previousParams } } = prevProps;
+    const { match: { params: nextParams } } = this.props;
 
     if (previousParams[PARAM_ID] !== nextParams[PARAM_ID]) {
       this.getPublication(nextParams[PARAM_ID]);
@@ -117,7 +114,7 @@ class PublicationDetails extends React.Component {
       config: { openaire: { providers } },
       publication: { data: pub },
     } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     if (this.hostedBy) {
       const provider = providers.find(p => p.id === this.hostedBy.id) || null;
@@ -196,7 +193,7 @@ class PublicationDetails extends React.Component {
 
   render() {
     const { config: { openaire: { host } }, publication: { data: p } } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     if (this.isLoading) {
       return (
@@ -467,4 +464,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(PublicationDetails);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(PublicationDetails));

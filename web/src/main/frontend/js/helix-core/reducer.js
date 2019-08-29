@@ -1,5 +1,7 @@
 import * as Redux from 'redux';
 
+import { connectRouter } from 'connected-react-router';
+
 import {
   config,
   i18n,
@@ -22,10 +24,11 @@ import {
   pubs,
 } from './ducks/ui/views';
 
-export default Redux.combineReducers({
+export default (history) => Redux.combineReducers({
   config,
   i18n,
   meta,
+  router: connectRouter(history),
   ui: Redux.combineReducers({
     dataset,
     login,

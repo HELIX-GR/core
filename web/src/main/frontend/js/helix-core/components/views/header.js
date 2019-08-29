@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import {
   Link,
   NavLink,
@@ -21,10 +23,6 @@ class Header extends React.Component {
     super(props);
 
     this.changeLocale = this.changeLocale.bind(this);
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   static propTypes = {
@@ -69,7 +67,8 @@ class Header extends React.Component {
   render() {
     const { data: { host: dataHost } } = this.props.config;
     const authenticated = (this.props.profile != null);
-    const _t = this.context.intl.formatMessage;
+
+    const _t = this.props.intl.formatMessage;
 
     return (
       <header className="header">
@@ -186,4 +185,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default injectIntl(Header);

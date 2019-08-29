@@ -2,10 +2,11 @@ import * as Redux from 'redux';
 import * as ReduxLogger from 'redux-logger';
 import * as ReduxThunk from 'redux-thunk';
 
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router';
 
-import rootReducer from './reducer';
 import { history } from './history';
+
+import createRootReducer from './reducer';
 
 // Create and configure store
 
@@ -26,7 +27,9 @@ if (process.env.NODE_ENV != 'production') {
 var initialState = {};
 
 var store = Redux.createStore(
-  rootReducer, initialState, Redux.applyMiddleware(...middleware)
+  createRootReducer(history),
+  initialState,
+  Redux.applyMiddleware(...middleware)
 );
 
 export default store;

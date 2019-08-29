@@ -2,6 +2,8 @@ import _ from 'lodash';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import { Tooltip } from 'reactstrap';
 
 import {
@@ -20,10 +22,6 @@ class Favorite extends React.Component {
       tooltipOpen: false
     };
     this.id = _.uniqueId('btn-favorite-');
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   static propTypes = {
@@ -58,7 +56,7 @@ class Favorite extends React.Component {
 
   render() {
     const { active } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <React.Fragment>
@@ -78,4 +76,4 @@ class Favorite extends React.Component {
   }
 }
 
-export default Favorite;
+export default injectIntl(Favorite);

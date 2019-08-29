@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import moment from '../../moment-localized';
 import classnames from 'classnames';
@@ -61,10 +62,6 @@ class Publications extends React.Component {
     this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, 400);
 
     this.textInput = React.createRef();
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   componentDidMount() {
@@ -210,7 +207,7 @@ class Publications extends React.Component {
     const { advanced, partialResult: { visible, catalogs }, loading, text } = this.props.search;
     const { featured } = this.props;
 
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
 
@@ -465,4 +462,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Publications);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Publications));

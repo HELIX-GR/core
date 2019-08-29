@@ -31,9 +31,9 @@ class Page extends React.Component {
     this.getPage(name);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { match: { params: { name: previousName } }, locale: previousLocale } = this.props;
-    const { match: { params: { name: nextName } }, locale: nextLocale } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { match: { params: { name: previousName } }, locale: previousLocale } = prevProps;
+    const { match: { params: { name: nextName } }, locale: nextLocale } = this.props;
 
     if ((previousName !== nextName) || (previousLocale !== nextLocale)) {
       this.getPage(nextName);

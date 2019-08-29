@@ -1,5 +1,6 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import {
   Link,
@@ -17,10 +18,6 @@ class Footer extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object,
   }
 
   get logoImage() {
@@ -65,7 +62,7 @@ class Footer extends React.Component {
 
   render() {
     const { data: { host: dataHost } } = this.props.config;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <footer id="footer" className={this.resolveClassName()}>
@@ -140,4 +137,4 @@ class Footer extends React.Component {
   }
 }
 
-export default Footer;
+export default injectIntl(Footer);

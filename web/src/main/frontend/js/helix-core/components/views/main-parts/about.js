@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+import { injectIntl } from 'react-intl';
+
 import {
   buildPath,
   DynamicRoutes,
@@ -14,12 +16,8 @@ class About extends React.Component {
     super(props);
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   render() {
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div className="about-helix-container container-fluid">
@@ -122,4 +120,4 @@ class About extends React.Component {
 
 }
 
-export default About;
+export default injectIntl(About);

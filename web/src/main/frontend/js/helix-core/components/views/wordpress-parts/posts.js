@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import classnames from 'classnames';
 import moment from '../../../moment-localized';
 
@@ -44,10 +46,6 @@ class News extends React.Component {
     this.lastPageFirstItem = React.createRef();
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   static propTypes = {
     category: PropTypes.string.isRequired,
   }
@@ -72,7 +70,7 @@ class News extends React.Component {
   render() {
     const { category } = this.props;
     const { page, loading } = this.props.news;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div>
@@ -152,7 +150,7 @@ class News extends React.Component {
       const date = age.asHours() < 24 ?
         moment(modifiedAt).fromNow() :
         <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
-      const _t = this.context.intl.formatMessage;
+      const _t = this.props.intl.formatMessage;
 
       return (
         <div key={`${p.id}`} className="row" ref={this.lastPageFirstItem}>
@@ -213,4 +211,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(News);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(News));

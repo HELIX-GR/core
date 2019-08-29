@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
+
+import { injectIntl } from 'react-intl';
 
 import moment from '../../moment-localized';
 
@@ -52,10 +53,6 @@ class NotebookDetails extends React.Component {
 
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
-
-  static contextTypes = {
-    intl: PropTypes.object,
-  };
 
   componentDidMount() {
     const { match: { params } } = this.props;
@@ -146,7 +143,7 @@ class NotebookDetails extends React.Component {
 
   render() {
     const { config: { lab: { host } }, notebook: { data: r } } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     if (this.isLoading) {
       return (
@@ -321,4 +318,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(NotebookDetails);
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(NotebookDetails));

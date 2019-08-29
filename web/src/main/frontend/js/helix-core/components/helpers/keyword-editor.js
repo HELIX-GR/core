@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import CreatableSelect from 'react-select/lib/Creatable';
+import Creatable from 'react-select/creatable';
 
 const components = {
   DropdownIndicator: null,
@@ -114,7 +114,7 @@ export default class KeywordEditor extends React.Component {
     const { inputValue } = this.state;
 
     return (
-      <CreatableSelect
+      <Creatable
         components={components}
         inputValue={inputValue}
         isClearable

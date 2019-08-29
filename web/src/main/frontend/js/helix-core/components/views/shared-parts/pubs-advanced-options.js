@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import { FormGroup, FormText, Label } from 'reactstrap';
 
 import { EnumOpenaireFilter } from '../../../model';
@@ -18,10 +20,6 @@ class PubsAdvancedOptions extends React.Component {
 
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   static propTypes = {
     filters: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
@@ -35,7 +33,7 @@ class PubsAdvancedOptions extends React.Component {
 
   renderProviders() {
     const { filters, metadata: { providers } } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div className="providers param-box">
@@ -65,7 +63,7 @@ class PubsAdvancedOptions extends React.Component {
 
   render() {
     const { filters, } = this.props;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <div className="fields">
@@ -122,4 +120,4 @@ class PubsAdvancedOptions extends React.Component {
 
 }
 
-export default PubsAdvancedOptions;
+export default injectIntl(PubsAdvancedOptions);

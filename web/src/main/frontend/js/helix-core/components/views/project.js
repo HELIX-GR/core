@@ -1,6 +1,7 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { injectIntl } from 'react-intl';
 
 import {
   buildPath,
@@ -26,10 +27,6 @@ class Project extends React.Component {
     super(props);
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   render() {
     const match = getParams(this.props.location.pathname, {
       path: DynamicRoutes.PROJECT_PAGE,
@@ -38,7 +35,7 @@ class Project extends React.Component {
     });
 
     const { name } = match ? match.params : WordPressPages.About;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
     const singleColumn = name === WordPressPages.Subjects;
 
     return (
@@ -101,4 +98,4 @@ class Project extends React.Component {
   }
 }
 
-export default Project;
+export default injectIntl(Project);

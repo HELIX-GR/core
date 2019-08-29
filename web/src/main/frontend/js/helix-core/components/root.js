@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as ReactIntl from 'react-intl';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { basename } from '../history';
+import { Route, Switch } from 'react-router-dom';
 
 import {
   EnumLocale,
@@ -21,12 +20,13 @@ import {
 //
 // Add locale-specific data for each supported locale
 //
+// See: https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md#migrate-to-using-native-intl-apis
+//
 
-import en from 'react-intl/locale-data/en';
-import el from 'react-intl/locale-data/el';
+import 'intl-pluralrules';
+import '@formatjs/intl-relativetimeformat/polyfill';
 
-ReactIntl.addLocaleData(en);
-ReactIntl.addLocaleData(el);
+import '@formatjs/intl-relativetimeformat/dist/locale-data/el';
 
 class Root extends React.Component {
 
@@ -40,14 +40,12 @@ class Root extends React.Component {
 
     return (
       <ReactIntl.IntlProvider locale={locale} key={locale} messages={messages}>
-        <BrowserRouter basename={basename} >
-          <Switch>
-            <Route path={ErrorPages.Unauthorized} component={Page401} />
-            <Route path={ErrorPages.Forbidden} component={Page403} exact />
-            <Route path={ErrorPages.NotFound} component={Page404} exact />
-            <Route path="/" component={ContentRoot} />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route path={ErrorPages.Unauthorized} component={Page401} />
+          <Route path={ErrorPages.Forbidden} component={Page403} exact />
+          <Route path={ErrorPages.NotFound} component={Page404} exact />
+          <Route path="/" component={ContentRoot} />
+        </Switch>
       </ReactIntl.IntlProvider>
     );
   }

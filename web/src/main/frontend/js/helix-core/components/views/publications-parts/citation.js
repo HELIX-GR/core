@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { injectIntl } from 'react-intl';
+
 import Select from 'react-select';
 
 import {
@@ -67,10 +69,6 @@ class Citation extends React.Component {
     publication: PropTypes.object.isRequired
   }
 
-  static contextTypes = {
-    intl: PropTypes.object,
-  };
-
   createCitation(option) {
     if (option) {
       const { publication } = this.props;
@@ -83,7 +81,7 @@ class Citation extends React.Component {
 
   render() {
     const { citation } = this.state;
-    const _t = this.context.intl.formatMessage;
+    const _t = this.props.intl.formatMessage;
 
     return (
       <React.Fragment>
@@ -109,4 +107,4 @@ class Citation extends React.Component {
   }
 }
 
-export default Citation;
+export default injectIntl(Citation);
