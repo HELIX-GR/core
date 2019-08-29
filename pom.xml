@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>gr.helix</groupId>
 	<artifactId>helix-core-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<packaging>pom</packaging>
 
@@ -14,22 +15,33 @@
 	<url>https://hellenicdataservice.gr/</url>
 
 	<properties>
+		<!-- Project properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<dependency.locations.enabled>false</dependency.locations.enabled>
 		<java.version>1.8</java.version>
-		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
-		<postgresql.version>42.2.2</postgresql.version>
-		<geotools.version>19.0</geotools.version>
-		<hibernate.version>5.2.17.Final</hibernate.version>
-		<hibernate-spatial.version>5.2.17.Final</hibernate-spatial.version>
-		<jackson-version>2.9.5</jackson-version>
-		<log4j2.version>2.11.0</log4j2.version>
+
+		<!-- Dependency versions -->
+		<geotools.version>21.1</geotools.version>
+		<hibernate.version>5.4.4.Final</hibernate.version>
+		<hibernate-spatial.version>5.4.4.Final</hibernate-spatial.version>
+		<jackson.version>2.9.9</jackson.version>
+		<jackson-datatype-jts.version>2.4</jackson-datatype-jts.version>
+		<jts.version>1.13</jts.version>
+		<log4j2.version>2.12.1</log4j2.version>
+		<postgresql.version>42.2.6</postgresql.version>
+		<spring-boot.version>2.1.7.RELEASE</spring-boot.version>
+
+		<!-- Plugin versions -->
+		<maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
+		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+		<maven-site-plugin.version>3.8.2</maven-site-plugin.version>
+		<maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+		<maven-surefire-report-plugin.version>3.0.0-M3</maven-surefire-report-plugin.version>
 	</properties>
 
 	<repositories>
-
-
 
 		<repository>
 			<id>osgeo</id>
@@ -42,7 +54,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.2.RELEASE</version>
+		<version>2.1.7.RELEASE</version>
 		<relativePath />
 	</parent>
 
@@ -84,7 +96,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${spring-boot.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.springframework.boot</groupId>
@@ -117,13 +129,13 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-jsr310</artifactId>
-				<version>${jackson-version}</version>
+				<version>${jackson.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-xml</artifactId>
-				<version>${jackson-version}</version>
+				<version>${jackson.version}</version>
 			</dependency>
 
 			<dependency>
@@ -135,13 +147,13 @@
 			<dependency>
 				<groupId>com.vividsolutions</groupId>
 				<artifactId>jts</artifactId>
-				<version>1.13</version>
+				<version>${jts.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.bedatadriven</groupId>
 				<artifactId>jackson-datatype-jts</artifactId>
-				<version>2.4</version>
+				<version>${jackson-datatype-jts.version}</version>
 			</dependency>
 
 			<dependency>
@@ -187,7 +199,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
+					<version>${maven-site-plugin.version}</version>
 				</plugin>
 
 				<plugin>
@@ -203,7 +215,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<systemProperties>
 							<property>
@@ -217,7 +229,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>${maven-failsafe-plugin.version}</version>
 					<configuration>
 						<systemProperties>
 							<property>
@@ -231,7 +243,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-report-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>${maven-surefire-report-plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -242,7 +254,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<!--<inherited>false</inherited> -->
+				<!-- <inherited>false</inherited> -->
 				<configuration>
 					<siteDirectory>project/site</siteDirectory>
 				</configuration>
@@ -256,7 +268,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.9</version>
+				<version>{$maven-project-info-reports-plugin.version}</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -268,7 +280,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>${maven-javadoc-plugin.version}</version>
 				<reportSets>
 					<reportSet>
 						<reports>
