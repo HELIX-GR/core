@@ -328,7 +328,7 @@
           }
           .item-details {
             float: left;
-            width: 80vw;
+            width: 100%;
             padding-left: 18px;
             padding-right: 10px;
             .item-date {
@@ -399,6 +399,9 @@
                 font-size: 13px;
                 line-height: 1.6;
                 font-weight: bold;
+              }
+              img{
+                max-width: 100%;
               }
             }
           }
