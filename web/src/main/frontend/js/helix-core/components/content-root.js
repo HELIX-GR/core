@@ -26,6 +26,8 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
+  CollectionDetails,
+  Collections,
   DatasetDetails,
   Events,
   EventsDetails,
@@ -36,6 +38,7 @@ import {
   News,
   NewsDetails,
   NotebookDetails,
+  Profile,
   Project,
   PublicationDetails,
   Publications,
@@ -118,18 +121,21 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
+        <Route path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} />
         <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
         <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
         <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
         {/* Static routes */}
+        <Route path={StaticRoutes.COLLECTIONS} component={Collections} />
         <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />
         <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
         <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
+        <Route path={StaticRoutes.PROFILE} component={Profile} />
         {/* Default */}
         <Route path={StaticRoutes.MAIN} component={Main} exact />
         <Redirect to={StaticRoutes.MAIN} />

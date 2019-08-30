@@ -1,3 +1,5 @@
+export { default as CollectionDetails } from './collection-details';
+export { default as Collections } from './collections';
 export { default as DatasetDetails } from './dataset-details';
 export { default as Events } from './events';
 export { default as EventsDetails } from './events-details';
@@ -8,6 +10,7 @@ export { default as MainResults } from './main-results';
 export { default as News } from './news';
 export { default as NewsDetails } from './news-details';
 export { default as NotebookDetails } from './notebook-details';
+export { default as Profile } from './profile';
 export { default as Project } from './project';
 export { default as PublicationDetails } from './publication-details';
 export { default as Publications } from './publications';

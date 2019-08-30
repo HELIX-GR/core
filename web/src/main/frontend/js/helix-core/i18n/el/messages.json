@@ -38,8 +38,8 @@
         "items": {
           "signed-in": "Είσοδος ως {username}",
           "account": "Λογαριασμός",
+          "collections": "Οι συλλογές μου",
           "help": "Βοήθεια",
-          "settings": "Ρυθμίσεις",
           "logout": "Έξοδος"
         }
       }

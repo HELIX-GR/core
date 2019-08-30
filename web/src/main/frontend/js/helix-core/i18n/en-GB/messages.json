@@ -37,9 +37,9 @@
       "login": {
         "items": {
           "signed-in": "Signed in as {username}",
-          "account": "Account",
+          "account": "Account Settings",
+          "collections": "My Collections",
           "help": "Help",
-          "settings": "Settings",
           "logout": "Log out"
         }
       }

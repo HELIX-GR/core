@@ -161,9 +161,9 @@ class Header extends React.Component {
                       {authenticated &&
                         <li><a href=''>{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.username })}</a></li>
                       }
-                      <li><a href=''>{_t({ id: 'header.menu.login.items.account' })}</a></li>
-                      <li><a href=''>{_t({ id: 'header.menu.login.items.help' })}</a></li>
-                      <li><a href=''>{_t({ id: 'header.menu.login.items.settings' })}</a></li>
+                      <li><Link to={StaticRoutes.PROFILE}>{_t({ id: 'header.menu.login.items.account' })}</Link></li>
+                      <li><Link to={StaticRoutes.COLLECTIONS}>{_t({ id: 'header.menu.login.items.collections' })}</Link></li>
+                      <li><Link to={StaticRoutes.PROJECT}>{_t({ id: 'header.menu.login.items.help' })}</Link></li>
                       <li><a href='' onClick={() => this.props.logout()}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
                     </ul>
                   </li>

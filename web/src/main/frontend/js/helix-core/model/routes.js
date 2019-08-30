@@ -20,6 +20,9 @@ const PROJECT = '/project/';
 const PUBS = '/pubs/';
 const PUBS_RESULTS = '/pubs/results';
 
+const PROFILE = '/profile/';
+const COLLECTIONS = '/collections/';
+
 const GOOGLE = '/login/google';
 const GITHUB = '/login/github';
 const HELIX = '/login/helix';
@@ -29,10 +32,12 @@ const SAML = '/saml/login';
  * Static routes
  */
 export const StaticRoutes = {
+  COLLECTIONS,
   EVENTS,
   MAIN,
   MAIN_RESULTS,
   NEWS,
+  PROFILE,
   PROJECT,
   PUBS,
   PUBS_RESULTS,
@@ -45,6 +50,7 @@ export const StaticRoutes = {
 };
 
 // Dynamic routes
+const COLLECTION_PAGE = '/collections/:id';
 const DATASET_PAGE = '/datasets/:id';
 const EVENT_PAGE = '/news/events/view/:id';
 const NEWS_PAGE = '/news/view/:id';
@@ -56,6 +62,7 @@ const PUBLICATION_PAGE = '/publications/:id';
  * Dynamic routes
  */
 export const DynamicRoutes = {
+  COLLECTION_PAGE,
   DATASET_PAGE,
   EVENT_PAGE,
   NEWS_PAGE,
