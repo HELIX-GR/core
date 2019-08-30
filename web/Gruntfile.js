@@ -330,27 +330,28 @@ module.exports = function (grunt) {
   // Tasks
   //
 
+  // Display environment properties
   grunt.registerTask('mode', function () {
     grunt.log.writeln('Building in [' + (process.env.NODE_ENV || 'development') + '] mode');
   });
 
+  // Build documentation
   grunt.registerTask('docs', ['apidoc', 'jsdoc', 'copy:apidoc', 'copy:jsdoc']);
 
-  grunt.registerTask('browserify:vendor', [
-    'browserify:vendor-util', 'browserify:vendor-react',
-  ]);
+  // Transpile, bundle and minify JavaScript files
+  grunt.registerTask('build:vendor', develop ?
+    ['browserify:vendor-util', 'browserify:vendor-react'] :
+    ['browserify:vendor-util', 'browserify:vendor-react', 'uglify:vendor']);
 
   grunt.registerTask('build:helix-core', develop ?
     ['sass:helix-core', 'eslint:helix-core', 'browserify:helix-core',] :
     ['sass:helix-core', 'eslint:helix-core', 'browserify:helix-core', 'uglify:helix-core']);
 
-  grunt.registerTask('build:vendor', develop ?
-    ['browserify:vendor-util', 'browserify:vendor-react'] :
-    ['browserify:vendor-util', 'browserify:vendor-react', 'uglify:vendor']);
+  grunt.registerTask('build', ['build:vendor', 'build:helix-core']);
 
-  grunt.registerTask('build', ['build:helix-core', 'build:vendor']);
-
+  // Development build
   grunt.registerTask('develop', ['mode', 'clean', 'build', 'docs', 'copy', 'watch']);
 
+  // Production build
   grunt.registerTask('default', ['mode', 'clean', 'build', 'docs', 'copy']);
 };
