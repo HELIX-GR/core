@@ -46,8 +46,8 @@ class Pagination extends React.Component {
       <div className={"breadcrumbs-pagination " + this.props.className}>
         {showBreadcrumb === true &&
           <div className="breadcrumbs">
-            <a href='' className="breadcrumbs-part">{_t({ id: this.props.breadcrumbPrefix })}</a>
-            <a href='' className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
+            <a className="breadcrumbs-part">{_t({ id: this.props.breadcrumbPrefix })}</a>
+            <a className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
           </div>
         }
 
