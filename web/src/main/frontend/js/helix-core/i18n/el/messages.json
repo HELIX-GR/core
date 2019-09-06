@@ -39,6 +39,7 @@
           "signed-in": "Είσοδος ως {username}",
           "account": "Λογαριασμός",
           "collections": "Οι συλλογές μου",
+          "favorites": "Σελιδοδείκτες",
           "help": "Βοήθεια",
           "logout": "Έξοδος"
         }
@@ -49,8 +50,33 @@
     "results": "ΑΠΟΤΕΛΕΣΜΑΤΑ",
     "all": "ΟΛΑ",
     "events": "Εκδηλώσεις",
+    "favorites": "ΣΕΛΙΔΟΔΕΙΚΤΕΣ",
     "helix-team": "Ομάδα HELIX",
     "news": "Νέα"
+  },
+  "favorites": {
+    "text.placeholder": "Αναζήτηση με τίτλο",
+    "order-by": {
+      "label": "Ταξινόμηση κατά",
+      "options": {
+        "date": "Ημερομηνία Εισαγωγής",
+        "title": "Τίτλος"
+      }
+    }
+  },
+  "collections": {
+    "create.title": "Create Collection",
+    "create.text.placeholder": "Enter a name for the collection ...",
+    "create.success": "Collection {title} has been created",
+    "create.failure": "Collection creation has failed",
+    "update.success": "Collection {title} has been updated",
+    "update.failure": "Collection update has failed",
+    "delete.success": "Collection {title} has been deleted",
+    "delete.failure": "Collection deletion has failed",
+    "last-modified": "lasted saved {when}",
+    "manager.title": "Select Collections",
+    "add-favorite.failure": "Failed to add favorite to collection",
+    "remove-favorite.failure": "Failed to remove favorite from collection"
   },
   "footer": {
     "columns": {
@@ -93,6 +119,28 @@
     "data": "DATA",
     "pubs": "PUBS",
     "lab": "LAB"
+  },
+  "profile": {
+    "action": {
+      "edit": "Ενημέρωση Στοιχείων",
+      "update": "Ενημέρωση",
+      "upload-image": "Επιλογή Εικόνας"
+    },
+    "title": "Στοιχεία χρήστη",
+    "form": {
+      "image": "Εικόνα",
+      "username": "Όνομα Χρήστη",
+      "email": "Email",
+      "resume": "Βιογραφικό",
+      "url": "URL",
+      "company": "Εταιρεία / Οργανισμός",
+      "location": "Τοποθεσία"
+    },
+    "notes": "All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears. Please see our privacy statement to learn more about how we use this information.",
+    "error": {
+      "update.failure": "Failed to update user profile",
+      "update.success": "Profile has been updated successfully"
+    }
   },
   "main": {
     "search": {
@@ -321,6 +369,21 @@
   "tooltip": {
     "add-favorite": "Προσθήκη στα αγαπημένα",
     "remove-favorite": "Διαγραφή από τα αγαπημένα",
-    "view-publication": "Προβολή δημοσίευσης"
+    "view-publication": "Προβολή δημοσίευσης",
+    "manage-collections": "Manage collections"
+  },
+  "filesystem": {
+    "size": {
+      "less-than": "Το μέγεθος του αρχείου πρέπει να είναι μικρότερο από {size}"
+    },
+    "read-failed": "Η ανάγνωση του αρχείου απέτυχε",
+    "type-not-supported": "Ο τύπος αρχείου δεν υποστηρίζεται"
+  },
+  "FavoriteErrorCode": {
+    "TITLE_MISSING": "Title is required",
+    "COLLECTION_ALREADY_EXISTS": "Collection with the same title already exists",
+    "COLLECTION_NOT_FOUND": "Collection was not found",
+    "HANDLE_NOT_FOUND": "Favorite was not found",
+    "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
   }
 }

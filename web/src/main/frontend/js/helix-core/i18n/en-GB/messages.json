@@ -39,6 +39,7 @@
           "signed-in": "Signed in as {username}",
           "account": "Account Settings",
           "collections": "My Collections",
+          "favorites": "Favorites",
           "help": "Help",
           "logout": "Log out"
         }
@@ -49,8 +50,33 @@
     "results": "RESULTS",
     "all": "ALL",
     "events": "Events",
+    "favorites": "FAVORITES",
     "helix-team": "HELIX Team",
     "news": "News"
+  },
+  "favorites": {
+    "text.placeholder": "Search favorites",
+    "order-by": {
+      "label": "Order by",
+      "options": {
+        "date": "Data Added",
+        "title": "Title"
+      }
+    }
+  },
+  "collections": {
+    "create.title": "Create Collection",
+    "create.text.placeholder": "Enter a name for the collection ...",
+    "create.success": "Collection {title} has been created",
+    "create.failure": "Collection creation has failed",
+    "update.success": "Collection {title} has been created",
+    "update.failure": "Collection creation has failed",
+    "delete.success": "Collection {title} has been deleted",
+    "delete.failure": "Collection deletion has failed",
+    "last-modified": "lasted saved {when}",
+    "manager.title": "Select Collections",
+    "add-favorite.failure": "Failed to add favorite to collection",
+    "remove-favorite.failure": "Failed to remove favorite from collection"
   },
   "footer": {
     "columns": {
@@ -88,6 +114,28 @@
     "login": "Login",
     "subtitle": "Sign-in into your account",
     "failure": "The username or password is incorrect"
+  },
+  "profile": {
+    "action": {
+      "edit": "Edit Profile",
+      "update": "Update",
+      "upload-image": "Upload New Picture"
+    },
+    "title": "Profile",
+    "form": {
+      "image": "Picture",
+      "username": "User Name",
+      "email": "Email",
+      "resume": "Resume",
+      "url": "URL",
+      "company": "Company",
+      "location": "Location"
+    },
+    "notes": "All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears. Please see our privacy statement to learn more about how we use this information.",
+    "error": {
+      "update.failure": "Failed to update user profile",
+      "update.success": "Profile has been updated successfully"
+    }
   },
   "pills": {
     "data": "DATA",
@@ -320,7 +368,22 @@
   },
   "tooltip": {
     "add-favorite": "Add to favorites",
-    "remove-favorite": "Remove from favorite",
-    "view-publication": "View publication"
+    "remove-favorite": "Remove from favorites",
+    "view-publication": "View publication",
+    "manage-collections": "Manage collections"
+  },
+  "filesystem": {
+    "size": {
+      "less-than": "File size must be less than {size}"
+    },
+    "read-failed": "File read operation has failed",
+    "type-not-supported": "File type is not supported"
+  },
+  "FavoriteErrorCode": {
+    "TITLE_MISSING": "Title is required",
+    "COLLECTION_ALREADY_EXISTS": "Collection with the same title already exists",
+    "COLLECTION_NOT_FOUND": "Collection was not found",
+    "HANDLE_NOT_FOUND": "Favorite was not found",
+    "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
   }
 }
