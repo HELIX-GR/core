@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.model.Error;
+import gr.helix.core.web.model.user.FavoriteCollectionRequest;
 import gr.helix.core.web.model.user.FavoriteErrorCode;
 import gr.helix.core.web.model.user.FavouriteRequest;
 
@@ -49,6 +50,17 @@ public class FavoriteValidationService implements IFavoriteValidationService {
             default:
                 errors.add(new Error(FavoriteErrorCode.ACTION_NOT_SUPPORTED, "Action is not supported or missing"));
                 break;
+        }
+
+        return errors;
+    }
+
+    @Override
+    public List<Error> validate(FavoriteCollectionRequest request) {
+        final List<Error> errors = new ArrayList<Error>();
+
+        if (StringUtils.isBlank(request.getTitle())) {
+            errors.add(new Error(FavoriteErrorCode.TITLE_MISSING, "Title is required"));
         }
 
         return errors;

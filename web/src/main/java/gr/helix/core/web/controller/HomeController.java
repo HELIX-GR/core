@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     private static final String clientRoutes[] = {
+        "/collections/",
         "/datasets/",
         "/error/",
+        "/favorites/",
         "/main/",
         "/news/",
         "/notebooks/",
         "/pages/",
+        "/profile/",
         "/project/",
         "/pubs/",
         "/publications/",
@@ -31,12 +34,15 @@ public class HomeController {
     }
 
     @RequestMapping({
+        "/collections/**",
         "/datasets/**",
         "/error/**",
+        "/favorites/**",
         "/main/**",
         "/news/**",
         "/notebooks/**",
         "/pages/**",
+        "/profile/**",
         "/project/**",
         "/pubs/**",
         "/publications/**",

@@ -2,14 +2,19 @@ package gr.helix.core.web.domain;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -55,7 +60,7 @@ public class FavoriteEntity {
 
     @NotNull
     @Column(name = "`created_on`")
-    ZonedDateTime       created_on = ZonedDateTime.now(ZoneId.systemDefault());
+    ZonedDateTime       createdOn = ZonedDateTime.now(ZoneId.systemDefault());
 
     @NotNull
     @Column(name = "`title`")
@@ -63,6 +68,15 @@ public class FavoriteEntity {
 
     @Column(name = "`description`")
     String              description;
+
+    @OneToMany(
+        targetEntity = FavoriteCollectionItemEntity.class,
+        mappedBy = "favorite",
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    List<FavoriteCollectionItemEntity> items     = new ArrayList<>();
 
     public String getClientId() {
         return this.clientId;
@@ -124,8 +138,12 @@ public class FavoriteEntity {
         return this.id;
     }
 
-    public ZonedDateTime getCreated_on() {
-        return this.created_on;
+    public ZonedDateTime getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public List<FavoriteCollectionItemEntity> getItems() {
+        return this.items;
     }
 
     /**
@@ -140,6 +158,7 @@ public class FavoriteEntity {
             this.catalog,
             this.handle,
             this.url,
+            this.createdOn,
             this.title,
             this.description
         );

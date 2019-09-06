@@ -2,12 +2,14 @@ package gr.helix.core.web.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.opensaml.saml2.core.Attribute;
 import org.opensaml.xml.schema.impl.XSAnyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.saml.SAMLCredential;
 import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.model.EnumRole;
 import gr.helix.core.common.model.user.Account;
+import gr.helix.core.common.model.user.AccountProfile;
+import gr.helix.core.common.repository.AccountRepository;
 import gr.helix.core.web.model.security.User;
 
 @Service
@@ -27,6 +31,9 @@ public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {
     private final static String ATTRIBUTE_NAME ="name";
     private final static String ATTRIBUTE_FAMILY_NAME ="familyName";
     private final static String ATTRIBUTE_GIVEN_NAME ="givenName";
+
+    @Autowired
+    private AccountRepository   accountRepository;
 
     @Override
     public Object loadUserBySAML(SAMLCredential credential) throws UsernameNotFoundException {
@@ -82,6 +89,11 @@ public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {
             throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
         }
 
+        // Get profile from database
+        final Optional<AccountProfile> profile = this.accountRepository.getProfileByEmail(account.getEmail());
+        if (profile.isPresent()) {
+            account.setProfile(profile.get());
+        }
         return new User(account, "");
     }
 

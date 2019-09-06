@@ -100,6 +100,7 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
+import gr.helix.core.common.repository.AccountRepository;
 import gr.helix.core.web.logging.filter.MappedDiagnosticContextFilter;
 import gr.helix.core.web.service.OAuthUserInfoTokenServices;
 import gr.helix.core.web.service.SAMLUserDetailsServiceImpl;
@@ -123,6 +124,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final RegexRequestMatcher          apiMatcher    = new RegexRequestMatcher(API_REG_EX, null);
 
     private final Pattern                      csrfMethods   = Pattern.compile("^(POST|PUT|DELETE)$");
+
+    @Autowired
+    AccountRepository                          accountRepository;
 
     @Autowired
     OAuthUserInfoDetailResolver                userInfoDetailResolver;
@@ -264,11 +268,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public WebSSOProfileConsumerHoKImpl hokWebSSOProfile() {
         return new WebSSOProfileConsumerHoKImpl();
     }
-
-//    @Bean
-//    public SingleLogoutProfile logoutprofile() {
-//        return new SingleLogoutProfileImpl();
-//    }
 
     /**
      * Central storage of cryptographic keys
@@ -514,11 +513,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public FilterChainProxy samlFilter() throws Exception {
         final List<SecurityFilterChain> chains = new ArrayList<SecurityFilterChain>();
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/login/**"), this.samlEntryPoint()));
-        //chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/logout/**"), this.samlLogoutFilter()));
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/metadata/**"), this.metadataDisplayFilter()));
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/SSO/**"), this.samlWebSSOProcessingFilter()));
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/SSOHoK/**"), this.samlWebSSOHoKProcessingFilter()));
-        //chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/SingleLogout/**"), this.samlLogoutProcessingFilter()));
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/discovery/**"), this.samlIDPDiscovery()));
         return new FilterChainProxy(chains);
     }
@@ -564,50 +561,58 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-            .authorizeRequests()
-                .antMatchers("/",
-                             // Site parts
-                             "/datasets/**",
-                             "/error/**",
-                             "/main/**",
-                             "/news/**",
-                             "/notebooks/**",
-                             "/pages/**",
-                             "/project/**",
-                             "/pubs/**",
-                             "/publications/**",
-                             // Assets
-                             "/favicon.ico",
-                             "/css/**",
-                             "/docs/**",
-                             "/fonts/**",
-                             "/i18n/**",
-                             "/images/**",
-                             "/js/**",
-                             "/vendor/**",
-                             // Authentication endpoints
-                             "/login**",
-                             "/logged-in",
-                             "/logged-out",
-                             "/error**",
-                             // SAML endpoints
-                             "/saml/**",
-                             // Public action API endpoints
-                             "/action/catalog/**",
-                             "/action/ckan/**",
-                             "/action/configuration/**",
-                             "/action/dataset/**",
-                             "/action/notebook/**",
-                             "/action/openaire/**",
-                             "/action/publication/**",
-                             "/action/featured-publications")
-                .permitAll()
-                .regexMatchers(API_REG_EX)
-                .permitAll()
-            .anyRequest().authenticated()
-                .antMatchers("/admin/**")
-                .hasAuthority("ROLE_ADMIN");
+        http.authorizeRequests()
+            // Public
+            .antMatchers(
+                "/",
+                 // Site parts
+                 "/datasets/**",
+                 "/error/**",
+                 "/main/**",
+                 "/news/**",
+                 "/notebooks/**",
+                 "/pages/**",
+                 "/project/**",
+                 "/pubs/**",
+                 "/publications/**",
+                 // Assets
+                 "/favicon.ico",
+                 "/css/**",
+                 "/docs/**",
+                 "/fonts/**",
+                 "/i18n/**",
+                 "/images/**",
+                 "/js/**",
+                 "/vendor/**",
+                 // Authentication endpoints
+                 "/login**",
+                 "/logged-out",
+                 // Error pages
+                 "/error**",
+                 // SAML endpoints
+                 "/saml/**",
+                 // Public action API endpoints
+                 "/action/catalog/**",
+                 "/action/ckan/**",
+                 "/action/configuration/**",
+                 "/action/dataset/**",
+                 "/action/notebook/**",
+                 "/action/openaire/**",
+                 "/action/publication/**",
+                 "/action/featured-publications"
+             ).permitAll()
+            // Public API endpoints
+            .regexMatchers(API_REG_EX).permitAll()
+            // Private API endpoints
+            .antMatchers(
+                "/logged-in",
+                "/logout",
+                "/action/**"
+            ).authenticated()
+            // Private
+            .antMatchers(
+                "/admin/**"
+            ).hasAuthority("ROLE_ADMIN");
 
         http.csrf().requireCsrfProtectionMatcher((HttpServletRequest req) -> {
             // Disable for SAML
@@ -669,7 +674,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             client.getResource().getUserInfoUri(),
             client.getClient().getClientId(),
             this.userService,
-            this.userInfoDetailResolver);
+            this.userInfoDetailResolver,
+            this.accountRepository);
 
         tokenServices.setRestTemplate(template);
 

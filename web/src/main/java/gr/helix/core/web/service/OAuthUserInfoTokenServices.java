@@ -2,6 +2,7 @@ package gr.helix.core.web.service;
 
 import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +18,8 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import gr.helix.core.common.model.EnumRole;
 import gr.helix.core.common.model.user.Account;
+import gr.helix.core.common.model.user.AccountProfile;
+import gr.helix.core.common.repository.AccountRepository;
 import gr.helix.core.web.config.OAuthUserInfoDetailResolver;
 import gr.helix.core.web.model.security.User;
 
@@ -26,13 +29,20 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
 
     private final UserDetailsService          userService;
 
+    private final AccountRepository           accountRepository;
+
     public OAuthUserInfoTokenServices(
-        String userInfoEndpointUrl, String clientId, UserDetailsService userService, OAuthUserInfoDetailResolver userInfoDetailResolver
+        String userInfoEndpointUrl,
+        String clientId,
+        UserDetailsService userService,
+        OAuthUserInfoDetailResolver userInfoDetailResolver,
+        AccountRepository accountRepository
     ) {
         super(userInfoEndpointUrl, clientId);
 
         this.userInfoDetailResolver = userInfoDetailResolver;
         this.userService = userService;
+        this.accountRepository = accountRepository;
     }
 
     @Override
@@ -90,6 +100,12 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
         // An email is required
         if (StringUtils.isBlank(account.getEmail())) {
             throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
+        }
+
+        // Get profile from database
+        final Optional<AccountProfile> profile = this.accountRepository.getProfileByEmail(account.getEmail());
+        if (profile.isPresent()) {
+            account.setProfile(profile.get());
         }
 
         // Replace authentication

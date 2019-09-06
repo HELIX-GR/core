@@ -9,9 +9,11 @@ import gr.helix.core.common.model.user.Account;
 
 public class Profile {
 
-    private Account        account;
+    private Account                  account;
 
-    private List<Favorite> favorites = new ArrayList<Favorite>();
+    private List<FavoriteCollection> collections = new ArrayList<FavoriteCollection>();
+
+    private List<Favorite>           favorites   = new ArrayList<Favorite>();
 
     public Account getAccount() {
         return this.account;
@@ -19,6 +21,15 @@ public class Profile {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public List<FavoriteCollection> getCollections() {
+        return this.collections;
+    }
+
+    public void setCollections(List<FavoriteCollection> collections) {
+        Assert.notNull(collections, "List of FavoriteCollection must not be null");
+        this.collections = collections;
     }
 
     public List<Favorite> getFavorites() {

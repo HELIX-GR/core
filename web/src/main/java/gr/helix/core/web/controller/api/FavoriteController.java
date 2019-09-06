@@ -43,7 +43,7 @@ public class FavoriteController {
     private IFavoriteValidationService favoriteValidationService;
 
     @PostMapping(value = "/api/v1/favorite")
-    public RestResponse<?> action(
+    public RestResponse<?> favorite(
         @RequestHeader(required = false, value = AUTHENTICATION_HEADER) String applicationKey,
         @RequestBody FavouriteRequest request
     ) {
@@ -64,7 +64,7 @@ public class FavoriteController {
         try {
             switch (request.getAction()) {
                 case ADD:
-                    this.favoriteRepository.add(
+                    this.favoriteRepository.addFavorite(
                         request.getEmail(),
                         request.getCatalog(),
                         request.getHandle(),
@@ -75,10 +75,10 @@ public class FavoriteController {
                     );
                     break;
                 case REMOVE:
-                    this.favoriteRepository.remove(request.getEmail(), request.getCatalog(), request.getHandle());
+                    this.favoriteRepository.removeFavorite(request.getEmail(), request.getCatalog(), request.getHandle());
                     break;
                 case LIST:
-                    final List<Favorite> favorites = this.favoriteRepository.getByEmail(request.getEmail());
+                    final List<Favorite> favorites = this.favoriteRepository.getFavoritesByEmail(request.getEmail());
                     return RestResponse.result(favorites);
                 default:
                     // No action
