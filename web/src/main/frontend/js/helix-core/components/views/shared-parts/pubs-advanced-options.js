@@ -93,7 +93,7 @@ class PubsAdvancedOptions extends React.Component {
                 className="form-control"
                 id={EnumOpenaireFilter.FromDateAccepted}
                 name={EnumOpenaireFilter.FromDateAccepted}
-                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date)}
+                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.FromDateAccepted, date, false)}
                 value={filters[EnumOpenaireFilter.FromDateAccepted] || null}
                 readOnly={this.props.readOnly}
               />
@@ -106,7 +106,7 @@ class PubsAdvancedOptions extends React.Component {
                 className="form-control"
                 id={EnumOpenaireFilter.ToDateAccepted}
                 name={EnumOpenaireFilter.ToDateAccepted}
-                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date)}
+                onChange={date => this.props.setOpenaireFilter(EnumOpenaireFilter.ToDateAccepted, date, false)}
                 value={filters[EnumOpenaireFilter.ToDateAccepted] || null}
                 readOnly={this.props.readOnly}
               />

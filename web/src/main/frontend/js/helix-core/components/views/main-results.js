@@ -131,9 +131,11 @@ class MainResults extends React.Component {
     this.search();
   }
 
-  onOpenaireFilterChanged(key, value) {
+  onOpenaireFilterChanged(key, value, refresh = true) {
     this.props.setOpenaireFilter(key, value);
-    this.search();
+    if (refresh) {
+      this.search();
+    }
   }
 
   onSearch(e) {
@@ -152,7 +154,6 @@ class MainResults extends React.Component {
             [EnumCatalog.LAB]: notebooks = {},
           },
         },
-        pills,
       }
     } = this.props;
 
@@ -612,7 +613,7 @@ class MainResults extends React.Component {
                     name="order-by"
                     id="order-by"
                     value=""
-                    onChange={(e) => { console.log(e.target.value); }}
+                    onChange={() => null}
                   >
                     <option value="1">
                       {_t({ id: 'results.shared.search.order-by.options.relevance' })}
