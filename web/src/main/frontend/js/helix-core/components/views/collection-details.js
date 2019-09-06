@@ -49,7 +49,7 @@ class CollectionDetails extends React.Component {
     this.onRemoveFavoriteFromCollection = this.onRemoveFavoriteFromCollection.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     const { profile: { collections, favorites: allFavorites }, match: { params } } = props;
     const collection = collections.find(c => c.id === +params.id) || null;
 

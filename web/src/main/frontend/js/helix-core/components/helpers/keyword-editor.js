@@ -13,7 +13,7 @@ const createOption = (label) => ({
 });
 
 const customStyles = {
-  control: (base, state) => {
+  control: (base) => {
     return {
       ...base,
       boxShadow: 'none',
@@ -27,18 +27,18 @@ const customStyles = {
       },
     };
   },
-  indicatorsContainer: (base, state) => ({
+  indicatorsContainer: (base) => ({
     ...base,
     display: 'inline',
   }),
-  multiValueRemove: (base, state) => ({
+  multiValueRemove: (base) => ({
     ...base,
     ':hover': {
       backgroundColor: 'none',
     },
     cursor: 'pointer',
   }),
-  placeholder: (base, state) => ({
+  placeholder: (base) => ({
     ...base,
     fontSize: '17px',
     lineHeight: '20px',

@@ -35,7 +35,7 @@ class DatePicker extends React.Component {
   }
 
   render() {
-    const { value, onChange, ...rest } = this.props;
+    const { value, ...rest } = this.props;
     const date = value ? moment(value) : null;
 
     return (

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -66,7 +65,7 @@ class Favorites extends React.Component {
     const active = Object.keys(pills).filter(key => pills[key]);
 
     if ((active.length > 1) || (active[0] !== id)) {
-      this.setState((state, props) => {
+      this.setState((state) => {
         return {
           pills: {
             ...state.pills,

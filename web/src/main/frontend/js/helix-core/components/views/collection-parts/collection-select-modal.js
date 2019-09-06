@@ -23,8 +23,6 @@ class CollectionSelectModal extends React.Component {
     this.state = {
       loading: false,
     };
-
-    this.textInput = React.createRef();
   }
 
   static propTypes = {

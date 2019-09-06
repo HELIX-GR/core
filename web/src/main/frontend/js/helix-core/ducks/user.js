@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import moment from '../moment-localized';
 
 import { default as userService } from '../service/user';

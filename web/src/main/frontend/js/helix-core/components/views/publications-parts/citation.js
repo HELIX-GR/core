@@ -18,7 +18,7 @@ const citationOptions = [
 ];
 
 const customStyles = {
-  control: (base, state) => {
+  control: (base) => {
     return {
       ...base,
       boxShadow: 'none',
@@ -32,11 +32,11 @@ const customStyles = {
       },
     };
   },
-  indicatorsContainer: (base, state) => ({
+  indicatorsContainer: (base) => ({
     ...base,
     display: 'flex',
   }),
-  placeholder: (base, state) => ({
+  placeholder: (base) => ({
     ...base,
     fontSize: '15px',
     lineHeight: '24px',

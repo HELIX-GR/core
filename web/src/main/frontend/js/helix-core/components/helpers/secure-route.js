@@ -3,7 +3,7 @@ import * as ReactRedux from 'react-redux';
 import * as PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-import { Pages, ErrorPages, StaticRoutes } from '../../model/routes';
+import { ErrorPages, StaticRoutes } from '../../model/routes';
 
 class SecureRoute extends React.Component {
 

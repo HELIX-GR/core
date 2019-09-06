@@ -298,7 +298,7 @@ class PublicationsResults extends React.Component {
                     name="order-by"
                     id="order-by"
                     value=""
-                    onChange={(e) => { console.log(e.target.value); }}
+                    onChange={() => null}
                   >
                     <option value="1">
                       {_t({ id: 'results.shared.search.order-by.options.relevance' })}
