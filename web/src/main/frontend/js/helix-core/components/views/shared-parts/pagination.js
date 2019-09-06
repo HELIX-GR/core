@@ -12,12 +12,16 @@ class Pagination extends React.Component {
   }
 
   static propTypes = {
+    breadcrumbPrefix: PropTypes.string,
+    showBreadcrumb: PropTypes.bool,
     pageIndex: PropTypes.number.isRequired,
     pageCount: PropTypes.number.isRequired,
     pageChange: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
+    breadcrumbPrefix: 'breadcrumb.results',
+    showBreadcrumb: true,
     pageIndex: 0,
     pageCount: 0,
   }
@@ -28,7 +32,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const { pageIndex, pageCount: count } = this.props;
+    const { pageIndex, pageCount: count, showBreadcrumb } = this.props;
     const index = pageIndex + 1;
     const isFirst = index === 1;
     const isLast = index === count;
@@ -40,10 +44,12 @@ class Pagination extends React.Component {
 
     return (
       <div className={"breadcrumbs-pagination " + this.props.className}>
-        <div className="breadcrumbs">
-          <a href='' className="breadcrumbs-part">{_t({ id: 'breadcrumb.results' })}</a>
-          <a href='' className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
-        </div>
+        {showBreadcrumb === true &&
+          <div className="breadcrumbs">
+            <a href='' className="breadcrumbs-part">{_t({ id: this.props.breadcrumbPrefix })}</a>
+            <a href='' className="breadcrumbs-part last-part">{_t({ id: 'breadcrumb.all' })}</a>
+          </div>
+        }
 
         <ul className="pagination-block">
           <ul>
@@ -72,7 +78,7 @@ class Pagination extends React.Component {
             {count > 1 &&
               <li className={
                 classnames({
-                  'current-item': !isFirst && !isLast,
+                  'current-item': count === 2 ? isLast : !isFirst && !isLast,
                 })
               }>
                 <a onClick={(e) => this.onPageChange(e, index < 3 ? 1 : index > count - 2 ? count - 2 : index - 1)} className="pagination-item">

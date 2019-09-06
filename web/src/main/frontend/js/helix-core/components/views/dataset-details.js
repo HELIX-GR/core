@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as PropTypes from 'prop-types';
 
 import { injectIntl } from 'react-intl';
 
@@ -267,7 +266,7 @@ class DatasetDetails extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   dataset: state.ui.dataset,
-  favorites: state.user.favorites,
+  favorites: state.user.profile.favorites,
   profile: state.user.profile,
 });
 

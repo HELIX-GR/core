@@ -7,7 +7,7 @@ const EnumAction = {
 
 const api = {
 
-  add: (catalog, handle, title, description, url, token) => {
+  addFavorite: (catalog, handle, title, description, url, token) => {
     const data = {
       action: EnumAction.ADD,
       catalog,
@@ -19,13 +19,40 @@ const api = {
     return actions.post('/action/favorite', token, data);
   },
 
-  remove: (catalog, handle, token) => {
+  removeFavorite: (catalog, handle, token) => {
     const data = {
       action: EnumAction.REMOVE,
       catalog,
       handle,
     };
     return actions.post('/action/favorite', token, data);
+  },
+
+  addCollection: (title, token) => {
+    const data = {
+      title,
+    };
+    return actions.post('/action/collection', token, data);
+  },
+
+  updateCollection: (id, title, token) => {
+    const data = {
+      id,
+      title,
+    };
+    return actions.put('/action/collection', token, data);
+  },
+
+  removeCollection: (id, token) => {
+    return actions._delete(`/action/collection/${id}`, token);
+  },
+
+  addFavoriteToCollection: (collection, favorite, token) => {
+    return actions.post(`/action/collection/${collection}/favorite/${favorite}`, token, {});
+  },
+
+  removeFavoriteFromCollection: (collection, favorite, token) => {
+    return actions._delete(`/action/collection/${collection}/favorite/${favorite}`, token);
   },
 
 };

@@ -3,6 +3,7 @@ export { default as Collections } from './collections';
 export { default as DatasetDetails } from './dataset-details';
 export { default as Events } from './events';
 export { default as EventsDetails } from './events-details';
+export { default as Favorites } from './favorites';
 export { default as Footer } from './footer';
 export { default as Header } from './header';
 export { default as Main } from './main';

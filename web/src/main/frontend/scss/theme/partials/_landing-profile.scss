@@ -1,0 +1,397 @@
+#root {
+  div {
+    &.profile {
+      border-left: 15px solid $main-black;
+      border-right: 15px solid $main-black;
+    }
+
+    section.profile-landing-page-content {
+      margin: 0 15px 0px 15px;
+      padding-bottom: 10px;
+      background-color: $neutral-grey;
+
+      .container-fluid {
+        padding-top: 45px;
+        padding-right: 25px;
+        padding-left: 25px;
+        padding-bottom: 0;
+
+        .row {
+          padding-right: -25px;
+          padding-left: -25px;
+        }
+
+        .col-xs-1,
+        .col-sm-1,
+        .col-md-1,
+        .col-lg-1,
+        .col-xs-2,
+        .col-sm-2,
+        .col-md-2,
+        .col-lg-2,
+        .col-xs-3,
+        .col-sm-3,
+        .col-md-3,
+        .col-lg-3,
+        .col-xs-4,
+        .col-sm-4,
+        .col-md-4,
+        .col-lg-4,
+        .col-xs-5,
+        .col-sm-5,
+        .col-md-5,
+        .col-lg-5,
+        .col-xs-6,
+        .col-sm-6,
+        .col-md-6,
+        .col-lg-6,
+        .col-xs-7,
+        .col-sm-7,
+        .col-md-7,
+        .col-lg-7,
+        .col-xs-8,
+        .col-sm-8,
+        .col-md-8,
+        .col-lg-8,
+        .col-xs-9,
+        .col-sm-9,
+        .col-md-9,
+        .col-lg-9,
+        .col-xs-10,
+        .col-sm-10,
+        .col-md-10,
+        .col-lg-10,
+        .col-xs-11,
+        .col-sm-11,
+        .col-md-11,
+        .col-lg-11,
+        .col-xs-12,
+        .col-sm-12,
+        .col-md-12,
+        .col-lg-12 {
+          padding-right: 25px;
+          padding-left: 25px;
+        }
+
+        &.profile-container {
+          padding: 46px 130px 10px 130px;
+          max-width: $layout-fixed-width;
+
+          h4.profile-header {
+            margin: 0;
+            padding-bottom: 10px;
+            padding-left: 14px;
+            padding-top: 15px;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 400;
+          }
+
+          h4.profile-details-header {
+            margin: 0;
+            padding: 34px 0px 18px 52px;
+            font-weight: 300;
+            font-size: 72px;
+            line-height: 77px;
+          }
+        }
+      }
+
+      .profile-item {
+        border-top: solid 10px $main-black;
+
+        a {
+          color: $main-black;
+
+          &:hover {
+            text-decoration: none;
+            color: $main-black;
+          }
+
+          &.selected {
+            h4 {
+              font-weight: 700;
+              background: #F6F6F6;
+            }
+          }
+        }
+
+        h3.profile-title {
+          margin: 37px 0px 0px 3px;
+        }
+
+        h4.profile-title {
+          margin: 0;
+          font-size: 14px;
+          line-height: 16px;
+          padding-top: 15px;
+          padding-left: 10px;
+          padding-bottom: 15px;
+          font-weight: 300;
+          border-bottom: solid 1px $details-grey;
+          transition: all .2s ease-in-out;
+          -webkit-transition: all .2s ease-in-out;
+          -moz-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+
+          &:hover {
+            opacity: .5;
+          }
+        }
+
+        .style-5 {
+          font-family: $body_font;
+          font-size: 12px;
+          line-height: 1;
+          letter-spacing: .025em;
+          font-weight: 300;
+        }
+
+        .profile-text {
+          font-size: 18px;
+          line-height: 30px;
+          font-weight: 300;
+
+          h1,
+          h2 {
+            font-size: 30px;
+            line-height: 77px;
+            font-weight: 500;
+          }
+
+          ul,
+          ol {
+            padding-left: 20px;
+          }
+
+          li {
+            padding-bottom: 22px;
+          }
+
+          blockquote {
+            font-size: 25px;
+            line-height: 33px;
+            border-left: 2px solid $main-black;
+            margin: 0px;
+            padding-left: 20px;
+          }
+
+          p {
+            margin-bottom: 22px;
+          }
+
+          a {
+            text-decoration: underline;
+          }
+        }
+
+        .profile-link {
+          font-size: 18px;
+          line-height: 1.3;
+          font-weight: 500;
+          padding: 34px 0px 0px 8px;
+          transition: all .2s ease-in-out;
+          -webkit-transition: all .2s ease-in-out;
+          -moz-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+
+          &:hover {
+            opacity: .5;
+          }
+        }
+      }
+
+      form {
+        .account-picture {
+          width: 275px;
+          height: 275px;
+          border-radius: 50%;
+          margin-top: 50px;
+          margin-bottom: 25px;
+        }
+
+
+        button.upload-picture-button {
+          outline: none;
+          background-color: $neutral-grey;
+          border: 1px solid #262626;
+          border-radius: 25px;
+          height: 49px;
+          width: 280px;
+          font-size: 20px;
+          line-height: 24px;
+          right: 0;
+          opacity: 1;
+          transition: all .2s ease-in-out;
+          -webkit-transition: all .2s ease-in-out;
+          -moz-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+
+          &:hover {
+            opacity: .5;
+            cursor: pointer;
+          }
+        }
+
+        .form-title {
+          font-size: 25px;
+          font-weight: 500;
+          line-height: 29px;
+          color: #262626;
+          margin: 24px 0px 0px 24px;
+        }
+
+        .nav-bar-wrapper {
+          margin: 30px 36px 0px 31px;
+          display: flex;
+        }
+
+        .nav-bar {
+          list-style: none;
+          float: left;
+          width: 100%;
+          padding-left: 25px;
+          margin-top: 10px;
+
+          .nav-menu {
+            text-align: center;
+            padding-left: 65px;
+          }
+
+          li {
+            float: left;
+            padding: 15px 0px 5px 0px;
+            width: 155px;
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+
+            a {
+              color: #262626;
+            }
+          }
+
+          li.active {
+            border-bottom: 1px #ffffff solid;
+            margin-bottom: -1px;
+          }
+        }
+
+        .fields {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 20px;
+
+          .fields-group {
+            flex: 1 1 25%;
+            margin-left: 45px;
+            margin-right: 36px;
+            margin-bottom: 20px;
+          }
+        }
+
+        .btn {
+          cursor: pointer;
+        }
+
+        textarea.profile-text {
+          outline: none;
+          resize: none;
+          background-color: transparent;
+          font-size: 17px;
+          line-height: 20px;
+          font-weight: 300;
+          color: #707070;
+          width: 385px;
+          height: 200px;
+          padding-left: 13px;
+          margin-top: 18px;
+
+          &::-moz-selection {
+            color: white;
+            background-color: #BFBFBF;
+          }
+
+          &::selection {
+            color: white;
+            background-color: #BFBFBF;
+          }
+        }
+
+        input.profile-text {
+          padding: 25px 10px 0px 10px;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          font-size: 17px;
+          line-height: 20px;
+          font-weight: 300;
+          color: #707070;
+          width: 385px;
+          height: 50px;
+          border-bottom-style: solid;
+          border-bottom-width: 1px;
+          padding-left: 13px;
+          margin-top: 18px;
+
+          &::-moz-selection {
+            color: white;
+            background-color: #BFBFBF;
+          }
+
+          &::selection {
+            color: white;
+            background-color: #BFBFBF;
+          }
+        }
+
+        .form-field {
+          margin-bottom: 60px;
+        }
+
+        .form-field-last {
+          margin-bottom: 30px;
+        }
+
+        .form-notes {
+          margin-bottom: 60px;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 385px;
+
+          div {
+            text-align: justify;
+          }
+        }
+
+        section.footer {
+          text-align: center;
+          width: 100%;
+
+          button.landing-search-button {
+            outline: none;
+            color: white;
+            background-color: $main-black;
+            border: none;
+            border-radius: 25px;
+            height: 49px;
+            width: 572px;
+            font-size: 20px;
+            line-height: 24px;
+            right: 0;
+            opacity: 1;
+            transition: all .2s ease-in-out;
+            -webkit-transition: all .2s ease-in-out;
+            -moz-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+
+            &:hover {
+              opacity: .5;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

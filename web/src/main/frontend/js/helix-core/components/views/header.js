@@ -22,7 +22,8 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.changeLocale = this.changeLocale.bind(this);
+    this.onChangeLocale = this.onChangeLocale.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
   static propTypes = {
@@ -36,10 +37,16 @@ class Header extends React.Component {
     locale: EnumLocale.EN,
   }
 
-  changeLocale(e, locale) {
+  onChangeLocale(e, locale) {
     e.preventDefault();
 
     this.props.changeLocale(locale);
+  }
+
+  onLogout(e) {
+    e.preventDefault();
+
+    this.props.logout();
   }
 
   get currentLocale() {
@@ -62,6 +69,16 @@ class Header extends React.Component {
 
   get logoLink() {
     return StaticRoutes.MAIN;
+  }
+
+  get avatarImage() {
+    const { imageUrl, profile = null } = this.props.profile.account;
+
+    if (profile && profile.image) {
+      return `data:${profile.imageMimeType};base64,${profile.image}`;
+    }
+
+    return imageUrl || '/images/svg/avatar-white.svg';
   }
 
   render() {
@@ -129,7 +146,7 @@ class Header extends React.Component {
                 <a href='' onClick={(e) => e.preventDefault()}>{this.currentLocale}</a>
                 <ul className="sub-menu">
                   <li>
-                    <a href='' onClick={(e) => this.changeLocale(e, this.props.locale === EnumLocale.EL ? EnumLocale.EN : EnumLocale.EL)}>
+                    <a href='' onClick={(e) => this.onChangeLocale(e, this.props.locale === EnumLocale.EL ? EnumLocale.EN : EnumLocale.EL)}>
                       {this.props.locale === EnumLocale.EL ? 'EN' : 'ΕΛ'}
                     </a>
                   </li>
@@ -138,8 +155,6 @@ class Header extends React.Component {
 
             </ul>
           </nav>
-
-
 
           {!authenticated &&
             <div className="account-item">
@@ -155,16 +170,17 @@ class Header extends React.Component {
                 <ul className="menu-items">
                   <li id="menu-item-account" className="menu-item aux-item has-sub-menu">
                     <a>
-                      <img className="account-icon" src={this.props.profile.imageUrl || '/images/svg/avatar-white.svg'} alt="Account tab" />
+                      <img className="account-icon" src={this.avatarImage} alt="Account tab" />
                     </a>
                     <ul className="sub-menu">
                       {authenticated &&
-                        <li><a href=''>{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.username })}</a></li>
+                        <li><a href=''>{_t({ id: 'header.menu.login.items.signed-in' }, { username: this.props.profile.account.username })}</a></li>
                       }
                       <li><Link to={StaticRoutes.PROFILE}>{_t({ id: 'header.menu.login.items.account' })}</Link></li>
+                      <li><Link to={StaticRoutes.FAVORITES}>{_t({ id: 'header.menu.login.items.favorites' })}</Link></li>
                       <li><Link to={StaticRoutes.COLLECTIONS}>{_t({ id: 'header.menu.login.items.collections' })}</Link></li>
                       <li><Link to={StaticRoutes.PROJECT}>{_t({ id: 'header.menu.login.items.help' })}</Link></li>
-                      <li><a href='' onClick={() => this.props.logout()}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
+                      <li><a onClick={this.onLogout}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
                     </ul>
                   </li>
                 </ul>

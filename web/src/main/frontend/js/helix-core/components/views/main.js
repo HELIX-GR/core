@@ -277,7 +277,6 @@ const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
   news: state.ui.news,
-  profile: state.user.profile,
   search: state.ui.main,
 });
 

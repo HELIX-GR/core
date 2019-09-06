@@ -6,7 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 
-import { EnumAuthProvider } from '../model';
+import { EnumAuthProvider, EnumRole as Roles } from '../model';
 import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
 
 import {
@@ -31,6 +31,7 @@ import {
   DatasetDetails,
   Events,
   EventsDetails,
+  Favorites,
   Footer,
   Header,
   Main,
@@ -48,6 +49,10 @@ import {
 import {
   LoginForm,
 } from './pages';
+
+import {
+  SecureRoute
+} from './helpers';
 
 //
 // Presentational component
@@ -114,6 +119,8 @@ class ContentRoot extends React.Component {
   }
 
   render() {
+    const roles = [Roles.Admin, Roles.User];
+
     const routes = (
       <Switch>
         {/* Redirect for authenticated users. Navigation after a successful login operation
@@ -121,21 +128,22 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
-        <Route path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} />
+        <SecureRoute path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} exact roles={roles} />
         <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
         <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
         <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
         {/* Static routes */}
-        <Route path={StaticRoutes.COLLECTIONS} component={Collections} />
+        <SecureRoute path={StaticRoutes.COLLECTIONS} component={Collections} roles={roles} />
+        <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
         <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />
         <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />
         <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
-        <Route path={StaticRoutes.PROFILE} component={Profile} />
+        <SecureRoute path={StaticRoutes.PROFILE} component={Profile} roles={roles} />
         {/* Default */}
         <Route path={StaticRoutes.MAIN} component={Main} exact />
         <Redirect to={StaticRoutes.MAIN} />

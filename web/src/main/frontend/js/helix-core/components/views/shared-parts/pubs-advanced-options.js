@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 
 import { injectIntl } from 'react-intl';
 
-import { FormGroup, FormText, Label } from 'reactstrap';
+import { FormGroup, FormText } from 'reactstrap';
 
 import { EnumOpenaireFilter } from '../../../model';
 

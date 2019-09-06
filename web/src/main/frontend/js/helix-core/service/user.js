@@ -6,6 +6,10 @@ const api = {
     return actions.get('/action/user/profile', token);
   },
 
+  updateProfile: (profile, token) => {
+    return actions.post('/action/user/profile', token, profile);
+  },
+
   login: (username, password, token) => {
     const loginForm = new FormData();
     loginForm.append('username', username);

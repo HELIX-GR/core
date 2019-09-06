@@ -728,6 +728,9 @@
                 .btn-favorite {
                   display: block;
                 }
+                .btn-collections {
+                  display: block;
+                }
               }
               .date-of-entry {
                 color: $details-grey;
@@ -748,6 +751,21 @@
                 &.active {
                   opacity: 1;
                   display: block;
+                }
+              }
+              .btn-collections {
+                float: right;
+                margin-right: 11px;
+                display: none;
+                opacity: 0.5;
+                cursor: pointer;
+                &.active {
+                  opacity: 1;
+                  display: block;
+                }
+                i {
+                  font-size: 22px;
+                  margin-top: 9px;
                 }
               }
               h3.title {
@@ -848,6 +866,16 @@
                 margin-bottom: 20px;
               }
               .btn-favorite {
+                cursor: pointer;
+                opacity: 0.5;
+                &.active {
+                  opacity: 1;
+                }
+                a {
+                  display: inline-block;
+                }
+              }
+              .btn-collections {
                 cursor: pointer;
                 opacity: 0.5;
                 &.active {

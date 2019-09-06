@@ -22,6 +22,7 @@ const PUBS_RESULTS = '/pubs/results';
 
 const PROFILE = '/profile/';
 const COLLECTIONS = '/collections/';
+const FAVORITES = '/favorites/';
 
 const GOOGLE = '/login/google';
 const GITHUB = '/login/github';
@@ -34,6 +35,7 @@ const SAML = '/saml/login';
 export const StaticRoutes = {
   COLLECTIONS,
   EVENTS,
+  FAVORITES,
   MAIN,
   MAIN_RESULTS,
   NEWS,

@@ -300,7 +300,7 @@ class NotebookDetails extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
-  favorites: state.user.favorites,
+  favorites: state.user.profile.favorites,
   notebook: state.ui.notebook,
   profile: state.user.profile,
 });

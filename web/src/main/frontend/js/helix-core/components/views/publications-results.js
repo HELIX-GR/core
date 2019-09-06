@@ -338,7 +338,7 @@ class PublicationsResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
-  favorites: state.user.favorites,
+  favorites: state.user.profile.favorites,
   profile: state.user.profile,
   search: state.ui.pubs,
 });

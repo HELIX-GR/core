@@ -1,8 +1,9 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
 import {
-  bindActionCreators,
+  bindActionCreators
 } from 'redux';
 
 import {
@@ -18,7 +19,6 @@ import {
 import {
   EnumCatalog,
   ServerError,
-  StaticRoutes
 } from '../../model';
 
 import {
@@ -26,17 +26,26 @@ import {
 } from 'react-toastify';
 
 import {
-  AccountDetails,
-  CollectionItem,
   CollectionSelectModal,
 } from './collection-parts';
 
-class CollectionDetails extends React.Component {
+import {
+  FavoriteFilter,
+  FavoriteList
+} from './favorite-parts';
+
+class Favorites extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
+      pills: {
+        [EnumCatalog.CKAN]: true,
+        [EnumCatalog.OPENAIRE]: true,
+        [EnumCatalog.LAB]: true,
+      },
+      text: '',
       collectionModal: {
         visible: false,
         favorite: null,
@@ -46,30 +55,32 @@ class CollectionDetails extends React.Component {
     this.onAddFavoriteToCollection = this.onAddFavoriteToCollection.bind(this);
     this.onCollectionSelect = this.onCollectionSelect.bind(this);
     this.onFavoriteDelete = this.onFavoriteDelete.bind(this);
+    this.onPillChanged = this.onPillChanged.bind(this);
     this.onRemoveFavoriteFromCollection = this.onRemoveFavoriteFromCollection.bind(this);
+    this.onTextChanged = this.onTextChanged.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const { profile: { collections, favorites: allFavorites }, match: { params } } = props;
-    const collection = collections.find(c => c.id === +params.id) || null;
+  onPillChanged(id) {
+    const { pills } = this.state;
 
-    const favorites = !collection ? null : collection.items
-      .map(id => allFavorites.find(f => f.id === id) || null)
-      .filter(f => !!f);
+    const active = Object.keys(pills).filter(key => pills[key]);
 
-    return {
-      collection,
-      favorites,
-    };
-  }
-
-  componentDidMount() {
-    const { collection } = this.state;
-    const { history } = this.props;
-
-    if (!collection) {
-      history.replace(StaticRoutes.COLLECTIONS);
+    if ((active.length > 1) || (active[0] !== id)) {
+      this.setState((state, props) => {
+        return {
+          pills: {
+            ...state.pills,
+            [id]: !state.pills[id],
+          }
+        };
+      });
     }
+  }
+
+  onTextChanged(value) {
+    this.setState({
+      text: value,
+    });
   }
 
   onFavoriteDelete(data) {
@@ -79,7 +90,7 @@ class CollectionDetails extends React.Component {
     const active = this.isFavoriteActive(data.catalog, data.handle);
 
     if (authenticated) {
-      return this.props.removeFavorite(data)
+      this.props.removeFavorite(data)
         .catch((err) => {
           if ((err.errors) && (err.errors[0].code.startsWith('FavoriteErrorCode.'))) {
             // Ignore
@@ -94,8 +105,6 @@ class CollectionDetails extends React.Component {
       toast.dismiss();
       toast.error(<FormattedMessage id='favorite.login-required' />);
     }
-
-    return Promise.reject(null);
   }
 
   onCollectionSelect(favorite) {
@@ -179,8 +188,17 @@ class CollectionDetails extends React.Component {
   }
 
   render() {
-    const { collection, collectionModal, favorites } = this.state;
-    const { collections, config, profile: { account } } = this.props;
+    const {
+      collectionModal,
+      pills,
+      text,
+    } = this.state;
+
+    const {
+      collections,
+      config,
+      favorites,
+    } = this.props;
 
     return (
       <>
@@ -195,26 +213,25 @@ class CollectionDetails extends React.Component {
           </CollectionSelectModal>
         }
         <div className="results-main">
-          <section className="main-results-page-content collection-landing-page-content">
+          <section className="main-results-page-content">
             <div className="results-main-content">
 
-              <section className="results-main-sidebar">
-                <AccountDetails
-                  account={account}
-                />
-              </section>
+              <FavoriteFilter
+                onPillChanged={this.onPillChanged}
+                onTextChanged={this.onTextChanged}
+                pills={pills}
+                text={text}
+              />
 
-              <section className="results-main-result-set">
-                <CollectionItem
-                  collection={collection}
-                  collections={collections}
-                  config={config}
-                  favorites={favorites}
-                  onCollectionSelect={this.onCollectionSelect}
-                  onFavoriteDelete={this.onFavoriteDelete}
-                />
-              </section>
-
+              <FavoriteList
+                collections={collections}
+                config={config}
+                favorites={favorites}
+                onCollectionSelect={this.onCollectionSelect}
+                onFavoriteDelete={this.onFavoriteDelete}
+                pills={pills}
+                text={text}
+              />
             </div>
           </section>
         </div>
@@ -242,4 +259,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(CollectionDetails);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Favorites);

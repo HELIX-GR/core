@@ -190,6 +190,7 @@ class MainResults extends React.Component {
   }
 
   renderDataset(r, host) {
+    const authenticated = (this.props.profile != null);
     const formats = r.resources.reduce((result, value) => {
       if (!result.includes(value.format)) {
         return [...result, value.format];
@@ -208,15 +209,17 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <Favorite
-          active={this.isFavoriteActive(EnumCatalog.CKAN, r.id)}
-          catalog={EnumCatalog.CKAN}
-          description={r.notes}
-          handle={r.id}
-          onClick={this.toggleFavorite}
-          title={r.title}
-          url={`${host}/dataset/${r.id}`}
-        />
+        {authenticated &&
+          <Favorite
+            active={this.isFavoriteActive(EnumCatalog.CKAN, r.id)}
+            catalog={EnumCatalog.CKAN}
+            description={r.notes}
+            handle={r.id}
+            onClick={this.toggleFavorite}
+            title={r.title}
+            url={`${host}/dataset/${r.id}`}
+          />
+        }
         <h3 className="title">
           <a href={`${host}/dataset/${r.id}`} target="_blank">
             {r.title.length > MAX_TITLE_LENGTH ? `${r.title.substring(0, MAX_TITLE_LENGTH)} ...` : r.title}
@@ -299,6 +302,7 @@ class MainResults extends React.Component {
   }
 
   renderPublication(p, host) {
+    const authenticated = (this.props.profile != null);
     const resource = this.resolvePublicationResource(p);
 
     const modifiedAt = moment(p.dateOfAcceptance).parseZone();
@@ -312,15 +316,17 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <Favorite
-          active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
-          catalog={EnumCatalog.OPENAIRE}
-          description={p.description[0] || null}
-          handle={p.objectIdentifier}
-          onClick={this.toggleFavorite}
-          title={p.title}
-          url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
-        />
+        {authenticated &&
+          <Favorite
+            active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
+            catalog={EnumCatalog.OPENAIRE}
+            description={p.description[0] || null}
+            handle={p.objectIdentifier}
+            onClick={this.toggleFavorite}
+            title={p.title}
+            url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+          />
+        }
         <h3 className="title">
           <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
             {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
@@ -356,6 +362,7 @@ class MainResults extends React.Component {
   }
 
   renderNotebook(n, host) {
+    const authenticated = (this.props.profile != null);
     const formats = n.resources.reduce((result, value) => {
       if (!result.includes(value.format)) {
         return [...result, value.format];
@@ -374,15 +381,17 @@ class MainResults extends React.Component {
         <div className="date-of-entry">
           {date}
         </div>
-        <Favorite
-          active={this.isFavoriteActive(EnumCatalog.LAB, n.id)}
-          catalog={EnumCatalog.LAB}
-          description={n.notes}
-          handle={n.id}
-          onClick={this.toggleFavorite}
-          title={n.title}
-          url={`${host}/dataset/${n.id}`}
-        />
+        {authenticated &&
+          <Favorite
+            active={this.isFavoriteActive(EnumCatalog.LAB, n.id)}
+            catalog={EnumCatalog.LAB}
+            description={n.notes}
+            handle={n.id}
+            onClick={this.toggleFavorite}
+            title={n.title}
+            url={`${host}/dataset/${n.id}`}
+          />
+        }
         <h3 className="title">
           <a href={`https://lab.hellenicdataservice.gr/notebook/${n.id}`} target="_blank">
             {n.title.length > MAX_TITLE_LENGTH ? `${n.title.substring(0, MAX_TITLE_LENGTH)} ...` : n.title}
@@ -661,7 +670,7 @@ class MainResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
-  favorites: state.user.favorites,
+  favorites: state.user.profile ? state.user.profile.favorites : [],
   profile: state.user.profile,
   search: state.ui.main,
 });

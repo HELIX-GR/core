@@ -411,7 +411,7 @@ class PublicationDetails extends React.Component {
                               {pub.dateOfAcceptance &&
                                 <span className="pl-1">
                                   ({moment(pub.dateOfAcceptance).year()})
-                            </span>
+                                </span>
                               }
                             </div>
                             <div className=" btn-group publication-component-similarity" title={_t({ id: 'publication.similarity' })}>
@@ -447,7 +447,7 @@ class PublicationDetails extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   publication: state.ui.publication,
-  favorites: state.user.favorites,
+  favorites: state.user.profile.favorites,
   profile: state.user.profile,
 });
 
