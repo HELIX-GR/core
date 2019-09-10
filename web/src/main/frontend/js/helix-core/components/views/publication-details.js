@@ -447,7 +447,7 @@ class PublicationDetails extends React.Component {
 const mapStateToProps = (state) => ({
   config: state.config,
   publication: state.ui.publication,
-  favorites: state.user.profile.favorites,
+  favorites: state.user.profile ? state.user.profile.favorites : [],
   profile: state.user.profile,
 });
 

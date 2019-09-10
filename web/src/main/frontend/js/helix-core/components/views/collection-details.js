@@ -226,7 +226,7 @@ class CollectionDetails extends React.Component {
 const mapStateToProps = (state) => ({
   collections: state.user.profile.collections,
   config: state.config,
-  favorites: state.user.profile.favorites,
+  favorites: state.user.profile ? state.user.profile.favorites : [],
   profile: state.user.profile,
 });
 
