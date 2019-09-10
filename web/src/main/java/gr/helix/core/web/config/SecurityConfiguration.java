@@ -609,10 +609,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/logout",
                 "/action/**"
             ).authenticated()
-            // Private
-            .antMatchers(
-                "/admin/**"
-            ).hasAuthority("ROLE_ADMIN");
+            .anyRequest().authenticated();
 
         http.csrf().requireCsrfProtectionMatcher((HttpServletRequest req) -> {
             // Disable for SAML
