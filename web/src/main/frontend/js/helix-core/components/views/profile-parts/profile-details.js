@@ -176,8 +176,8 @@ class ProfileDetails extends React.Component {
                 {this.props.loading ? (
                   <i className="fa fa-spin fa-spinner"></i>
                 ) : (
-                    <span>{_t({ id: 'profile.action.upload-image' })}</span>
-                  )}
+                  <span>{_t({ id: 'profile.action.upload-image' })}</span>
+                )}
               </button>
             </div>
             <div className="form-field">
@@ -263,8 +263,8 @@ class ProfileDetails extends React.Component {
                 {this.props.loading ? (
                   <i className="fa fa-spin fa-spinner"></i>
                 ) : (
-                    <span>{_t({ id: 'profile.action.update' })}</span>
-                  )}
+                  <span>{_t({ id: 'profile.action.update' })}</span>
+                )}
               </button>
             </section>
 
