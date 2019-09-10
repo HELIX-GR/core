@@ -6,11 +6,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {"spring.profiles.active=testing"})
-public class ApplicationTests 
+@SpringBootTest(
+    properties = {
+        "spring.profiles.active=testing",
+        "spring.main.allow-bean-definition-overriding=true"
+    }
+)
+public class ApplicationTests
 {
-	@Test
-	public void contextLoads() {
-	}
+
+    @Test
+    public void contextLoads() throws Exception
+    {
+    }
 
 }
