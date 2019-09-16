@@ -46,3 +46,9 @@ export const EnumPostCategory = {
   News: 'news',
   Events: 'events',
 };
+
+export const EnumCollectionAction = {
+  Create: 'create',
+  Update: 'update',
+  Delete: 'delete',
+};

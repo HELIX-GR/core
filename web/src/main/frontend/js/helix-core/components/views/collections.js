@@ -55,9 +55,9 @@ class Collections extends React.Component {
               <div className="col-md-9 col-xs-12">
                 <CollectionList
                   addCollection={this.props.addCollection}
-                  updateCollection={this.props.updateCollection}
-                  removeCollection={this.props.removeCollection}
                   collections={profile.collections}
+                  removeCollection={this.props.removeCollection}
+                  updateCollection={this.props.updateCollection}
                 />
               </div>
 

@@ -232,6 +232,14 @@
     margin: 24px 0px 0px 24px;
   }
 
+  .form-content {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 29px;
+    color: #262626;
+    margin: 24px 0px 0px 24px;
+  }
+
   .btn {
     cursor: pointer;
   }
@@ -268,14 +276,13 @@
     bottom: 32px;
     width: 100%;
 
-    button.landing-search-button {
+    button.action {
       outline: none;
       color: white;
       background-color: $main-black;
       border: none;
       border-radius: 25px;
       height: 49px;
-      width: 300px;
       font-size: 20px;
       line-height: 24px;
       right: 0;
@@ -284,6 +291,22 @@
       -webkit-transition: all .2s ease-in-out;
       -moz-transition: all .2s ease-in-out;
       -o-transition: all .2s ease-in-out;
+
+      &.action-create {
+        width: 150px;
+      }
+
+      &.action-update {
+        width: 150px;
+      }
+
+      &.action-cancel {
+        width: 150px;
+      }
+
+      &.action-disabled {
+        opacity: 0.5;
+      }
 
       &:hover {
         opacity: .5;

@@ -13,6 +13,7 @@ import {
 import {
   buildPath,
   DynamicRoutes,
+  EnumCollectionAction,
 } from '../../../model';
 
 class CollectionCard extends React.Component {
@@ -32,10 +33,10 @@ class CollectionCard extends React.Component {
           </div>
           <div className="actions">
             <div className="action">
-              <i className="fa fa-pencil" onClick={() => this.props.handleAction('edit', c)}></i>
+              <i className="fa fa-pencil" onClick={() => this.props.handleAction(EnumCollectionAction.Update, c)}></i>
             </div>
             <div className="action">
-              <i className="fa fa-trash" onClick={() => this.props.handleAction('delete', c)}></i>
+              <i className="fa fa-trash" onClick={() => this.props.handleAction(EnumCollectionAction.Delete, c)}></i>
             </div>
           </div>
           <div className="pills">
@@ -60,7 +61,9 @@ class CollectionCard extends React.Component {
     return (
       <div className="collection-card placeholder">
         <div className="title"><FormattedMessage id={'collections.create.title'} /></div>
-        <div className="add-button" onClick={() => this.props.handleAction('create')}><i className="fa fa-plus"></i></div>
+        <div className="add-button" onClick={() => this.props.handleAction(EnumCollectionAction.Create)}>
+          <i className="fa fa-plus"></i>
+        </div>
       </div>
     );
   }

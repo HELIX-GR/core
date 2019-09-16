@@ -4,6 +4,7 @@ export {
   EnumAuthProvider,
   EnumCatalog,
   EnumCkanFacet,
+  EnumCollectionAction,
   EnumLocale,
   EnumMimeType,
   EnumOpenaireFilter,

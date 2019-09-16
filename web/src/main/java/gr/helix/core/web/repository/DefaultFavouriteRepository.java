@@ -134,7 +134,13 @@ public class DefaultFavouriteRepository implements IFavoriteRepository {
 
     @Override
     public FavoriteCollection updateCollection(String email, int id, String title) throws ApplicationException {
-        final Optional<FavoriteCollectionEntity> existing = this.findCollectionByEmailAndId(email, id);
+        Optional<FavoriteCollectionEntity> existing = this.findCollectionByEmailAndTitle(email, title);
+
+        if (existing.isPresent()) {
+            throw ApplicationException.fromMessage(FavoriteErrorCode.COLLECTION_ALREADY_EXISTS, "A collection already exists");
+        }
+
+        existing = this.findCollectionByEmailAndId(email, id);
 
         if (!existing.isPresent()) {
             throw ApplicationException.fromMessage(FavoriteErrorCode.COLLECTION_NOT_FOUND, "Collection was not found");

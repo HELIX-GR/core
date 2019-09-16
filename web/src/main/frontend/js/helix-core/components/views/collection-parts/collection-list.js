@@ -1,15 +1,7 @@
 import * as React from 'react';
 
 import {
-  toast,
-} from 'react-toastify';
-
-import {
-  FormattedMessage,
-} from 'react-intl';
-
-import {
-  ServerError,
+  EnumCollectionAction,
 } from '../../../model';
 
 import { default as CollectionCard } from './collection-card';
@@ -21,78 +13,56 @@ class CollectionList extends React.Component {
     super(props);
 
     this.state = {
-      showModal: false,
+      action: null,
       selected: null,
+      showModal: false,
     };
   }
 
   handleAction(action, collection = null) {
     switch (action) {
-      case 'create':
-        this.showModal();
+      case EnumCollectionAction.Create:
+        this.showModal(action);
         break;
-      case 'edit':
-        this.showModal(collection);
+      case EnumCollectionAction.Update:
+        this.showModal(action, collection);
         break;
-      case 'delete':
-        this.deleteCollection(collection);
+      case EnumCollectionAction.Delete:
+        this.showModal(action, collection);
         break;
     }
   }
 
-  showModal(selected = null) {
+  showModal(action, selected = null) {
     this.setState({
-      showModal: true,
+      action,
       selected,
+      showModal: true,
     });
   }
 
   hideModal() {
     this.setState({
-      showModal: false,
+      action: null,
       selected: null,
+      showModal: false,
     });
-  }
-
-  deleteCollection(collection) {
-    this.props.removeCollection(collection.id)
-      .then(() => {
-        toast.success(
-          <FormattedMessage
-            id="collections.delete.success"
-            values={{ title: collection.title }}
-          />
-        );
-      })
-      .catch(err => {
-        if (err instanceof ServerError) {
-          toast.error(
-            <div>
-              {err.errors.map((e) => (
-                <FormattedMessage key={e.code} id={e.code} />
-              ))}
-            </div>
-          );
-        } else {
-          toast.error(
-            <FormattedMessage id={'collections.delete.failure'} />
-          );
-        }
-      });
   }
 
   render() {
     const { collections } = this.props;
-    const { showModal, selected = null } = this.state;
+    const { action, selected = null, showModal } = this.state;
 
     return (
       <>
         {showModal &&
           <CollectionEditModal
-            collection={selected}
+            action={action}
             addCollection={this.props.addCollection}
-            updateCollection={this.props.updateCollection}
+            collection={selected}
+            removeCollection={this.props.removeCollection}
             toggle={() => this.hideModal()}
+            updateCollection={this.props.updateCollection}
             visible={showModal}>
           </CollectionEditModal>
         }
