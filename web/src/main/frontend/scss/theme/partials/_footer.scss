@@ -4,83 +4,104 @@ body {
       color: $footer-white;
       background-color: $main-black;
     }
+
     &.data-footer {
       color: white;
       background-color: $data-color;
     }
+
     &.pubs-footer {
       color: white;
       background-color: $pubs-color;
     }
+
     &.lab-footer {
       color: white;
       background-color: $lab-color;
     }
+
     .footer-content {
       width: 100%;
       padding: 50px 50px 30px 58px;
       display: block;
       margin: auto;
+
       .footer-column {
         vertical-align: top;
         display: inline-block;
+
         &.logo {
           min-width: 312px;
           flex-grow: 1;
+
           a {
             color: inherit;
+
             img {
               vertical-align: super;
               width: 210px;
             }
           }
         }
+
         &.about {
           min-width: 180px;
           margin-top: -4px;
         }
+
         &.research {
           min-width: 180px;
           margin-top: -4px;
         }
+
         &.partners {
           margin-top: -4px;
+
           li {
             float: left;
+
             img {
               max-width: 200px;
               min-width: 55px;
               margin: 0px 10px 0px 0px;
             }
           }
+
           h3.footer-column-title {
             margin-bottom: 72px;
           }
         }
+
         h3.footer-column-title {
           font-weight: 500;
           font-size: 25px;
           line-height: 29px;
           margin-bottom: 47px;
         }
+
         ul {
           list-style-type: none;
           padding: 0;
+
           li {
             margin-bottom: 18px;
             font-weight: 300;
             font-size: 14px;
             line-height: 16px;
             padding-right: 50px;
+
             &:first-child {
               padding-right: 70px;
             }
+
             &:last-child {
               margin-bottom: none;
               padding-right: 0px;
             }
+
             a {
               color: inherit;
+F
               &:hover {
                 text-decoration: none;
               }
@@ -88,10 +109,15 @@ body {
           }
         }
       }
+
       .copyright-notes {
         font-size: 12px;
         font-weight: 400;
         line-height: 14px;
+      }
+
+      .eu-logo {
+        max-width: 500px !important;
       }
     }
   }
