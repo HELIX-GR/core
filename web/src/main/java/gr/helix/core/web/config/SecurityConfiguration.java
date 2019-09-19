@@ -33,6 +33,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,7 @@ import org.springframework.security.saml.processor.HTTPRedirectDeflateBinding;
 import org.springframework.security.saml.processor.HTTPSOAP11Binding;
 import org.springframework.security.saml.processor.SAMLBinding;
 import org.springframework.security.saml.processor.SAMLProcessorImpl;
+import org.springframework.security.saml.storage.EmptyStorageFactory;
 import org.springframework.security.saml.trust.httpclient.TLSProtocolConfigurer;
 import org.springframework.security.saml.trust.httpclient.TLSProtocolSocketFactory;
 import org.springframework.security.saml.util.VelocityFactory;
@@ -204,9 +206,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      *
      * @return
      */
+    @Profile("production")
+    @Qualifier("SAMLContextProviderImpl")
     @Bean
-    public SAMLContextProviderImpl contextProvider() {
+    public SAMLContextProviderImpl contextProviderWithHttpSessionStorage() {
         return new SAMLContextProviderImpl();
+    }
+
+    /**
+     * Provider of default SAML Context
+     *
+     * See https://docs.spring.io/spring-security-saml/docs/current/reference/html/chapter-troubleshooting.html
+     *
+     * @return
+     */
+    @Profile("!production")
+    @Qualifier("SAMLContextProviderImpl")
+    @Bean
+    public SAMLContextProviderImpl contextProviderWithEmptyStorage() {
+        final SAMLContextProviderImpl provider = new SAMLContextProviderImpl();
+        provider.setStorageFactory(new EmptyStorageFactory());
+        return provider;
     }
 
     /**
