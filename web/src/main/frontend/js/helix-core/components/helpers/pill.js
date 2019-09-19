@@ -20,12 +20,13 @@ class Pill extends React.Component {
   }
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-    text: PropTypes.string.isRequired,
-    selected: PropTypes.bool,
     className: PropTypes.string,
+    counter: PropTypes.number,
+    disabled: PropTypes.bool,
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    selected: PropTypes.bool,
+    text: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -33,6 +34,8 @@ class Pill extends React.Component {
   }
 
   render() {
+    const { counter, text } = this.props;
+
     return (
       <div
         className={
@@ -51,7 +54,10 @@ class Pill extends React.Component {
           }
         }
       >
-        <FormattedMessage id={this.props.text} defaultMessage={this.props.text} />
+        {counter !== null &&
+          <span>{counter} </span>
+        }
+        <FormattedMessage id={text} defaultMessage={text} />
       </div>
     );
   }

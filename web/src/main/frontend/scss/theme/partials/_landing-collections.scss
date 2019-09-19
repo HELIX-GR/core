@@ -519,4 +519,65 @@
     line-height: 47px;
     margin-bottom: 20px;
   }
+
+  .domain-pills {
+    display: flex;
+
+    .filter-pill {
+      cursor: pointer;
+      user-select: none;
+      margin-right: 10px;
+      color: white;
+      font-size: 14px;
+      padding: 6px 8px;
+      height: 25px;
+      line-height: 15px;
+      float: left;
+      border-radius: 17.5px;
+      background-color: #BFBFBF;
+      opacity: 1;
+      transition: all .2s ease-in-out;
+      -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+
+      &:hover {
+        opacity: .5;
+      }
+
+      &:after {
+        content: '\f00d';
+        display: inline-block;
+        margin-left: 4px;
+        font-family: 'FontAwesome';
+        font-size: 12px;
+        line-height: 15px;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+      }
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      &.selected {
+        &:after {
+          content: '\f00c';
+        }
+
+        &.pill-data {
+          background-color: $data-color;
+        }
+
+        &.pill-pubs {
+          background-color: $pubs-color;
+        }
+
+        &.pill-lab {
+          background-color: $lab-color;
+        }
+      }
+    }
+  }
 }
