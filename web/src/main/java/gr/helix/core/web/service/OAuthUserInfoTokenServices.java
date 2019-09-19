@@ -77,6 +77,11 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
             }
         });
 
+        // An email is required
+        if (StringUtils.isBlank(account.getEmail())) {
+            throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
+        }
+
         // TODO: Override roles (by default ROLE_USER is set)
 
         // Authentication -> Account roles
@@ -92,14 +97,9 @@ public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
 
         // TODO: Get user from database
         try {
-            this.userService.loadUserByUsername(authentication.getPrincipal().toString());
+            this.userService.loadUserByUsername(account.getEmail());
         }catch (final UsernameNotFoundException ex) {
             // TODO: Handle exception / Create user
-        }
-
-        // An email is required
-        if (StringUtils.isBlank(account.getEmail())) {
-            throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
         }
 
         // Get profile from database
