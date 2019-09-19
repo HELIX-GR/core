@@ -68,9 +68,15 @@ public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {
                 }
             });
 
-        if (StringUtils.isBlank(ATTRIBUTE_USERNAME)) {
+        if (StringUtils.isBlank(attributes.get(ATTRIBUTE_USERNAME))) {
             logger.error("Cannot map SAML credential attributes to user");
             throw new UsernameNotFoundException(userID);
+        }
+
+        // An email is required
+        if (StringUtils.isBlank(attributes.get(ATTRIBUTE_MAIL))) {
+            logger.error("A valid email address is required for user {}.", attributes.get(ATTRIBUTE_USERNAME));
+            throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
         }
 
         // TODO: Load user data from database and assign roles
@@ -83,11 +89,6 @@ public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {
 
         account.getRoles().add(EnumRole.ROLE_USER);
 
-        // An email is required
-        if (StringUtils.isBlank(account.getEmail())) {
-            logger.error("A valid email address is required for user {}.", account.getName());
-            throw new UsernameNotFoundException("Username was not found. A valid email address is required.");
-        }
 
         // Get profile from database
         final Optional<AccountProfile> profile = this.accountRepository.getProfileByEmail(account.getEmail());
