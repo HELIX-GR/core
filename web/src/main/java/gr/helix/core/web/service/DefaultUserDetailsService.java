@@ -18,7 +18,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final AccountEntity accountEntity = this.accountRepository.findOneByUsername(username);
+        final AccountEntity accountEntity = this.accountRepository.findOneByEmail(username);
         if (accountEntity == null) {
             throw new UsernameNotFoundException(username);
         }
