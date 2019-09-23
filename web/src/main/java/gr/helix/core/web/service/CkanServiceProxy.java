@@ -56,7 +56,7 @@ public class CkanServiceProxy {
     private ServiceConfiguration ckanConfiguration;
 
     @PostConstruct
-    public void initi() throws Exception {
+    public void init() throws Exception {
         Assert.notNull(this.objectMapper, "An instance of ObjectMapper is required");
         Assert.notNull(this.httpClient, "An instance of HttpClient is required");
         Assert.notNull(this.ckanConfiguration, "An instance of ServiceConfiguration is required");
