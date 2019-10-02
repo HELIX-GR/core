@@ -30,8 +30,11 @@ const getPosts = (host, pageIndex, pageSize, category = null) => {
     .then(res => {
       return res.json()
         .then(data => ({
+          category,
           count: +res.headers.get('X-WP-Total'),
-          posts: data,
+          pageIndex,
+          pageSize,
+          posts: data || [],
         }));
     });
 };

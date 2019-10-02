@@ -22,6 +22,8 @@ const RELATIVE_POSTS_RESPONSE = 'ui/news/RELATIVE_POSTS_RESPONSE';
 
 // Reducer
 const initialState = {
+  // Current category
+  category: null,
   // True if a request is pending
   loading: false,
   // Most recent posts
@@ -32,7 +34,7 @@ const initialState = {
   page: {
     pageIndex: 1,
     pageSize: 10,
-    posts: [],
+    posts: null,
     count: 0,
   },
   // Current post
@@ -61,7 +63,12 @@ export default (state = initialState, action) => {
     case POST_PAGE_REQUEST:
       return {
         ...state,
+        category: action.category,
         loading: true,
+        page: {
+          ...state.page,
+          posts: state.category !== action.category ? null : state.page.posts,
+        },
       };
 
     case POST_PAGE_RESPONSE:
@@ -69,6 +76,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         page: {
+          category: action.category,
           // If no new posts are found, do not increase the page index
           pageIndex: action.posts.length === 0 ? Math.max(1, action.pageIndex - 1) : action.pageIndex,
           pageSize: action.pageSize,
@@ -122,16 +130,18 @@ const getPostLatestComplete = (posts) => ({
   posts,
 });
 
-const getPostPageBegin = (pageIndex, pageSize) => ({
+const getPostPageBegin = (pageIndex, pageSize, category) => ({
   type: POST_PAGE_REQUEST,
+  category,
   pageIndex,
   pageSize,
 });
 
-const getPostPageComplete = (pageIndex, pageSize, count, posts) => ({
+const getPostPageComplete = (pageIndex, pageSize, count, posts, category) => ({
   type: POST_PAGE_RESPONSE,
   pageIndex,
   pageSize,
+  category,
   count,
   posts,
 });
@@ -204,10 +214,10 @@ export const getPosts = (pageIndex, pageSize, categoryName) => (dispatch, getSta
     dispatch(getPostPageComplete(pageIndex, pageSize, 0, []));
   }
 
-  dispatch(getPostPageBegin(pageIndex, pageSize));
+  dispatch(getPostPageBegin(pageIndex, pageSize, categoryId));
   return wordPressService.getPosts(host, pageIndex, pageSize, categoryId)
     .then((data) => {
-      dispatch(getPostPageComplete(pageIndex, pageSize, data.count, data.posts));
+      dispatch(getPostPageComplete(pageIndex, pageSize, data.count, data.posts, categoryId));
     })
     .catch((err) => {
       console.error('Failed loading WordPress posts:', err);

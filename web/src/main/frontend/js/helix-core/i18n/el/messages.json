@@ -31,7 +31,8 @@
         "title": "Νέα",
         "items": {
           "news": "Νέα",
-          "events": "Εκδηλώσεις"
+          "events": "Εκδηλώσεις",
+          "actions": "Δράσεις"
         }
       },
       "login": {
@@ -277,6 +278,10 @@
     "load-more": "Περισσότερα",
     "read-more": "Περισσότερα",
     "related-news": "Σχετικά Νέα"
+  },
+  "actions" : {
+    "title": "Δράσεις",
+    "load-more": "Περισσότερα"
   },
   "results": {
     "shared": {

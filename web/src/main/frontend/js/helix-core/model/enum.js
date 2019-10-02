@@ -45,6 +45,7 @@ export const EnumAuthProvider = {
 export const EnumPostCategory = {
   News: 'news',
   Events: 'events',
+  Actions: 'actions',
 };
 
 export const EnumCollectionAction = {

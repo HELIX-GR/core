@@ -34,7 +34,7 @@ class Project extends React.Component {
       strict: false,
     });
 
-    const { name } = match ? match.params : WordPressPages.About;
+    const { name = 'about'} = match ? match.params : WordPressPages.About;
     const _t = this.props.intl.formatMessage;
     const singleColumn = name === WordPressPages.Subjects;
 

@@ -12,6 +12,7 @@ export const ExternalRoutes = {
 };
 
 // Static routes
+const ACTIONS = '/news/actions/';
 const EVENTS = '/news/events/';
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
@@ -33,6 +34,7 @@ const SAML = '/saml/login';
  * Static routes
  */
 export const StaticRoutes = {
+  ACTIONS,
   COLLECTIONS,
   EVENTS,
   FAVORITES,
@@ -52,6 +54,7 @@ export const StaticRoutes = {
 };
 
 // Dynamic routes
+const ACTION_PAGE = '/news/actions/view/:id';
 const COLLECTION_PAGE = '/collections/:id';
 const DATASET_PAGE = '/datasets/:id';
 const EVENT_PAGE = '/news/events/view/:id';
@@ -64,6 +67,7 @@ const PUBLICATION_PAGE = '/publications/:id';
  * Dynamic routes
  */
 export const DynamicRoutes = {
+  ACTION_PAGE,
   COLLECTION_PAGE,
   DATASET_PAGE,
   EVENT_PAGE,

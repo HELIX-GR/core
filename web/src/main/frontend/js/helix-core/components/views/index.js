@@ -1,3 +1,5 @@
+export { default as Actions } from './actions';
+export { default as ActionsDetails } from './actions-details';
 export { default as CollectionDetails } from './collection-details';
 export { default as Collections } from './collections';
 export { default as DatasetDetails } from './dataset-details';

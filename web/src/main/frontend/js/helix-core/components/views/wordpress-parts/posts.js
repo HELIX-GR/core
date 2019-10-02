@@ -86,26 +86,26 @@ class News extends React.Component {
 
               <div className="col-sm-12">
                 <h4 className="news-header">
-                  {_t({ id: category === EnumPostCategory.News ? 'news.title' : 'events.title' })}
+                  {_t({ id: `${category}.title` })}
                 </h4>
               </div>
 
               <div className="col">
                 <div className="news-item-list">
-                  {page.posts.length === 0 &&
+                  {!page.posts &&
                     <div className="mt-3">
                       <Code />
                       <Code />
                     </div>
                   }
-                  {page.posts.length !== 0 &&
+                  {page.posts && page.posts.length !== 0 &&
                     this.renderPosts(page.posts)
                   }
                 </div>
               </div>
 
             </div>
-            {page.posts.length !== 0 &&
+            {page.posts && page.posts.length !== 0 &&
               <div>
                 <button
                   type="submit"

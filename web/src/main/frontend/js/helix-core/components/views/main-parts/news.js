@@ -29,12 +29,12 @@ class News extends React.Component {
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts = null } = this.props;
     const _t = this.props.intl.formatMessage;
 
     return (
       <div className="latest-news-container container-fluid">
-        {posts.length !== 0 &&
+        {posts &&
           <div className="row">
 
             <div className="col-sm-12">

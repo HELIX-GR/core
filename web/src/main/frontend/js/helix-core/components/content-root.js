@@ -26,6 +26,8 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
+  Actions,
+  ActionsDetails,
   CollectionDetails,
   Collections,
   DatasetDetails,
@@ -130,6 +132,7 @@ class ContentRoot extends React.Component {
         {/* Dynamic routes */}
         <SecureRoute path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} exact roles={roles} />
         <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
+        <Route path={DynamicRoutes.ACTION_PAGE} component={ActionsDetails} />
         <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
@@ -139,6 +142,7 @@ class ContentRoot extends React.Component {
         <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
         <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
         <Route path={StaticRoutes.PUBS} component={Publications} />
+        <Route path={StaticRoutes.ACTIONS} component={Actions} />
         <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />
         <Route path={StaticRoutes.PROJECT} component={Project} />

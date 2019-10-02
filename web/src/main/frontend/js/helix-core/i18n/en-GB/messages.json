@@ -31,7 +31,8 @@
         "title": "News",
         "items": {
           "news": "News",
-          "events": "Events"
+          "events": "Events",
+          "actions": "Actions"
         }
       },
       "login": {
@@ -277,6 +278,10 @@
     "load-more": "More",
     "read-more": "Read more",
     "related-news": "Related News"
+  },
+  "actions" : {
+    "title": "Actions",
+    "load-more": "More"
   },
   "results": {
     "shared": {
