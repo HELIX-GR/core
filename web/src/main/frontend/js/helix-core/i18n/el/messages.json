@@ -53,7 +53,8 @@
     "events": "Εκδηλώσεις",
     "favorites": "ΣΕΛΙΔΟΔΕΙΚΤΕΣ",
     "helix-team": "Ομάδα HELIX",
-    "news": "Νέα"
+    "news": "Νέα",
+    "actions": "Δράσεις"
   },
   "favorites": {
     "text.placeholder": "Αναζήτηση με τίτλο",
@@ -279,7 +280,7 @@
     "read-more": "Περισσότερα",
     "related-news": "Σχετικά Νέα"
   },
-  "actions" : {
+  "actions": {
     "title": "Δράσεις",
     "load-more": "Περισσότερα"
   },

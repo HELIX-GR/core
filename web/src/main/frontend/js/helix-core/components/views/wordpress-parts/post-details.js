@@ -61,7 +61,7 @@ class NewsDetails extends React.Component {
     const { category } = this.props;
     const { current: post } = this.props.news;
     const parts = [
-      _t({ id: category === EnumPostCategory.News ? 'breadcrumb.news' : 'breadcrumb.events' }),
+      _t({ id: `breadcrumb.${category}` }),
       moment(post.modified).year().toString(),
       post.title.rendered,
     ];

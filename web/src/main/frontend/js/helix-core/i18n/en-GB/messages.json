@@ -53,7 +53,8 @@
     "events": "Events",
     "favorites": "FAVORITES",
     "helix-team": "HELIX Team",
-    "news": "News"
+    "news": "News",
+    "actions": "Actions"
   },
   "favorites": {
     "text.placeholder": "Search favorites",
@@ -279,7 +280,7 @@
     "read-more": "Read more",
     "related-news": "Related News"
   },
-  "actions" : {
+  "actions": {
     "title": "Actions",
     "load-more": "More"
   },

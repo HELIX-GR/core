@@ -67,6 +67,21 @@ class News extends React.Component {
     this.props.getPosts(1, 5, category);
   }
 
+  getRoute() {
+    const { category } = this.props;
+
+    switch (category) {
+      case EnumPostCategory.News:
+        return DynamicRoutes.NEWS_PAGE;
+      case EnumPostCategory.Events:
+        return DynamicRoutes.EVENT_PAGE;
+      case EnumPostCategory.Actions:
+        return DynamicRoutes.ACTION_PAGE;
+      default:
+        return null;
+    }
+  }
+
   render() {
     const { category } = this.props;
     const { page, loading } = this.props.news;
@@ -115,7 +130,7 @@ class News extends React.Component {
                   onClick={(e) => this.onLoadMore(e)}
                 >
                   {!loading &&
-                    <span>{_t({ id: category === EnumPostCategory.News ? 'news.load-more' : 'events.load-more' })}</span>
+                    <span>{_t({ id: `${category}.load-more` })}</span>
                   }
                   {loading &&
                     <i className='fa fa-spin fa-spinner'></i>
@@ -172,7 +187,7 @@ class News extends React.Component {
                 <div className="item-date">
                   {date}
                 </div>
-                <NavLink to={buildPath(category === EnumPostCategory.News ? DynamicRoutes.NEWS_PAGE : DynamicRoutes.EVENT_PAGE, [p.id])}>
+                <NavLink to={buildPath(this.getRoute(), [p.id])}>
                   <h3 className="item-title">
                     {p.title.rendered}
                   </h3>
@@ -180,7 +195,7 @@ class News extends React.Component {
                 <div className="item-excerpt style-5" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}>
                 </div>
                 <div>
-                  <NavLink to={buildPath(category === EnumPostCategory.News ? DynamicRoutes.NEWS_PAGE : DynamicRoutes.EVENT_PAGE, [p.id])} className="read-more">
+                  <NavLink to={buildPath(this.getRoute(), [p.id])} className="read-more">
                     {_t({ id: 'news.read-more' })}
                   </NavLink>
                 </div>
