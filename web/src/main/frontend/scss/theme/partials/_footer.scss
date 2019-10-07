@@ -116,9 +116,18 @@ F
         line-height: 14px;
       }
 
-      .eu-logo {
-        max-width: 500px !important;
-      }
     }
+  }
+}
+
+.eu-logo {
+  position: absolute;
+  top: 40px;
+  left: 265px;
+  width: 400px;
+  z-index: 1;
+
+  img {
+    max-width: 100%;
   }
 }
