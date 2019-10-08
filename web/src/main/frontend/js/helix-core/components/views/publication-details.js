@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -231,7 +232,7 @@ class PublicationDetails extends React.Component {
               <h5 className="side-heading">{_t({ id: 'publication.subjects' })}</h5>
               <section className="side-tags">
                 {p.subjects &&
-                  p.subjects.sort().map(tag => (
+                  _.uniq(p.subjects).sort().map(tag => (
                     <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }

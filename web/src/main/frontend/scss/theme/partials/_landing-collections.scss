@@ -229,7 +229,7 @@
     font-weight: 500;
     line-height: 29px;
     color: #262626;
-    margin: 24px 0px 0px 24px;
+    margin: 24px 10px 0px 24px;
   }
 
   .form-content {
@@ -361,20 +361,17 @@
 
     .fields-group {
       flex: 1 1 25%;
-      margin-left: 45px;
+      margin-left: 10px;
       margin-right: 36px;
       margin-bottom: 20px;
     }
   }
 
   .param-box {
-    margin-top: 18px;
 
     .switches {
-      margin-top: 24px;
+      margin-top: 10px;
       max-height: 160px;
-
-
 
       .checkbox-text {
         font-size: 12px;

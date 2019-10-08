@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -153,7 +154,7 @@ class DatasetDetails extends React.Component {
               <h5 className="side-heading">{_t({ id: 'dataset.subjects' })}</h5>
               <section className="side-tags">
                 {r.tags &&
-                  r.tags.sort().map(tag => (
+                  _.uniq(r.tags).sort().map(tag => (
                     <Tag key={tag} text={tag} onClick={(e, tag) => this.onSearchTag(e, tag)} />
                   ))
                 }

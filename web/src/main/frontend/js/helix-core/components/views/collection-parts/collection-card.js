@@ -32,11 +32,11 @@ class CollectionCard extends React.Component {
             <Link to={buildPath(DynamicRoutes.COLLECTION_PAGE, [c.id])}>{c.title}</Link>
           </div>
           <div className="actions">
-            <div className="action">
-              <i className="fa fa-pencil" onClick={() => this.props.handleAction(EnumCollectionAction.Update, c)}></i>
+            <div className="action" onClick={() => this.props.handleAction(EnumCollectionAction.Update, c)}>
+              <i className="fa fa-pencil"></i>
             </div>
-            <div className="action">
-              <i className="fa fa-trash" onClick={() => this.props.handleAction(EnumCollectionAction.Delete, c)}></i>
+            <div className="action" onClick={() => this.props.handleAction(EnumCollectionAction.Delete, c)}>
+              <i className="fa fa-trash"></i>
             </div>
           </div>
           <div className="pills">

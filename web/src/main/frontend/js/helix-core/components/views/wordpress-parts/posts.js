@@ -151,8 +151,6 @@ class News extends React.Component {
   }
 
   renderPosts(posts) {
-    const { category } = this.props;
-
     return posts.map((p, index, posts) => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
