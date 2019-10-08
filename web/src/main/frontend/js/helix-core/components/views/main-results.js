@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import * as ReactRedux from 'react-redux';
 
 import { injectIntl } from 'react-intl';
@@ -32,7 +32,9 @@ import {
 
 import {
   addFavorite,
+  addFavoriteToCollection,
   removeFavorite,
+  removeFavoriteFromCollection,
 } from '../../ducks/user';
 
 import {
@@ -41,6 +43,7 @@ import {
   EnumCatalog,
   EnumCkanFacet,
   EnumMimeType,
+  ServerError,
 } from '../../model';
 
 import {
@@ -49,6 +52,7 @@ import {
 
 import {
   Favorite,
+  FavoriteCollectionPicker,
   Pill,
 } from '../helpers';
 
@@ -58,6 +62,10 @@ import {
   Pagination,
   PubsAdvancedOptions,
 } from './shared-parts';
+
+import {
+  CollectionSelectModal,
+} from './collection-parts';
 
 const MAX_TITLE_LENGTH = 77;
 const MAX_NOTES_LENGTH = 192;
@@ -70,15 +78,23 @@ class MainResults extends React.Component {
     this.state = {
       dataFacets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
       labFacets: Object.keys(EnumCkanFacet).reduce((result, key) => { result[EnumCkanFacet[key]] = false; return result; }, {}),
+      collectionModal: {
+        visible: false,
+        catalog: null,
+        item: null,
+        favorite: null,
+      },
     };
 
     this.textInput = React.createRef();
 
-    this.onPillChanged = this.onPillChanged.bind(this);
+    this.onAddFavoriteToCollection = this.onAddFavoriteToCollection.bind(this);
     this.onDataFacetChanged = this.onDataFacetChanged.bind(this);
     this.onLabFacetChanged = this.onLabFacetChanged.bind(this);
-    this.onProviderToggle = this.onProviderToggle.bind(this);
     this.onOpenaireFilterChanged = this.onOpenaireFilterChanged.bind(this);
+    this.onPillChanged = this.onPillChanged.bind(this);
+    this.onProviderToggle = this.onProviderToggle.bind(this);
+    this.onRemoveFavoriteFromCollection = this.onRemoveFavoriteFromCollection.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
@@ -164,8 +180,143 @@ class MainResults extends React.Component {
     }
   }
 
+  onCollectionSelect(catalog, item, favorite = null) {
+    this.showModal(catalog, item, favorite);
+  }
+
+  onAddFavoriteToCollection(collection, favorite = null) {
+    const { profile } = this.props;
+    const authenticated = (profile != null);
+
+    if (authenticated) {
+      const { collectionModal: { catalog, item } } = this.state;
+      const data = this.getFavoriteProperties(catalog, item);
+
+      const create = favorite ? Promise.resolve(favorite) : this.props.addFavorite(data);
+
+      create.then((favorite) => {
+        // Refresh favorite
+        this.setState(state => ({
+          collectionModal: {
+            ...state.collectionModal,
+            favorite,
+          }
+        }));
+
+        this.props.addFavoriteToCollection(collection.id, favorite.id)
+          .catch(err => {
+            if (err instanceof ServerError) {
+              toast.error(
+                <div>
+                  {err.errors.map((e) => (
+                    <FormattedMessage key={e.code} id={e.code} />
+                  ))}
+                </div>
+              );
+            } else {
+              toast.error(
+                <FormattedMessage id={'collections.add-favorite.failure'} />
+              );
+            }
+          });
+      });
+    } else {
+      toast.dismiss();
+      toast.error(<FormattedMessage id='favorite.login-required' />);
+    }
+  }
+
+  onRemoveFavoriteFromCollection(collection, favorite) {
+    const { profile } = this.props;
+    const authenticated = (profile != null);
+
+    if (authenticated) {
+      this.props.removeFavoriteFromCollection(collection.id, favorite.id)
+        .catch(err => {
+          if (err instanceof ServerError) {
+            toast.error(
+              <div>
+                {err.errors.map((e) => (
+                  <FormattedMessage key={e.code} id={e.code} />
+                ))}
+              </div>
+            );
+          } else {
+            toast.error(
+              <FormattedMessage id={'collections.remove-favorite.failure'} />
+            );
+          }
+        });
+    } else {
+      toast.dismiss();
+      toast.error(<FormattedMessage id='favorite.login-required' />);
+    }
+  }
+
   isFavoriteActive(catalog, handle) {
     return !!this.props.favorites.find(f => f.catalog === catalog && f.handle === handle);
+  }
+
+  getFavorite(catalog, handle) {
+    return this.props.favorites.find(f => f.catalog === catalog && f.handle === handle) || null;
+  }
+
+  showModal(catalog, item, favorite) {
+    this.setState({
+      collectionModal: {
+        visible: true,
+        catalog,
+        item,
+        favorite,
+      },
+    });
+  }
+
+  hideModal() {
+    this.setState({
+      collectionModal: {
+        visible: false,
+        catalog: null,
+        item: null,
+        favorite: null,
+      },
+    });
+  }
+
+  getFavoriteProperties(catalog, item) {
+    const { data: { host: dataHost }, openaire: { host: pubsHost }, lab: { host: labHost } } = this.props.config;
+
+    switch (catalog) {
+      case EnumCatalog.CKAN:
+        return {
+          catalog,
+          description: item.notes,
+          handle: item.id,
+          title: item.title,
+          url: `${dataHost}/dataset/${item.id}`,
+        };
+
+      case EnumCatalog.OPENAIRE:
+        return {
+          catalog,
+          description: item.description[0] || null,
+          handle: item.objectIdentifier,
+          title: item.title,
+          url: `${pubsHost}/search/publication?articleId=${item.objectIdentifier}`,
+        };
+
+      case EnumCatalog.LAB:
+        return {
+          catalog,
+          description: item.notes,
+          handle: item.id,
+          title: item.title,
+          url: `${labHost}/dataset/${item.id}`,
+        };
+
+      default:
+        throw Error('Catalog is not supported');
+    }
   }
 
   toggleFavorite(data) {
@@ -205,21 +356,31 @@ class MainResults extends React.Component {
       moment(modifiedAt).fromNow() :
       <FormattedDate value={r.metadata_modified} day='numeric' month='numeric' year='numeric' />;
 
+    const favorite = this.getFavorite(EnumCatalog.CKAN, r.id);
+
     return (
       <div className="result-item data" key={r.id} >
         <div className="date-of-entry">
           {date}
         </div>
         {authenticated &&
-          <Favorite
-            active={this.isFavoriteActive(EnumCatalog.CKAN, r.id)}
-            catalog={EnumCatalog.CKAN}
-            description={r.notes}
-            handle={r.id}
-            onClick={this.toggleFavorite}
-            title={r.title}
-            url={`${host}/dataset/${r.id}`}
-          />
+          <React.Fragment>
+            <Favorite
+              active={this.isFavoriteActive(EnumCatalog.CKAN, r.id)}
+              catalog={EnumCatalog.CKAN}
+              description={r.notes}
+              handle={r.id}
+              onClick={this.toggleFavorite}
+              title={r.title}
+              url={`${host}/dataset/${r.id}`}
+            />
+            {this.props.collections.length !== 0 &&
+              <FavoriteCollectionPicker
+                favorite={favorite}
+                onClick={() => this.onCollectionSelect(EnumCatalog.CKAN, r, favorite)}
+              />
+            }
+          </React.Fragment>
         }
         <h3 className="title">
           <a href={`${host}/dataset/${r.id}`} target="_blank">
@@ -312,21 +473,31 @@ class MainResults extends React.Component {
       moment(modifiedAt).fromNow() :
       <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
 
+    const favorite = this.getFavorite(EnumCatalog.OPENAIRE, p.objectIdentifier);
+
     return (
       <div className="result-item pubs" key={p.originalId} >
         <div className="date-of-entry">
           {date}
         </div>
         {authenticated &&
-          <Favorite
-            active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
-            catalog={EnumCatalog.OPENAIRE}
-            description={p.description[0] || null}
-            handle={p.objectIdentifier}
-            onClick={this.toggleFavorite}
-            title={p.title}
-            url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
-          />
+          <React.Fragment>
+            <Favorite
+              active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
+              catalog={EnumCatalog.OPENAIRE}
+              description={p.description[0] || null}
+              handle={p.objectIdentifier}
+              onClick={this.toggleFavorite}
+              title={p.title}
+              url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
+            />
+            {this.props.collections.length !== 0 &&
+              <FavoriteCollectionPicker
+                favorite={favorite}
+                onClick={() => this.onCollectionSelect(EnumCatalog.OPENAIRE, p, favorite)}
+              />
+            }
+          </React.Fragment>
         }
         <h3 className="title">
           <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
@@ -377,21 +548,31 @@ class MainResults extends React.Component {
       moment(modifiedAt).fromNow() :
       <FormattedDate value={n.metadata_modified} day='numeric' month='numeric' year='numeric' />;
 
+    const favorite = this.getFavorite(EnumCatalog.LAB, n.id);
+
     return (
       <div className="result-item lab" key={n.id} >
         <div className="date-of-entry">
           {date}
         </div>
         {authenticated &&
-          <Favorite
-            active={this.isFavoriteActive(EnumCatalog.LAB, n.id)}
-            catalog={EnumCatalog.LAB}
-            description={n.notes}
-            handle={n.id}
-            onClick={this.toggleFavorite}
-            title={n.title}
-            url={`${host}/dataset/${n.id}`}
-          />
+          <React.Fragment>
+            <Favorite
+              active={this.isFavoriteActive(EnumCatalog.LAB, n.id)}
+              catalog={EnumCatalog.LAB}
+              description={n.notes}
+              handle={n.id}
+              onClick={this.toggleFavorite}
+              title={n.title}
+              url={`${host}/dataset/${n.id}`}
+            />
+            {this.props.collections.length !== 0 &&
+              <FavoriteCollectionPicker
+                favorite={favorite}
+                onClick={() => this.onCollectionSelect(EnumCatalog.LAB, n, favorite)}
+              />
+            }
+          </React.Fragment>
         }
         <h3 className="title">
           <a href={`https://lab.hellenicdataservice.gr/notebook/${n.id}`} target="_blank">
@@ -457,6 +638,10 @@ class MainResults extends React.Component {
 
   render() {
     const {
+      collectionModal,
+    } = this.state;
+    const {
+      collections,
       search: {
         result: {
           catalogs: {
@@ -483,193 +668,206 @@ class MainResults extends React.Component {
     ].filter(text => text).join(', ');
 
     return (
-      <div className="results-main">
-        <section className="main-results-page-content">
-          <div className="results-main-content">
+      <>
+        {collectionModal.visible &&
+          <CollectionSelectModal
+            addFavoriteToCollection={this.onAddFavoriteToCollection}
+            collections={collections}
+            favorite={collectionModal.favorite}
+            removeFavoriteFromCollection={this.onRemoveFavoriteFromCollection}
+            toggle={() => this.hideModal()}
+            visible={collectionModal.visible}>
+          </CollectionSelectModal>
+        }
+        <div className="results-main">
+          <section className="main-results-page-content">
+            <div className="results-main-content">
 
-            <section className="results-main-sidebar">
+              <section className="results-main-sidebar">
 
-              <div className="search-form-wrapper">
+                <div className="search-form-wrapper">
 
-                <form className="landing-search-form">
+                  <form className="landing-search-form">
 
-                  <div className="main-form-content">
-                    <input
-                      type="text"
-                      autoComplete="off"
-                      className="landing-search-text"
-                      disabled={!this.isEnabled}
-                      name="landing-search-text"
-                      placeholder={_t({ id: 'results.main.search.placeholder.prefix' }, { catalogs: catalogNames })}
-                      value={text}
-                      onChange={(e) => this.onTextChanged(e.target.value)}
-                      ref={this.textInput}
-                    />
-
-                    <div className="domain-pills">
-                      <Pill
-                        id="data"
-                        disabled={loading}
-                        text="pills.data"
-                        className="pill-data"
-                        selected={pills.data}
-                        onChange={this.onPillChanged}
+                    <div className="main-form-content">
+                      <input
+                        type="text"
+                        autoComplete="off"
+                        className="landing-search-text"
+                        disabled={!this.isEnabled}
+                        name="landing-search-text"
+                        placeholder={_t({ id: 'results.main.search.placeholder.prefix' }, { catalogs: catalogNames })}
+                        value={text}
+                        onChange={(e) => this.onTextChanged(e.target.value)}
+                        ref={this.textInput}
                       />
-                      <Pill
-                        id="pubs"
-                        disabled={loading}
-                        text="pills.pubs"
-                        className="pill-pubs"
-                        selected={pills.pubs}
-                        onChange={this.onPillChanged}
-                      />
-                      <Pill
-                        id="lab"
-                        disabled={loading}
-                        text="pills.lab"
-                        className="pill-lab"
-                        selected={pills.lab}
-                        onChange={this.onPillChanged}
-                      />
+
+                      <div className="domain-pills">
+                        <Pill
+                          id="data"
+                          disabled={loading}
+                          text="pills.data"
+                          className="pill-data"
+                          selected={pills.data}
+                          onChange={this.onPillChanged}
+                        />
+                        <Pill
+                          id="pubs"
+                          disabled={loading}
+                          text="pills.pubs"
+                          className="pill-pubs"
+                          selected={pills.pubs}
+                          onChange={this.onPillChanged}
+                        />
+                        <Pill
+                          id="lab"
+                          disabled={loading}
+                          text="pills.lab"
+                          className="pill-lab"
+                          selected={pills.lab}
+                          onChange={this.onPillChanged}
+                        />
+                      </div>
+
                     </div>
 
-                  </div>
+                    <button
+                      type="submit"
+                      name="landing-search-button"
+                      className="landing-search-button"
+                      disabled={loading || !this.isEnabled}
+                      onClick={(e) => this.onSearch(e)}
+                    >
+                      <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
+                    </button>
 
-                  <button
-                    type="submit"
-                    name="landing-search-button"
-                    className="landing-search-button"
-                    disabled={loading || !this.isEnabled}
-                    onClick={(e) => this.onSearch(e)}
-                  >
-                    <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
-                  </button>
+                  </form>
+                </div>
 
-                </form>
-              </div>
+                {advanced &&
+                  <React.Fragment>
+                    <div className="main-results-advanced-search">
 
-              {advanced &&
-                <React.Fragment>
-                  <div className="main-results-advanced-search">
-
-                    <h4 className="header">
-                      {_t({ id: 'results.shared.search.advanced-search' })}
-                    </h4>
+                      <h4 className="header">
+                        {_t({ id: 'results.shared.search.advanced-search' })}
+                      </h4>
 
 
-                    <div className="border-bottom-bar">
+                      <div className="border-bottom-bar">
 
+                      </div>
                     </div>
-                  </div>
 
-                  {true === false &&
-                    <LocationFilter />
-                  }
+                    {true === false &&
+                      <LocationFilter />
+                    }
 
-                  {pills.data &&
-                    <CkanAdvancedOptions
-                      facets={this.props.search.data.facets}
-                      metadata={this.props.config.data}
-                      minOptions={4}
-                      toggleFacet={this.onDataFacetChanged}
-                    />
-                  }
-
-                  {pills.pubs &&
-                    <PubsAdvancedOptions
-                      filters={this.props.search.openaire}
-                      metadata={this.props.config.openaire}
-                      setOpenaireFilter={this.onOpenaireFilterChanged}
-                      toggleProvider={this.onProviderToggle}
-                    />
-                  }
-
-                  {pills.lab &&
-                    <CkanAdvancedOptions
-                      facets={this.props.search.lab.facets}
-                      metadata={this.props.config.lab}
-                      minOptions={4}
-                      toggleFacet={this.onLabFacetChanged}
-                    />
-                  }
-
-                </React.Fragment>
-              }
-
-            </section>
-
-            <section className="results-main-result-set">
-
-              <Pagination
-                className="top"
-                pageIndex={pageIndex}
-                pageCount={pageCount}
-                pageChange={(pageIndex) => this.onPageChange(pageIndex)}
-              />
-
-              <div className="main-results-border-bottom">
-                <label className="order-by " htmlFor="order-by">{_t({ id: 'results.shared.search.order-by.label' })}
-                  <select
-                    name="order-by"
-                    id="order-by"
-                    value=""
-                    onChange={() => null}
-                  >
-                    <option value="1">
-                      {_t({ id: 'results.shared.search.order-by.options.relevance' })}
-                    </option>
-                  </select>
-                </label>
-                {!loading &&
-                  <div className="main-results-result-count">
                     {pills.data &&
-                      <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
+                      <CkanAdvancedOptions
+                        facets={this.props.search.data.facets}
+                        metadata={this.props.config.data}
+                        minOptions={4}
+                        toggleFacet={this.onDataFacetChanged}
+                      />
                     }
+
                     {pills.pubs &&
-                      <React.Fragment>
-                        {pills.data &&
-                          <span className="pr-2 pl-2">|</span>
-                        }
-                        <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
-                      </React.Fragment>
+                      <PubsAdvancedOptions
+                        filters={this.props.search.openaire}
+                        metadata={this.props.config.openaire}
+                        setOpenaireFilter={this.onOpenaireFilterChanged}
+                        toggleProvider={this.onProviderToggle}
+                      />
                     }
+
                     {pills.lab &&
-                      <React.Fragment>
-                        {(pills.data || pills.pubs) &&
-                          <span className="pr-2 pl-2">|</span>
-                        }
-                        <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
-                      </React.Fragment>
+                      <CkanAdvancedOptions
+                        facets={this.props.search.lab.facets}
+                        metadata={this.props.config.lab}
+                        minOptions={4}
+                        toggleFacet={this.onLabFacetChanged}
+                      />
                     }
-                  </div>
+
+                  </React.Fragment>
                 }
-              </div>
 
-              <div className="result-items">
-                {this.renderResults(datasets, publications, notebooks)}
-              </div>
+              </section>
 
-              <div className="main-results-border-bottom">
+              <section className="results-main-result-set">
 
-              </div>
+                <Pagination
+                  className="top"
+                  pageIndex={pageIndex}
+                  pageCount={pageCount}
+                  pageChange={(pageIndex) => this.onPageChange(pageIndex)}
+                />
 
-              <Pagination
-                className="bottom"
-                pageIndex={pageIndex}
-                pageCount={pageCount}
-                pageChange={(pageIndex) => this.onPageChange(pageIndex)}
-              />
+                <div className="main-results-border-bottom">
+                  <label className="order-by " htmlFor="order-by">{_t({ id: 'results.shared.search.order-by.label' })}
+                    <select
+                      name="order-by"
+                      id="order-by"
+                      value=""
+                      onChange={() => null}
+                    >
+                      <option value="1">
+                        {_t({ id: 'results.shared.search.order-by.options.relevance' })}
+                      </option>
+                    </select>
+                  </label>
+                  {!loading &&
+                    <div className="main-results-result-count">
+                      {pills.data &&
+                        <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
+                      }
+                      {pills.pubs &&
+                        <React.Fragment>
+                          {pills.data &&
+                            <span className="pr-2 pl-2">|</span>
+                          }
+                          <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
+                        </React.Fragment>
+                      }
+                      {pills.lab &&
+                        <React.Fragment>
+                          {(pills.data || pills.pubs) &&
+                            <span className="pr-2 pl-2">|</span>
+                          }
+                          <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
+                        </React.Fragment>
+                      }
+                    </div>
+                  }
+                </div>
 
-            </section>
+                <div className="result-items">
+                  {this.renderResults(datasets, publications, notebooks)}
+                </div>
 
-          </div>
-        </section>
-      </div>
+                <div className="main-results-border-bottom">
+
+                </div>
+
+                <Pagination
+                  className="bottom"
+                  pageIndex={pageIndex}
+                  pageCount={pageCount}
+                  pageChange={(pageIndex) => this.onPageChange(pageIndex)}
+                />
+
+              </section>
+
+            </div>
+          </section>
+        </div>
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
+  collections: state.user.profile ? state.user.profile.collections : [],
   config: state.config,
   favorites: state.user.profile ? state.user.profile.favorites : [],
   profile: state.user.profile,
@@ -678,7 +876,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addFavorite,
+  addFavoriteToCollection,
   removeFavorite,
+  removeFavoriteFromCollection,
   searchAll,
   setOpenaireFilter,
   setResultVisibility,

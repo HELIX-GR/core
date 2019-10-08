@@ -318,6 +318,8 @@ export const addFavorite = (data) => (dispatch, getState) => {
   return favoriteService.addFavorite(data.catalog, data.handle, data.title, data.description, data.url, token).then(
     (result) => {
       dispatch(addFavoriteComplete(result));
+
+      return result;
     },
     (err) => {
       console.warn('Add favorite action failed: ' + err.message);

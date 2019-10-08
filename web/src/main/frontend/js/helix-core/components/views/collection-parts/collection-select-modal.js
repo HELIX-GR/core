@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
@@ -43,14 +44,14 @@ class CollectionSelectModal extends React.Component {
   }
 
   renderCollections() {
-    const { collections = [], favorite } = this.props;
+    const { collections = [], favorite = null } = this.props;
 
     return (
       <div className="param-box">
         <div className="switches">
           {
-            collections.map((c) => {
-              const value = !!c.items.find(id => id === favorite.id);
+            _.orderBy(collections, ['title'], ['asc']).map((c) => {
+              const value = favorite ? !!c.items.find(id => id === favorite.id) : false;
 
               return (
                 <Checkbox
