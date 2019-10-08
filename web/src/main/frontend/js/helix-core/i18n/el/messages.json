@@ -395,5 +395,10 @@
     "COLLECTION_NOT_FOUND": "Collection was not found",
     "HANDLE_NOT_FOUND": "Favorite was not found",
     "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
+  },
+  "cookie": {
+    "consent": "This website uses cookies to enhance the user experience.",
+    "learn-more": "Learn more",
+    "accept": "Accept"
   }
 }

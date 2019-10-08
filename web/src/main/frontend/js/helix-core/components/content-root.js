@@ -2,12 +2,14 @@ import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { ToastContainer } from 'react-toastify';
+import CookieConsent from "react-cookie-consent";
 
-import { EnumAuthProvider, EnumRole as Roles } from '../model';
-import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
+import { EnumAuthProvider, EnumRole as Roles, WordPressPages } from '../model';
+import { Pages, StaticRoutes, DynamicRoutes, buildPath } from '../model/routes';
 
 import {
   changeLocale,
@@ -122,6 +124,7 @@ class ContentRoot extends React.Component {
 
   render() {
     const roles = [Roles.Admin, Roles.User];
+    const _t = this.props.intl.formatMessage;
 
     const routes = (
       <Switch>
@@ -186,6 +189,23 @@ class ContentRoot extends React.Component {
             location={this.props.location}
           />
         </div>
+        <CookieConsent
+          location="none"
+          disableStyles={true}
+          containerClasses="cookie-consent"
+          buttonClasses="cookie-consent-button"
+          cookieName="helix-cookie-consent"
+          buttonText={_t({ id: 'cookie.accept' })}
+        >
+          <div>
+            <FormattedMessage id="cookie.consent" />
+          </div>
+          <div className="cookie-consent-learn-more">
+            <Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>
+              <FormattedMessage id="cookie.learn-more" />
+            </Link>
+          </div>
+        </CookieConsent>
       </React.Fragment>
     );
   }
@@ -209,4 +229,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   toggleLoginDialog,
 }, dispatch);
 
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ContentRoot);
+export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(injectIntl(ContentRoot));
