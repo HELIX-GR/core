@@ -16,10 +16,10 @@ import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
 import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.model.EnumRole;
+import gr.helix.core.common.model.security.User;
 import gr.helix.core.common.model.user.Account;
 import gr.helix.core.common.model.user.AccountProfile;
 import gr.helix.core.common.repository.AccountRepository;
-import gr.helix.core.web.model.security.User;
 
 @Service
 public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {

@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.domain.AccountEntity;
+import gr.helix.core.common.model.security.User;
 import gr.helix.core.common.repository.AccountRepository;
-import gr.helix.core.web.model.security.User;
 
 @Service
 public class DefaultUserDetailsService implements UserDetailsService {

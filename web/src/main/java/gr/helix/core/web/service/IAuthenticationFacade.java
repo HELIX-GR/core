@@ -5,7 +5,7 @@ import java.util.Locale;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import gr.helix.core.web.model.security.User;
+import gr.helix.core.common.model.security.User;
 
 public interface IAuthenticationFacade {
 

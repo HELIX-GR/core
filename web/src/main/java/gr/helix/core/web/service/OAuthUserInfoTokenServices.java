@@ -17,11 +17,11 @@ import org.springframework.security.oauth2.common.exceptions.InvalidTokenExcepti
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import gr.helix.core.common.model.EnumRole;
+import gr.helix.core.common.model.security.User;
 import gr.helix.core.common.model.user.Account;
 import gr.helix.core.common.model.user.AccountProfile;
 import gr.helix.core.common.repository.AccountRepository;
 import gr.helix.core.web.config.OAuthUserInfoDetailResolver;
-import gr.helix.core.web.model.security.User;
 
 public class OAuthUserInfoTokenServices extends UserInfoTokenServices {
 
