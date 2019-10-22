@@ -3,19 +3,23 @@
     &.pubs {
       background-color: $pubs-color;
     }
+
     section.pubs-landing-page-content {
       margin: 0 15px 0px 15px;
       padding-bottom: 55px;
       background-color: $neutral-grey;
+
       .container-fluid {
         padding-top: 45px;
         padding-right: 25px;
         padding-left: 25px;
         padding-bottom: 0;
+
         .row {
           padding-right: -25px;
           padding-left: -25px;
         }
+
         .col-xs-1,
         .col-sm-1,
         .col-md-1,
@@ -67,10 +71,12 @@
           padding-right: 25px;
           padding-left: 25px;
         }
+
         &.featured-pubs-container {
           padding-top: 46px;
           padding-left: 29px;
           max-width: $layout-fixed-width;
+
           h4.featured-pubs-header {
             margin: 0;
             padding-bottom: 18px;
@@ -81,6 +87,7 @@
           }
         }
       }
+
       div {
         .featured-pubs-item {
           padding: 28px 15px 45px 9px;
@@ -89,19 +96,23 @@
           -webkit-transition: all .2s ease-in-out;
           -moz-transition: all .2s ease-in-out;
           -o-transition: all .2s ease-in-out;
+
           &:hover {
             background-color: white;
           }
+
           .date-of-entry {
             color: $details-grey;
             font-size: 12px;
             line-height: 14px;
             font-weight: 400;
             letter-spacing: .05;
+
             a {
               color: inherit;
             }
           }
+
           h3.featured-pubs-title {
             margin: 0;
             font-size: 25px;
@@ -109,34 +120,42 @@
             font-weight: 500;
             padding-top: 11px;
             color: #F95F85;
+
             a {
               color: inherit;
+
               &:hover {
                 color: inherit;
               }
             }
           }
+
           .pubs-service {
             margin-top: 13px;
             font-size: 12;
             color: $details-grey;
             line-height: 1.3;
             font-size: 0.9rem;
+
             a {
               color: inherit;
+
               &:hover {
                 color: inherit;
               }
             }
           }
+
           .tag-list {
             margin-top: 8px;
           }
         }
       }
+
       .search-by-subject-container {
         padding-top: 58px;
         max-width: $layout-fixed-width;
+
         h4.search-by-subject-header {
           margin: 0;
           padding-bottom: 13px;
@@ -145,8 +164,10 @@
           font-weight: 700;
           line-height: 24px;
         }
+
         div.search-by-subject-col {
           height: 10px;
+
           .search-by-subject-border-bottom {
             border-top: solid 10px $pubs-color;
             height: 0px;
@@ -156,6 +177,7 @@
             margin-bottom: 25px;
           }
         }
+
         div {
           .subject-item {
             padding: 0 19px 15px 34px;
@@ -165,11 +187,13 @@
             -o-transition: all .2s ease-in-out;
             height: 260px;
             opacity: 0.5;
+
             .featured-pubs-icon {
               height: 138px;
               line-height: 150px;
               color: $pubs-color;
               text-align: center;
+
               img {
                 width: 50px;
                 max-height: 55px;
@@ -177,6 +201,7 @@
                 color: inherit;
               }
             }
+
             h3.featured-pubs-title {
               text-align: center;
               margin: 0;
@@ -184,12 +209,14 @@
               line-height: 29px;
               font-weight: 500;
               color: $pubs-color;
+
               a {
                 color: $main-black;
                 line-height: 1.3;
                 cursor: default;
               }
             }
+
             .pubs-service {
               margin-top: 16px;
               font-weight: 400;
@@ -197,31 +224,38 @@
               color: $details-grey;
               letter-spacing: .05em;
               line-height: 1.3;
+
               a {
                 color: inherit;
+
                 &:hover {
                   color: inherit;
                 }
               }
             }
+
             .tag-list {
               margin-top: 10px;
             }
           }
         }
       }
+
       .explore-container {
         padding-top: 37px;
         padding-left: 31px;
         max-width: $layout-fixed-width;
+
         h4.explore-header {
           margin: 0;
           padding-bottom: 18px;
           padding-left: 7px;
           font-weight: bold;
         }
+
         div.explore-col {
           height: 10px;
+
           .explore-border-bottom {
             border-top: solid 10px $pubs-color;
             height: 0px;
@@ -231,6 +265,7 @@
             margin-bottom: 25px;
           }
         }
+
         div {
           .explore-item {
             padding: 0 14px 15px 8px;
@@ -240,15 +275,14 @@
             -o-transition: all .2s ease-in-out;
             height: 250px;
             opacity: 0.5;
-            &:hover {
-              // background-color: white;
-            }
+
             .featured-pubs-icon {
               height: 118px;
               line-height: 115px;
               color: $pubs-color;
               text-align: center;
               position: relative;
+
               img {
                 position: relative;
                 width: 32px;
@@ -257,6 +291,7 @@
                 top: 10px;
               }
             }
+
             h3.featured-pubs-title {
               text-align: center;
               margin: 0;
@@ -265,11 +300,13 @@
               font-weight: 500;
               color: $pubs-color;
               min-height: 34px;
+
               a {
                 color: $main-black;
                 cursor: default;
               }
             }
+
             .explore-description {
               text-align: center;
               margin-top: 20px;
