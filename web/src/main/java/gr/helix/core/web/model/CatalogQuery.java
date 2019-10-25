@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import gr.helix.core.common.model.EnumCatalog;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 

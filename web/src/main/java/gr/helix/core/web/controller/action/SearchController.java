@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gr.helix.core.common.model.BasicErrorCode;
+import gr.helix.core.common.model.EnumCatalog;
 import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
-import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.service.SearchService;

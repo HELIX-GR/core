@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import gr.helix.core.common.model.EnumCatalog;
 import gr.helix.core.web.model.CatalogQuery;
 import gr.helix.core.web.model.CatalogResult;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
-import gr.helix.core.web.model.EnumCatalog;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
 import gr.helix.core.web.model.ckan.Package;
 import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;

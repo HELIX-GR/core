@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import gr.helix.core.common.model.EnumCatalog;
+
 public class CompositeCatalogQuery {
 
     private Map<EnumCatalog, CatalogQuery> queries = new HashMap<EnumCatalog, CatalogQuery>();

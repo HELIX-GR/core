@@ -3,8 +3,8 @@ package gr.helix.core.web.service;
 import java.util.List;
 
 import gr.helix.core.common.model.Error;
-import gr.helix.core.web.model.user.FavoriteCollectionRequest;
-import gr.helix.core.web.model.user.FavouriteRequest;
+import gr.helix.core.common.model.user.FavoriteCollectionRequest;
+import gr.helix.core.common.model.user.FavouriteRequest;
 
 public interface IFavoriteValidationService {
 

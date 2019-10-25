@@ -7,9 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import gr.helix.core.common.model.Error;
-import gr.helix.core.web.model.user.FavoriteCollectionRequest;
-import gr.helix.core.web.model.user.FavoriteErrorCode;
-import gr.helix.core.web.model.user.FavouriteRequest;
+import gr.helix.core.common.model.user.FavoriteCollectionRequest;
+import gr.helix.core.common.model.user.FavoriteErrorCode;
+import gr.helix.core.common.model.user.FavouriteRequest;
 
 @Service
 public class FavoriteValidationService implements IFavoriteValidationService {

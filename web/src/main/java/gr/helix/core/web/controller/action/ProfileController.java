@@ -15,12 +15,12 @@ import gr.helix.core.common.model.BasicErrorCode;
 import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.common.model.user.Account;
 import gr.helix.core.common.model.user.AccountProfile;
+import gr.helix.core.common.model.user.Favorite;
+import gr.helix.core.common.model.user.FavoriteCollection;
 import gr.helix.core.common.repository.AccountRepository;
-import gr.helix.core.web.model.user.Favorite;
-import gr.helix.core.web.model.user.FavoriteCollection;
+import gr.helix.core.common.repository.IFavoriteRepository;
 import gr.helix.core.web.model.user.Profile;
 import gr.helix.core.web.model.user.UpdateProfileRequest;
-import gr.helix.core.web.repository.IFavoriteRepository;
 import gr.helix.core.web.service.AuthenticationFacade;
 
 /**

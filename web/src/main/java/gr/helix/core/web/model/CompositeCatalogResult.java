@@ -3,6 +3,8 @@ package gr.helix.core.web.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import gr.helix.core.common.model.EnumCatalog;
+
 public class CompositeCatalogResult {
 
     private Map<EnumCatalog, CatalogResult<?>> catalogs = new HashMap<EnumCatalog, CatalogResult<?>>();

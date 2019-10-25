@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.util.Assert;
 
 import gr.helix.core.common.model.user.Account;
+import gr.helix.core.common.model.user.Favorite;
+import gr.helix.core.common.model.user.FavoriteCollection;
 
 public class Profile {
 

@@ -18,11 +18,11 @@ import gr.helix.core.common.model.ApplicationException;
 import gr.helix.core.common.model.BasicErrorCode;
 import gr.helix.core.common.model.Error;
 import gr.helix.core.common.model.RestResponse;
-import gr.helix.core.web.model.user.Favorite;
-import gr.helix.core.web.model.user.FavoriteCollection;
-import gr.helix.core.web.model.user.FavoriteCollectionRequest;
-import gr.helix.core.web.model.user.FavouriteRequest;
-import gr.helix.core.web.repository.IFavoriteRepository;
+import gr.helix.core.common.model.user.Favorite;
+import gr.helix.core.common.model.user.FavoriteCollection;
+import gr.helix.core.common.model.user.FavoriteCollectionRequest;
+import gr.helix.core.common.model.user.FavouriteRequest;
+import gr.helix.core.common.repository.IFavoriteRepository;
 import gr.helix.core.web.service.IFavoriteValidationService;
 
 @RestController("actionFavouriteController")
