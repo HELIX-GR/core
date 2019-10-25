@@ -43,7 +43,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -102,10 +101,12 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
 
+import gr.helix.core.common.config.OAuthUserInfoDetailResolver;
 import gr.helix.core.common.repository.AccountRepository;
+import gr.helix.core.common.service.CustomUserDetailsService;
+import gr.helix.core.common.service.OAuthUserInfoTokenServices;
+import gr.helix.core.common.service.SAMLUserDetailsServiceImpl;
 import gr.helix.core.web.logging.filter.MappedDiagnosticContextFilter;
-import gr.helix.core.web.service.OAuthUserInfoTokenServices;
-import gr.helix.core.web.service.SAMLUserDetailsServiceImpl;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -561,7 +562,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("defaultUserDetailsService")
-    UserDetailsService  userService;
+    CustomUserDetailsService userService;
 
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
