@@ -23,9 +23,9 @@ import gr.helix.core.common.model.user.FavoriteCollection;
 import gr.helix.core.common.model.user.FavoriteCollectionRequest;
 import gr.helix.core.common.model.user.FavouriteRequest;
 import gr.helix.core.common.repository.IFavoriteRepository;
-import gr.helix.core.web.service.IFavoriteValidationService;
+import gr.helix.core.common.service.IFavoriteValidationService;
 
-@RestController("actionFavouriteController")
+@RestController("actionFavoriteController")
 @RequestMapping(produces = "application/json")
 @Secured({ "ROLE_USER", "ROLE_ADMIN" })
 public class FavoriteController extends BaseController {

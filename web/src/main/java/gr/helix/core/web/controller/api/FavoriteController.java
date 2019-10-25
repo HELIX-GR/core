@@ -22,9 +22,9 @@ import gr.helix.core.common.model.user.Favorite;
 import gr.helix.core.common.model.user.FavouriteRequest;
 import gr.helix.core.common.repository.IApplicationKeyRepository;
 import gr.helix.core.common.repository.IFavoriteRepository;
-import gr.helix.core.web.service.IFavoriteValidationService;
+import gr.helix.core.common.service.IFavoriteValidationService;
 
-@RestController("apiFavouriteController")
+@RestController("apiFavoriteController")
 @RequestMapping(produces = "application/json")
 @CrossOrigin
 public class FavoriteController {

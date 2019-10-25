@@ -19,9 +19,9 @@ import gr.helix.core.common.model.user.Favorite;
 import gr.helix.core.common.model.user.FavoriteCollection;
 import gr.helix.core.common.repository.AccountRepository;
 import gr.helix.core.common.repository.IFavoriteRepository;
+import gr.helix.core.common.service.AuthenticationFacade;
 import gr.helix.core.web.model.user.Profile;
 import gr.helix.core.web.model.user.UpdateProfileRequest;
-import gr.helix.core.web.service.AuthenticationFacade;
 
 /**
  * Actions for querying and updating user data
