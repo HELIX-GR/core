@@ -1,28 +1,28 @@
+import i18n from '../service/i18n';
 import moment from '../moment-localized';
 
-import i18n from '../service/i18n';
+import { setCookieValue } from '../util/cookie';
 
 import {
   EnumLocale,
 } from '../model';
-
 // Actions
-const REQUEST_MESSAGES = 'locale/REQUEST_MESSAGES';
-const LOAD_MESSAGES = 'locale/LOAD_MESSAGES';
+
+const MESSAGES_REQUEST = 'locale/MESSAGES_REQUEST';
+const MESSAGES_SUCCESS = 'locale/MESSAGES_SUCCESS';
+
+// Reducer
 
 const initialState = {
   locale: EnumLocale.EN,
   messages: {},
 };
 
-// Reducer
 export default (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_MESSAGES:
-      return state;
-
-    case LOAD_MESSAGES:
+    case MESSAGES_SUCCESS: {
       moment.locale(action.locale);
+
       return {
         ...state,
         locale: action.locale,
@@ -31,6 +31,7 @@ export default (state = initialState, action) => {
           [action.locale]: action.messages,
         }
       };
+    }
 
     default:
       return state;
@@ -38,26 +39,28 @@ export default (state = initialState, action) => {
 };
 
 // Action Creators
-const loadMessages = (locale, messages) => ({
-  type: LOAD_MESSAGES,
+const messagesRequest = (locale) => ({
+  type: MESSAGES_REQUEST,
+  locale,
+});
+
+const messagesSuccess = (locale, messages) => ({
+  type: MESSAGES_SUCCESS,
   locale,
   messages,
 });
 
-const requestMessages = (locale) => ({
-  type: REQUEST_MESSAGES,
-  locale,
-});
-
 // Thunk actions
-const fetchMessages = (locale) => (dispatch) => {
-  dispatch(requestMessages(locale));
+
+const getMessages = (locale) => (dispatch) => {
+  dispatch(messagesRequest(locale));
+
   return i18n.getMessages(locale)
-    .then(r => dispatch(loadMessages(locale, r)));
+    .then(messages => dispatch(messagesSuccess(locale, messages)));
 };
 
 export const changeLocale = (locale) => (dispatch) => {
-  dispatch(fetchMessages(locale))
-    .catch(
-      () => console.warn("No messages for locale " + locale));
+  setCookieValue('helix-cookie-locale', locale);
+
+  return dispatch(getMessages(locale));
 };
