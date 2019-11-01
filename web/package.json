@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "HELIX core",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint",
-    "test": "./node_modules/.bin/jest",
-    "develop": "NODE_ENV=development ./grunt develop",
-    "build": "NODE_ENV=production ./grunt build deploy"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "NODE_ENV=development ./grunt eslint",
+    "start": "NODE_ENV=development ./grunt develop",
+    "build": "NODE_ENV=production ./grunt default"
   },
   "keywords": [
     "hellenicdataservice.gr"
