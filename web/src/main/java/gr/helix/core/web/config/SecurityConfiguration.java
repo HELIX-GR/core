@@ -593,9 +593,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                  "/news/**",
                  "/notebooks/**",
                  "/pages/**",
-                 "/project/**",
-                 "/pubs/**",
-                 "/publications/**",
+                 "/the-action/**",
+                 "/network/**",
+                 "/applications/**",
+                 "/news-events/**",
                  // Assets
                  "/favicon.ico",
                  "/css/**",
@@ -617,10 +618,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                  "/action/ckan/**",
                  "/action/configuration/**",
                  "/action/dataset/**",
-                 "/action/notebook/**",
-                 "/action/openaire/**",
-                 "/action/publication/**",
-                 "/action/featured-publications"
+                 "/action/notebook/**"
              ).permitAll()
             // Public API endpoints
             .regexMatchers(API_REG_EX).permitAll()

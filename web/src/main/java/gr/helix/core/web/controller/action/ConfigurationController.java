@@ -16,7 +16,6 @@ import gr.helix.core.web.config.SamlConfiguration;
 import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.configuration.ClientConfiguration;
 import gr.helix.core.web.service.CkanServiceProxy;
-import gr.helix.core.web.service.OpenaireServiceProxy;
 
 @RestController
 @RequestMapping(produces = "application/json")
@@ -45,9 +44,6 @@ public class ConfigurationController extends BaseController {
     @Qualifier("labCkanServiceProxy")
     private CkanServiceProxy                     labCkanServiceProxy;
 
-    @Autowired
-    private OpenaireServiceProxy                 openaireServiceProxy;
-
     @RequestMapping(value = "/action/configuration/{locale}", method = RequestMethod.GET)
     public RestResponse<ClientConfiguration> getConfiguration(String locale) {
         return RestResponse.result(this.createConfiguration());
@@ -64,7 +60,6 @@ public class ConfigurationController extends BaseController {
 
         config.setData(this.dataCkanServiceProxy.getMetadata());
         config.setLab(this.labCkanServiceProxy.getMetadata());
-        config.setOpenaire(this.openaireServiceProxy.getMetadata());
 
         this.metadata.getIDPEntityNames().stream().forEach(config::addIdentityProvider);
 

@@ -20,8 +20,10 @@ public class HomeController {
         "/pages/",
         "/profile/",
         "/project/",
-        "/pubs/",
-        "/publications/",
+        "/the-action/",
+        "/network/",
+        "/applications/",
+        "/news-events/",
     };
 
     @RequestMapping("*")
@@ -44,8 +46,10 @@ public class HomeController {
         "/pages/**",
         "/profile/**",
         "/project/**",
-        "/pubs/**",
-        "/publications/**",
+        "/the-action/**",
+        "/network/**",
+        "/applications/**",
+        "/news-events/**",
     })
     public String reactRoutes(HttpSession session, HttpServletRequest request) {
         return "index";

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.ckan.CkanMetadata;
-import gr.helix.core.web.model.openaire.OpenaireMetadata;
 
 /**
  * Application configuration settings
@@ -32,8 +31,6 @@ public class ClientConfiguration {
     private CkanMetadata                 data;
 
     private CkanMetadata                 lab;
-
-    private OpenaireMetadata             openaire;
 
     public List<String> getIdentityProviders() {
         return this.identityProviders;
@@ -89,14 +86,6 @@ public class ClientConfiguration {
 
     public void setLab(CkanMetadata lab) {
         this.lab = lab;
-    }
-
-    public OpenaireMetadata getOpenaire() {
-        return this.openaire;
-    }
-
-    public void setOpenaire(OpenaireMetadata openaire) {
-        this.openaire = openaire;
     }
 
     public List<EnumAuthProvider> getAuthProviders() {
