@@ -6,9 +6,9 @@
           background: $neutral-grey;
 
           div.landing-section-background {
-            background: white url('../images/jpg/CC_science and plants.jpg') center/cover no-repeat;
+            background: white url('../images/climact-background.jpg') center/cover no-repeat;
             opacity: 0.5;
-            background-position-y: 2px;
+            background-position-y: -50px;
             height: 100%;
             width: 100%;
           }
@@ -106,10 +106,10 @@
           display: block;
           max-width: 100%;
           margin: auto;
-          width: 955px;
+          width: 870px;
           min-width: 400px;
           @include position(absolute,
-            57% null null 50%);
+            60% null null 50%);
           transform: translate(-50%, -50%);
           -webkit-transform: translate(-50%, -50%);
           -o-transform: translate(-50%, -50%);
