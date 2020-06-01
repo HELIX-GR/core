@@ -54,7 +54,7 @@ class Header extends React.Component {
   }
 
   get logoImage() {
-    return '/images/svg/Helix-logo.svg';
+    return '/images/climate-logo.png';
   }
 
   get logoLink() {

@@ -21,17 +21,7 @@ class Footer extends React.Component {
   }
 
   get logoImage() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/datasets')) {
-        return '/images/svg/Helix-logo-White-on-Blue.svg';
-      }
-      if (location.pathname.startsWith('/notebooks')) {
-        return '/images/svg/Helix-logo-White-on-Purple.svg';
-      }
-    }
-    return '/images/svg/Helix-logo-White-on-Black.svg';
+    return '/images/climate-logo-white.png';
   }
 
   resolveClassName() {
