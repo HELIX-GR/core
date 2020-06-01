@@ -6,8 +6,6 @@ export {
   EnumCkanFacet,
   EnumCollectionAction,
   EnumLocale,
-  EnumMimeType,
-  EnumOpenaireFilter,
   EnumPostCategory,
   EnumRole,
 } from './enum';

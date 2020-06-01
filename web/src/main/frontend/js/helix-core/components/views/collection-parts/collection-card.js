@@ -40,9 +40,6 @@ class CollectionCard extends React.Component {
             </div>
           </div>
           <div className="pills">
-            {c.publicationCounter !== 0 &&
-              <div className="pill pill-pubs">{`${c.publicationCounter} PUBS`}</div>
-            }
             {c.datasetCounter !== 0 &&
               <div className="pill pill-data">{`${c.datasetCounter} DATA`}</div>
             }

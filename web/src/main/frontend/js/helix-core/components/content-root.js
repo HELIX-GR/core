@@ -45,9 +45,6 @@ import {
   NotebookDetails,
   Profile,
   Project,
-  PublicationDetails,
-  Publications,
-  PublicationsResults,
 } from './views';
 
 import {
@@ -95,12 +92,6 @@ class ContentRoot extends React.Component {
       if (location.pathname.startsWith('/project')) {
         return 'project';
       }
-      if (location.pathname.startsWith('/pubs')) {
-        return 'pubs';
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return 'pubs';
-      }
       if (location.pathname.startsWith('/datasets')) {
         return 'data';
       }
@@ -139,12 +130,9 @@ class ContentRoot extends React.Component {
         <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
-        <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
         {/* Static routes */}
         <SecureRoute path={StaticRoutes.COLLECTIONS} component={Collections} roles={roles} />
         <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
-        <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
-        <Route path={StaticRoutes.PUBS} component={Publications} />
         <Route path={StaticRoutes.ACTIONS} component={Actions} />
         <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />

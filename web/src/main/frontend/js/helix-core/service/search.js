@@ -22,11 +22,4 @@ export default {
     return actions.get(buildPath(routes.GetNotebook, [id]), token);
   },
 
-  getPublication: (token, id) => {
-    return actions.get(buildPath(routes.GetPublication, [id]), token);
-  },
-
-  getFeaturedPublications: (token) => {
-    return actions.get(routes.GetFeaturedPublications, token);
-  }
 };

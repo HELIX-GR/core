@@ -16,18 +16,12 @@ import {
 } from 'react-intl';
 
 import {
-  Link,
-} from 'react-router-dom';
-
-import {
   search as searchAll,
   setText,
-  setOpenaireFilter,
   setResultVisibility,
   togglePill,
   toggleDataFacet,
   toggleLabFacet,
-  toggleOpenaireProvider,
 } from '../../ducks/ui/views/main';
 
 import {
@@ -38,11 +32,8 @@ import {
 } from '../../ducks/user';
 
 import {
-  buildPath,
-  DynamicRoutes,
   EnumCatalog,
   EnumCkanFacet,
-  EnumMimeType,
   ServerError,
 } from '../../model';
 
@@ -60,7 +51,6 @@ import {
   CkanAdvancedOptions,
   LocationFilter,
   Pagination,
-  PubsAdvancedOptions,
 } from './shared-parts';
 
 import {
@@ -91,7 +81,6 @@ class MainResults extends React.Component {
     this.onAddFavoriteToCollection = this.onAddFavoriteToCollection.bind(this);
     this.onDataFacetChanged = this.onDataFacetChanged.bind(this);
     this.onLabFacetChanged = this.onLabFacetChanged.bind(this);
-    this.onOpenaireFilterChanged = this.onOpenaireFilterChanged.bind(this);
     this.onPillChanged = this.onPillChanged.bind(this);
     this.onProviderToggle = this.onProviderToggle.bind(this);
     this.onRemoveFavoriteFromCollection = this.onRemoveFavoriteFromCollection.bind(this);
@@ -142,18 +131,6 @@ class MainResults extends React.Component {
     this.search();
   }
 
-  onProviderToggle(id) {
-    this.props.toggleOpenaireProvider(id);
-    this.search();
-  }
-
-  onOpenaireFilterChanged(key, value, refresh = true) {
-    this.props.setOpenaireFilter(key, value);
-    if (refresh) {
-      this.search();
-    }
-  }
-
   onSearch(e) {
     e.preventDefault();
 
@@ -166,14 +143,13 @@ class MainResults extends React.Component {
         result: {
           catalogs: {
             [EnumCatalog.CKAN]: datasets = {},
-            [EnumCatalog.OPENAIRE]: publications = {},
             [EnumCatalog.LAB]: notebooks = {},
           },
         },
       }
     } = this.props;
 
-    const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
+    const pageIndex = datasets.pageIndex || notebooks.pageIndex || 0;
 
     if (index !== pageIndex) {
       this.search(index);
@@ -284,7 +260,7 @@ class MainResults extends React.Component {
   }
 
   getFavoriteProperties(catalog, item) {
-    const { data: { host: dataHost }, openaire: { host: pubsHost }, lab: { host: labHost } } = this.props.config;
+    const { data: { host: dataHost }, lab: { host: labHost } } = this.props.config;
 
     switch (catalog) {
       case EnumCatalog.CKAN:
@@ -294,15 +270,6 @@ class MainResults extends React.Component {
           handle: item.id,
           title: item.title,
           url: `${dataHost}/dataset/${item.id}`,
-        };
-
-      case EnumCatalog.OPENAIRE:
-        return {
-          catalog,
-          description: item.description[0] || null,
-          handle: item.objectIdentifier,
-          title: item.title,
-          url: `${pubsHost}/search/publication?articleId=${item.objectIdentifier}`,
         };
 
       case EnumCatalog.LAB:
@@ -330,7 +297,7 @@ class MainResults extends React.Component {
             // Ignore
             return;
           }
-          const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : data.catalog === EnumCatalog.OPENAIRE ? 'publication' : 'notebook';
+          const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : 'notebook';
 
           toast.dismiss();
           toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-${type}`} />);
@@ -445,94 +412,6 @@ class MainResults extends React.Component {
     );
   }
 
-  resolvePublicationResource(publication) {
-    const { format, fullTextUrl } = publication;
-
-    if ((!format) || (!fullTextUrl)) {
-      return null;
-    }
-
-    switch (format.toLowerCase()) {
-      case EnumMimeType.PDF:
-        return {
-          text: 'PDF',
-          url: fullTextUrl,
-        };
-      default:
-        return null;
-    }
-  }
-
-  renderPublication(p, host) {
-    const authenticated = (this.props.profile != null);
-    const resource = this.resolvePublicationResource(p);
-
-    const modifiedAt = moment(p.dateOfAcceptance).parseZone();
-    const age = moment.duration(moment() - modifiedAt);
-    const date = age.asHours() < 24 ?
-      moment(modifiedAt).fromNow() :
-      <FormattedDate value={p.dateOfAcceptance} day='numeric' month='numeric' year='numeric' />;
-
-    const favorite = this.getFavorite(EnumCatalog.OPENAIRE, p.objectIdentifier);
-
-    return (
-      <div className="result-item pubs" key={p.originalId} >
-        <div className="date-of-entry">
-          {date}
-        </div>
-        {authenticated &&
-          <React.Fragment>
-            <Favorite
-              active={this.isFavoriteActive(EnumCatalog.OPENAIRE, p.objectIdentifier)}
-              catalog={EnumCatalog.OPENAIRE}
-              description={p.description[0] || null}
-              handle={p.objectIdentifier}
-              onClick={this.toggleFavorite}
-              title={p.title}
-              url={`${host}/search/publication?articleId=${p.objectIdentifier}`}
-            />
-            {this.props.collections.length !== 0 &&
-              <FavoriteCollectionPicker
-                favorite={favorite}
-                onClick={() => this.onCollectionSelect(EnumCatalog.OPENAIRE, p, favorite)}
-              />
-            }
-          </React.Fragment>
-        }
-        <h3 className="title">
-          <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.objectIdentifier])}>
-            {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
-          </Link>
-          <div className="pill pubs ml-1">
-            PUBS
-          </div>
-        </h3>
-        <div className="notes">
-          {p.description[0].length > MAX_NOTES_LENGTH ? `${p.description[0].substring(0, MAX_NOTES_LENGTH)} ...` : p.description[0]}
-        </div>
-        {p.publisher &&
-          <div className="service">
-            <a href="" onClick={(e) => e.preventDefault()}>{p.publisher}</a>
-          </div>
-        }
-
-        <div className="tag-list">
-          {resource &&
-            <a
-              href={resource.url}
-              className="tag-box"
-              target="blank"
-            >
-              <div>
-                {resource.text}
-              </div>
-            </a>
-          }
-        </div>
-      </div>
-    );
-  }
-
   renderNotebook(n, host) {
     const authenticated = (this.props.profile != null);
     const formats = n.resources.reduce((result, value) => {
@@ -606,10 +485,9 @@ class MainResults extends React.Component {
     );
   }
 
-  renderResults(datasets, publications, notebooks) {
+  renderResults(datasets, notebooks) {
     const data = _.zip(
       datasets.results.map(d => ({ ...d, __source: EnumCatalog.CKAN })),
-      publications.results.map(p => ({ ...p, __source: EnumCatalog.OPENAIRE })),
       notebooks.results.map(n => ({ ...n, __source: EnumCatalog.LAB })))
       .flat()
       .filter(r => !!r);
@@ -618,15 +496,13 @@ class MainResults extends React.Component {
       return null;
     }
 
-    const { data: { host: dataHost }, openaire: { host: pubsHost }, lab: { host: labHost } } = this.props.config;
+    const { data: { host: dataHost }, lab: { host: labHost } } = this.props.config;
 
     return data
       .map(r => {
         switch (r.__source) {
           case EnumCatalog.CKAN:
             return this.renderDataset(r, dataHost);
-          case EnumCatalog.OPENAIRE:
-            return this.renderPublication(r, pubsHost);
           case EnumCatalog.LAB:
             return this.renderNotebook(r, labHost);
           default:
@@ -646,7 +522,6 @@ class MainResults extends React.Component {
         result: {
           catalogs: {
             [EnumCatalog.CKAN]: datasets = { results: [], count: 0, pageSize: 10 },
-            [EnumCatalog.OPENAIRE]: publications = { results: [], count: 0, pageSize: 10 },
             [EnumCatalog.LAB]: notebooks = { results: [], count: 0, pageSize: 10 },
           },
         },
@@ -656,14 +531,13 @@ class MainResults extends React.Component {
     const _t = this.props.intl.formatMessage;
 
     const advanced = Object.keys(pills).filter(key => pills[key]).length === 1;
-    const pageIndex = datasets.pageIndex || publications.pageIndex || notebooks.pageIndex || 0;
-    const pageSize = datasets.count !== 0 ? datasets.pageSize : publications.count !== 0 ? publications.pageSize : notebooks.count !== 0 ? notebooks.pageSize : 10;
-    const rowCount = Math.max(datasets.count, publications.count, notebooks.count);
+    const pageIndex = datasets.pageIndex || notebooks.pageIndex || 0;
+    const pageSize = datasets.count !== 0 ? datasets.pageSize : notebooks.count !== 0 ? notebooks.pageSize : 10;
+    const rowCount = Math.max(datasets.count, notebooks.count);
     const pageCount = Math.ceil(rowCount / pageSize);
 
     const catalogNames = [
       pills.data ? _t({ id: 'results.main.search.placeholder.data' }) : null,
-      pills.pubs ? _t({ id: 'results.main.search.placeholder.pubs' }) : null,
       pills.lab ? _t({ id: 'results.main.search.placeholder.lab' }) : null,
     ].filter(text => text).join(', ');
 
@@ -709,14 +583,6 @@ class MainResults extends React.Component {
                           text="pills.data"
                           className="pill-data"
                           selected={pills.data}
-                          onChange={this.onPillChanged}
-                        />
-                        <Pill
-                          id="pubs"
-                          disabled={loading}
-                          text="pills.pubs"
-                          className="pill-pubs"
-                          selected={pills.pubs}
                           onChange={this.onPillChanged}
                         />
                         <Pill
@@ -771,15 +637,6 @@ class MainResults extends React.Component {
                       />
                     }
 
-                    {pills.pubs &&
-                      <PubsAdvancedOptions
-                        filters={this.props.search.openaire}
-                        metadata={this.props.config.openaire}
-                        setOpenaireFilter={this.onOpenaireFilterChanged}
-                        toggleProvider={this.onProviderToggle}
-                      />
-                    }
-
                     {pills.lab &&
                       <CkanAdvancedOptions
                         facets={this.props.search.lab.facets}
@@ -821,17 +678,9 @@ class MainResults extends React.Component {
                       {pills.data &&
                         <span>{_t({ id: 'results.shared.count.data' }, { count: datasets.count })}</span>
                       }
-                      {pills.pubs &&
-                        <React.Fragment>
-                          {pills.data &&
-                            <span className="pr-2 pl-2">|</span>
-                          }
-                          <span>{_t({ id: 'results.shared.count.pubs' }, { count: publications.count })}</span>
-                        </React.Fragment>
-                      }
                       {pills.lab &&
                         <React.Fragment>
-                          {(pills.data || pills.pubs) &&
+                          {(pills.data) &&
                             <span className="pr-2 pl-2">|</span>
                           }
                           <span>{_t({ id: 'results.shared.count.lab' }, { count: notebooks.count })}</span>
@@ -842,7 +691,7 @@ class MainResults extends React.Component {
                 </div>
 
                 <div className="result-items">
-                  {this.renderResults(datasets, publications, notebooks)}
+                  {this.renderResults(datasets, notebooks)}
                 </div>
 
                 <div className="main-results-border-bottom">
@@ -880,12 +729,10 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   removeFavorite,
   removeFavoriteFromCollection,
   searchAll,
-  setOpenaireFilter,
   setResultVisibility,
   setText,
   toggleDataFacet,
   toggleLabFacet,
-  toggleOpenaireProvider,
   togglePill,
 }, dispatch);
 

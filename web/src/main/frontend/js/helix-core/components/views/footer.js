@@ -24,12 +24,6 @@ class Footer extends React.Component {
     const { location } = this.props;
 
     if (location.pathname) {
-      if (location.pathname.startsWith('/pubs')) {
-        return '/images/svg/Helix-logo-White-on-Pink.svg';
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return '/images/svg/Helix-logo-White-on-Pink.svg';
-      }
       if (location.pathname.startsWith('/datasets')) {
         return '/images/svg/Helix-logo-White-on-Blue.svg';
       }
@@ -44,12 +38,6 @@ class Footer extends React.Component {
     const { location } = this.props;
 
     if (location.pathname) {
-      if (location.pathname.startsWith('/pubs')) {
-        return 'pubs-footer';
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return 'pubs-footer';
-      }
       if (location.pathname.startsWith('/datasets')) {
         return 'data-footer';
       }
@@ -90,7 +78,6 @@ class Footer extends React.Component {
               </h3>
               <ul>
                 <li><a href={dataHost}>{_t({ id: 'footer.columns.research.links.data' })}</a></li>
-                <li><Link to={StaticRoutes.PUBS}>{_t({ id: 'footer.columns.research.links.pubs' })}</Link></li>
                 <li><a href={ExternalRoutes.Lab}>{_t({ id: 'footer.columns.research.links.lab' })}</a></li>
                 <li><a href=''>{_t({ id: 'footer.columns.research.links.topics' })}</a></li>
                 <li><a href=''>{_t({ id: 'footer.columns.research.links.organizations' })}</a></li>
@@ -110,12 +97,6 @@ class Footer extends React.Component {
                 <li>
                   <a href="https://grnet.gr/" target="blank">
                     <img src="/images/png/PARTNER_GRNET.png" alt="" />
-                  </a>
-                </li>
-
-                <li>
-                  <a href="https://www.openaire.eu/" target="blank">
-                    <img src="/images/png/PARTNER_OPENAIRE.png" alt="" />
                   </a>
                 </li>
 

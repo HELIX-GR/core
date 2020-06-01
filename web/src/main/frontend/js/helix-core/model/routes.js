@@ -18,8 +18,6 @@ const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
 const NEWS = '/news/';
 const PROJECT = '/project/';
-const PUBS = '/pubs/';
-const PUBS_RESULTS = '/pubs/results';
 
 const PROFILE = '/profile/';
 const COLLECTIONS = '/collections/';
@@ -43,8 +41,6 @@ export const StaticRoutes = {
   NEWS,
   PROFILE,
   PROJECT,
-  PUBS,
-  PUBS_RESULTS,
   LOGIN: {
     GITHUB,
     GOOGLE,
@@ -61,7 +57,6 @@ const EVENT_PAGE = '/news/events/view/:id';
 const NEWS_PAGE = '/news/view/:id';
 const NOTEBOOK_PAGE = '/notebooks/:id';
 const PROJECT_PAGE = '/project/page/:name';
-const PUBLICATION_PAGE = '/publications/:id';
 
 /**
  * Dynamic routes
@@ -74,7 +69,6 @@ export const DynamicRoutes = {
   NEWS_PAGE,
   NOTEBOOK_PAGE,
   PROJECT_PAGE,
-  PUBLICATION_PAGE,
 };
 
 // Routes for utility pages
@@ -110,11 +104,8 @@ export const api = {
   SearchAll: '/action/catalog/query',
   SearchData: '/action/data/query',
   SearchNotebooks: '/action/notebook/query',
-  SearchPubs: '/action/publication/query',
   GetDataset: '/action/dataset/:id',
   GetNotebook: '/action/notebook/:id',
-  GetFeaturedPublications: '/action/featured-publications',
-  GetPublication: '/action/publication/:id',
 };
 
 // Default links

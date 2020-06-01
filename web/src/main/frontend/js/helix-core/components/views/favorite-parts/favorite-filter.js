@@ -60,13 +60,6 @@ class FavoriteFilter extends React.Component {
                   onChange={this.props.onPillChanged}
                 />
                 <Pill
-                  id={EnumCatalog.OPENAIRE}
-                  text="pills.pubs"
-                  className="pill-pubs"
-                  selected={pills[EnumCatalog.OPENAIRE]}
-                  onChange={this.props.onPillChanged}
-                />
-                <Pill
                   id={EnumCatalog.LAB}
                   text="pills.lab"
                   className="pill-lab"

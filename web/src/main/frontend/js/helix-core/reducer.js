@@ -20,8 +20,6 @@ import {
   news,
   notebook,
   project,
-  publication,
-  pubs,
 } from './ducks/ui/views';
 
 export default (history) => Redux.combineReducers({
@@ -36,8 +34,6 @@ export default (history) => Redux.combineReducers({
     news,
     notebook,
     project,
-    publication,
-    pubs,
     viewport,
   }),
   user,

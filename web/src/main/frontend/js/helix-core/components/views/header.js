@@ -54,16 +54,6 @@ class Header extends React.Component {
   }
 
   get logoImage() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/pubs')) {
-        return '/images/svg/Pubs-logo.svg';
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return '/images/svg/Pubs-logo.svg';
-      }
-    }
     return '/images/svg/Helix-logo.svg';
   }
 
@@ -104,12 +94,6 @@ class Header extends React.Component {
                 <a href={dataHost}>
                   {_t({ id: 'header.menu.data.title' })}
                 </a>
-              </li>
-
-              <li id="menu-item-pubs" className="menu-item domain-item">
-                <NavLink to={StaticRoutes.PUBS} activeClassName="active-link">
-                  {_t({ id: 'header.menu.pubs.title' })}
-                </NavLink>
               </li>
 
               <li id="menu-item-lab" className="menu-item domain-item">

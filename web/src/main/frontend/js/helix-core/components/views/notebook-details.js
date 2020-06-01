@@ -115,7 +115,7 @@ class NotebookDetails extends React.Component {
           }
 
           toast.dismiss();
-          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-publication`} />);
+          toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-notebook`} />);
         });
     } else {
       toast.dismiss();

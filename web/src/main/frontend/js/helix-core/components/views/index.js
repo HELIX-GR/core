@@ -15,6 +15,3 @@ export { default as NewsDetails } from './news-details';
 export { default as NotebookDetails } from './notebook-details';
 export { default as Profile } from './profile';
 export { default as Project } from './project';
-export { default as PublicationDetails } from './publication-details';
-export { default as Publications } from './publications';
-export { default as PublicationsResults } from './publications-results';

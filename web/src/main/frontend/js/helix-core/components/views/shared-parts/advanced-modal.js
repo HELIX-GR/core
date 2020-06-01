@@ -19,18 +19,12 @@ import {
 
 import {
   CkanAdvancedOptions,
-  PubsAdvancedOptions,
 } from './';
 
 const catalogValidator = (props, propName, componentName) => {
   switch (propName) {
     case 'data':
       if ((props['pills']['data']) && (!props[propName])) {
-        return new Error(`Invalid prop \`${propName}\` passed to \`${componentName}\`. Expected a valid catalog configuration.`);
-      }
-      break;
-    case 'openaire':
-      if ((props['pills']['pubs']) && (!props[propName])) {
         return new Error(`Invalid prop \`${propName}\` passed to \`${componentName}\`. Expected a valid catalog configuration.`);
       }
       break;
@@ -60,16 +54,13 @@ class AdvancedModal extends React.Component {
     lab: catalogValidator,
     loading: PropTypes.bool.isRequired,
     minOptions: PropTypes.number,
-    openaire: catalogValidator,
     pills: PropTypes.object.isRequired,
     search: PropTypes.func.isRequired,
-    setOpenaireFilter: PropTypes.func.isRequired,
     setText: PropTypes.func.isRequired,
     text: PropTypes.string,
     toggle: PropTypes.func.isRequired,
     toggleDataFacet: PropTypes.func.isRequired,
     toggleLabFacet: PropTypes.func.isRequired,
-    toggleOpenaireProvider: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
   }
 
@@ -96,17 +87,9 @@ class AdvancedModal extends React.Component {
   }
 
   resolveActiveTab() {
-    const { pills } = this.props;
     const { tab } = this.state;
 
-    let result = tab;
-    if ((result === EnumCatalog.CKAN) && (!pills.data)) {
-      result = EnumCatalog.OPENAIRE;
-    }
-    if ((result === EnumCatalog.OPENAIRE) && (!pills.pubs)) {
-      result = EnumCatalog.LAB;
-    }
-    return result;
+    return tab;
   }
 
   renderTabs(selected) {
@@ -118,13 +101,6 @@ class AdvancedModal extends React.Component {
       tabs.push(
         <li key="tab-data" className={selected === EnumCatalog.CKAN ? 'active' : ''}>
           <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.CKAN)}>{_t({ id: 'advanced-search.tabs.data' })}</a>
-        </li>
-      );
-    }
-    if (pills.pubs) {
-      tabs.push(
-        <li key="tab-pubs" className={selected === EnumCatalog.OPENAIRE ? 'active' : ''}>
-          <a href="" onClick={(e) => this.onTabChanged(e, EnumCatalog.OPENAIRE)}>{_t({ id: 'advanced-search.tabs.pubs' })}</a>
         </li>
       );
     }
@@ -149,7 +125,6 @@ class AdvancedModal extends React.Component {
 
     const catalogs = [
       pills.data ? _t({ id: 'advanced-search.placeholder.data' }) : null,
-      pills.pubs ? _t({ id: 'advanced-search.placeholder.pubs' }) : null,
       pills.lab ? _t({ id: 'advanced-search.placeholder.lab' }) : null,
     ].filter(text => text).join(', ');
 
@@ -166,7 +141,6 @@ class AdvancedModal extends React.Component {
             classnames({
               "advanced-search": true,
               "data": tab === EnumCatalog.CKAN,
-              'pubs': tab === EnumCatalog.OPENAIRE,
               'lab': tab === EnumCatalog.LAB,
             })
           }
@@ -207,15 +181,6 @@ class AdvancedModal extends React.Component {
                 metadata={this.props.config.data}
                 minOptions={this.props.minOptions}
                 toggleFacet={this.props.toggleDataFacet}
-              />
-            }
-
-            {tab === EnumCatalog.OPENAIRE &&
-              <PubsAdvancedOptions
-                filters={this.props.openaire}
-                metadata={this.props.config.openaire}
-                setOpenaireFilter={this.props.setOpenaireFilter}
-                toggleProvider={this.props.toggleOpenaireProvider}
               />
             }
 

@@ -17,14 +17,12 @@ import {
 import {
   search as searchAll,
   searchAutoComplete,
-  setOpenaireFilter,
   setResultVisibility,
   setText,
   toggleAdvanced,
   togglePill,
   toggleDataFacet,
   toggleLabFacet,
-  toggleOpenaireProvider,
 } from '../../ducks/ui/views/main';
 
 import {
@@ -136,14 +134,13 @@ class Main extends React.Component {
   }
 
   render() {
-    const { data, lab, openaire } = this.props.config;
+    const { data, lab } = this.props.config;
     const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
     const { latest: posts } = this.props.news;
     const _t = this.props.intl.formatMessage;
 
     const placeholderText = [
       pills.data ? _t({ id: 'main.search.placeholder.data' }) : null,
-      pills.pubs ? _t({ id: 'main.search.placeholder.pubs' }) : null,
       pills.lab ? _t({ id: 'main.search.placeholder.lab' }) : null,
     ].filter(text => text).join(', ');
 
@@ -187,14 +184,6 @@ class Main extends React.Component {
                       onChange={this.onPillChanged}
                     />
                     <Pill
-                      id="pubs"
-                      disabled={loading}
-                      text="pills.pubs"
-                      className="pill-pubs"
-                      selected={pills.pubs}
-                      onChange={this.onPillChanged}
-                    />
-                    <Pill
                       id="lab"
                       disabled={loading}
                       text="pills.lab"
@@ -220,7 +209,6 @@ class Main extends React.Component {
                     hide={() => this.props.setResultVisibility(false)}
                     lab={lab}
                     navigate={(url) => this.props.history.push(url)}
-                    openaire={openaire}
                     pills={pills}
                     result={catalogs}
                     searchCatalog={(catalog) => this.search(false, catalog)}
@@ -256,16 +244,13 @@ class Main extends React.Component {
           data={this.props.search.data}
           lab={this.props.search.lab}
           loading={this.props.search.loading}
-          openaire={this.props.search.openaire}
           pills={this.props.search.pills}
           search={() => this.search(true)}
-          setOpenaireFilter={this.props.setOpenaireFilter}
           setText={(text) => this.onTextChanged(text, false)}
           text={this.props.search.text}
           toggle={this.props.toggleAdvanced}
           toggleDataFacet={this.props.toggleDataFacet}
           toggleLabFacet={this.props.toggleLabFacet}
-          toggleOpenaireProvider={this.props.toggleOpenaireProvider}
           visible={advanced}
         />
       </div>
@@ -284,14 +269,12 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getLatestPosts,
   searchAll,
   searchAutoComplete,
-  setOpenaireFilter,
   setResultVisibility,
   setText,
   toggleAdvanced,
   togglePill,
   toggleDataFacet,
   toggleLabFacet,
-  toggleOpenaireProvider,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
