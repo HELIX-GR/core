@@ -7,11 +7,7 @@ import {
 } from 'react-router-dom';
 
 import {
-  buildPath,
-  DynamicRoutes,
-  ExternalRoutes,
   StaticRoutes,
-  WordPressPages,
 } from '../../model';
 
 class Footer extends React.Component {
@@ -21,7 +17,7 @@ class Footer extends React.Component {
   }
 
   get logoImage() {
-    return '/images/climate-logo-white.png';
+    return '/images/climact-logo-white.png';
   }
 
   resolveClassName() {
@@ -52,50 +48,8 @@ class Footer extends React.Component {
               </Link>
             </div>
             <div className="footer-column about">
-              <h3 className="footer-column-title">
-                {_t({ id: 'footer.columns.about.title' })}
-              </h3>
               <ul>
-                <li><Link to={StaticRoutes.MAIN}>{_t({ id: 'footer.columns.about.links.home' })}</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>{_t({ id: 'footer.columns.about.links.what-is-helix' })}</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>{_t({ id: 'footer.columns.about.links.contact' })}</Link></li>
-                <li><Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>{_t({ id: 'footer.columns.about.links.terms-of-use' })}</Link></li>
-              </ul>
-            </div>
-            <div className="footer-column research">
-              <h3 className="footer-column-title">
-                {_t({ id: 'footer.columns.research.title' })}
-              </h3>
-              <ul>
-                <li><a href={dataHost}>{_t({ id: 'footer.columns.research.links.data' })}</a></li>
-                <li><a href={ExternalRoutes.Lab}>{_t({ id: 'footer.columns.research.links.lab' })}</a></li>
-                <li><a href=''>{_t({ id: 'footer.columns.research.links.topics' })}</a></li>
-                <li><a href=''>{_t({ id: 'footer.columns.research.links.organizations' })}</a></li>
-              </ul>
-            </div>
-            <div className="footer-column partners">
-              <h3 className="footer-column-title">
-                {_t({ id: 'footer.columns.partners.title' })}
-              </h3>
-              <ul>
-                <li>
-                  <a href="https://www.athenarc.gr/" target="blank">
-                    <img src="/images/png/PARTNER-ATHENA.png" alt="" />
-                  </a>
-                </li>
-
-                <li>
-                  <a href="https://grnet.gr/" target="blank">
-                    <img src="/images/png/PARTNER_GRNET.png" alt="" />
-                  </a>
-                </li>
-
-                <li>
-                  <a href="https://www.minedu.gov.gr/" target="blank">
-                    <img src="/images/png/PARTNER-EDUC.png" alt="" />
-                  </a>
-                </li>
-
+                <li><a href="#">{_t({ id: 'footer.members-area' })}</a></li>
               </ul>
             </div>
           </div>

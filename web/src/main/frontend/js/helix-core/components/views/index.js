@@ -1,5 +1,6 @@
 export { default as Actions } from './actions';
 export { default as ActionsDetails } from './actions-details';
+export { default as Applications } from './applications';
 export { default as CollectionDetails } from './collection-details';
 export { default as Collections } from './collections';
 export { default as DatasetDetails } from './dataset-details';
@@ -10,8 +11,11 @@ export { default as Footer } from './footer';
 export { default as Header } from './header';
 export { default as Main } from './main';
 export { default as MainResults } from './main-results';
+export { default as Network } from './network';
 export { default as News } from './news';
+export { default as NewsAndEvents } from './news-events';
 export { default as NewsDetails } from './news-details';
 export { default as NotebookDetails } from './notebook-details';
 export { default as Profile } from './profile';
 export { default as Project } from './project';
+export { default as TheAction } from './the-action';

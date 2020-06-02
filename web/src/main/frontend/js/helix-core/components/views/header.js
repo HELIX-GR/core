@@ -54,7 +54,7 @@ class Header extends React.Component {
   }
 
   get logoImage() {
-    return '/images/climate-logo.png';
+    return '/images/climact-logo.png';
   }
 
   get logoLink() {
@@ -90,40 +90,119 @@ class Header extends React.Component {
 
           <nav className="nav-menu">
             <ul className="menu-items">
+              <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
+                <NavLink to={StaticRoutes.THE_ACTION} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.the-action.title' })}</NavLink>
+                <ul className="sub-menu">
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Overview])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-overview' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Targets])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-targets' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.ManagementCommittee])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-management-committee' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.ScientificCommittee])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-scientific-committee' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.WorkPackages])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-work-packages' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Deliverables])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-deliverables' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.ContactUs])}>
+                      {_t({ id: 'header.menu.the-action.items.the-action-contact-us' })}
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
+              <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
+                <NavLink to={StaticRoutes.NETWORK} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.network.title' })}</NavLink>
+                <ul className="sub-menu">
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NETWORK_PAGE, [WordPressPages.Network.Members])}>
+                      {_t({ id: 'header.menu.network.items.network-members' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NETWORK_PAGE, [WordPressPages.Network.Join])}>
+                      {_t({ id: 'header.menu.network.items.network-join' })}
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
               <li id="menu-item-data" className="menu-item domain-item">
                 <a href={dataHost}>
                   {_t({ id: 'header.menu.data.title' })}
                 </a>
               </li>
 
-              <li id="menu-item-lab" className="menu-item domain-item">
-                <a href={ExternalRoutes.Lab}>
-                  {_t({ id: 'header.menu.lab.title' })}
-                </a>
-              </li>
-
               <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
-                <NavLink to={StaticRoutes.PROJECT} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.project.title' })}</NavLink>
+                <NavLink to={StaticRoutes.APPLICATIONS} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.applications.title' })}</NavLink>
                 <ul className="sub-menu">
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.WhatIsHelix])}>{_t({ id: 'header.menu.project.items.what-is-helix' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Services])}>{_t({ id: 'header.menu.project.items.services' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>{_t({ id: 'header.menu.project.items.faq' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.PublishData])}>{_t({ id: 'header.menu.project.items.publish-data' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Software])}>{_t({ id: 'header.menu.project.items.software' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Project])}>{_t({ id: 'header.menu.project.items.the-project' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Media])}>{_t({ id: 'header.menu.project.items.media' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.AcknowledgeHelix])}>{_t({ id: 'header.menu.project.items.acknowledge-helix' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.Contact])}>{_t({ id: 'header.menu.project.items.contact' })}</NavLink></li>
-                  <li><NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>{_t({ id: 'header.menu.project.items.terms-of-use' })}</NavLink></li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.APPLICATIONS_PAGE, [WordPressPages.Applications.Services])}>
+                      {_t({ id: 'header.menu.applications.items.applications-services' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.APPLICATIONS_PAGE, [WordPressPages.Applications.Tools])}>
+                      {_t({ id: 'header.menu.applications.items.applications-tools' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <a href={ExternalRoutes.Lab}>
+                      {_t({ id: 'header.menu.applications.items.applications-lab' })}
+                    </a>
+                  </li>
                 </ul>
               </li>
 
-              <li id="menu-item-news" className="menu-item aux-item has-sub-menu">
-                <NavLink to={StaticRoutes.NEWS} activeClassName="active-link">{_t({ id: 'header.menu.news.title' })}</NavLink>
+              <li id="menu-item-project" className="menu-item aux-item has-sub-menu">
+                <NavLink to={StaticRoutes.NEWS_EVENTS} activeClassName="active-link" strict={false}>{_t({ id: 'header.menu.news-events.title' })}</NavLink>
                 <ul className="sub-menu">
-                  <li><NavLink to={StaticRoutes.NEWS}>{_t({ id: 'header.menu.news.items.news' })}</NavLink></li>
-                  <li><NavLink to={StaticRoutes.EVENTS}>{_t({ id: 'header.menu.news.items.events' })}</NavLink></li>
-                  <li><NavLink to={StaticRoutes.ACTIONS}>{_t({ id: 'header.menu.news.items.actions' })}</NavLink></li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NEWS_EVENTS_PAGE, [WordPressPages.NewsEvents.DialogueForum])}>
+                      {_t({ id: 'header.menu.news-events.items.news-events-dialogue-forum' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NEWS_EVENTS_PAGE, [WordPressPages.NewsEvents.Workshops])}>
+                      {_t({ id: 'header.menu.news-events.items.news-events-workshops' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NEWS_EVENTS_PAGE, [WordPressPages.NewsEvents.OtherEvents])}>
+                      {_t({ id: 'header.menu.news-events.items.news-events-other-events' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={buildPath(DynamicRoutes.NEWS_EVENTS_PAGE, [WordPressPages.NewsEvents.Newsletter])}>
+                      {_t({ id: 'header.menu.news-events.items.news-events-newsletter' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={StaticRoutes.NEWS}>
+                      {_t({ id: 'header.menu.news-events.items.news-events-blog' })}
+                    </NavLink>
+                  </li>
+
                 </ul>
               </li>
 

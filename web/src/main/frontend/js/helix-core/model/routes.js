@@ -13,11 +13,15 @@ export const ExternalRoutes = {
 
 // Static routes
 const ACTIONS = '/news/actions/';
+const APPLICATIONS = '/applications/';
 const EVENTS = '/news/events/';
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
+const NETWORK = '/network/';
 const NEWS = '/news/';
+const NEWS_EVENTS = '/news-events/';
 const PROJECT = '/project/';
+const THE_ACTION = '/the-action/';
 
 const PROFILE = '/profile/';
 const COLLECTIONS = '/collections/';
@@ -33,12 +37,15 @@ const SAML = '/saml/login';
  */
 export const StaticRoutes = {
   ACTIONS,
+  APPLICATIONS,
   COLLECTIONS,
   EVENTS,
   FAVORITES,
   MAIN,
   MAIN_RESULTS,
+  NETWORK,
   NEWS,
+  NEWS_EVENTS,
   PROFILE,
   PROJECT,
   LOGIN: {
@@ -47,6 +54,7 @@ export const StaticRoutes = {
     HELIX,
     SAML,
   },
+  THE_ACTION,
 };
 
 // Dynamic routes
@@ -56,7 +64,11 @@ const DATASET_PAGE = '/datasets/:id';
 const EVENT_PAGE = '/news/events/view/:id';
 const NEWS_PAGE = '/news/view/:id';
 const NOTEBOOK_PAGE = '/notebooks/:id';
-const PROJECT_PAGE = '/project/page/:name';
+
+const THE_ACTION_PAGE = '/the-action/page/:name';
+const APPLICATIONS_PAGE = '/applications/page/:name';
+const NETWORK_PAGE = '/network/page/:name';
+const NEWS_EVENTS_PAGE = '/news-events/page/:name';
 
 /**
  * Dynamic routes
@@ -68,7 +80,10 @@ export const DynamicRoutes = {
   EVENT_PAGE,
   NEWS_PAGE,
   NOTEBOOK_PAGE,
-  PROJECT_PAGE,
+  THE_ACTION_PAGE,
+  APPLICATIONS_PAGE,
+  NETWORK_PAGE,
+  NEWS_EVENTS_PAGE,
 };
 
 // Routes for utility pages

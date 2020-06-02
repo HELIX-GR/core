@@ -10,29 +10,41 @@
       "lab": {
         "title": "Lab"
       },
-      "project": {
-        "title": "Σχετικά",
+      "applications": {
+        "title": "Applications",
         "items": {
-          "about": "Σχετικά",
-          "what-is-helix": "Τί είναι το HELIX;",
-          "services": "Υπηρεσίες",
-          "faq": "FAQ",
-          "publish-data": "Δημοσιεύστε Δεδομένα",
-          "software": "Λογισμικό",
-          "the-project": "Το έργο",
-          "media": "Μέσα",
-          "acknowledge-helix": "Αναφέρετε το HELIX",
-          "contact": "Επικοινωνία",
-          "terms-of-use": "Όροι χρήσης",
-          "subjects": "Θεματικές κατηγορίες"
+          "applications-services": "Services",
+          "applications-tools": "Tools",
+          "applications-lab": "Lab"
         }
       },
-      "news": {
-        "title": "Νέα",
+      "the-action": {
+        "title": "The Action",
         "items": {
-          "news": "Νέα",
-          "events": "Εκδηλώσεις",
-          "actions": "Δράσεις"
+          "the-action-overview": "Overview",
+          "the-action-targets": "Targets",
+          "the-action-management-committee": "Management Committee",
+          "the-action-scientific-committee": "Scientific Committee",
+          "the-action-work-packages": "Work Packages",
+          "the-action-deliverables": "Deliverables",
+          "the-action-contact-us": "Contact Us"
+        }
+      },
+      "news-events": {
+        "title": "News & Events",
+        "items": {
+          "news-events-dialogue-forum": "Dialogue Forum",
+          "news-events-workshops": "Workshops",
+          "news-events-other-events": "Other Events",
+          "news-events-newsletter": "Newsletter",
+          "news-events-blog": "Blog"
+        }
+      },
+      "network": {
+        "title": "Network",
+        "items": {
+          "network-members": "Members",
+          "network-join": "Join"
         }
       },
       "login": {
@@ -85,31 +97,8 @@
     "remove-favorite.failure": "Failed to remove favorite from collection"
   },
   "footer": {
-    "columns": {
-      "about": {
-        "title": "Σχετικά",
-        "links": {
-          "home": "Αρχική",
-          "what-is-helix": "Το έργο",
-          "contact": "Επικοινωνία",
-          "terms-of-use": "Όροι χρήσης"
-        }
-      },
-      "research": {
-        "title": "Έρευνα",
-        "links": {
-          "data": "Data",
-          "pubs": "Publications",
-          "lab": "Lab",
-          "topics": "Θεματικές",
-          "organizations": "Οργανισμοί"
-        }
-      },
-      "partners": {
-        "title": "Συνεργάτες"
-      }
-    },
-    "copyright": "© 2018 HELIX. All rights reserved."
+    "members-area": "Members Area",
+    "copyright": "© 2020 CLIMPACT. All rights reserved."
   },
   "locales": {
     "en": "Αγγλικά",

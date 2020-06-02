@@ -30,6 +30,7 @@ import {
 import {
   Actions,
   ActionsDetails,
+  Applications,
   CollectionDetails,
   Collections,
   DatasetDetails,
@@ -40,11 +41,13 @@ import {
   Header,
   Main,
   MainResults,
+  Network,
   News,
+  NewsAndEvents,
   NewsDetails,
   NotebookDetails,
   Profile,
-  Project,
+  TheAction,
 } from './views';
 
 import {
@@ -136,7 +139,10 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.ACTIONS} component={Actions} />
         <Route path={StaticRoutes.EVENTS} component={Events} />
         <Route path={StaticRoutes.NEWS} component={News} />
-        <Route path={StaticRoutes.PROJECT} component={Project} />
+        <Route path={StaticRoutes.THE_ACTION} component={TheAction} />
+        <Route path={StaticRoutes.NETWORK} component={Network} />
+        <Route path={StaticRoutes.APPLICATIONS} component={Applications} />
+        <Route path={StaticRoutes.NEWS_EVENTS} component={NewsAndEvents} />
         <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
         <SecureRoute path={StaticRoutes.PROFILE} component={Profile} roles={roles} />
         {/* Default */}

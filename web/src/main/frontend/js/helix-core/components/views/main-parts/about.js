@@ -30,7 +30,7 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
+              <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Overview])}>
                 <h3 className="about-title">
                   {_t({ id: 'main.about.sections.1.title' })}
                 </h3>
@@ -40,7 +40,7 @@ class About extends React.Component {
                 {_t({ id: 'main.about.sections.1.content' })}
               </div>
 
-              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
+              <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Overview])}>
                 <div className="about-link">
                   {_t({ id: 'main.about.sections.1.link' })}
                 </div>
@@ -93,7 +93,7 @@ class About extends React.Component {
 
           <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="about-item">
-              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
+              <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Overview])}>
                 <h3 className="about-title">
                   {_t({ id: 'main.about.sections.4.title' })}
                 </h3>
@@ -103,7 +103,7 @@ class About extends React.Component {
                 {_t({ id: 'main.about.sections.4.content' })}
               </div>
 
-              <NavLink to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.FAQ])}>
+              <NavLink to={buildPath(DynamicRoutes.THE_ACTION_PAGE, [WordPressPages.Action.Overview])}>
                 <div className="about-link">
                   {_t({ id: 'main.about.sections.4.link' })}
                 </div>

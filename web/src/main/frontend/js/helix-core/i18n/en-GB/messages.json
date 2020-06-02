@@ -10,21 +10,41 @@
       "lab": {
         "title": "Lab"
       },
-      "project": {
-        "title": "About",
+      "applications": {
+        "title": "Applications",
         "items": {
-          "about": "About",
-          "what-is-helix": "What is HELIX?",
-          "services": "Services",
-          "faq": "FAQ",
-          "publish-data": "Publish Data",
-          "software": "Software",
-          "the-project": "The project",
-          "media": "Media",
-          "acknowledge-helix": "Acknowledge HELIX",
-          "contact": "Contact",
-          "terms-of-use": "Terms of use",
-          "subjects": "Subjects"
+          "applications-services": "Services",
+          "applications-tools": "Tools",
+          "applications-lab": "Lab"
+        }
+      },
+      "the-action": {
+        "title": "The Action",
+        "items": {
+          "the-action-overview": "Overview",
+          "the-action-targets": "Targets",
+          "the-action-management-committee": "Management Committee",
+          "the-action-scientific-committee": "Scientific Committee",
+          "the-action-work-packages": "Work Packages",
+          "the-action-deliverables": "Deliverables",
+          "the-action-contact-us": "Contact Us"
+        }
+      },
+      "news-events": {
+        "title": "News & Events",
+        "items": {
+          "news-events-dialogue-forum": "Dialogue Forum",
+          "news-events-workshops": "Workshops",
+          "news-events-other-events": "Other Events",
+          "news-events-newsletter": "Newsletter",
+          "news-events-blog": "Blog"
+        }
+      },
+      "network": {
+        "title": "Network",
+        "items": {
+          "network-members": "Members",
+          "network-join": "Join"
         }
       },
       "news": {
@@ -85,31 +105,8 @@
     "remove-favorite.failure": "Failed to remove favorite from collection"
   },
   "footer": {
-    "columns": {
-      "about": {
-        "title": "About",
-        "links": {
-          "home": "Home",
-          "what-is-helix": "The Project",
-          "contact": "Contact",
-          "terms-of-use": "Terms of Use"
-        }
-      },
-      "research": {
-        "title": "Research",
-        "links": {
-          "data": "Data",
-          "pubs": "Publications",
-          "lab": "Lab",
-          "topics": "Topics",
-          "organizations": "Organizations"
-        }
-      },
-      "partners": {
-        "title": "Partners"
-      }
-    },
-    "copyright": "© 2018 HELIX. All rights reserved."
+    "members-area": "Members Area",
+    "copyright": "© 2020 CLIMPACT. All rights reserved."
   },
   "locales": {
     "en": "English",
@@ -153,7 +150,6 @@
       "placeholder": {
         "prefix": "Search {catalogs}",
         "data": "data",
-        "pubs": "publications",
         "lab": "research tools",
         "author": "Enter a name and press enter ..."
       },
@@ -194,13 +190,11 @@
     "placeholder": {
       "prefix": "Search {catalogs}",
       "data": "data",
-      "pubs": "publications",
       "lab": "research tools",
       "author": "Enter a name and press enter ..."
     },
     "tabs": {
       "data": "DATA",
-      "pubs": "PUBLICATIONS",
       "lab": "LAB"
     },
     "filters": {
@@ -210,12 +204,6 @@
         "tags": "TAGS",
         "formats": "FORMATS",
         "licenses": "LICENSES"
-      },
-      "pubs": {
-        "providers": "Providers",
-        "author": "Author",
-        "acceptance-from": "Date Accepted From",
-        "acceptance-to": "Date Accepted To"
       }
     },
     "help": {
@@ -225,47 +213,6 @@
     },
     "view-less": "View Less",
     "view-more": "View More"
-  },
-  "pubs": {
-    "search": {
-      "placeholder": "Search publications",
-      "advanced-search": "ADVANCED SEARCH"
-    },
-    "featured": "Featured Publications",
-    "subject": {
-      "title": "Search by subject",
-      "items": {
-        "humanities": "Humanities and Social Sciences",
-        "business": "Business, Economics and Law",
-        "agricultural": "Agricultural and Veterinary Sciences",
-        "environmental": "Environmental Sciences",
-        "engineering": "Engineering, Computing and Technology",
-        "biological": "Biological Sciences",
-        "medical": "Medical and Health",
-        "sciences": "Physical, Chemical and Mathematical Sciences"
-      }
-    },
-    "explore": {
-      "title": "Explore",
-      "items": {
-        "themes": {
-          "title": "Themed Collections",
-          "description": "Explore selected resources by theme"
-        },
-        "services-tools": {
-          "title": "Services and Tools",
-          "description": "Access data-related services and tools"
-        },
-        "open-data": {
-          "title": "Open Data",
-          "description": "Find open data that is reusable"
-        },
-        "projects": {
-          "title": "Grants and Projects",
-          "description": "Search for research grants and projects"
-        }
-      }
-    }
   },
   "project": {
     "title": "The project"

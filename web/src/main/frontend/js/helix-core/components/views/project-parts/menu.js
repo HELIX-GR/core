@@ -6,18 +6,9 @@ import { injectIntl } from 'react-intl';
 import {
   buildPath,
   DynamicRoutes,
-  WordPressPages
 } from '../../../model';
 
 class Menu extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      TechnicalDetails: false,
-    };
-  }
 
   toggleSubMenu(e, key) {
     this.setState({
@@ -26,27 +17,17 @@ class Menu extends React.Component {
   }
 
   render() {
-    const pages = [
-      WordPressPages.WhatIsHelix,
-      WordPressPages.Services,
-      WordPressPages.FAQ,
-      WordPressPages.PublishData,
-      WordPressPages.Software,
-      WordPressPages.Project,
-      WordPressPages.Media,
-      WordPressPages.AcknowledgeHelix,
-      WordPressPages.Contact,
-      WordPressPages.TermsOfUse,
-    ];
+    const { prefix, path, pages } = this.props;
+
     const _t = this.props.intl.formatMessage;
 
     return (
       <div className="about-item">
 
         {pages.map(key => (
-          <NavLink key={key} to={buildPath(DynamicRoutes.PROJECT_PAGE, [key])} activeClassName="selected">
+          <NavLink key={key} to={buildPath(path, [key])} activeClassName="selected">
             <h4 className="about-title" >
-              {_t({ id: `header.menu.project.items.${key}` })}
+              {_t({ id: `${prefix}.items.${key}` })}
             </h4>
           </NavLink>))
         }

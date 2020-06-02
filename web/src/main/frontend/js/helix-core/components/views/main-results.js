@@ -82,7 +82,6 @@ class MainResults extends React.Component {
     this.onDataFacetChanged = this.onDataFacetChanged.bind(this);
     this.onLabFacetChanged = this.onLabFacetChanged.bind(this);
     this.onPillChanged = this.onPillChanged.bind(this);
-    this.onProviderToggle = this.onProviderToggle.bind(this);
     this.onRemoveFavoriteFromCollection = this.onRemoveFavoriteFromCollection.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
