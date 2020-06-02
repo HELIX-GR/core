@@ -109,7 +109,7 @@
           width: 870px;
           min-width: 400px;
           @include position(absolute,
-            60% null null 50%);
+            null null 24% 50%);
           transform: translate(-50%, -50%);
           -webkit-transform: translate(-50%, -50%);
           -o-transform: translate(-50%, -50%);
