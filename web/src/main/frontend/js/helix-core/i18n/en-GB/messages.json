@@ -4,9 +4,6 @@
       "data": {
         "title": "Data"
       },
-      "pubs": {
-        "title": "Pubs"
-      },
       "lab": {
         "title": "Lab"
       },
@@ -61,7 +58,6 @@
           "account": "Account Settings",
           "collections": "My Collections",
           "favorites": "Favorites",
-          "help": "Help",
           "logout": "Log out"
         }
       }
@@ -142,7 +138,6 @@
   },
   "pills": {
     "data": "DATA",
-    "pubs": "PUBS",
     "lab": "LAB"
   },
   "main": {
@@ -247,7 +242,6 @@
       },
       "count": {
         "data": "{count} datasets found",
-        "pubs": "{count} publications found",
         "lab": "{count} notebooks found"
       }
     },
@@ -256,14 +250,8 @@
         "placeholder": {
           "prefix": "Search {catalogs}",
           "data": "data",
-          "pubs": "publications",
           "lab": "research tools"
         }
-      }
-    },
-    "pubs": {
-      "search": {
-        "placeholder": "Search publications"
       }
     }
   },

@@ -4,9 +4,6 @@
       "data": {
         "title": "Data"
       },
-      "pubs": {
-        "title": "Pubs"
-      },
       "lab": {
         "title": "Lab"
       },
@@ -53,7 +50,6 @@
           "account": "Λογαριασμός",
           "collections": "Οι συλλογές μου",
           "favorites": "Σελιδοδείκτες",
-          "help": "Βοήθεια",
           "logout": "Έξοδος"
         }
       }
@@ -112,7 +108,6 @@
   },
   "pills": {
     "data": "DATA",
-    "pubs": "PUBS",
     "lab": "LAB"
   },
   "profile": {
@@ -142,7 +137,6 @@
       "placeholder": {
         "prefix": "Αναζήτηση {catalogs}",
         "data": "data",
-        "pubs": "publications",
         "lab": "research tools",
         "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
       },
@@ -183,13 +177,11 @@
     "placeholder": {
       "prefix": "Αναζήτηση {catalogs}",
       "data": "δεδομένα",
-      "pubs": "δημοσιεύσεις",
       "lab": "ερευνητικά εργαλεία",
       "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
     },
     "tabs": {
       "data": "DATA",
-      "pubs": "PUBLICATIONS",
       "lab": "LAB"
     },
     "filters": {
@@ -199,12 +191,6 @@
         "tags": "TAGS",
         "formats": "ΜΟΡΦΟΤΥΠΟΙ",
         "licenses": "ΑΔΕΙΕΣ"
-      },
-      "pubs": {
-        "providers": "Πάροχοι",
-        "author": "Συγγραφείς",
-        "acceptance-from": "Ημερομηνία Αποδοχής Από",
-        "acceptance-to": "Ημερομηνία Αποδοχής Έως"
       }
     },
     "help": {
@@ -214,47 +200,6 @@
     },
     "view-less": "Λιγότερα",
     "view-more": "Περισσότερα"
-  },
-  "pubs": {
-    "search": {
-      "placeholder": "Αναζητήστε δημοσιεύσεις",
-      "advanced-search": "ΠΡΟΧΩΡΗΜΕΝΗ ΑΝΑΖΗΤΗΣΗ"
-    },
-    "featured": "Επιλεγμένες Δημοσιεύσεις",
-    "subject": {
-      "title": "Αναζήτηση ανά Θέμα",
-      "items": {
-        "humanities": "Ανθρωπιστικές και Κοινωνικές Επιστήμες",
-        "business": "Επιχειρήσεις, Οικονομία και Δίκαιο",
-        "agricultural": "Αγροτικές και Κτηνιατρικές Επιστήμες",
-        "environmental": "Περιβαλλοντικές Επιστήμες",
-        "engineering": "Μηχανική, Υπολογιστική και Τεχνολογία",
-        "biological": "Βιολογικές Επιστήμες",
-        "medical": "Ιατρική και Υγεία",
-        "sciences": "Φυσική, Χημεία και Μαθηματικά"
-      }
-    },
-    "explore": {
-      "title": "Εξερευνήστε",
-      "items": {
-        "themes": {
-          "title": "Θεματικές Συλλογές",
-          "description": "Εξερευνήστε επιλεγμένους πόρους ανά θεματική περιοχή"
-        },
-        "services-tools": {
-          "title": "Υπηρεσίες και Εργαλεία",
-          "description": "Αποκτήστε πρόσβαση σε υπηρεσίες και εργαλεία"
-        },
-        "open-data": {
-          "title": "Ανοικτά Δεδομένα",
-          "description": "Βρείτε επαναχρησιμοποιήσιμα ανοικτά δεδομένα"
-        },
-        "projects": {
-          "title": "Χορηγήσεις και Έργα",
-          "description": "Βρείτε ερευνητικές χορηγίες και έργα"
-        }
-      }
-    }
   },
   "project": {
     "title": "Το έργο"
@@ -289,7 +234,6 @@
       },
       "count": {
         "data": "Βρέθηκαν {count} σύνολα δεδομένων",
-        "pubs": "Βρέθηκαν {count} δημοσιεύσεις",
         "lab": " Βρέθηκαν {count} notebooks"
       }
     },
@@ -298,14 +242,8 @@
         "placeholder": {
           "prefix": "Αναζήτηση {catalogs}",
           "data": "δεδομένα",
-          "pubs": "δημοσίευσεις",
           "lab": "ερευνητικά εργαλεία"
         }
-      }
-    },
-    "pubs": {
-      "search": {
-        "placeholder": "Αναζητείστε δημοσίευσεις"
       }
     }
   },
