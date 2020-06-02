@@ -243,8 +243,7 @@ class Header extends React.Component {
                       <li><Link to={StaticRoutes.PROFILE}>{_t({ id: 'header.menu.login.items.account' })}</Link></li>
                       <li><Link to={StaticRoutes.FAVORITES}>{_t({ id: 'header.menu.login.items.favorites' })}</Link></li>
                       <li><Link to={StaticRoutes.COLLECTIONS}>{_t({ id: 'header.menu.login.items.collections' })}</Link></li>
-                      <li><Link to={StaticRoutes.PROJECT}>{_t({ id: 'header.menu.login.items.help' })}</Link></li>
-                      <li><a onClick={this.onLogout}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
+                      <li><a style={{ cursor: 'pointer' }} onClick={this.onLogout}>{_t({ id: 'header.menu.login.items.logout' })}</a></li>
                     </ul>
                   </li>
                 </ul>
