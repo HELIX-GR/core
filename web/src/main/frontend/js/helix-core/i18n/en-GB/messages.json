@@ -45,9 +45,9 @@
         }
       },
       "news": {
-        "title": "News",
+        "title": "Blog",
         "items": {
-          "news": "News",
+          "news": "Blog",
           "events": "Events",
           "actions": "Actions"
         }
@@ -69,7 +69,7 @@
     "events": "Events",
     "favorites": "FAVORITES",
     "helix-team": "HELIX Team",
-    "news": "News",
+    "news": "Blog",
     "actions": "Actions"
   },
   "favorites": {
@@ -151,7 +151,7 @@
       "advanced-search": "ADVANCED SEARCH"
     },
     "news": {
-      "title": "Latest News",
+      "title": "Latest Blog Posts",
       "read-more": "Read more"
     },
     "about": {
@@ -217,10 +217,10 @@
     "load-more": "More"
   },
   "news": {
-    "title": "News",
+    "title": "Blog",
     "load-more": "More",
     "read-more": "Read more",
-    "related-news": "Related News"
+    "related-news": "Related Blog Posts"
   },
   "actions": {
     "title": "Actions",
