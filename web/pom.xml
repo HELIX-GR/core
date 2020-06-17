@@ -180,7 +180,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
-					<execution>
+                    <execution>
+                        <id>repackage</id>
 						<goals>
 							<goal>repackage</goal>
 						</goals>
