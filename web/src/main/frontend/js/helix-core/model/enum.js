@@ -28,7 +28,6 @@ export const EnumAuthProvider = {
   Google: 'Google',
   GitHub: 'GitHub',
   HELIX: 'HELIX',
-  SAML: 'SAML',
 };
 
 export const EnumPostCategory = {

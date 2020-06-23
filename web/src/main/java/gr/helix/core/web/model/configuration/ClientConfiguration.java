@@ -3,8 +3,6 @@ package gr.helix.core.web.model.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.ckan.CkanMetadata;
 
@@ -17,11 +15,6 @@ public class ClientConfiguration {
 
     private String                       jupyterNotebookViewer;
 
-    @JsonIgnore
-    private final List<String>           identityProviders = new ArrayList<String>();
-
-    private String                       defaultIdentityProvider;
-
     private OsmConfiguration             osm;
 
     private BingMapsConfiguration        bingMaps;
@@ -31,10 +24,6 @@ public class ClientConfiguration {
     private CkanMetadata                 data;
 
     private CkanMetadata                 lab;
-
-    public List<String> getIdentityProviders() {
-        return this.identityProviders;
-    }
 
     public OsmConfiguration getOsm() {
         return this.osm;
@@ -58,18 +47,6 @@ public class ClientConfiguration {
 
     public void setWordPress(WordPressConfiguration wordPress) {
         this.wordPress = wordPress;
-    }
-
-    public String getDefaultIdentityProvider() {
-        return this.defaultIdentityProvider;
-    }
-
-    public void setDefaultIdentityProvider(String defaultIdentityProvider) {
-        this.defaultIdentityProvider = defaultIdentityProvider;
-    }
-
-    public void addIdentityProvider(String identityProvider) {
-        this.identityProviders.add(identityProvider);
     }
 
     public CkanMetadata getData() {

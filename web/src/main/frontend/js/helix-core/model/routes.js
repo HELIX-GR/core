@@ -30,7 +30,6 @@ const FAVORITES = '/favorites/';
 const GOOGLE = '/login/google';
 const GITHUB = '/login/github';
 const HELIX = '/login/helix';
-const SAML = '/saml/login';
 
 /**
  * Static routes
@@ -52,7 +51,6 @@ export const StaticRoutes = {
     GITHUB,
     GOOGLE,
     HELIX,
-    SAML,
   },
   THE_ACTION,
 };
