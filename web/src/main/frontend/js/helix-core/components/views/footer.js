@@ -41,20 +41,22 @@ class Footer extends React.Component {
     return (
       <footer id="footer" className={this.resolveClassName()}>
         <div className="footer-content">
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap" style={{ alignItems: 'center' }}>
             <div className="footer-column logo">
               <Link to={StaticRoutes.MAIN}>
                 <img src={this.logoImage} alt="" />
               </Link>
+            </div>
+            <div className="footer-column logo">
+              <div className="eu-logo">
+                <img src="/images/eu-logo.jpg" alt="" />
+              </div>
             </div>
             <div className="footer-column about">
               <ul>
                 <li><a href="#">{_t({ id: 'footer.members-area' })}</a></li>
               </ul>
             </div>
-          </div>
-          <div className="eu-logo">
-            <img src="/images/eu-logo.jpg" alt="" />
           </div>
           <div className="copyright-notes">
             {_t({ id: 'footer.copyright' })}
