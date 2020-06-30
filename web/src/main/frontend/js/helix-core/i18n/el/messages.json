@@ -8,47 +8,47 @@
         "title": "Lab"
       },
       "applications": {
-        "title": "Applications",
+        "title": "Εφαρμογές",
         "items": {
-          "applications-services": "Services",
-          "applications-tools": "Tools",
+          "applications-services": "Υπηρεσίες",
+          "applications-tools": "Εργαλεία",
           "applications-lab": "Lab"
         }
       },
       "the-action": {
-        "title": "The Action",
+        "title": "Η Δράση",
         "items": {
-          "the-action-overview": "Overview",
-          "the-action-targets": "Targets",
-          "the-action-management-committee": "Management Committee",
-          "the-action-scientific-committee": "Scientific Committee",
-          "the-action-work-packages": "Work Packages",
-          "the-action-deliverables": "Deliverables",
-          "the-action-contact-us": "Contact Us"
+          "the-action-overview": "Επισκόπηση",
+          "the-action-targets": "Στόχοι",
+          "the-action-management-committee": "Επιτροπή Διαχείρισης",
+          "the-action-scientific-committee": "Επιστημονική Επιτροπή",
+          "the-action-work-packages": "Πακέτα Εργασίας",
+          "the-action-deliverables": "Παραδοτέα",
+          "the-action-contact-us": "Επικοινωνία"
         }
       },
       "news-events": {
-        "title": "News & Events",
+        "title": "Νέα & Εκδηλώσεις",
         "items": {
-          "news-events-dialogue-forum": "Dialogue Forum",
-          "news-events-workshops": "Workshops",
-          "news-events-other-events": "Other Events",
-          "news-events-newsletter": "Newsletter",
+          "news-events-dialogue-forum": "Φόρουμ",
+          "news-events-workshops": "Εργαστήρια",
+          "news-events-other-events": "Άλλες Εκδηλώσεις",
+          "news-events-newsletter": "Ενημερωτικό Δελτίο",
           "news-events-blog": "Blog"
         }
       },
       "network": {
-        "title": "Network",
+        "title": "Δίκτυο",
         "items": {
-          "network-members": "Members",
-          "network-join": "Join"
+          "network-members": "Μέλη",
+          "network-join": "Δηλώστε Συμμετοχή"
         }
       },
       "login": {
         "items": {
           "signed-in": "Είσοδος ως {username}",
           "account": "Λογαριασμός",
-          "collections": "Οι συλλογές μου",
+          "collections": "Οι Συλλογές μου",
           "favorites": "Σελιδοδείκτες",
           "logout": "Έξοδος"
         }
