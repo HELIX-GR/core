@@ -1,47 +1,143 @@
-/*
- * Theme
- */
+@import "reset";
+@import "variables";
+@import "mixins";
+@import 'fonts';
+@import 'header';
+@import 'footer';
+@import 'btns';
+@import 'climateclock';
+@import 'home';
+@import 'page';
+@import 'cards';
+@import 'modal';
+@import 'drawer';
+@import 'related';
+@import 'inputs';
+@import 'data';
+@import 'single';
+@import 'privacy';
+@import 'contact';
+@import 'pagination';
 
-$layout-fixed-width :1366px;
-@import 'theme/theme';
-/*
- * Customize styles for 3rd party components
- */
 
-@import 'vendor/react-toastify';
-@import 'vendor/react-datepicker';
-/*
- * Import HELIX react components
- */
-
-@import 'components/accordion';
-@import 'components/advanced-search';
-@import 'components/checkbox';
-@import 'components/login';
-@import 'components/map';
-@import 'components/progress-bar';
-
-/*
- * Openlayers (the file is copied by grunt "copy" task)
- */
-
-@import '../vendor/ol/ol.css';
-/*
- * Custom rules
- */
-
-.menu-wrapper .menu-item .active-link {
-  border-bottom: 3px solid;
+body {
+    font-size: #{$baseFontSize}px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+    // font-size: $baseFontSize;
+    font-family: $mainFontFamily;
+    background: $gradientBg;
+    color: $mainFontColor;
+    padding-top: 80px;
+    @media(max-width: 992px) {
+        padding-top: 60px;
+    }
+    &.blog-template {
+        background: $gradientBgBlog;
+        .header {
+            background: $gradientBgBlog;
+            &__nav {
+                @media(max-width: 992px) {
+                    background: $gradientBgBlog;
+                }
+            }
+        }
+        .page__sidebar__menu {
+            @media(max-width: 992px) {
+                background: $gradientBgBlog;
+            }
+        }
+    }
+    &.forum-template {
+        background: $gradientBgForum;
+        .header {
+            background: $gradientBgForum;
+            &__nav {
+                @media(max-width: 992px) {
+                    background: $gradientBgForum;
+                }
+            }
+        }
+        .page__sidebar__menu {
+            @media(max-width: 992px) {
+                background: $gradientBgForum;
+            }
+        }
+    }
+    &.events-template {
+        background: $gradientBgEvents;
+        .header {
+            background: $gradientBgEvents;
+            &__nav {
+                @media(max-width: 992px) {
+                    background: $gradientBgEvents;
+                }
+            }
+        }
+        .page__sidebar__menu {
+            @media(max-width: 992px) {
+                background: $gradientBgEvents;
+            }
+        }
+    }
+}
+html {
+    &.overflow-hidden {
+        overflow: hidden;
+    }
 }
 
-/*
- * Override bootstrap defaults
- */
-
-.modal-open {
-  overflow: auto;
+.container {
+    padding: 0 40px;
+    width: 100%;
+    @media(max-width: 1260px) {
+        padding: 0px 20px;
+    }
+    &--md{
+        max-width: 1315px;
+        margin: auto;
+    }
 }
 
-.modal-content {
-  border-radius: 0px;
+.no-padding {
+    padding: 0!important;
 }
+.biglink {
+    padding-bottom: 15px;
+    display: inline-block;
+    @include fluid-type(30px, 74px);
+    font-weight: 600;
+    line-height: 1em;
+    background: $gradientFont;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.only-mobile{
+    @media(min-width:993px){
+        display: none;
+    }
+}
+.gratter576{
+    @media(max-width:576px){
+        display: none;
+    }
+}
+
+
+.text-overlay{
+    background:$mainColor;
+    display: inline-block;
+    padding: 0 20px;
+    font-weight: 700;
+    //margin: 0 30px;
+    display: inline;
+    padding: 0em 0.5em;
+    margin: 0em -0.5em;
+    background: $mainColor;
+    //box-shadow: 0em 0 0 red,0em 0 0 red;
+    box-decoration-break: clone;
+    line-height: 1.5;
+    mix-blend-mode: lighten;
+  }

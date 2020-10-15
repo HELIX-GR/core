@@ -1,0 +1,44 @@
+.privacy{
+  padding: 150px 0 100px;
+  @media(max-width:576px){
+    padding: 80px 0 40px;
+  }
+  &__title{
+    text-align: center;
+    margin-bottom: 20px;
+    h1{
+      @include fluid-type(30px, 74px);
+    }
+  }
+  ul.privacy__list{
+    > li {
+      > span { 
+        color:#D41A2C;
+      }
+    }
+    li{
+      display: inline-block;
+      margin-top: 10px;
+      @include fluid-type(18px, 30px);
+      > ul{
+        margin-left: 40px;
+        @media(max-width:576px){
+          margin-left: 20px;
+        }
+      }
+      span{
+        background:$mainColor;
+        font-weight: 800;
+        padding: 2px 10px;
+      }
+      p{
+        background:$mainColor;
+        font-size: 18px;
+        padding: 2px 10px;
+        @media(max-width:576px){
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

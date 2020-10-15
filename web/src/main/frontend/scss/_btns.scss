@@ -1,0 +1,47 @@
+.btn {
+  outline: none;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+
+  &--std {
+    font-size: em(20);
+    font-weight: 800;
+    letter-spacing: 0.2em;  
+    background: $mainColor;
+    color:$mainFontColor;
+    padding: 10px 30px;
+    transition: background 0.2s ease;
+    &:hover {
+      background: #fff;
+    }
+  }
+  
+  &--outline {
+    // font-size: em(20);
+    font-weight: 400;
+    border: 2px solid $mainColor;
+    color: $mainColor;
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+    &:hover {
+      background: $mainColor;
+      color: $mainFontColor
+    }
+  }
+  &--simple{
+    background: $mainFontColor;
+    color: $mainColor;
+    border: 1px solid $mainFontColor;
+    font-size: em(12);
+    padding: 5px 12px 6px 12px;
+  }
+  &--noaction{
+    pointer-events: none;
+  }
+  &--noback{
+    background:none;
+    color:$mainFontColor;
+  }
+
+}

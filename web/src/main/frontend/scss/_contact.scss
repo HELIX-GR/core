@@ -1,0 +1,19 @@
+.contact{
+  text-align: center;
+  padding: 150px 0 150px;
+  &__top{
+    margin-bottom: 20px;
+    font-size: em(30);
+    color:$mainColor;
+    @media(max-width:576px){
+      font-size: em(18);
+    }
+  }
+  &__info{
+      @include fluid-type(30px, 74px);
+      a{
+        text-decoration: none;
+        color: $mainFontColor;  
+      }
+  }
+}

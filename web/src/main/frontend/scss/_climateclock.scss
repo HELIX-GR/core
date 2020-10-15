@@ -1,0 +1,192 @@
+.climate-clock {
+  $clock: &;
+  width: 100%;
+  margin-top: 25px;
+  position: relative;
+  // opacity: 0;
+  transition: opacity 1s ease;
+  padding: 10px 0;
+
+  &:hover{
+    #{$clock}__image{
+      opacity:0;
+    }
+    #{$clock}__wrapper{
+      opacity: 1;
+    }
+  }
+  &__image{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    display: none;
+    
+  }
+  &__wrapper{
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  &:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    lefT: 0;
+    width: 100%;
+    height: 100%;
+    background: $gradientBg;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  &--minimal {
+    margin-top: 20px;
+    @media(max-width: 992px) {
+      display: none;
+    }
+    .climate-clock__digit {
+      @include fluid-type(0px, 64px);
+      font-weight: 800;
+      color: $mainColor;
+      &:after {
+        content: ":"
+      }
+      &:last-child {
+        &:after {
+          content: ""
+        } 
+      }
+    }
+  }
+  &--border{
+    border-top: 7px solid $mainColor;
+  }
+  &.fullscreen {
+    &:before {
+      display: block;
+      opacity: 1;
+    }
+  }
+  &__title {
+    font-weight: 300;
+    color: $mainColor;
+    @include fluid-type(20px, 50px);
+    line-height: 1.2em;
+  }
+  &__data {
+    width: 100%;
+    display: flex;
+    .fullscreen & {
+      z-index: 1001;
+    }
+    
+    position: relative;
+    justify-content: space-between;
+    // overflow: hidden;
+    @media(max-width: 576px) {  
+      justify-content: flex-start;
+    }
+    &__item {
+      color: $mainColor;
+      position: relative;
+      padding-right: 20px;
+      @media(max-width: 576px) {  
+        padding-right: 0px;
+        display: flex;
+        align-items: center;
+      }
+      &__value {
+        @include fluid-type(0px, 200px);
+        line-height: 1.0em;
+        font-weight: 800;
+        @media(max-width: 1300px) {    
+          @include fluid-type(0px, 120px);
+        }
+        @media(max-width: 992px) { 
+          min-width: 0!important;
+        }
+        @media(max-width: 576px) { 
+          font-size: em(37);
+          line-height: 1.5em;
+        }
+        @media(max-width: 320px) {   
+          font-size: em(30);
+          line-height: 1.5em;
+        }
+      }
+      &:last-child {
+        .climate-clock__data__item__label {
+          letter-spacing: 0.1em;
+        }
+        @media(max-width: 768px) {
+          padding-right: 0!important;
+          .climate-clock__data__item__label {
+            display: none!important;
+            padding-right: 0px;
+          }
+        }
+      }
+      &__label {
+        position: absolute;
+        display: inline;
+        right: 0;
+        top: 50%;
+        transform: rotate(-90deg) translateX(12%) translateY(330%);
+        margin-right: 30px;
+        // width: auto;
+        text-align: center;
+        white-space: nowrap;
+        letter-spacing: 0.7em;
+        @include fluid-type(0px, 17px);
+        span {
+          font-weight: 800;
+        }
+        @media(max-width: 1300px) { 
+          letter-spacing: 0.3em;
+          transform: rotate(-90deg) translateX(15%) translateY(250%);
+        }
+        @media(max-width: 992px) {  
+          width: auto!important;
+        }
+        @media(max-width: 768px) {
+          transform: translateY(-50%) translateX(100%);
+          width: auto!important;
+          height: auto!important;
+          span {
+            display: none;
+          }
+          &:after {
+            content: ":";
+            padding: 0 7px;
+            @include fluid-type(7px, 130px);
+          }
+        }
+        @media(max-width: 576px) {  
+          position: relative;
+          transform: unset;
+          display: inline-block;
+          top: unset;
+          margin-right: 0;
+          // padding: 0 10px;
+          &:after {
+            content: ":";
+            font-size: 35px;
+            line-height: 1em;
+          }
+        }
+        @media(max-width: 320px) {    
+          &:after {
+            content: ":";
+            font-size: 30px;
+            line-height: 1em;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.footer {
+  &__upper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include border-top;
+    @include border-bottom;
+    padding: 40px 0;
+    @media(max-width:768px){
+      display: block;
+    }
+    &__block {
+      width: calc(50% - 50px);
+      @media(max-width:768px){
+        width: 100%;
+        margin-bottom: 40px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+      h3 {
+        @include fluid-type(30px, 40px);
+        line-height: 1.2em;
+        font-weight: 700;
+        color: $mainColor;
+        margin-bottom: 20px;
+      }
+      p{
+        color: $mainColor;
+        font-size: em(20);
+        margin-bottom: 40px;
+      }
+      input[type="text"]{
+        width: 100%;
+        font-size: em(20);
+        padding: 10px 20px;
+        border:0;
+        background: rgba($color: #000000, $alpha: 0.2);
+        margin-bottom: 25px;
+        color: $mainColor;
+        &::placeholder{
+          color: $mainColor;
+        }
+      }
+    }
+  }
+
+  &__logo {
+    text-align: center;
+    margin: 30px 0;
+
+  }
+  &__logos {
+    text-align: center;
+    margin: 40px 0;
+    img {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+  &__social{
+    text-align: center;
+    margin-bottom: 30px;
+    ul{
+      li{
+        display: inline-block;
+        padding: 0 10px;
+      }
+    }
+  }
+  &__copyright {
+    text-align: center;
+    color: $mainColor;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    p{
+      font-size: em(15);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 5px;
+      @media(max-width:1200px){
+        margin-bottom: 20px;
+      }
+    }
+    ul {
+      li {
+        display: inline-block;
+        a{
+          color: $mainColor;
+          text-decoration: none;
+          font-size: em(15);
+          letter-spacing: 0.1em;
+          display: inline-block;
+          vertical-align: top;
+        }
+        &::after{
+          content: '•';
+          display: inline-block;
+          vertical-align: top;
+          line-height: 1;
+        }
+        &:last-child{
+          &::after{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+}
