@@ -16,6 +16,7 @@ import {
 } from '../../../../model';
 
 import ClimateClock from '../../climate-clock';
+import WordPressPage from '../word-press-page';
 
 class Join extends React.Component {
 
@@ -59,42 +60,7 @@ class Join extends React.Component {
                 <li><a href="#">{_t({ id: 'breadcrumb.network' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.join' })}</a></li>
               </ul>
-              <div className="page__content__default">
-                <section>
-                  <h2>CLIMPACT is a scientific network open to all organizations researching climate change. If you want to join the network, please contact us</h2>
-                </section>
-                <section className="no-padding">
-                  <h1><a href="mailto:climpact@noa.gr" className="">climpact@noa.gr</a></h1>
-                </section>
-                <section>
-                  <p>Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</p>
-                  <p>Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</p>
-                  <p>Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</p>
-                  <div className="page__content__default__download">
-                    <div className="page__content__default__download__title">File to submit 1</div>
-                    <div className="page__content__default__download__desc">
-                      <p>Some additional info about the file.</p>
-                      <p>Press the download button to get the .doc file</p>
-                    </div>
-                    <div className="page__content__default__download__button">
-                      <a href="#" className="btn btn--simple">Download</a>
-                    </div>
-                  </div>
-                  <div className="page__content__default__download page__content__default__download--nomargin-bottom">
-                    <div className="page__content__default__download__title">File to submit 2</div>
-                    <div className="page__content__default__download__desc">
-                      <p>Some additional info about the file.</p>
-                      <p>Press the download button to get the .doc file</p>
-                    </div>
-                    <div className="page__content__default__download__button">
-                      <a href="#" className="btn btn--simple">Download</a>
-                    </div>
-                  </div>
-                </section>
-                <section className="no-padding">
-                  <img src="/images/sample_images/angela-compagnone-g1xoeXbfuTw-unsplash.jpg" alt="" />
-                </section>
-              </div>
+              <WordPressPage className="page__content__default" name={'network-join-climpact'} />
             </div>
           </div>
         </div>

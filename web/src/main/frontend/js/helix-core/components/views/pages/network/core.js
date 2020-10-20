@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -16,12 +17,37 @@ import {
 } from '../../../../model';
 
 import ClimateClock from '../../climate-clock';
-import { Drawer } from '../../parts';
+import WordPressPage from '../word-press-page';
 
 class Core extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    $('#root').on('click', '.drawer__item', (e) => {
+      const $el = $(e.currentTarget);
+
+      if (!$el.hasClass('open')) {
+        e.preventDefault();
+
+        $el.addClass('open');
+      }
+    });
+
+    $('#root').on('click', '.drawer__item__trigger', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const $el = $(e.currentTarget).closest('.drawer__item');
+
+      $el.toggleClass('open');
+    });
+  }
+
+  componentWillUnmount() {
+    $('#root').off('click', '.drawer__item');
+
+    $('#root').off('click', '.drawer__item__trigger');
   }
 
   render() {
@@ -56,20 +82,17 @@ class Core extends React.Component {
             </div>
             <div className="page__content">
               <ul className="page__breadcrumbs">
-              <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
+                <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.network' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.core' })}</a></li>
               </ul>
               <div className="page__content__intro">
-                <div className="page__content__intro__text">Short description of the association of these members. Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</div>
+                <div className="page__content__intro__text">
+                  {_t({ id: 'text.network-associate.intro' })}
+                </div>
               </div>
               <div className="page__content__default">
-                <div className="drawer">
-                  <Drawer type="logo" />
-                  <Drawer type="logo" />
-                  <Drawer type="logo" />
-                  <Drawer type="logo" />
-                </div>
+                <WordPressPage className="drawer" name={'network-core'} />
               </div>
             </div>
           </div>
