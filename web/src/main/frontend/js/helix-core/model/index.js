@@ -1,4 +1,4 @@
-import * as RoleNames from './role';
+export { Roles } from './role';
 
 export {
   EnumAuthProvider,
@@ -28,9 +28,3 @@ export {
   Pages,
   StaticRoutes,
 } from './routes';
-
-
-export const Roles = {
-  ...RoleNames,
-};
-

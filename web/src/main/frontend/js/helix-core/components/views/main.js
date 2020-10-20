@@ -5,276 +5,288 @@ import * as ReactRedux from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import classnames from 'classnames';
+import moment from '../../moment-localized';
 
 import {
   bindActionCreators
 } from 'redux';
 
 import {
+  FormattedDate,
+} from 'react-intl';
+
+import {
+  Link,
+} from 'react-router-dom';
+
+import {
   getLatestPosts,
-} from '../../ducks/ui/views/news';
+} from '../../ducks/ui/views/posts';
 
 import {
-  search as searchAll,
-  searchAutoComplete,
-  setResultVisibility,
-  setText,
-  toggleAdvanced,
-  togglePill,
-  toggleDataFacet,
-  toggleLabFacet,
-} from '../../ducks/ui/views/main';
-
-import {
-  EnumCatalog,
+  buildPath,
+  DynamicRoutes,
+  EnumPostCategory,
   StaticRoutes,
 } from '../../model';
 
-import {
-  Pill,
-} from '../helpers';
-
-import {
-  AdvancedModal,
-} from './shared-parts';
-
-import {
-  About,
-  News,
-  Result,
-} from './main-parts';
+import ClimateClock from './climate-clock';
+import { Draggable } from './parts';
 
 const KEYSTROKE_INTERVAL = 800;
+
+const toggleSecureUrl = (content) => {
+  return content.replace(/(http:\/\/)/g, 'https://');
+};
 
 class Main extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.onPillChanged = this.onPillChanged.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.searchAutoComplete = _.debounce(this.props.searchAutoComplete, KEYSTROKE_INTERVAL);
+    this.state = {
+      open: false,
+    };
+  }
 
-    this.textInput = React.createRef();
+  showModal() {
+    this.setState({ open: true });
+  }
+
+  closeModal() {
+    this.setState({ open: false });
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.onKeyDown, false);
-    this.props.getLatestPosts(2);
-    this.props.setResultVisibility(false);
+    this.props.getLatestPosts(5);
+
+    this.interval = setInterval(() => {
+
+    }, 1000);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.onKeyDown, false);
-  }
-
-  isTextValid(text) {
-    return ((text) && (text.length > 2));
-  }
-
-  get isEnabled() {
-    const { pills } = this.props.search;
-    return !!Object.keys(pills).find(key => !!pills[key]);
-  }
-
-  search(advanced = false, catalog = null) {
-    const { text } = this.props.search;
-
-    if (this.isTextValid(text)) {
-      (catalog ? this.props.searchAll(text, false, 0, 10, catalog) : this.props.searchAll(text, advanced))
-        .then((data) => {
-          const found = Object.keys(EnumCatalog).some((key) => {
-            return (data.catalogs && data.catalogs[key] && data.catalogs[key].count !== 0);
-          });
-
-          if (found) {
-            if (advanced) {
-              this.props.toggleAdvanced();
-            }
-            this.props.history.push(StaticRoutes.MAIN_RESULTS);
-          }
-        });
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
     }
   }
 
-  onPillChanged(id) {
-    const { text, pills } = this.props.search;
+  renderPosts(posts = []) {
+    const { config: { wordPress: { categories } } } = this.props;
 
-    // Get all active sections (including the one that has been toggled)
-    const active = Object.keys(pills).filter(key => pills[key]);
-    if ((active.length > 1) || (active[0] !== id)) {
-      this.props.togglePill(id);
-      // At least one active section must be active
-      if (this.isTextValid(text)) {
-        this.searchAutoComplete(text);
+    const items = [];
+
+    const titleStyle = { maxWidth: 360 };
+    const imageStyle = { maxWidth: 400 };
+
+    posts.forEach((p) => {
+      // Must have at least one category
+      if (!p.categories.length) {
+        return;
       }
+
+      // Convert category id to number
+      const category = categories.find(c => +c.id === p.categories[0]);
+      if (!category) {
+        return;
+      }
+
+      // Get featured image
+      const imageUrl = (
+        p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
+          toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
+          '/images/dummy_card.png'
+      );
+
+      // Get author
+      const author = p._embedded.author[0].name;
+
+      // Get interval since publication date or date
+      const modifiedAt = moment(p.modified);
+      const age = moment.duration(moment() - modifiedAt);
+      const date = age.asHours() < 24 ?
+        moment(modifiedAt).fromNow() :
+        <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+
+      switch (category.name) {
+        case EnumPostCategory.Blog: {
+          items.push(
+            <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.BLOG_PAGE, [p.id])} className="cards__item cards__item--news">
+              <div className="cards__item__top">
+                <img src="/images/icons/news_icon.png" alt="" className="cards__item__icon" />
+                <span className="cards__item__date"> {p.climpact_location} • {date}</span>
+                <h3 className="cards__item__title" style={titleStyle}>{p.title.rendered}</h3>
+              </div>
+              <div className="cards__item__img">
+                <img src={imageUrl} alt="" style={imageStyle} />
+              </div>
+              <span className="cards__item__button">Περισσοτερα</span>
+            </Link>
+          );
+
+          break;
+        }
+      }
+    });
+
+    for (let i = items.length; i < 5; i++) {
+      items.push(
+        <div key={'latest-posts-last-element'} className="cards__item cards__item--empty"></div>
+      );
     }
 
-    this.textInput.current.focus();
-  }
+    return items;
+    /*
+        <a href="" className="cards__item">
+          <div className="cards__item__top">
+            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
+            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
+            <h3 className="cards__item__title">Εργαστήριο big data</h3>
+          </div>
+          <div className="cards__item__img">
+            <img src="/images/dummy_card.png" alt="" />
+          </div>
+          <span className="cards__item__button">Εγγραφη</span>
+        </a>
 
-  onTextChanged(value, refresh = true) {
-    this.props.setText(value);
-
-    if ((refresh) && (this.isTextValid(value))) {
-      this.searchAutoComplete(value);
-    }
-  }
-
-  onSearch(e) {
-    e.preventDefault();
-
-    this.search(false);
-  }
-
-  onKeyDown(e) {
-    if (e.key === 'Escape') {
-      this.props.setResultVisibility(false);
-    }
+        <a href="" className="cards__item cards__item--events">
+          <div className="cards__item__top">
+            <img src="/images/icons/events_icon.png" alt="" className="cards__item__icon" />
+            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
+            <h3 className="cards__item__title">Εργαστήριο big data</h3>
+          </div>
+          <div className="cards__item__img">
+            <img src="/images/dummy_card.png" alt="" />
+          </div>
+          <span className="cards__item__button">Περισσοτερα</span>
+        </a>
+        <a href="" className="cards__item">
+          <div className="cards__item__top">
+            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
+            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
+            <h3 className="cards__item__title">Εργαστήριο big data</h3>
+          </div>
+          <div className="cards__item__img">
+            <img src="/images/dummy_card.png" alt="" />
+          </div>
+          <span className="cards__item__button">Εγγραφη</span>
+        </a>
+        <a href="" className="cards__item">
+          <div className="cards__item__top">
+            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
+            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
+            <h3 className="cards__item__title">Εργαστήριο big data</h3>
+          </div>
+          <div className="cards__item__img">
+            <img src="/images/dummy_card.png" alt="" />
+          </div>
+          <span className="cards__item__button">Εγγραφη</span>
+        </a>
+      */
   }
 
   render() {
-    const { data, lab } = this.props.config;
-    const { advanced, partialResult: { visible, catalogs }, loading, pills, text } = this.props.search;
-    const { latest: posts } = this.props.news;
+    const { open } = this.state;
+    const { countdown, posts: { latest: { posts } } } = this.props;
+
     const _t = this.props.intl.formatMessage;
 
-    const placeholderText = [
-      pills.data ? _t({ id: 'main.search.placeholder.data' }) : null,
-      pills.lab ? _t({ id: 'main.search.placeholder.lab' }) : null,
-    ].filter(text => text).join(', ');
-
     return (
+      <React.Fragment>
+        <main className="home">
+          <div className="container">
+            <ClimateClock countdown={countdown} />
 
-      <div>
-        <section>
-          <div className="landing-section">
-            <div className="landing-section-background">
-
-            </div>
-            <div className="search-form-wrapper">
-              <form className="landing-search-form">
-                <div className="main-form-content">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    className="landing-search-text"
-                    disabled={!this.isEnabled}
-                    name="landing-search-text"
-                    placeholder={_t({ id: 'main.search.placeholder.prefix' }, { catalogs: placeholderText })}
-                    value={text}
-                    onChange={(e) => this.onTextChanged(e.target.value)}
-                    onFocus={() => this.props.setResultVisibility(true)}
-                    ref={this.textInput}
-                  />
-                  <div
-                    className={
-                      classnames({
-                        'domain-pills': true,
-                        'short': advanced,
-                      })
-                    }
-                  >
-                    <Pill
-                      id="data"
-                      disabled={loading}
-                      text="pills.data"
-                      className="pill-data"
-                      selected={pills.data}
-                      onChange={this.onPillChanged}
-                    />
-                    <Pill
-                      id="lab"
-                      disabled={loading}
-                      text="pills.lab"
-                      className="pill-lab"
-                      selected={pills.lab}
-                      onChange={this.onPillChanged}
-                    />
-                    <div
-                      className={
-                        classnames({
-                          'advanced-search-link': true,
-                          'hidden': advanced,
-                        })
-                      }
-                      onClick={() => this.props.toggleAdvanced()}
-                    >
-                      {_t({ id: 'main.search.advanced-search' })}
-                    </div>
-                  </div>
-
-                  <Result
-                    data={data}
-                    hide={() => this.props.setResultVisibility(false)}
-                    lab={lab}
-                    navigate={(url) => this.props.history.push(url)}
-                    pills={pills}
-                    result={catalogs}
-                    searchCatalog={(catalog) => this.search(false, catalog)}
-                    visible={visible && !loading}
-                  />
-
+            <section className="home__bigtext">
+              <div className="home__bigtext__main">
+                <h1>Η Επιστήμη στην υπηρεσία της Πολιτείας και της Κοινωνίας για την αντιμετώπιση της Κλιματικής Αλλαγής.</h1>
+                <div className="home__bigtext__buttons">
+                  <Link to={StaticRoutes.Overview} className="btn btn--std">{_t({ id: 'buttons.learn-more' })}</Link>
+                  <Link to={StaticRoutes.Targets} className="btn btn--std">{_t({ id: 'buttons.our-targets' })}</Link>
                 </div>
+              </div>
+              <div className="home__bigtext__video">
+                <div className="home__bigtext__video__wrapper open-modal-video" onClick={(e) => {
+                  e.preventDefault();
 
-                <button
-                  type="submit"
-                  name="landing-search-button"
-                  className="landing-search-button"
-                  disabled={loading || !this.isEnabled}
-                  onClick={(e) => this.onSearch(e)}
-                >
-                  <i className={loading ? 'fa fa-spin fa-spinner' : 'fa fa-search'}></i>
-                </button>
-              </form>
+                  this.showModal();
+                }}>
+                  <img src="/images/video.jpg" alt="" />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="47.184" height="52.931" viewBox="0 0 47.184 52.931">
+                    <path id="Polygon_1" data-name="Polygon 1" d="M26.465,0,52.931,47.184H0Z" transform="translate(47.184) rotate(90)" fill="#c9e9fc" />
+                  </svg>
+                </div>
+              </div>
+            </section>
+            <section className="home__climpact">
+              <div className="home__climpact__text">
+                <p>Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</p>
+              </div>
+              <div className="home__climpact__logos">
+                <a target="_blank" href="http://www.noa.gr/"><img src="/images/logos/asteroskopio-logo-white.png" alt="" /></a>
+                <a target="_blank" href="http://www.academyofathens.gr/"><img src="/images/logos/athens-Academy-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.uoa.gr/"><img src="/images/logos/ekpa-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.auth.gr/"><img src="/images/logos/aristoteleio-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.hcmr.gr/"><img src="/images/logos/hcmr-logo-white.png" alt="" /></a>
+                <a target="_blank" href="http://www.demokritos.gr/"><img src="/images/logos/demokritos-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.ntua.gr/"><img src="/images/logos/metsovio-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.uoc.gr/"><img src="/images/logos/uoc-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.tuc.gr/"><img src="/images/logos/polutechneio-kritis-logo-white.png" alt="" /></a>
+                <a target="_blank" href="http://www.athena-innovation.gr/"><img src="/images/logos/athena-RC-logo-white.png" alt="" /></a>
+                <a target="_blank" href="https://www.ekke.gr/"><img src="/images/logos/ekke-logo-white.png" alt="" /></a>
+                <a href="#" className="empty"></a>
+              </div>
+            </section>
+            <section className="cards">
+              <div className="container">
+                <Draggable className="cards__inner">
+                  {posts && this.renderPosts(posts)}
+                </Draggable>
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <div id="modal_video_home" className={
+          classnames({
+            'people_modal': true,
+            "modal": true,
+            'show-modal': open,
+          })
+        }>
+          <a href="#" className="modal__close" onClick={(e) => {
+            e.preventDefault();
+            this.closeModal();
+          }}>
+            <img src="/images/icons/modal_close_white.svg" alt="" />
+          </a>
+          <div className="people_modal__wrapper">
+            <div className="modal__iframe">
+              <div className="modal__iframe__cont">
+                {open &&
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/UtgYSgJyeJo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                }
+              </div>
             </div>
           </div>
-        </section>
-
-        <section className="landing-page-content">
-
-          <News posts={posts} />
-
-          <About />
-
-        </section>
-
-        <AdvancedModal
-          config={this.props.config}
-          data={this.props.search.data}
-          lab={this.props.search.lab}
-          loading={this.props.search.loading}
-          pills={this.props.search.pills}
-          search={() => this.search(true)}
-          setText={(text) => this.onTextChanged(text, false)}
-          text={this.props.search.text}
-          toggle={this.props.toggleAdvanced}
-          toggleDataFacet={this.props.toggleDataFacet}
-          toggleLabFacet={this.props.toggleLabFacet}
-          visible={advanced}
-        />
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
+
 }
 
 const mapStateToProps = (state) => ({
   config: state.config,
+  countdown: state.countdown.value,
   locale: state.i18n.locale,
-  news: state.ui.news,
-  search: state.ui.main,
+  posts: state.ui.posts,
+  viewport: state.ui.viewport,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getLatestPosts,
-  searchAll,
-  searchAutoComplete,
-  setResultVisibility,
-  setText,
-  toggleAdvanced,
-  togglePill,
-  toggleDataFacet,
-  toggleLabFacet,
+  getLatestPosts
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

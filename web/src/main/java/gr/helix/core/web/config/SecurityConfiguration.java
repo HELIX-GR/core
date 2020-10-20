@@ -117,37 +117,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             // Public
             .antMatchers(
                 "/",
-                 // Site parts
-                 "/datasets/**",
-                 "/error/**",
-                 "/main/**",
-                 "/news/**",
-                 "/notebooks/**",
-                 "/pages/**",
-                 "/the-action/**",
-                 "/network/**",
-                 "/applications/**",
-                 "/news-events/**",
-                 // Assets
-                 "/favicon.ico",
-                 "/css/**",
-                 "/docs/**",
-                 "/fonts/**",
-                 "/i18n/**",
-                 "/images/**",
-                 "/js/**",
-                 "/vendor/**",
-                 // Authentication endpoints
-                 "/login**",
-                 "/logged-out",
-                 // Error pages
-                 "/error**",
-                 // Public action API endpoints
-                 "/action/catalog/**",
-                 "/action/ckan/**",
-                 "/action/configuration/**",
-                 "/action/dataset/**",
-                 "/action/notebook/**"
+                // Site parts
+                "/about/**",
+                "/contact",
+                "/datasets/**",
+                "/error/**",
+                "/main/**",
+                "/news/**",
+                "/notebooks/**",
+                "/pages/**",
+                "/the-action/**",
+                "/network/**",
+                "/applications/**",
+                "/news-events/**",
+                "/terms-of-use",
+                // Assets
+                "/css/**",
+                "/docs/**",
+                "/fonts/**",
+                "/i18n/**",
+                "/images/**",
+                "/js/**",
+                "/vendor/**",
+                // Authentication endpoints
+                "/login**",
+                "/logged-out",
+                // Error pages
+                "/error**",
+                // Public action API endpoints
+                "/action/catalog/**",
+                "/action/ckan/**",
+                "/action/configuration/**",
+                "/action/dataset/**",
+                "/action/notebook/**"
              ).permitAll()
             // Public API endpoints
             .regexMatchers(API_REG_EX).permitAll()

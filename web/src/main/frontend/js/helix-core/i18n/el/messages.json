@@ -1,331 +1,117 @@
 {
+  "breadcrumb": {
+    "home": "Home",
+    "about": "About",
+    "overview": "Overview",
+    "targets": "Targets",
+    "committee": "Managing Committee",
+    "scientific-committee": "Scientific Committee",
+    "work-packages": "Work Packages",
+    "deliverables": "Deliverables",
+    "network": "Network",
+    "associate": "Associate",
+    "core": "Core",
+    "join": "Join",
+    "news": "News & Events",
+    "applications": "Applications",
+    "services": "Services",
+    "tools": "Tools",
+    "blog": "Blog",
+    "dialogue-forum": "Dialog Forum",
+    "newsletter": "Newsletter",
+    "other-events": "Other Events",
+    "workshops": "Workshops"
+  },
+  "buttons": {
+    "learn-more": "LEARN MORE",
+    "our-targets": "OUR TARGETS",
+    "join": "JOIN",
+    "keep-me-updated": "KEEP ME UPDATED"
+  },
   "header": {
     "menu": {
-      "data": {
-        "title": "Data"
-      },
-      "lab": {
-        "title": "Lab"
+      "about": {
+        "items": {
+          "deliverables": "DELIVERABLES",
+          "home": "HOME",
+          "committee": "MANAGEMENT COMMITTEE",
+          "overview": "OVERVIEW",
+          "scientific-committee": "SCIENTIFIC COMMITTEE",
+          "targets": "TARGETS",
+          "work-packages": "WORK PACKAGES"
+        }
       },
       "applications": {
-        "title": "Applications",
         "items": {
-          "applications-services": "Services",
-          "applications-tools": "Tools",
-          "applications-lab": "Lab"
-        }
-      },
-      "the-action": {
-        "title": "The Action",
-        "items": {
-          "the-action-overview": "Overview",
-          "the-action-targets": "Targets",
-          "the-action-management-committee": "Management Committee",
-          "the-action-scientific-committee": "Scientific Committee",
-          "the-action-work-packages": "Work Packages",
-          "the-action-deliverables": "Deliverables",
-          "the-action-contact-us": "Contact Us"
-        }
-      },
-      "news-events": {
-        "title": "News & Events",
-        "items": {
-          "news-events-dialogue-forum": "Dialogue Forum",
-          "news-events-workshops": "Workshops",
-          "news-events-other-events": "Other Events",
-          "news-events-newsletter": "Newsletter",
-          "news-events-blog": "Blog"
+          "lab": "LAB",
+          "services": "SERVICES",
+          "tools": "TOOLS"
         }
       },
       "network": {
-        "title": "Network",
         "items": {
-          "network-members": "Members",
-          "network-join": "Join"
+          "associate": "ASSOCIATE",
+          "core": "CORE",
+          "join": "JOIN"
         }
       },
-      "login": {
+      "news-events": {
         "items": {
-          "signed-in": "Είσοδος ως {username}",
-          "account": "Λογαριασμός",
-          "collections": "Οι συλλογές μου",
-          "favorites": "Σελιδοδείκτες",
-          "logout": "Έξοδος"
+          "blog": "BLOG",
+          "dialogue-forum": "DIALOGUE FORUM",
+          "newsletter": "NEWSLETTER",
+          "other-events": "OTHER EVENTS",
+          "workshops": "WORKSHOPS"
         }
       }
     }
-  },
-  "breadcrumb": {
-    "results": "ΑΠΟΤΕΛΕΣΜΑΤΑ",
-    "all": "ΟΛΑ",
-    "events": "Εκδηλώσεις",
-    "favorites": "ΣΕΛΙΔΟΔΕΙΚΤΕΣ",
-    "helix-team": "Ομάδα HELIX",
-    "news": "Blog",
-    "actions": "Δράσεις"
-  },
-  "favorites": {
-    "text.placeholder": "Αναζήτηση με τίτλο",
-    "order-by": {
-      "label": "Ταξινόμηση κατά",
-      "options": {
-        "date": "Ημερομηνία Εισαγωγής",
-        "title": "Τίτλος"
-      }
-    }
-  },
-  "collections": {
-    "create.title": "Create Collection",
-    "create.text.placeholder": "Enter a name for the collection ...",
-    "create.success": "Collection {title} has been created",
-    "create.failure": "Collection creation has failed",
-    "update.title": "Update Collection",
-    "update.text.placeholder": "Enter a new name for the collection ...",
-    "update.success": "Collection {title} has been updated",
-    "update.failure": "Collection update has failed",
-    "delete.title": "Delete Collection",
-    "delete.text.placeholder": "Do you want to delete collection {title} permanently?",
-    "delete.success": "Collection {title} has been deleted",
-    "delete.failure": "Collection deletion has failed",
-    "last-modified": "lasted saved {when}",
-    "manager.title": "Select Collections",
-    "add-favorite.failure": "Failed to add favorite to collection",
-    "remove-favorite.failure": "Failed to remove favorite from collection"
-  },
-  "footer": {
-    "members-area": "Members Area",
-    "copyright": "© 2020 CLIMPACT. All rights reserved."
   },
   "locales": {
-    "en": "Αγγλικά",
-    "el": "Ελληνικά"
+    "en": "English",
+    "el": "Greek"
   },
   "login": {
-    "forgot-password": "Ξεχάσατε το κωδικό σας;",
-    "login": "Είσοδος",
-    "subtitle": "Εισοδος στο λογαριασμό σας",
-    "failure": "Το όνομα χρήστη ή/και ο κωδικός είναι λάθος"
+    "forgot-password": "Forgot your password?",
+    "login": "Login",
+    "subtitle": "Sign-in into your account",
+    "failure": "The username or password is incorrect"
   },
-  "pills": {
-    "data": "DATA",
-    "lab": "LAB"
-  },
-  "profile": {
-    "action": {
-      "edit": "Ενημέρωση Στοιχείων",
-      "update": "Ενημέρωση",
-      "upload-image": "Επιλογή Εικόνας"
-    },
-    "title": "Στοιχεία χρήστη",
-    "form": {
-      "image": "Εικόνα",
-      "username": "Όνομα Χρήστη",
-      "email": "Email",
-      "resume": "Βιογραφικό",
-      "url": "URL",
-      "company": "Εταιρεία / Οργανισμός",
-      "location": "Τοποθεσία"
-    },
-    "notes": "All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears. Please see our privacy statement to learn more about how we use this information.",
-    "error": {
-      "update.failure": "Failed to update user profile",
-      "update.success": "Profile has been updated successfully"
-    }
-  },
-  "main": {
-    "search": {
-      "placeholder": {
-        "prefix": "Αναζήτηση {catalogs}",
-        "data": "data",
-        "lab": "research tools",
-        "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
-      },
-      "advanced-search": "ΠΡΟΧΩΡΗΜΕΝΗ ΑΝΑΖΗΤΗΣΗ"
-    },
-    "news": {
-      "title": "Τελευταίες δημοσιεύσεις",
-      "read-more": "Περισσότερα"
-    },
-    "about": {
-      "title": "Σχετικά με το HELIX",
-      "sections": {
-        "1": {
-          "title": "Τι είναι το HELIX;",
-          "content": "Το HELIX είναι μία οριζόντια ψηφιακή επιστημονική υποδομή για την υποστήριξη της έρευνας έντασης δεδομένων, καλύπτοντας το σύνολο των αναγκών διαμοιρασμού, ανακάλυψης, διαχείρισης, επεξεργασίας και δημοσίευσης επιστημονικών δεδομένων της Ελληνικής Επιστημονικής κοινότητας.",
-          "link": "Μάθετε περισσότερα"
-        },
-        "2": {
-          "title": "Αναζητήστε Δεδομένα",
-          "content": "Βρείτε, χρησιμοποιείστε και μοιραστείτε ανοικτά επιστημονικά δεδομένα από Ελληνικούς Ερευνητικους οργανισμούς, ιδρύματα και ερευνητές. Χρησιμοποιείστε τα στη δική σας έρευνα ή εργασία.",
-          "link": "Βρείτε δεδομένα"
-        },
-        "3": {
-          "title": "Φτιάξτε με δεδομένα",
-          "content": "Μάθετε, πειραματιστείτε και δουλέψτε με δεδομένα χωρίς να φύγετε από το διαφυλλιστή σας. Αξιοποιήστε κλιμακώσιμες υποδομές Μεγάλων Δεδομένων και HPC.",
-          "link": "Γράψτε κώδικα"
-        },
-        "4": {
-          "title": "Συνεργάτες",
-          "content": "Το HELIX είναι μία συλλογική προσπάθεια του ΕΚ Αθηνά και του ΕΔΕΤ Α.Ε., με την οικονομική στήριξη της Ευρωπαικής Ένωσης, φέρνοντας κοντά το σύνολο της Εληνικής ερευνητικής κοινότητας.",
-          "link": "Learn more"
-        }
-      }
-    }
-  },
-  "advanced-search": {
-    "title": "Προχωρημένη Αναζήτηση",
-    "placeholder": {
-      "prefix": "Αναζήτηση {catalogs}",
-      "data": "δεδομένα",
-      "lab": "ερευνητικά εργαλεία",
-      "author": "Εισάγετε ένα όνομα και πατήστε enter ..."
-    },
-    "tabs": {
-      "data": "DATA",
-      "lab": "LAB"
-    },
-    "filters": {
-      "ckan": {
-        "organizations": "ΟΡΓΑΝΙΣΜΟΙ",
-        "topics": "ΘΕΜΑΤΑ",
-        "tags": "TAGS",
-        "formats": "ΜΟΡΦΟΤΥΠΟΙ",
-        "licenses": "ΑΔΕΙΕΣ"
-      }
-    },
-    "help": {
-      "author": "Λίστα ονομάτων ή/και επιθέτων. Αναζητήστε δημοσιεύσεις ανά συγγραφέα.",
-      "acceptance-from": "Επιστρέφει τις δημοσιεύσεις με ημερομηνία αποδοχής μεγαλύτερη ή ίση από τη δοθείσα ημερομηνία.",
-      "acceptance-to": "Επιστρέφει τις δημοσιεύσεις με ημερομηνία αποδοχής μικρότερη από τη δοθείσα ημερομηνία."
-    },
-    "view-less": "Λιγότερα",
-    "view-more": "Περισσότερα"
-  },
-  "project": {
-    "title": "Το έργο"
-  },
-  "events": {
-    "title": "Εκδηλώσεις",
-    "load-more": "Περισσότερα"
-  },
-  "news": {
-    "title": "Blog",
-    "load-more": "Περισσότερα",
-    "read-more": "Περισσότερα",
-    "related-news": "Σχετικές δημοσιεύσεις"
-  },
-  "actions": {
-    "title": "Δράσεις",
-    "load-more": "Περισσότερα"
-  },
-  "results": {
-    "shared": {
-      "search": {
-        "advanced-search": "Σύνθετη Αναζήτηση",
-        "order-by": {
-          "label": "Ταξινόμηση κατά",
-          "options": {
-            "relevance": "Σχετικότητα"
-          }
-        },
-        "location": {
-          "title": "Τοποθεσία"
+  "sidebar": {
+    "menu": {
+      "about": {
+        "items": {
+          "about": "About",
+          "deliverables": "Deliverables",
+          "committee": "Managing Committee",
+          "overview": "Overview",
+          "scientific-committee": "Scientific Committee",
+          "targets": "Targets",
+          "work-packages": "Work Packages"
         }
       },
-      "count": {
-        "data": "Βρέθηκαν {count} σύνολα δεδομένων",
-        "lab": " Βρέθηκαν {count} notebooks"
-      }
-    },
-    "main": {
-      "search": {
-        "placeholder": {
-          "prefix": "Αναζήτηση {catalogs}",
-          "data": "δεδομένα",
-          "lab": "ερευνητικά εργαλεία"
+      "applications": {
+        "items": {
+          "lab": "Lab",
+          "services": "Services",
+          "tools": "Tools"
+        }
+      },
+      "network": {
+        "items": {
+          "associate": "Associate",
+          "core": "Core",
+          "join": "Join"
+        }
+      },
+      "news-events": {
+        "items": {
+          "blog": "Blog",
+          "dialogue-forum": "Dialog Forum",
+          "newsletter": "Newsletter",
+          "other-events": "Other Events",
+          "workshops": "Workshops"
         }
       }
     }
-  },
-  "dataset": {
-    "publisher": "Εκδότης",
-    "subjects": "Θέματα",
-    "license": "Άδεια",
-    "publication": "ΔΗΜΟΣΙΕΥΣΗ: ",
-    "last-revision": "ΤΕΛΕΥΤΑΙΑ ΑΝΑΝΕΩΣΗ: ",
-    "dataset": "Σύνολο δεδομένων",
-    "resources": "Δεδομένα και Πόροι",
-    "no-description": "Καμία περιγραφή",
-    "open-data-license": "Το σύνολο δεδομένων είναι Ανοικτό",
-    "buttons": {
-      "download": "ΜΕΤΑΦΟΡΤΩΣΗ"
-    }
-  },
-  "publication": {
-    "publisher": "Εκδότης",
-    "subjects": "Θέματα",
-    "date-of-acceptance": "Ημερομηνία Αποδοχής",
-    "embargo-end-date": "Ημερομηνία Λήξης Εμπάργκο",
-    "publication": "Δημοσίευση",
-    "no-description": "Καμία περιγραφή",
-    "related-publications": "Παρόμοια Ερευνητικά Αποτελέσματα ({count})",
-    "hosted-by": "Διαθέσιμο Από: {host}",
-    "similarity": "Ομοιότητα",
-    "download-section": "Μεταφόρτωση Από",
-    "citation": "Παραπομπές",
-    "select-citation-style": "Επιλογή μορφοποίησης παραπομπής ...",
-    "not-found": "Η δημοσίευση δεν βρέθηκε",
-    "buttons": {
-      "view": "ΠΡΟΒΟΛΗ"
-    }
-  },
-  "notebook": {
-    "publisher": "Εκδότης",
-    "subjects": "Θέματα",
-    "license": "Άδεια",
-    "publication": "ΔΗΜΟΣΙΕΥΣΗ: ",
-    "last-revision": "ΤΕΛΕΥΤΑΙΑ ΑΝΑΝΕΩΣΗ: ",
-    "notebook": "Notebook",
-    "resources": "ΔΕΔΟΜΕΝΑ ΚΑΙ ΠΟΡΟΙ",
-    "no-description": "Καμία περιγραφή",
-    "open-data-license": "Το notebook είναι Ανοικτό.",
-    "buttons": {
-      "download": "ΜΕΤΑΦΟΡΤΩΣΗ",
-      "view": "ΠΡΟΒΟΛΗ"
-    }
-  },
-  "favorite": {
-    "login-required": "Παρακαλώ συνδεθείτε για να προσθέσετε το αποτέλεσμα στα αγαπημένα σας",
-    "add-error-dataset": "Αποτυχία προσθήκης συνόλου δεδομένων στα αγαπημένα",
-    "add-error-publication": "Αποτυχία προσθήκης δημοσίευσης στα αγαπημένα",
-    "add-error-notebook": "Αποτυχία προσθήκης notebook δεδομένων στα αγαπημένα",
-    "remove-error-dataset": "Αποτυχία διαγραφής συνόλου δεδομένων από τα αγαπημένα",
-    "remove-error-publication": "Αποτυχία διαγραφής δημοσίευσης από τα αγαπημένα",
-    "remove-error-notebook": "Αποτυχία διαγραφής notebook από τα αγαπημένα"
-  },
-  "tooltip": {
-    "add-favorite": "Προσθήκη στα αγαπημένα",
-    "remove-favorite": "Διαγραφή από τα αγαπημένα",
-    "view-publication": "Προβολή δημοσίευσης",
-    "manage-collections": "Manage collections"
-  },
-  "filesystem": {
-    "size": {
-      "less-than": "Το μέγεθος του αρχείου πρέπει να είναι μικρότερο από {size}"
-    },
-    "read-failed": "Η ανάγνωση του αρχείου απέτυχε",
-    "type-not-supported": "Ο τύπος αρχείου δεν υποστηρίζεται"
-  },
-  "FavoriteErrorCode": {
-    "TITLE_MISSING": "Title is required",
-    "COLLECTION_ALREADY_EXISTS": "Collection with the same title already exists",
-    "COLLECTION_NOT_FOUND": "Collection was not found",
-    "HANDLE_NOT_FOUND": "Favorite was not found",
-    "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
-  },
-  "cookie": {
-    "consent": "This website uses cookies to enhance the user experience.",
-    "learn-more": "Learn more",
-    "accept": "Accept"
   }
 }

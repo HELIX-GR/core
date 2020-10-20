@@ -1,108 +1,70 @@
 {
+  "breadcrumb": {
+    "home": "Home",
+    "about": "About",
+    "overview": "Overview",
+    "targets": "Targets",
+    "committee": "Managing Committee",
+    "scientific-committee": "Scientific Committee",
+    "work-packages": "Work Packages",
+    "deliverables": "Deliverables",
+    "network": "Network",
+    "associate": "Associate",
+    "core": "Core",
+    "join": "Join",
+    "news": "News & Events",
+    "applications": "Applications",
+    "services": "Services",
+    "tools": "Tools",
+    "blog": "Blog",
+    "dialogue-forum": "Dialog Forum",
+    "newsletter": "Newsletter",
+    "other-events": "Other Events",
+    "workshops": "Workshops"
+  },
+  "buttons": {
+    "learn-more": "LEARN MORE",
+    "our-targets": "OUR TARGETS",
+    "join": "JOIN",
+    "keep-me-updated": "KEEP ME UPDATED"
+  },
   "header": {
     "menu": {
-      "data": {
-        "title": "Data"
-      },
-      "lab": {
-        "title": "Lab"
+      "about": {
+        "items": {
+          "deliverables": "DELIVERABLES",
+          "home": "HOME",
+          "committee": "MANAGEMENT COMMITTEE",
+          "overview": "OVERVIEW",
+          "scientific-committee": "SCIENTIFIC COMMITTEE",
+          "targets": "TARGETS",
+          "work-packages": "WORK PACKAGES"
+        }
       },
       "applications": {
-        "title": "Applications",
         "items": {
-          "applications-services": "Services",
-          "applications-tools": "Tools",
-          "applications-lab": "Lab"
-        }
-      },
-      "the-action": {
-        "title": "The Action",
-        "items": {
-          "the-action-overview": "Overview",
-          "the-action-targets": "Targets",
-          "the-action-management-committee": "Management Committee",
-          "the-action-scientific-committee": "Scientific Committee",
-          "the-action-work-packages": "Work Packages",
-          "the-action-deliverables": "Deliverables",
-          "the-action-contact-us": "Contact Us"
-        }
-      },
-      "news-events": {
-        "title": "News & Events",
-        "items": {
-          "news-events-dialogue-forum": "Dialogue Forum",
-          "news-events-workshops": "Workshops",
-          "news-events-other-events": "Other Events",
-          "news-events-newsletter": "Newsletter",
-          "news-events-blog": "Blog"
+          "lab": "LAB",
+          "services": "SERVICES",
+          "tools": "TOOLS"
         }
       },
       "network": {
-        "title": "Network",
         "items": {
-          "network-members": "Members",
-          "network-join": "Join"
+          "associate": "ASSOCIATE",
+          "core": "CORE",
+          "join": "JOIN"
         }
       },
-      "news": {
-        "title": "Blog",
+      "news-events": {
         "items": {
-          "news": "Blog",
-          "events": "Events",
-          "actions": "Actions"
-        }
-      },
-      "login": {
-        "items": {
-          "signed-in": "Signed in as {username}",
-          "account": "Account Settings",
-          "collections": "My Collections",
-          "favorites": "Favorites",
-          "logout": "Log out"
+          "blog": "BLOG",
+          "dialogue-forum": "DIALOGUE FORUM",
+          "newsletter": "NEWSLETTER",
+          "other-events": "OTHER EVENTS",
+          "workshops": "WORKSHOPS"
         }
       }
     }
-  },
-  "breadcrumb": {
-    "results": "RESULTS",
-    "all": "ALL",
-    "events": "Events",
-    "favorites": "FAVORITES",
-    "helix-team": "HELIX Team",
-    "news": "Blog",
-    "actions": "Actions"
-  },
-  "favorites": {
-    "text.placeholder": "Search favorites",
-    "order-by": {
-      "label": "Order by",
-      "options": {
-        "date": "Data Added",
-        "title": "Title"
-      }
-    }
-  },
-  "collections": {
-    "create.title": "Create Collection",
-    "create.text.placeholder": "Enter a name for the collection ...",
-    "create.success": "Collection {title} has been created",
-    "create.failure": "Collection creation has failed",
-    "update.title": "Update Collection",
-    "update.text.placeholder": "Enter a new name for the collection ...",
-    "update.success": "Collection {title} has been updated",
-    "update.failure": "Collection update has failed",
-    "delete.title": "Delete Collection",
-    "delete.text.placeholder": "Do you want to delete collection {title} permanently?",
-    "delete.success": "Collection {title} has been deleted",
-    "delete.failure": "Collection deletion has failed",
-    "last-modified": "lasted saved {when}",
-    "manager.title": "Select Collections",
-    "add-favorite.failure": "Failed to add favorite to collection",
-    "remove-favorite.failure": "Failed to remove favorite from collection"
-  },
-  "footer": {
-    "members-area": "Members Area",
-    "copyright": "© 2020 CLIMPACT. All rights reserved."
   },
   "locales": {
     "en": "English",
@@ -114,226 +76,42 @@
     "subtitle": "Sign-in into your account",
     "failure": "The username or password is incorrect"
   },
-  "profile": {
-    "action": {
-      "edit": "Edit Profile",
-      "update": "Update",
-      "upload-image": "Upload New Picture"
-    },
-    "title": "Profile",
-    "form": {
-      "image": "Picture",
-      "username": "User Name",
-      "email": "Email",
-      "resume": "Resume",
-      "url": "URL",
-      "company": "Company",
-      "location": "Location"
-    },
-    "notes": "All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears. Please see our privacy statement to learn more about how we use this information.",
-    "error": {
-      "update.failure": "Failed to update user profile",
-      "update.success": "Profile has been updated successfully"
-    }
-  },
-  "pills": {
-    "data": "DATA",
-    "lab": "LAB"
-  },
-  "main": {
-    "search": {
-      "placeholder": {
-        "prefix": "Search {catalogs}",
-        "data": "data",
-        "lab": "research tools",
-        "author": "Enter a name and press enter ..."
-      },
-      "advanced-search": "ADVANCED SEARCH"
-    },
-    "news": {
-      "title": "Latest Blog Posts",
-      "read-more": "Read more"
-    },
-    "about": {
-      "title": "About HELIX",
-      "sections": {
-        "1": {
-          "title": "What is HELIX?",
-          "content": "HELIX is an horizontal eInfrastructure for data-intensive research, handling the data management, analysis, sharing, and reuse needs of Greek scientists, researchers and innovators in a cross-disciplinary, scalable, and low-cost manner.",
-          "link": "Learn more"
-        },
-        "2": {
-          "title": "Search for Data",
-          "content": "Find, use, and share open scientific data created by Greek Research organizations, institutions, and innovators. Use them in your own research or line of work.",
-          "link": "Find data"
-        },
-        "3": {
-          "title": "Build with data",
-          "content": "Learn, experiment, and work with data, without ever leaving in your browser. Tap into ready to use, highly scalable Big Data and HPC infrastructures.",
-          "link": "Start coding"
-        },
-        "4": {
-          "title": "Our partners",
-          "content": "HELIX is a collective effort of Athena RC and GRNET S.A., with the financial support of the European Union, bringing together the entire Greek research community.",
-          "link": "Learn more"
-        }
-      }
-    }
-  },
-  "advanced-search": {
-    "title": "Advanced Search",
-    "placeholder": {
-      "prefix": "Search {catalogs}",
-      "data": "data",
-      "lab": "research tools",
-      "author": "Enter a name and press enter ..."
-    },
-    "tabs": {
-      "data": "DATA",
-      "lab": "LAB"
-    },
-    "filters": {
-      "ckan": {
-        "organizations": "ORGANIZATIONS",
-        "topics": "TOPICS",
-        "tags": "TAGS",
-        "formats": "FORMATS",
-        "licenses": "LICENSES"
-      }
-    },
-    "help": {
-      "author": "White-space separated list of names and/or surnames. Search for publications by authors.",
-      "acceptance-from": "Gets the publications whose date of acceptance is greater than or equal the given date.",
-      "acceptance-to": "Gets the publications whose date of acceptance is less than or equal the given date."
-    },
-    "view-less": "View Less",
-    "view-more": "View More"
-  },
-  "project": {
-    "title": "The project"
-  },
-  "events": {
-    "title": "Events",
-    "load-more": "More"
-  },
-  "news": {
-    "title": "Blog",
-    "load-more": "More",
-    "read-more": "Read more",
-    "related-news": "Related Blog Posts"
-  },
-  "actions": {
-    "title": "Actions",
-    "load-more": "More"
-  },
-  "results": {
-    "shared": {
-      "search": {
-        "advanced-search": "Advanced Search",
-        "order-by": {
-          "label": "Order by",
-          "options": {
-            "relevance": "Relevance"
-          }
-        },
-        "location": {
-          "title": "LOCATION"
+  "sidebar": {
+    "menu": {
+      "about": {
+        "items": {
+          "about": "About",
+          "deliverables": "Deliverables",
+          "committee": "Managing Committee",
+          "overview": "Overview",
+          "scientific-committee": "Scientific Committee",
+          "targets": "Targets",
+          "work-packages": "Work Packages"
         }
       },
-      "count": {
-        "data": "{count} datasets found",
-        "lab": "{count} notebooks found"
-      }
-    },
-    "main": {
-      "search": {
-        "placeholder": {
-          "prefix": "Search {catalogs}",
-          "data": "data",
-          "lab": "research tools"
+      "applications": {
+        "items": {
+          "lab": "Lab",
+          "services": "Services",
+          "tools": "Tools"
+        }
+      },
+      "network": {
+        "items": {
+          "associate": "Associate",
+          "core": "Core",
+          "join": "Join"
+        }
+      },
+      "news-events": {
+        "items": {
+          "blog": "Blog",
+          "dialogue-forum": "Dialog Forum",
+          "newsletter": "Newsletter",
+          "other-events": "Other Events",
+          "workshops": "Workshops"
         }
       }
     }
-  },
-  "dataset": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
-    "dataset": "Dataset",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This dataset satisfies the Open Definition.",
-    "buttons": {
-      "download": "DOWNLOAD"
-    }
-  },
-  "publication": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "date-of-acceptance": "Acceptance Date",
-    "embargo-end-date": "Embargo End Date",
-    "publication": "Publication",
-    "no-description": "No description",
-    "related-publications": "Similar Research Results ({count})",
-    "hosted-by": "Hosted By: {host}",
-    "similarity": "Similarity",
-    "download-section": "Download From",
-    "citation": "Citation",
-    "select-citation-style": "Select citation style ...",
-    "not-found": "Publication was not found",
-    "buttons": {
-      "view": "VIEW"
-    }
-  },
-  "notebook": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
-    "notebook": "Notebook",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This notebook satisfies the Open Definition.",
-    "buttons": {
-      "download": "DOWNLOAD",
-      "view": "VIEW"
-    }
-  },
-  "favorite": {
-    "login-required": "Please login to add result to favorites",
-    "add-error-dataset": "Failed to add dataset to favorites",
-    "add-error-publication": "Failed to add publication to favorites",
-    "add-error-notebook": "Failed to add notebook to favorites",
-    "remove-error-dataset": "Failed to remove dataset from favorites",
-    "remove-error-publication": "Failed remove add publication from favorites",
-    "remove-error-notebook": "Failed to remove notebook from favorites"
-  },
-  "tooltip": {
-    "add-favorite": "Add to favorites",
-    "remove-favorite": "Remove from favorites",
-    "view-publication": "View publication",
-    "manage-collections": "Manage collections"
-  },
-  "filesystem": {
-    "size": {
-      "less-than": "File size must be less than {size}"
-    },
-    "read-failed": "File read operation has failed",
-    "type-not-supported": "File type is not supported"
-  },
-  "FavoriteErrorCode": {
-    "TITLE_MISSING": "Title is required",
-    "COLLECTION_ALREADY_EXISTS": "Collection with the same title already exists",
-    "COLLECTION_NOT_FOUND": "Collection was not found",
-    "HANDLE_NOT_FOUND": "Favorite was not found",
-    "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
-  },
-  "cookie": {
-    "consent": "This website uses cookies to enhance the user experience.",
-    "learn-more": "Learn more",
-    "accept": "Accept"
   }
 }

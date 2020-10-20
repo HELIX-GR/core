@@ -4,6 +4,7 @@ import { connectRouter } from 'connected-react-router';
 
 import {
   config,
+  countdown,
   i18n,
   meta,
   user
@@ -19,11 +20,13 @@ import {
   main,
   news,
   notebook,
+  posts,
   project,
 } from './ducks/ui/views';
 
 export default (history) => Redux.combineReducers({
   config,
+  countdown,
   i18n,
   meta,
   router: connectRouter(history),
@@ -33,6 +36,7 @@ export default (history) => Redux.combineReducers({
     main,
     news,
     notebook,
+    posts,
     project,
     viewport,
   }),

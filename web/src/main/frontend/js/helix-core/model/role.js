@@ -1,3 +1,5 @@
-export const USER = 'USER';
-export const ADMIN = 'ADMIN';
-export const MAINTAINER = 'MAINTAINER';
+export const Roles = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+  MAINTAINER: 'MAINTAINER',
+};

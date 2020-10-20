@@ -31,9 +31,11 @@ export const EnumAuthProvider = {
 };
 
 export const EnumPostCategory = {
-  News: 'news',
-  Events: 'events',
-  Actions: 'actions',
+  Blog: 'blog',
+  DialogueForum: 'dialogue-forum',
+  Newsletter: 'newsletter',
+  OtherEvent: 'other-events',
+  Workshop: 'workshop',
 };
 
 export const EnumCollectionAction = {

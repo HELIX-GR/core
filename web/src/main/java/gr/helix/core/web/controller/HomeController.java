@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     private static final String clientRoutes[] = {
+        "/about/",
         "/collections/",
+        "/contact",
         "/datasets/",
         "/error/",
         "/favorites/",
@@ -24,6 +26,7 @@ public class HomeController {
         "/network/",
         "/applications/",
         "/news-events/",
+        "/terms-of-use",
     };
 
     @RequestMapping("*")
@@ -36,7 +39,9 @@ public class HomeController {
     }
 
     @RequestMapping({
+        "/about/**",
         "/collections/**",
+        "/contact",
         "/datasets/**",
         "/error/**",
         "/favorites/**",
@@ -50,6 +55,7 @@ public class HomeController {
         "/network/**",
         "/applications/**",
         "/news-events/**",
+        "/terms-of-use",
     })
     public String reactRoutes(HttpSession session, HttpServletRequest request) {
         return "index";

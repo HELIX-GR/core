@@ -11,6 +11,11 @@ import CookieConsent from "react-cookie-consent";
 import { EnumAuthProvider, EnumRole as Roles, WordPressPages } from '../model';
 import { Pages, StaticRoutes, DynamicRoutes, buildPath } from '../model/routes';
 
+
+import {
+  updateCountDown,
+} from '../ducks/countdown';
+
 import {
   changeLocale,
 } from '../ducks/i18n';
@@ -55,6 +60,43 @@ import {
 } from './pages';
 
 import {
+  Committee,
+  Deliverables,
+  Overview,
+  ScientificCommittee,
+  Targets,
+  WorkPackages,
+} from './views/pages/about';
+
+import {
+  Services,
+  Tools,
+} from './views/pages/applications';
+
+import {
+  Associate,
+  Core,
+  Join,
+} from './views/pages/network';
+
+import {
+  Blog,
+  DialogueForum,
+  Newsletter,
+  OtherEvents,
+  Workshops,
+} from './views/pages/news';
+
+import {
+  Contact,
+  TermsOfUse,
+} from './views/pages/misc';
+
+import {
+  PostPage
+} from './views/pages';
+
+import {
   SecureRoute
 } from './helpers';
 
@@ -67,15 +109,48 @@ class ContentRoot extends React.Component {
     super(props);
 
     this.toggleLoginDialog = this.toggleLoginDialog.bind(this);
+
+    this.countdownInterval = null;
+  }
+
+  setBodyClassName() {
+    const { location } = this.props;
+
+    let className = '';
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/news-events/other-events')) {
+        className = 'events-template';
+      }
+      if (location.pathname.startsWith('/news-events/blog')) {
+        className = 'blog-template';
+      }
+      if (location.pathname.startsWith('/news-events/dialogue-forum')) {
+        className = 'forum-template';
+      }
+    }
+
+    document.body.className = className;
   }
 
   componentDidMount() {
     this._viewportListener = _.debounce(this._setViewport.bind(this), 150);
     window.addEventListener('resize', this._viewportListener);
+
+    // Start countdown
+    this.countdownInterval = setInterval(() => {
+      this.props.updateCountDown();
+    }, 997);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this._viewportListener);
+
+    // Stop countdown
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+      this.countdownInterval = null;
+    }
   }
 
   _setViewport() {
@@ -83,27 +158,6 @@ class ContentRoot extends React.Component {
       document.documentElement.clientWidth,
       document.documentElement.clientHeight
     );
-  }
-
-  resolvePageClassName() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/news')) {
-        return 'news';
-      }
-      if (location.pathname.startsWith('/project')) {
-        return 'project';
-      }
-      if (location.pathname.startsWith('/datasets')) {
-        return 'data';
-      }
-      if (location.pathname.startsWith('/notebooks')) {
-        return 'lab';
-      }
-    }
-
-    return 'home';
   }
 
   toggleLoginDialog() {
@@ -117,6 +171,8 @@ class ContentRoot extends React.Component {
   }
 
   render() {
+    this.setBodyClassName();
+
     const roles = [Roles.Admin, Roles.User];
     const _t = this.props.intl.formatMessage;
 
@@ -127,6 +183,8 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
+        <Route path={DynamicRoutes.BLOG_PAGE} component={PostPage} />
+
         <SecureRoute path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} exact roles={roles} />
         <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
         <Route path={DynamicRoutes.ACTION_PAGE} component={ActionsDetails} />
@@ -134,6 +192,31 @@ class ContentRoot extends React.Component {
         <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
         <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
         {/* Static routes */}
+        <Route path={StaticRoutes.Home} component={Main} exact />
+
+        <Route path={StaticRoutes.Committee} component={Committee} />
+        <Route path={StaticRoutes.Deliverables} component={Deliverables} />
+        <Route path={StaticRoutes.Overview} component={Overview} />
+        <Route path={StaticRoutes.ScientificCommittee} component={ScientificCommittee} />
+        <Route path={StaticRoutes.Targets} component={Targets} />
+        <Route path={StaticRoutes.WorkPackages} component={WorkPackages} />
+
+        <Route path={StaticRoutes.Services} component={Services} />
+        <Route path={StaticRoutes.Tools} component={Tools} />
+
+        <Route path={StaticRoutes.Associate} component={Associate} />
+        <Route path={StaticRoutes.Core} component={Core} />
+        <Route path={StaticRoutes.Join} component={Join} />
+
+        <Route path={StaticRoutes.Blog} component={Blog} />
+        <Route path={StaticRoutes.DialogueForum} component={DialogueForum} />
+        <Route path={StaticRoutes.Newsletter} component={Newsletter} />
+        <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
+        <Route path={StaticRoutes.Workshops} component={Workshops} />
+
+        <Route path={StaticRoutes.Contact} component={Contact} />
+        <Route path={StaticRoutes.TermsOfUse} component={TermsOfUse} />
+
         <SecureRoute path={StaticRoutes.COLLECTIONS} component={Collections} roles={roles} />
         <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
         <Route path={StaticRoutes.ACTIONS} component={Actions} />
@@ -167,7 +250,7 @@ class ContentRoot extends React.Component {
           toggle={this.toggleLoginDialog}
           visible={this.props.login.visible}
         />
-        <div className={this.resolvePageClassName()}>
+        <div>
           <Header
             changeLocale={this.props.changeLocale}
             config={this.props.config}
@@ -221,6 +304,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout,
   resize,
   toggleLoginDialog,
+  updateCountDown,
 }, dispatch);
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(injectIntl(ContentRoot));

@@ -12,6 +12,33 @@ export const ExternalRoutes = {
 };
 
 // Static routes
+const Home = '/main/';
+
+const Overview = '/about/overview';
+const Targets = '/about/targets';
+const Committee = '/about/committee';
+const ScientificCommittee = '/about/scientific-committee';
+const WorkPackages = '/about/work-packages';
+const Deliverables = '/about/deliverables';
+
+const Associate = '/network/associate';
+const Core = '/network/core';
+const Join = '/network/join';
+
+const Services = '/applications/services';
+const Tools = '/applications/tools';
+
+const Blog = '/news-events/blog';
+const DialogueForum = '/news-events/dialogue-forum';
+const Newsletter = '/news-events/newsletter';
+const OtherEvents = '/news-events/other-events';
+const Workshops = '/news-events/workshops';
+
+const Contact = '/contact';
+const TermsOfUse = '/terms-of-use';
+
+
+
 const ACTIONS = '/news/actions/';
 const APPLICATIONS = '/applications/';
 const EVENTS = '/news/events/';
@@ -35,6 +62,40 @@ const HELIX = '/login/helix';
  * Static routes
  */
 export const StaticRoutes = {
+  Home,
+
+  Overview,
+  Targets,
+  Committee,
+  ScientificCommittee,
+  WorkPackages,
+  Deliverables,
+
+  Associate,
+  Core,
+  Join,
+
+  Services,
+  Tools,
+
+  Blog,
+  DialogueForum,
+  Newsletter,
+  OtherEvents,
+  Workshops,
+
+  Contact,
+  TermsOfUse,
+
+
+
+
+
+
+
+
+
+
   ACTIONS,
   APPLICATIONS,
   COLLECTIONS,
@@ -56,6 +117,8 @@ export const StaticRoutes = {
 };
 
 // Dynamic routes
+const BLOG_PAGE = '/news-events/blog/:id';
+
 const ACTION_PAGE = '/news/actions/view/:id';
 const COLLECTION_PAGE = '/collections/:id';
 const DATASET_PAGE = '/datasets/:id';
@@ -72,6 +135,8 @@ const NEWS_EVENTS_PAGE = '/news-events/page/:name';
  * Dynamic routes
  */
 export const DynamicRoutes = {
+  BLOG_PAGE,
+
   ACTION_PAGE,
   COLLECTION_PAGE,
   DATASET_PAGE,
