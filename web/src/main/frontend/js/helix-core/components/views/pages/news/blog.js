@@ -10,6 +10,7 @@ import {
 import { injectIntl } from 'react-intl';
 
 import {
+  Link,
   NavLink,
 } from 'react-router-dom';
 
@@ -18,9 +19,11 @@ import {
 } from 'react-intl';
 
 import {
+  buildPath,
   DynamicRoutes,
   EnumPostCategory,
   StaticRoutes,
+  WordPressField,
 } from '../../../../model';
 
 import {
@@ -34,19 +37,6 @@ const truncateText = (text, tag, length = 200) => {
   return result.length > length ? result.substring(0, length) + '...' : result;
 };
 
-const getTag = (p) => {
-  if (p._embedded && p._embedded['wp:term']) {
-    const terms = p._embedded['wp:term'].reduce((terms, value) => {
-      return [...terms, ...value];
-    }, []);
-
-    const tags = terms.filter(t => t.taxonomy === 'post_tag');
-
-    return tags.length ? tags[0] : null;
-  }
-  return null;
-};
-
 class Blog extends React.Component {
 
   componentDidMount() {
@@ -55,12 +45,21 @@ class Blog extends React.Component {
     this.props.getPosts(1, 100, EnumPostCategory.Blog);
   }
 
-  getRoute() {
-    return DynamicRoutes.BLOG_PAGE;
-  }
-
   toggleSecureUrl(content) {
     return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
+  renderDate(post) {
+    if (post[WordPressField.Date]) {
+      return post[WordPressField.Date];
+    }
+
+    const modifiedAt = moment(post.modified);
+    const age = moment.duration(moment() - modifiedAt);
+
+    return age.asHours() < 24 ?
+      moment(modifiedAt).fromNow() :
+      <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
   }
 
   renderPosts(posts) {
@@ -73,26 +72,18 @@ class Blog extends React.Component {
           '/images/sample_images/academy.jpg'
       );
 
-      const tag = getTag(p);
-
-      const modifiedAt = moment(p.modified).parseZone();
-      const age = moment.duration(moment() - modifiedAt);
-      const date = age.asHours() < 24 ?
-        moment(modifiedAt).fromNow() :
-        <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
-
       return (
-        <a key={`post-${p.id}`} href="#" className="cards__item cards__item--text cards__item--blog">
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--text cards__item--blog">
           <div className="cards__item__top">
-            <span className="cards__item__date">{p.climpact_title ? `${p.climpact_title} • ` : ''}{p.climpact_date}</span>
+            <span className="cards__item__date">{p[WordPressField.Title] ? `${p[WordPressField.Title]} • ` : ''}{this.renderDate(p)}</span>
             <h3 className="cards__item__title">{p.title.rendered}</h3>
             <div className="cards__item__excerpt" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></div>
           </div>
           <div className="cards__item__img">
             <img src={imageUrl} alt="" />
           </div>
-          <span className="cards__item__button">Πληροφοριες</span>
-        </a>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.blog-more' })}</span>
+        </Link>
       );
     });
   }
@@ -152,7 +143,6 @@ class Blog extends React.Component {
                   <div className="cards__item cards__item--empty"></div>
                 </div>
               </section>
-
             </div>
           </div>
         </div>

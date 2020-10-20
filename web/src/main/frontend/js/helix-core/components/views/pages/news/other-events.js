@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
+import moment from '../../../../moment-localized';
+
 import {
   bindActionCreators
 } from 'redux';
@@ -8,23 +10,88 @@ import {
 import { injectIntl } from 'react-intl';
 
 import {
+  Link,
   NavLink,
 } from 'react-router-dom';
 
 import {
+  FormattedDate,
+} from 'react-intl';
+
+import {
+  buildPath,
+  DynamicRoutes,
+  EnumPostCategory,
   StaticRoutes,
+  WordPressField,
 } from '../../../../model';
 
+import {
+  getPosts,
+} from '../../../../ducks/ui/views/posts';
+
 import ClimateClock from '../../climate-clock';
+
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
+
 
 class OtherEvents extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.getPosts(1, 100, EnumPostCategory.OtherEvent);
+  }
+
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
+  renderDate(post) {
+    if (post[WordPressField.Date]) {
+      return post[WordPressField.Date];
+    }
+
+    const modifiedAt = moment(post.modified);
+    const age = moment.duration(moment() - modifiedAt);
+
+    return age.asHours() < 24 ?
+      moment(modifiedAt).fromNow() :
+      <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+  }
+
+  renderPosts(posts) {
+    const _t = this.props.intl.formatMessage;
+
+    return posts.map((p) => {
+      const imageUrl = (
+        p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
+          this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
+          '/images/sample_images/academy.jpg'
+      );
+
+      return (
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--text cards__item--events">
+          <div className="cards__item__top">
+            <span className="cards__item__date">{p[WordPressField.Title] ? `${p[WordPressField.Title]} • ` : ''}{this.renderDate(p)}</span>
+            <h3 className="cards__item__title">{p.title.rendered}</h3>
+            <div className="cards__item__excerpt" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></div>
+          </div>
+          <div className="cards__item__img">
+            <img src={imageUrl} alt="" />
+          </div>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.other-event-more' })}</span>
+        </Link>
+      );
+    });
   }
 
   render() {
-    const { countdown } = this.props;
+    const { countdown, pages } = this.props;
+    const { posts } = pages[EnumPostCategory.OtherEvent];
 
     const _t = this.props.intl.formatMessage;
 
@@ -67,132 +134,14 @@ class OtherEvents extends React.Component {
               <ul className="page__breadcrumbs">
                 <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.news' })}</a></li>
-                <li><a href="#">{_t({ id: 'breadcrumb.other-events' })}</a></li>
+                <li><a href="#">{_t({ id: 'breadcrumb.other-event' })}</a></li>
               </ul>
 
               <section className="cards cards--sidebar">
                 <div className="cards__inner">
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--text cards__item--events">
-                    <div className="cards__item__top">
-                      <span className="cards__item__date">ΕΚΔΗΛΩΣΕΙΣ • 25/11/2020</span>
-                      <h3 className="cards__item__title">Παρουσίαση Climpact</h3>
-                      <div className="cards__item__excerpt">Η περιοχή μας, η Μεσόγειος και η ειδικότερα η ανατολική λεκάνη της, είναι ιδιαίτερα ευαίσθητη στην κλιματική αλλαγή. Βρίσκεται στο σταυροδρόμι πολιτισμών αλλά και ατμοσφαιρικών διεργασιών, επηρεαζόμενη τόσο από τροπικά όσο και από πολικά συστήματα αερίων μαζών, ανάλογα με τις και- ρικές συνθήκες. Με την προβλεπόμενη από τα κλιματικά μοντέλα επέκταση της ενδοτροπικής ζώνης, το νότιο τμήμα της χώρας θα επηρεάζεται όλο και περισσότερο από τροπικές αέριες μάζες. Για την Ελλάδα, τα κλιματικά μοντέλα για ένα «μέσο» σενάριο (Α1Β) προβλέπουν αύξηση της θερμοκρα- σίας έως 3.5 – 4.0o C, με μείωση της βροχόπτωσης κατά περίπου 30% μέχρι τα τέλη του αιώνα. Χαρακτηριστικά προβλέπεται ότι οι θερμότερες μέρες</div>
-                    </div>
-                    <div className="cards__item__img">
-                      <img src="/images/sample_images/academy.jpg" alt="" />
-                    </div>
-                    <span className="cards__item__button">Πληροφοριες</span>
-                  </a>
+                  {posts && posts.length !== 0 &&
+                    this.renderPosts(posts)
+                  }
                   <div className="cards__item cards__item--empty"></div>
                 </div>
               </section>
@@ -207,10 +156,12 @@ class OtherEvents extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getPosts,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

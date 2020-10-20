@@ -117,36 +117,13 @@ export const StaticRoutes = {
 };
 
 // Dynamic routes
-const BLOG_PAGE = '/news-events/blog/:id';
-
-const ACTION_PAGE = '/news/actions/view/:id';
-const COLLECTION_PAGE = '/collections/:id';
-const DATASET_PAGE = '/datasets/:id';
-const EVENT_PAGE = '/news/events/view/:id';
-const NEWS_PAGE = '/news/view/:id';
-const NOTEBOOK_PAGE = '/notebooks/:id';
-
-const THE_ACTION_PAGE = '/the-action/page/:name';
-const APPLICATIONS_PAGE = '/applications/page/:name';
-const NETWORK_PAGE = '/network/page/:name';
-const NEWS_EVENTS_PAGE = '/news-events/page/:name';
+const POST_PAGE = '/news-events/post/:id';
 
 /**
  * Dynamic routes
  */
 export const DynamicRoutes = {
-  BLOG_PAGE,
-
-  ACTION_PAGE,
-  COLLECTION_PAGE,
-  DATASET_PAGE,
-  EVENT_PAGE,
-  NEWS_PAGE,
-  NOTEBOOK_PAGE,
-  THE_ACTION_PAGE,
-  APPLICATIONS_PAGE,
-  NETWORK_PAGE,
-  NEWS_EVENTS_PAGE,
+  POST_PAGE,
 };
 
 // Routes for utility pages

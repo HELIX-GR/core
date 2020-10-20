@@ -19,14 +19,21 @@
     "blog": "Blog",
     "dialogue-forum": "Dialog Forum",
     "newsletter": "Newsletter",
-    "other-events": "Other Events",
-    "workshops": "Workshops"
+    "other-event": "Other Events",
+    "workshop": "Workshops"
   },
   "buttons": {
     "learn-more": "LEARN MORE",
     "our-targets": "OUR TARGETS",
     "join": "JOIN",
-    "keep-me-updated": "KEEP ME UPDATED"
+    "keep-me-updated": "KEEP ME UPDATED",
+    "card": {
+      "blog-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "dialogue-forum-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "newsletter-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "other-event-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "workshop-more": "ΠΕΡΙΣΣΟΤΕΡΑ"
+    }
   },
   "header": {
     "menu": {

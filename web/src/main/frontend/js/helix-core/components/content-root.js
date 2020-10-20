@@ -183,14 +183,8 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
-        <Route path={DynamicRoutes.BLOG_PAGE} component={PostPage} />
+        <Route path={DynamicRoutes.POST_PAGE} component={PostPage} />
 
-        <SecureRoute path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} exact roles={roles} />
-        <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
-        <Route path={DynamicRoutes.ACTION_PAGE} component={ActionsDetails} />
-        <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
-        <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
-        <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
         {/* Static routes */}
         <Route path={StaticRoutes.Home} component={Main} exact />
 
@@ -217,16 +211,6 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.Contact} component={Contact} />
         <Route path={StaticRoutes.TermsOfUse} component={TermsOfUse} />
 
-        <SecureRoute path={StaticRoutes.COLLECTIONS} component={Collections} roles={roles} />
-        <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
-        <Route path={StaticRoutes.ACTIONS} component={Actions} />
-        <Route path={StaticRoutes.EVENTS} component={Events} />
-        <Route path={StaticRoutes.NEWS} component={News} />
-        <Route path={StaticRoutes.THE_ACTION} component={TheAction} />
-        <Route path={StaticRoutes.NETWORK} component={Network} />
-        <Route path={StaticRoutes.APPLICATIONS} component={Applications} />
-        <Route path={StaticRoutes.NEWS_EVENTS} component={NewsAndEvents} />
-        <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
         <SecureRoute path={StaticRoutes.PROFILE} component={Profile} roles={roles} />
         {/* Default */}
         <Route path={StaticRoutes.MAIN} component={Main} exact />

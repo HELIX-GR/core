@@ -28,6 +28,7 @@ import {
   DynamicRoutes,
   EnumPostCategory,
   StaticRoutes,
+  WordPressField,
 } from '../../model';
 
 import ClimateClock from './climate-clock';
@@ -72,6 +73,43 @@ class Main extends React.Component {
     }
   }
 
+  renderPostDate(post) {
+    if (post[WordPressField.Date]) {
+      return post[WordPressField.Date];
+    }
+
+    const modifiedAt = moment(post.modified);
+    const age = moment.duration(moment() - modifiedAt);
+
+    return age.asHours() < 24 ?
+      moment(modifiedAt).fromNow() :
+      <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+  }
+
+  renderPostIcon(post, category) {
+    let icon = 'blog_icon.svg';
+
+    if (category) {
+      switch (category.name) {
+        case EnumPostCategory.DialogueForum:
+          icon = 'dialogue_forum_icon.svg';
+          break;
+        case EnumPostCategory.Newsletter:
+          icon = 'newsletter_icon.svg';
+          break;
+        case EnumPostCategory.OtherEvent:
+          icon = 'events_icon.svg';
+          break;
+        case EnumPostCategory.Workshop:
+          icon = 'workshop_icon.svg';
+          break;
+      }
+    }
+    return (
+      <img src={`/images/icons/${icon}`} alt="" className="cards__item__icon" />
+    );
+  }
+
   renderPosts(posts = []) {
     const { config: { wordPress: { categories } } } = this.props;
 
@@ -100,90 +138,56 @@ class Main extends React.Component {
       );
 
       // Get author
-      const author = p._embedded.author[0].name;
+      const author = p[WordPressField.Author] || p._embedded.author[0].name;
 
-      // Get interval since publication date or date
-      const modifiedAt = moment(p.modified);
-      const age = moment.duration(moment() - modifiedAt);
-      const date = age.asHours() < 24 ?
-        moment(modifiedAt).fromNow() :
-        <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+      // Get date either as a fixed date from a custom field or as
+      // the interval from the publication date
+      const date = this.renderPostDate(p);
+
+      // Get title
+      const title = p[WordPressField.Location] || p[WordPressField.Title] || '';
+
+      // Get card class
+      let cardClassName = 'cards__item cards__item';
 
       switch (category.name) {
-        case EnumPostCategory.Blog: {
-          items.push(
-            <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.BLOG_PAGE, [p.id])} className="cards__item cards__item--news">
-              <div className="cards__item__top">
-                <img src="/images/icons/news_icon.png" alt="" className="cards__item__icon" />
-                <span className="cards__item__date"> {p.climpact_location} • {date}</span>
-                <h3 className="cards__item__title" style={titleStyle}>{p.title.rendered}</h3>
-              </div>
-              <div className="cards__item__img">
-                <img src={imageUrl} alt="" style={imageStyle} />
-              </div>
-              <span className="cards__item__button">Περισσοτερα</span>
-            </Link>
-          );
-
+        case EnumPostCategory.Blog:
+          cardClassName += '--blog';
           break;
-        }
+        case EnumPostCategory.DialogueForum:
+          cardClassName += '--forum';
+          break;
+        case EnumPostCategory.Newsletter:
+          cardClassName += '--newsletter';
+          break;
+        case EnumPostCategory.OtherEvent:
+          cardClassName += '--events';
+          break;
       }
+
+      items.push(
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className={cardClassName}>
+          <div className="cards__item__top">
+            {this.renderPostIcon(p, category)}
+            <span className="cards__item__date">{title ? `${title} • ` : ''}{date}</span>
+            <h3 className="cards__item__title" style={titleStyle}>{p.title.rendered}</h3>
+          </div>
+          <div className="cards__item__img">
+            <img src={imageUrl} alt="" style={imageStyle} />
+          </div>
+          <span className="cards__item__button">Περισσοτερα</span>
+        </Link>
+      );
     });
 
-    for (let i = items.length; i < 5; i++) {
+    // Add 3 placeholders for each missing post (5 posts are rendered)
+    for (let i = items.length * 3; i < 15; i++) {
       items.push(
-        <div key={'latest-posts-last-element'} className="cards__item cards__item--empty"></div>
+        <div key={`latest-posts-last-element-${i}`} className="cards__item cards__item--empty"></div>
       );
     }
 
     return items;
-    /*
-        <a href="" className="cards__item">
-          <div className="cards__item__top">
-            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
-            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
-            <h3 className="cards__item__title">Εργαστήριο big data</h3>
-          </div>
-          <div className="cards__item__img">
-            <img src="/images/dummy_card.png" alt="" />
-          </div>
-          <span className="cards__item__button">Εγγραφη</span>
-        </a>
-
-        <a href="" className="cards__item cards__item--events">
-          <div className="cards__item__top">
-            <img src="/images/icons/events_icon.png" alt="" className="cards__item__icon" />
-            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
-            <h3 className="cards__item__title">Εργαστήριο big data</h3>
-          </div>
-          <div className="cards__item__img">
-            <img src="/images/dummy_card.png" alt="" />
-          </div>
-          <span className="cards__item__button">Περισσοτερα</span>
-        </a>
-        <a href="" className="cards__item">
-          <div className="cards__item__top">
-            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
-            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
-            <h3 className="cards__item__title">Εργαστήριο big data</h3>
-          </div>
-          <div className="cards__item__img">
-            <img src="/images/dummy_card.png" alt="" />
-          </div>
-          <span className="cards__item__button">Εγγραφη</span>
-        </a>
-        <a href="" className="cards__item">
-          <div className="cards__item__top">
-            <img src="/images/icons/athina_icon.png" alt="" className="cards__item__icon" />
-            <span className="cards__item__date"> Αθηνα • 25/11/2020</span>
-            <h3 className="cards__item__title">Εργαστήριο big data</h3>
-          </div>
-          <div className="cards__item__img">
-            <img src="/images/dummy_card.png" alt="" />
-          </div>
-          <span className="cards__item__button">Εγγραφη</span>
-        </a>
-      */
   }
 
   render() {

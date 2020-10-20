@@ -1,6 +1,11 @@
 export { Roles } from './role';
 
 export {
+  PathVariable,
+  WordPressField,
+} from './const';
+
+export {
   EnumAuthProvider,
   EnumCatalog,
   EnumCkanFacet,

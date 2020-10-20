@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
+import moment from '../../../../moment-localized';
+
 import {
   bindActionCreators
 } from 'redux';
@@ -8,23 +10,72 @@ import {
 import { injectIntl } from 'react-intl';
 
 import {
+  Link,
   NavLink,
 } from 'react-router-dom';
 
 import {
+  FormattedDate,
+} from 'react-intl';
+
+import {
+  buildPath,
+  DynamicRoutes,
+  EnumPostCategory,
   StaticRoutes,
+  WordPressField,
 } from '../../../../model';
 
+import {
+  getPosts,
+} from '../../../../ducks/ui/views/posts';
+
 import ClimateClock from '../../climate-clock';
+
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
 
 class DialogueForum extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.getPosts(1, 100, EnumPostCategory.DialogueForum);
+  }
+
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
+  renderPosts(posts) {
+    const _t = this.props.intl.formatMessage;
+
+    return posts.map((p) => {
+      const author = p[WordPressField.Author] || p._embedded.author[0].name;
+
+      return (
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--forum">
+          <div className="cards__item__top cards__item__top--flex">
+            <div className="cards__item__top__upper">
+              <div className="cards__item__date">{p[WordPressField.Date]}</div>
+              <div className="cards__item__title">{p.title.rendered}</div>
+              <p className="cards__item__text" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></p>
+            </div>
+            <div className="cards__item__top__lower">
+              <p className="cards__item__text">{author}</p>
+            </div>
+          </div>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.dialogue-forum-more' })}</span>
+        </Link>
+      );
+    });
   }
 
   render() {
-    const { countdown } = this.props;
+    const { countdown, pages } = this.props;
+    const { posts } = pages[EnumPostCategory.DialogueForum];
 
     const _t = this.props.intl.formatMessage;
 
@@ -72,101 +123,14 @@ class DialogueForum extends React.Component {
 
               <section className="cards cards--sidebar">
                 <div className="cards__inner">
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
-                  <a href="single-forum.html" className="cards__item cards__item--forum">
-                    <div className="cards__item__top cards__item__top--flex">
-                      <div className="cards__item__top__upper">
-                        <div className="cards__item__date">GA INDICATOR</div>
-                        <div className="cards__item__title">Forum title</div>
-                        <p className="cards__item__text">Thematic domain </p>
-                      </div>
-                      <div className="cards__item__top__lower">
-                        <p className="cards__item__text">Organiser</p>
-                      </div>
-                    </div>
-                    <span className="cards__item__button">ΠΕΡΙΣΣΟΤΕΡΑ</span>
-                  </a>
+                  {posts && posts.length !== 0 &&
+                    this.renderPosts(posts)
+                  }
                   <div className="cards__item cards__item--empty"></div>
                 </div>
               </section>
 
+              {/*
               <div className="pagination">
                 <a href="#" className="pagination__arrow pagination__arrow--left pagination__arrow--inactive"></a>
                 <ul>
@@ -179,6 +143,7 @@ class DialogueForum extends React.Component {
                 </ul>
                 <a href="#" className="pagination__arrow pagination__arrow--right"></a>
               </div>
+              */}
             </div>
           </div>
         </div>
@@ -189,10 +154,12 @@ class DialogueForum extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getPosts,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

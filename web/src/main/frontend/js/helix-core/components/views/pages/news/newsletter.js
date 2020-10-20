@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
+import moment from '../../../../moment-localized';
+
 import {
   bindActionCreators
 } from 'redux';
@@ -8,23 +10,81 @@ import {
 import { injectIntl } from 'react-intl';
 
 import {
+  Link,
   NavLink,
 } from 'react-router-dom';
 
 import {
+  FormattedDate,
+} from 'react-intl';
+
+import {
+  buildPath,
+  DynamicRoutes,
+  EnumPostCategory,
   StaticRoutes,
+  WordPressField,
 } from '../../../../model';
 
+import {
+  getPosts,
+} from '../../../../ducks/ui/views/posts';
+
 import ClimateClock from '../../climate-clock';
+
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
 
 class Newsletter extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.getPosts(1, 100, EnumPostCategory.Newsletter);
+  }
+
+  toggleSecureUrl(content) {
+    return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
+  renderDate(post) {
+    if (post[WordPressField.Date]) {
+      return post[WordPressField.Date];
+    }
+
+    const modifiedAt = moment(post.modified);
+    const age = moment.duration(moment() - modifiedAt);
+
+    return age.asHours() < 24 ?
+      moment(modifiedAt).fromNow() :
+      <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+  }
+
+  renderPosts(posts) {
+    const _t = this.props.intl.formatMessage;
+
+    return posts.map((p) => {
+      const imageUrl = (
+        p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
+          this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
+          '/assets/images/dummy_card.png'
+      );
+
+      return (
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--newsletter">
+          <div className="cards__item__top" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+          <h3 className="cards__item__title">{p.title.rendered}</h3>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.newsletter-more' })}</span>
+        </Link>
+      );
+    });
   }
 
   render() {
-    const { countdown } = this.props;
+    const { countdown, pages } = this.props;
+    const { posts } = pages[EnumPostCategory.Newsletter];
 
     const _t = this.props.intl.formatMessage;
 
@@ -72,77 +132,9 @@ class Newsletter extends React.Component {
 
               <section className="cards cards--sidebar">
                 <div className="cards__inner">
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-                  <a href="#" className="cards__item cards__item--newsletter">
-                    <div className="cards__item__top" style={{ backgroundImage: 'url(/images/dummy_card.png)' }}></div>
-                    <h3 className="cards__item__title">Newsletter #1</h3>
-                    <span className="cards__item__button">Εγγραφη</span>
-                  </a>
-
+                  {posts && posts.length !== 0 &&
+                    this.renderPosts(posts)
+                  }
                   <div className="cards__item cards__item--empty"></div>
                 </div>
               </section>
@@ -157,10 +149,12 @@ class Newsletter extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getPosts,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
