@@ -60,7 +60,7 @@ class OtherEvents extends React.Component {
 
     return age.asHours() < 24 ?
       moment(modifiedAt).fromNow() :
-      <FormattedDate value={p.modified} day='numeric' month='numeric' year='numeric' />;
+      <FormattedDate value={post.modified} day='numeric' month='numeric' year='numeric' />;
   }
 
   renderPosts(posts) {
