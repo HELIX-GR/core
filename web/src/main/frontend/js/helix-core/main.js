@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var rootEl = document.querySelector(rootSelector);
 
   // TODO: read from non-httponly "locale" cookie
-  const locale = getCookieValue('helix-cookie-locale') || EnumLocale.EN;
+  const locale = getCookieValue('helix-cookie-locale') || EnumLocale.EL;
 
   const token = document.querySelector('meta[name=_csrf]').getAttribute('content');
 
