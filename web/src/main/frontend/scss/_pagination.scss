@@ -21,7 +21,7 @@
     }
     &--left{
       &:after{
-        content: url(../../assets/images/arrow-left.svg);
+        content: url(../../images/arrow-left.svg);
         position: absolute;
         top:50%;
         left:-1px;
@@ -30,7 +30,7 @@
     }
     &--right{
       &:after{
-        content: url(../../assets/images/arrow-right.svg);
+        content: url(../../images/arrow-right.svg);
         position: absolute;
         top:50%;
         right:-1px;
