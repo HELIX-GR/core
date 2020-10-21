@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import {
   Link,
@@ -42,12 +42,12 @@ class Footer extends React.Component {
         <div className="container">
           <div className="footer__upper">
             <div className="footer__upper__block">
-              <h3>Θέλετε να γίνετε μέλος του Δικτύου για την Κλιμακτική Αλλαγή?</h3>
-              <p>Η συμμετοχή ειναι ανοικτή σε επιστημονικούς οργανισμούς της Ελλάδας</p>
+              <h3><FormattedMessage id="text.footer.join.header" /></h3>
+              <p><FormattedMessage id="text.footer.join.content" /></p>
               <Link to={StaticRoutes.Join} className="btn btn--std">{_t({ id: 'buttons.join' })}</Link>
             </div>
             <div className="footer__upper__block">
-              <h3>Θέλετε να λαμβάνετε νέα για το Climpact και την Κλιματική Αλλαγή?</h3>
+              <h3><FormattedMessage id="text.footer.subscribe.header" /></h3>
               <input type="text" placeholder="Email address" />
               <a href="#" className="btn btn--std">{_t({ id: 'buttons.keep-me-updated' })}</a>
             </div>
@@ -87,13 +87,13 @@ class Footer extends React.Component {
             </ul>
           </div>
           <div className="footer__copyright">
-            <p>© 2020 • CLIMPACT • Εθνικο Δικτυο για την Κλιματικη Αλλαγη και τις επιπτωσεις της • </p>
+            <p><FormattedMessage id="text.footer.title" /></p>
             <ul>
-              <li><Link to={StaticRoutes.Contact}>CONTACT</Link></li>
+              <li><Link to={StaticRoutes.Contact}><FormattedMessage id="text.footer.contact" /></Link></li>
               {/*
               <li><a href="/privacy.html">PRIVACY POLICY</a></li>
               */}
-              <li><Link to={StaticRoutes.TermsOfUse}>TERMS AND CONDITIONS</Link></li>
+              <li><Link to={StaticRoutes.TermsOfUse}><FormattedMessage id="text.footer.terms-of-user" /></Link></li>
             </ul>
           </div>
         </div>

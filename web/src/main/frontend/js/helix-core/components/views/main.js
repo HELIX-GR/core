@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import classnames from 'classnames';
 import moment from '../../moment-localized';
@@ -204,7 +204,7 @@ class Main extends React.Component {
 
             <section className="home__bigtext">
               <div className="home__bigtext__main">
-                <h1>Η Επιστήμη στην υπηρεσία της Πολιτείας και της Κοινωνίας για την αντιμετώπιση της Κλιματικής Αλλαγής.</h1>
+                <h1><FormattedMessage id="text.main.header" /></h1>
                 <div className="home__bigtext__buttons">
                   <Link to={StaticRoutes.Overview} className="btn btn--std">{_t({ id: 'buttons.learn-more' })}</Link>
                   <Link to={StaticRoutes.Targets} className="btn btn--std">{_t({ id: 'buttons.our-targets' })}</Link>
@@ -225,7 +225,7 @@ class Main extends React.Component {
             </section>
             <section className="home__climpact">
               <div className="home__climpact__text">
-                <p>Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας.</p>
+                <p><FormattedMessage id="text.main.content" /></p>
               </div>
               <div className="home__climpact__logos">
                 <a target="_blank" href="http://www.noa.gr/"><img src="/images/logos/asteroskopio-logo-white.png" alt="" /></a>
