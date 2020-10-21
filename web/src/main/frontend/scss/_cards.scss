@@ -7,12 +7,12 @@
   }
 
   &--sidebar {
-    #{$cards}__item {  
+    #{$cards}__item {
       @media(max-width: 1370px) {
-        flex: 0 1 calc(100%/2 - 10px);    
+        flex: 0 1 calc(100%/2 - 10px);
       }
-      @media(max-width: 576px) { 
-        flex: 0 1 100%;    
+      @media(max-width: 576px) {
+        flex: 0 1 100%;
       }
     }
   }
@@ -32,9 +32,9 @@
 
     &--news {
       color: $mainColor;
-      #{$item}__top {  
+      #{$item}__top {
         background: $darkColor;
-        &:after { 
+        &:after {
           display: none;
         }
       }
@@ -45,9 +45,9 @@
 
     &--events {
       color: #D41A2C;
-      #{$item}__top {  
+      #{$item}__top {
         background: #FCA01F;
-        &:after { 
+        &:after {
           background: linear-gradient(rgba(201, 233, 252,0) 0%, rgba(252, 160, 31,1) 100%)!important;
         }
       }
@@ -64,9 +64,9 @@
 
     &--blog {
       color: $mainColor;
-      #{$item}__top {  
+      #{$item}__top {
         background: $darkColor;
-        &:after { 
+        &:after {
           background: linear-gradient(rgba(201, 233, 252,0) 0%, rgba(107, 10, 63 ,1) 100%)!important;
         }
       }
@@ -97,66 +97,66 @@
     &--forum{
       min-height: 300px;
       color:$mainColor;
-      #{$item}__title { 
+      #{$item}__title {
         padding: 13px 0 5px!important;
       }
-      #{$item}__top, 
-      #{$item}__button { 
+      #{$item}__top,
+      #{$item}__button {
         background: #DE1A24;
       }
       &:hover {
         padding-bottom: 41px;
-        #{$item}__top { 
+        #{$item}__top {
           padding: 18px 20px 10px 20px;
         }
-        #{$item}__title { 
+        #{$item}__title {
           padding: 13px 0 5px!important;
         }
-      }  
+      }
     }
 
     &:hover {
       padding-bottom: 41px;
-      #{$item}__top { 
+      #{$item}__top {
         padding-bottom: 5px;
       }
       #{$item}__icon {
         margin-bottom: 8px;
       }
-      #{$item}__title { 
+      #{$item}__title {
         padding: 0px 0 0px;
       }
-      #{$item}__button {  
+      #{$item}__button {
         transform: translateY(0)
       }
     }
-    @media(max-width: 992px) { 
+    @media(max-width: 992px) {
       padding-bottom: 41px;
-      #{$item}__top { 
+      #{$item}__top {
         padding-bottom: 5px;
       }
       #{$item}__icon {
         margin-bottom: 8px;
       }
-      #{$item}__title { 
+      #{$item}__title {
         padding: 0px 0 0px;
       }
-      #{$item}__button {  
+      #{$item}__button {
         transform: translateY(0)
       }
     }
-    
-    
+
+
     &__top {
       width: 100%;
       position: relative;
       padding: 18px 20px 10px 20px;
       flex:1;
-      background: $mainColor; 
+      background: $mainColor;
       margin-bottom: 5px;
       transition: padding 0.2s ease;
-      @media(max-width: 576px) {  
-        padding: 12px!important; 
+      @media(max-width: 576px) {
+        padding: 12px!important;
       }
       &--flex{
         display: flex;
@@ -175,15 +175,15 @@
       margin-bottom: 20px;
       transition: margin 0.2s ease;
       height: 90px;
-      @media(max-width: 576px) { 
-        height: 50px; 
+      @media(max-width: 576px) {
+        height: 50px;
       }
     }
     &__img {
       width: 100%;
       height: 240px;
       background: $mainColor;
-    
+
       img {
         width: 100%;
         height: 100%;
@@ -244,13 +244,13 @@
       text-align: right;
       transition: transform 0.2s ease;
       color: inherit;
-      @media(max-width: 576px) {   
+      @media(max-width: 576px) {
         padding: 0px 12px;
       }
     }
 
     &--text {
-      #{$item}__top {   
+      #{$item}__top {
         &:after {
           content: "";
           position: absolute;
@@ -264,37 +264,37 @@
       }
       &:hover {
         padding-bottom: 41px;
-        #{$item}__top { 
+        #{$item}__top {
           padding-bottom: 5px;
         }
         #{$item}__icon {
           margin-bottom: 8px;
         }
-        #{$item}__title { 
+        #{$item}__title {
           padding: 5px 0 10px;
         }
-        #{$item}__button {  
+        #{$item}__button {
           transform: translateY(0)
         }
-        #{$item}__excerpt {  
+        #{$item}__excerpt {
           max-height: 72px;
         }
       }
       @media(max-width: 992px) {
         padding-bottom: 41px;
-        #{$item}__top { 
+        #{$item}__top {
           padding-bottom: 5px;
         }
         #{$item}__icon {
           margin-bottom: 8px;
         }
-        #{$item}__title { 
+        #{$item}__title {
           padding: 5px 0 10px;
         }
-        #{$item}__button {  
+        #{$item}__button {
           transform: translateY(0)
         }
-        #{$item}__excerpt {  
+        #{$item}__excerpt {
           max-height: 72px;
         }
       }
@@ -334,22 +334,22 @@
     }
 
     &:hover {
-      #{$p_item}__lower {  
+      #{$p_item}__lower {
         &:before {
           height: calc(100% - 43px);
         }
       }
-      #{$p_item}__button {  
+      #{$p_item}__button {
         transform: translateY(0)
       }
     }
     @media(max-width: 992px) {
-      #{$p_item}__lower {  
+      #{$p_item}__lower {
         &:before {
           height: calc(100% - 43px);
         }
       }
-      #{$p_item}__button {  
+      #{$p_item}__button {
         transform: translateY(0)
       }
     }
@@ -357,7 +357,7 @@
     &--empty {
       pointer-events: none;
       opacity: 0;
-      
+
     }
 
     &__upper {
@@ -376,8 +376,8 @@
         margin: 20px 0 30px;
         img {
           border-radius: 50%;
-          width: 100%;
-          height: 100%;
+          width: 180px;
+          height: 180px;
           object-fit: cover;
         }
       }
