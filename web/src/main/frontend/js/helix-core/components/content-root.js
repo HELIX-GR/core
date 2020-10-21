@@ -250,7 +250,7 @@ class ContentRoot extends React.Component {
             location={this.props.location}
           />
         </div>
-        <CookieConsent
+        {/* <CookieConsent
           location="none"
           disableStyles={true}
           containerClasses="cookie-consent"
@@ -266,7 +266,7 @@ class ContentRoot extends React.Component {
               <FormattedMessage id="cookie.learn-more" />
             </Link>
           </div>
-        </CookieConsent>
+        </CookieConsent> */}
       </React.Fragment>
     );
   }
