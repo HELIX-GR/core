@@ -109,7 +109,7 @@ class Committee extends React.Component {
                   <li><a href="#">{_t({ id: 'breadcrumb.about' })}</a></li>
                   <li><a href="#">{_t({ id: 'breadcrumb.committee' })}</a></li>
                 </ul>
-                <WordPressPage className="page__content__default" name={'about-scientific-committee'} />
+                <WordPressPage className="page__content__default" name={'about-committee'} />
               </div>
             </div>
           </div>
