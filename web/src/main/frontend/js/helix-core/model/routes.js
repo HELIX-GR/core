@@ -7,7 +7,7 @@ import { matchPath } from 'react-router';
  * External routes
  */
 export const ExternalRoutes = {
-  Data: 'https://data.hellenicdataservice.gr',
+  Data: 'https://data.climpact.gr/dataset',
   Lab: 'https://lab.hellenicdataservice.gr',
 };
 
