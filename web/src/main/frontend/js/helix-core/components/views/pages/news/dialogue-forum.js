@@ -49,6 +49,17 @@ class DialogueForum extends React.Component {
     return content.replace(/(http:\/\/)/g, 'https://');
   }
 
+  renderHeader(p) {
+    const location = p[WordPressField.Location];
+    const date = p[WordPressField.Date];
+
+    if (location && date) {
+      return (<div className="cards__item__date">{`${location} • ${date}`}</div>);
+    }
+
+    return (<div className="cards__item__date">{location ? location : date ? date : ''}</div>);
+  }
+
   renderPosts(posts) {
     const _t = this.props.intl.formatMessage;
 
@@ -59,7 +70,7 @@ class DialogueForum extends React.Component {
         <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--forum">
           <div className="cards__item__top cards__item__top--flex">
             <div className="cards__item__top__upper">
-              <div className="cards__item__date">{p[WordPressField.Date]}</div>
+              {this.renderHeader(p)}
               <div className="cards__item__title">{p.title.rendered}</div>
               <p className="cards__item__text" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></p>
             </div>
