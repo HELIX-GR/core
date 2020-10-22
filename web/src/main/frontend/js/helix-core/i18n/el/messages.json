@@ -1,32 +1,32 @@
 {
   "breadcrumb": {
-    "home": "Home",
-    "about": "About",
-    "overview": "Overview",
-    "targets": "Targets",
-    "committee": "Managing Committee",
-    "scientific-committee": "Scientific Committee",
-    "work-packages": "Work Packages",
-    "deliverables": "Deliverables",
-    "network": "Network",
-    "associate": "Associate",
-    "core": "Core",
-    "join": "Join",
-    "news": "News & Events",
-    "applications": "Applications",
-    "services": "Services",
-    "tools": "Tools",
+    "home": "Αρχική",
+    "about": "Σχετικά",
+    "overview": "Επισκόπηση",
+    "targets": "Στόχοι",
+    "committee": "Διοικούσα Επιτροπή",
+    "scientific-committee": "Επιστημονική Επιτροπή",
+    "work-packages": "Πακέτα Εργασίας",
+    "deliverables": "Παραδοτέα",
+    "network": "Το Δίκτυο",
+    "associate": "Συνεργάτες",
+    "core": "Μέλη",
+    "join": "Συμμετοχή",
+    "news": "Νέα και Δράσεις",
+    "applications": "Εφαρμογές",
+    "services": "Υπηρεσίες",
+    "tools": "Εργαλεία",
     "blog": "Blog",
-    "dialogue-forum": "Dialog Forum",
+    "dialogue-forum": "Φόρουμ Διαλόγου",
     "newsletter": "Newsletter",
-    "other-event": "Other Events",
-    "workshop": "Workshops"
+    "other-event": "Άλλες Εκδηλώσεις",
+    "workshop": "Εργαστήρια"
   },
   "buttons": {
-    "learn-more": "LEARN MORE",
-    "our-targets": "OUR TARGETS",
-    "join": "JOIN",
-    "keep-me-updated": "KEEP ME UPDATED",
+    "learn-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+    "our-targets": "ΟΙ ΣΤΟΧΟΙ",
+    "join": "ΣΥΜΜΕΤΟΧΗ",
+    "keep-me-updated": "ΚΡΑΤΗΣΤΕ ΜΕ ΕΝΗΜΕΡΟ",
     "card": {
       "blog-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
       "dialogue-forum-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
@@ -39,84 +39,84 @@
     "menu": {
       "about": {
         "items": {
-          "deliverables": "DELIVERABLES",
-          "home": "HOME",
-          "committee": "MANAGEMENT COMMITTEE",
-          "overview": "OVERVIEW",
-          "scientific-committee": "SCIENTIFIC COMMITTEE",
-          "targets": "TARGETS",
-          "work-packages": "WORK PACKAGES"
+          "deliverables": "ΠΑΡΑΔΟΤΕΑ",
+          "home": "ΑΡΧΙΚΗ",
+          "committee": "ΔΙΟΙΚΟΥΣΑ ΕΠΙΤΡΟΠΗ",
+          "overview": "ΕΠΙΣΚΟΠΗΣΗ",
+          "scientific-committee": "ΕΠΙΣΤΗΜΟΝΙΚΗ ΕΠΙΤΡΟΠΗ",
+          "targets": "ΣΤΟΧΟΙ",
+          "work-packages": "ΠΑΚΕΤΑ ΕΡΓΑΣΙΑΣ"
         }
       },
       "applications": {
         "items": {
           "lab": "LAB",
-          "services": "SERVICES",
-          "tools": "TOOLS"
+          "services": "ΥΠΗΡΕΣΙΕΣ",
+          "tools": "ΕΡΓΑΛΕΙΑ"
         }
       },
       "network": {
         "items": {
-          "associate": "ASSOCIATE",
-          "core": "CORE",
-          "join": "JOIN"
+          "associate": "ΣΥΝΕΡΓΑΤΕΣ",
+          "core": "ΜΕΛΗ",
+          "join": "ΣΥΜΜΕΤΟΧΗ"
         }
       },
       "news-events": {
         "items": {
           "blog": "BLOG",
-          "dialogue-forum": "DIALOGUE FORUM",
+          "dialogue-forum": "ΦΟΡΟΥΜ ΔΙΑΛΟΓΟΥ",
           "newsletter": "NEWSLETTER",
-          "other-events": "OTHER EVENTS",
-          "workshops": "WORKSHOPS"
+          "other-events": "ΑΛΛΕΣ ΕΚΔΗΛΩΣΕΙΣ",
+          "workshops": "ΕΡΓΑΣΤΗΡΙΑ"
         }
       }
     }
   },
   "locales": {
-    "en": "English",
-    "el": "Greek"
+    "en": "Αγγλικά",
+    "el": "Ελληνικά"
   },
   "login": {
-    "forgot-password": "Forgot your password?",
-    "login": "Login",
-    "subtitle": "Sign-in into your account",
-    "failure": "The username or password is incorrect"
+    "forgot-password": "Ξεχάσατε τον κωδικό σας;",
+    "login": "Είσοδος",
+    "subtitle": "Συνδεθείτε με το λογαριασμό σας",
+    "failure": "Το όνομα ή ο κωδικός χρήστη δεν είναι σωστοί"
   },
   "sidebar": {
     "menu": {
       "about": {
         "items": {
-          "about": "About",
-          "deliverables": "Deliverables",
-          "committee": "Managing Committee",
-          "overview": "Overview",
-          "scientific-committee": "Scientific Committee",
-          "targets": "Targets",
-          "work-packages": "Work Packages"
+          "about": "Σχετικά",
+          "deliverables": "Παραδοτέα",
+          "committee": "Διοικούσα Επιτροπή",
+          "overview": "Επισκόπηση",
+          "scientific-committee": "Επιστημονική Επιτροπή",
+          "targets": "Στόχοι",
+          "work-packages": "Πακέτα Εργασίας"
         }
       },
       "applications": {
         "items": {
           "lab": "Lab",
-          "services": "Services",
-          "tools": "Tools"
+          "services": "Υπηρεσίες",
+          "tools": "Εργαλεία"
         }
       },
       "network": {
         "items": {
-          "associate": "Associate",
-          "core": "Core",
-          "join": "Join"
+          "associate": "Συνεργάτες",
+          "core": "Μέλη",
+          "join": "Συμμετοχή"
         }
       },
       "news-events": {
         "items": {
           "blog": "Blog",
-          "dialogue-forum": "Dialog Forum",
+          "dialogue-forum": "Φόρουμ Διαλόγου",
           "newsletter": "Newsletter",
-          "other-events": "Other Events",
-          "workshops": "Workshops"
+          "other-events": "Άλλες Εκδηλώσεις",
+          "workshops": "Εργαστήρια"
         }
       }
     }
@@ -141,14 +141,14 @@
         "content": "Η συμμετοχή ειναι ανοικτή σε επιστημονικούς οργανισμούς της Ελλάδας"
       },
       "subscribe": {
-        "header": "Θέλετε να λαμβάνετε νέα για το Climpact και την Κλιματική Αλλαγή?"
+        "header": "Θέλετε να λαμβάνετε νέα για το CLIMPACT και την Κλιματική Αλλαγή;"
       },
       "title": "© 2020 • CLIMPACT • Εθνικο Δικτυο για την Κλιματικη Αλλαγη και τις επιπτωσεις της • ",
-      "contact": "CONTACT",
-      "terms-of-user": "TERMS AND CONDITIONS"
+      "contact": "Επικοινωνία",
+      "terms-of-user": "ΟΡΟΙ ΧΡΗΣΗΣ"
     },
     "network-associate": {
-      "intro": "Το δίκτυο CLIMPACT επιδιώκει τη συνεργασία με την Εθνική Επιτροπή για την κλιματική αλλαγή, με την Επιτροπή Μελέτης Επιπτώσεων κλιματικής αλλαγής της Τράπεζας της Ελλάδος αλλά και με άλλες σχετικές πρωτοβουλίες και δράσεις ώστε να αποτελέσει πόλο έγκυρης και πολύπλευρης εμπειρογνωμοσύνης και συμβουλευτικό όργανο της Πολιτείας και της Κοινωνίας."
+      "intro": "Το δίκτυο CLIMPACT είναι ανοικτό στη συνεργασία με το σύνολο των επιστημονικών, ερευνητικών και αναπτυξιακών οργανισμών της χώρας που ασχολούνται με τη μελέτη και τη διαχείριση των επιπτώσεων της Κλιματικης Αλλαγής. Ο οργανισμός σας μπορεί να γίνει επίσημα συνεργαζόμενο μέλος του δικτύου και να συμμετέχει στις δράσεις του."
     }
   }
 }
