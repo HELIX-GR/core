@@ -17,8 +17,7 @@ import {
 } from '../../../../model';
 
 import ClimateClock from '../../climate-clock';
-
-import { Drawer } from '../../parts';
+import WordPressPage from '../word-press-page';
 
 class Tools extends React.Component {
 
@@ -64,21 +63,7 @@ class Tools extends React.Component {
                 <li><a href="#">{_t({ id: 'breadcrumb.applications' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.tools' })}</a></li>
               </ul>
-              <div className="page__content__default">
-                <div className="drawer">
-                  <Drawer />
-
-                  <Drawer />
-
-                  <Drawer />
-
-                  <Drawer />
-
-                  <Drawer />
-
-                  <Drawer />
-                </div>
-              </div>
+              <WordPressPage className="page__content__default" name={'applications-tools'} />
             </div>
           </div>
         </div>
