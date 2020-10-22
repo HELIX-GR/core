@@ -60,7 +60,7 @@ class Join extends React.Component {
                 <li><a href="#">{_t({ id: 'breadcrumb.network' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.join' })}</a></li>
               </ul>
-              <WordPressPage className="page__content__default" name={'network-join-climpact'} />
+              <WordPressPage className="page__content__default" name={'network-join'} />
             </div>
           </div>
         </div>
