@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -32,11 +33,6 @@ import {
 
 import ClimateClock from '../../climate-clock';
 
-const truncateText = (text, tag, length = 200) => {
-  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
-  return result.length > length ? result.substring(0, length) + '...' : result;
-};
-
 class Newsletter extends React.Component {
 
   componentDidMount() {
@@ -47,6 +43,14 @@ class Newsletter extends React.Component {
 
   toggleSecureUrl(content) {
     return content.replace(/(http:\/\/)/g, 'https://');
+  }
+
+  onDownload(e, file) {
+    e.preventDefault();
+
+    if (file) {
+      window.open(file);
+    }
   }
 
   renderDate(post) {
@@ -65,19 +69,22 @@ class Newsletter extends React.Component {
   renderPosts(posts) {
     const _t = this.props.intl.formatMessage;
 
-    return posts.map((p) => {
+    // Sort posts based on index
+    const sortedPosts = _.sortBy(posts, (n) => n[WordPressField.Index]);
+
+    return sortedPosts.map((p) => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
           this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
-          '/assets/images/dummy_card.png'
+          '/images/dummy_card.png'
       );
 
       return (
-        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--newsletter">
+        <a key={`post-${p.id}`} href="#" onClick={(e) => this.onDownload(e, p[WordPressField.File])} className="cards__item cards__item--newsletter">
           <div className="cards__item__top" style={{ backgroundImage: `url(${imageUrl})` }}></div>
           <h3 className="cards__item__title">{p.title.rendered}</h3>
           <span className="cards__item__button">{_t({ id: 'buttons.card.newsletter-more' })}</span>
-        </Link>
+        </a>
       );
     });
   }
