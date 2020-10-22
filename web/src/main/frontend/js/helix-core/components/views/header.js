@@ -167,7 +167,7 @@ class Header extends React.Component {
                 </ul>
               </li>
               <li>
-                <a href={ExternalRoutes.Data} target="_blank">DATA</a>
+                <a href={ExternalRoutes.Data}>DATA</a>
               </li>
               <li className="has-submenu" onMouseOver={(e) => {
                 const height = this.outerHeight(this.appRef.current);
