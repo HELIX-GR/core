@@ -82,13 +82,14 @@
     }
 
     &--newsletter{
+      min-height: 520px;
       #{$item}__top{
         background-size: cover;
         background-position: center;
       }
       #{$item}__title{
         background: $mainColor;
-        height: 80px;
+        min-height: 80px;
         padding:18px 20px 10px!important;
       }
     }
