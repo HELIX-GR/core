@@ -38,6 +38,7 @@
   "header": {
     "menu": {
       "about": {
+        "title": "ABOUT",
         "items": {
           "deliverables": "DELIVERABLES",
           "home": "HOME",
@@ -49,13 +50,18 @@
         }
       },
       "applications": {
+        "title": "APPLICATIONS",
         "items": {
           "lab": "LAB",
           "services": "SERVICES",
           "tools": "TOOLS"
         }
       },
+      "data": {
+        "title": "DATA"
+      },
       "network": {
+        "title": "NETWORK",
         "items": {
           "associate": "ASSOCIATE",
           "core": "CORE",
@@ -63,6 +69,7 @@
         }
       },
       "news-events": {
+        "title": "NEWS & EVENTS",
         "items": {
           "blog": "BLOG",
           "dialogue-forum": "DIALOGUE FORUM",

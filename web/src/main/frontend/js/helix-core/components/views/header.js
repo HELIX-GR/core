@@ -108,7 +108,7 @@ class Header extends React.Component {
 
                 document.documentElement.style.setProperty('--header-height-open', `${height}px`);
               }}>
-                <a href="#">ABOUT</a>
+                <a href="#">{_t({ id: 'header.menu.about.title' })}</a>
                 <ul className="submenu" ref={this.aboutRef} >
                   <li>
                     <NavLink to={StaticRoutes.Overview} activeClassName="active">
@@ -147,7 +147,7 @@ class Header extends React.Component {
 
                 document.documentElement.style.setProperty('--header-height-open', `${height}px`);
               }}>
-                <a href="#">NETWORK</a>
+                <a href="#">{_t({ id: 'header.menu.network.title' })}</a>
                 <ul className="submenu" ref={this.networkRef}>
                   <li>
                     <NavLink to={StaticRoutes.Core} activeClassName="active">
@@ -167,14 +167,14 @@ class Header extends React.Component {
                 </ul>
               </li>
               <li>
-                <a href={ExternalRoutes.Data}>DATA</a>
+                <a href={ExternalRoutes.Data}>{_t({ id: 'header.menu.data.title' })}</a>
               </li>
               <li className="has-submenu" onMouseOver={(e) => {
                 const height = this.outerHeight(this.appRef.current);
 
                 document.documentElement.style.setProperty('--header-height-open', `${height}px`);
               }}>
-                <a href="#">APPLICATIONS</a>
+                <a href="#">{_t({ id: 'header.menu.applications.title' })}</a>
                 <ul className="submenu" ref={this.appRef} >
                   <li>
                     <NavLink to={StaticRoutes.Services} activeClassName="active">
@@ -200,7 +200,7 @@ class Header extends React.Component {
 
                 document.documentElement.style.setProperty('--header-height-open', `${height}px`);
               }}>
-                <a href="#">NEWS & EVENTS</a>
+                <a href="#">{_t({ id: 'header.menu.news-events.title' })}</a>
                 <ul className="submenu" ref={this.newsRef} >
                   <li>
                     <NavLink to={StaticRoutes.Workshops} activeClassName="active">

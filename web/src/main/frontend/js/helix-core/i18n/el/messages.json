@@ -38,6 +38,7 @@
   "header": {
     "menu": {
       "about": {
+        "title": "ΣΧΕΤΙΚΑ",
         "items": {
           "deliverables": "ΠΑΡΑΔΟΤΕΑ",
           "home": "ΑΡΧΙΚΗ",
@@ -49,13 +50,18 @@
         }
       },
       "applications": {
+        "title": "ΕΦΑΡΜΟΓΕΣ",
         "items": {
           "lab": "LAB",
           "services": "ΥΠΗΡΕΣΙΕΣ",
           "tools": "ΕΡΓΑΛΕΙΑ"
         }
       },
+      "data": {
+        "title": "DATA"
+      },
       "network": {
+        "title": "ΤΟ ΔΙΚΤΥΟ",
         "items": {
           "associate": "ΣΥΝΕΡΓΑΤΕΣ",
           "core": "ΜΕΛΗ",
@@ -63,6 +69,7 @@
         }
       },
       "news-events": {
+        "title": "ΝΕΑ ΚΑΙ ΔΡΑΣΕΙΣ",
         "items": {
           "blog": "BLOG",
           "dialogue-forum": "ΦΟΡΟΥΜ ΔΙΑΛΟΓΟΥ",
