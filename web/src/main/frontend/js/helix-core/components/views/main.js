@@ -73,6 +73,18 @@ class Main extends React.Component {
     }
   }
 
+  onPostClick(e, category, post) {
+    if (category && category.name === EnumPostCategory.Newsletter) {
+      e.preventDefault();
+
+      const file = post[WordPressField.File];
+
+      if (file) {
+        window.open(file);
+      }
+    }
+  }
+
   renderPostDate(post) {
     if (post[WordPressField.Date]) {
       return post[WordPressField.Date];
@@ -113,6 +125,8 @@ class Main extends React.Component {
   renderPosts(posts = []) {
     const { config: { wordPress: { categories } } } = this.props;
 
+    const _t = this.props.intl.formatMessage;
+
     const items = [];
 
     const titleStyle = { maxWidth: 360 };
@@ -149,24 +163,37 @@ class Main extends React.Component {
 
       // Get card class
       let cardClassName = 'cards__item cards__item';
+      let buttonResource = '';
 
       switch (category.name) {
         case EnumPostCategory.Blog:
           cardClassName += '--blog';
+          buttonResource = 'buttons.card.blog-more';
           break;
         case EnumPostCategory.DialogueForum:
           cardClassName += '--forum';
+          buttonResource = 'buttons.card.dialogue-forum-more';
           break;
         case EnumPostCategory.Newsletter:
           cardClassName += '--newsletter';
+          buttonResource = 'buttons.card.newsletter-more';
           break;
         case EnumPostCategory.OtherEvent:
           cardClassName += '--events';
+          buttonResource = 'buttons.card.other-event-more';
+          break;
+        case EnumPostCategory.Workshop:
+          buttonResource = 'buttons.card.workshop-more';
           break;
       }
 
       items.push(
-        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className={cardClassName}>
+        <Link
+          key={`post-${p.id}`}
+          className={cardClassName}
+          to={buildPath(DynamicRoutes.POST_PAGE, [p.id])}
+          onClick={(e) => this.onPostClick(e, category, p)}
+        >
           <div className="cards__item__top">
             {this.renderPostIcon(p, category)}
             <span className="cards__item__date">{title ? `${title} • ` : ''}{date}</span>
@@ -175,8 +202,8 @@ class Main extends React.Component {
           <div className="cards__item__img">
             <img src={imageUrl} alt="" style={imageStyle} />
           </div>
-          <span className="cards__item__button">Περισσοτερα</span>
-        </Link>
+          <span className="cards__item__button">{_t({ id: buttonResource })}</span>
+        </Link >
       );
     });
 

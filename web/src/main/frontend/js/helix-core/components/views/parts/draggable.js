@@ -67,6 +67,11 @@ class Draggable extends React.Component {
             onClick: (e) => {
               if (this.isMoving) {
                 e.preventDefault();
+              } else {
+                // Do not prevent custom event handler
+                if (typeof c.props.onClick === 'function') {
+                  c.props.onClick(e);
+                }
               }
             },
           });
