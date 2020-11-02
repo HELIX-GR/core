@@ -33,6 +33,19 @@
     p{
       margin-bottom: 20px;
     }
+    a {
+      color: inherit;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      &:hover {
+        color: rgba(252, 160, 31,1);
+      }
+    }
+    ul {
+      padding-left: 20px;
+      list-style: disk;
+      margin-bottom: 20px;
+    }
     &--pb{
       padding-bottom: 200px;
     }
@@ -60,13 +73,16 @@
       }
     }
   }
+  .img-spacer {
+    padding: 100px 0;
+  }
   &__quote{
     @include fluid-type(30px, 60px);
     margin: 10px 20px;
     padding: 0 20px;
     text-align: center;
     position: relative;
-    h4{
+    h4, p{
       background:$mainColor;
       display: inline-block;
       padding: 0 20px;
@@ -142,4 +158,3 @@
     mix-blend-mode: lighten;
   }
 }
-
