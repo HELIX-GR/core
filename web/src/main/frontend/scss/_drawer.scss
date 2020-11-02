@@ -4,7 +4,7 @@
     background: $mainColor;
     width: 100%;
     padding: 30px;
-    @media(max-width: 576px) { 
+    @media(max-width: 576px) {
       padding: 15px;
     }
     h3 {
@@ -27,13 +27,13 @@
     padding: 30px 30px 50px;
     position: relative;
     margin-bottom: 7px;
-    @media(max-width: 576px) {  
+    @media(max-width: 576px) {
       padding: 15px 15px 30px;
       margin-top: -1px;
     }
 
 
-    &:not(.open) { 
+    &:not(.open) {
       cursor: pointer;
     }
 
@@ -55,7 +55,7 @@
           display: none;
         }
       }
-      #{$item}__side__bottom { 
+      #{$item}__side__bottom {
         display: block;
       }
     }
@@ -64,11 +64,11 @@
       @media(max-width: 576px) {
         padding: 15px;
         flex-direction: row;
-        #{$item}__side { 
+        #{$item}__side {
           order: 2;
           flex: 0 1 100%;
         }
-        #{$item}__content { 
+        #{$item}__content {
           order: 1;
           flex: 0 1 100%;
           padding: 0px;
@@ -79,7 +79,7 @@
             font-size: em(28);
           }
         }
-        #{$item}__trigger {  
+        #{$item}__trigger {
           right: 10px;
           top: 40px;
           height: 65px;
@@ -88,24 +88,24 @@
             width: 15px;
           }
         }
-        #{$item}__side {   
+        #{$item}__side {
           display: none;
           img {
             margin-bottom: 30px;
           }
         }
         &.open {
-          #{$item}__side {   
+          #{$item}__side {
             display: block;
-          } 
+          }
         }
       }
     }
 
     &--noside{
       display: block;
-      #{$item}__title {  
-        @include fluid-type(0px, 90px);
+      #{$item}__title {
+        @include fluid-type(0px, 60px);
         font-weight: 300;
         line-height: 1;
         margin-bottom: 25px;
@@ -202,11 +202,11 @@
       right: 20px;
       bottom: 25px;
       z-index: 20;
-    } 
+    }
   }
   &--sections {
     margin-bottom: 38px;
-    #{$drawer}__item {  
+    #{$drawer}__item {
       margin-bottom: 0;
       &:after {
         content: "";
@@ -216,7 +216,7 @@
         bottom: 0;
         lefT: 50%;
         transform: translateX(-50%);
-        @media(max-width: 576px) { 
+        @media(max-width: 576px) {
           width: calc(100% - 30px);
         }
       }
