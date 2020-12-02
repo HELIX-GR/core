@@ -117,7 +117,7 @@
 
 .hero{
   position: relative;
-  min-height: calc(100vh - 80px);
+  // min-height: calc(100vh - 80px);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -126,7 +126,7 @@
     text-align: center;
     width: 100%;
     height: 100%;
-    padding: 40px 20px 150px;
+    padding: 40px 20px 50px;
   }
   &__icon{
     padding: 40px 0;
