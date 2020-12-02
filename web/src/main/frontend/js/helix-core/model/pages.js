@@ -24,6 +24,7 @@ export const WordPressPages = {
     DialogueForum: 'news-events-dialogue-forum',
     Workshops: 'news-events-workshops',
     OtherEvents: 'news-events-other-events',
+    PressReleases: 'news-events-press-releases',
     Newsletter: 'news-events-newsletter',
   },
   TermsOfUse: 'terms-of-use',

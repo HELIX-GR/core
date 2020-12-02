@@ -127,6 +127,11 @@ class Newsletter extends React.Component {
                     {_t({ id: 'header.menu.news-events.items.dialogue-forum' })}
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to={StaticRoutes.PressReleases} activeClassName="active">
+                    {_t({ id: 'header.menu.news-events.items.press-releases' })}
+                  </NavLink>
+                </li>
               </ul>
               <ClimateClock countdown={countdown} minimal />
             </div>

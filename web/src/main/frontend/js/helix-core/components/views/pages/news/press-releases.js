@@ -37,48 +37,53 @@ const truncateText = (text, tag, length = 200) => {
   return result.length > length ? result.substring(0, length) + '...' : result;
 };
 
-class DialogueForum extends React.Component {
+
+class PressReleases extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.getPosts(1, 100, EnumPostCategory.DialogueForum);
+    this.props.getPosts(1, 100, EnumPostCategory.PressRelease);
   }
 
   toggleSecureUrl(content) {
     return content.replace(/(http:\/\/)/g, 'https://');
   }
 
-  renderHeader(p) {
-    const location = p[WordPressField.Location];
-    const date = p[WordPressField.Date];
-
-    if (location && date) {
-      return (<div className="cards__item__date">{`${location} • ${date}`}</div>);
+  renderDate(post) {
+    if (post[WordPressField.Date]) {
+      return post[WordPressField.Date];
     }
 
-    return (<div className="cards__item__date">{location ? location : date ? date : ''}</div>);
+    const modifiedAt = moment(post.modified);
+    const age = moment.duration(moment() - modifiedAt);
+
+    return age.asHours() < 24 ?
+      moment(modifiedAt).fromNow() :
+      <FormattedDate value={post.modified} day='numeric' month='numeric' year='numeric' />;
   }
 
   renderPosts(posts) {
     const _t = this.props.intl.formatMessage;
 
     return posts.map((p) => {
-      const author = p[WordPressField.Author] || p._embedded.author[0].name;
+      const imageUrl = (
+        p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
+          this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
+          '/images/sample_images/academy.jpg'
+      );
 
       return (
-        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--forum">
-          <div className="cards__item__top cards__item__top--flex">
-            <div className="cards__item__top__upper">
-              {this.renderHeader(p)}
-              <div className="cards__item__title">{p.title.rendered}</div>
-              <p className="cards__item__text" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></p>
-            </div>
-            <div className="cards__item__top__lower">
-              <p className="cards__item__text">{author}</p>
-            </div>
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--text cards__item--events">
+          <div className="cards__item__top">
+            <span className="cards__item__date">{p[WordPressField.Title] ? `${p[WordPressField.Title]} • ` : ''}{this.renderDate(p)}</span>
+            <h3 className="cards__item__title">{p.title.rendered}</h3>
+            <div className="cards__item__excerpt" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></div>
           </div>
-          <span className="cards__item__button">{_t({ id: 'buttons.card.dialogue-forum-more' })}</span>
+          <div className="cards__item__img">
+            <img src={imageUrl} alt="" />
+          </div>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.press-release-more' })}</span>
         </Link>
       );
     });
@@ -86,7 +91,7 @@ class DialogueForum extends React.Component {
 
   render() {
     const { countdown, pages } = this.props;
-    const { posts } = pages[EnumPostCategory.DialogueForum];
+    const { posts } = pages[EnumPostCategory.PressRelease];
 
     const _t = this.props.intl.formatMessage;
 
@@ -134,7 +139,7 @@ class DialogueForum extends React.Component {
               <ul className="page__breadcrumbs">
                 <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.news' })}</a></li>
-                <li><a href="#">{_t({ id: 'breadcrumb.dialogue-forum' })}</a></li>
+                <li><a href="#">{_t({ id: 'breadcrumb.press-release' })}</a></li>
               </ul>
 
               <section className="cards cards--sidebar">
@@ -146,20 +151,6 @@ class DialogueForum extends React.Component {
                 </div>
               </section>
 
-              {/*
-              <div className="pagination">
-                <a href="#" className="pagination__arrow pagination__arrow--left pagination__arrow--inactive"></a>
-                <ul>
-                  <li className="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li className="dots"><span></span><span></span><span></span></li>
-                  <li><a href="#">8</a></li>
-                </ul>
-                <a href="#" className="pagination__arrow pagination__arrow--right"></a>
-              </div>
-              */}
             </div>
           </div>
         </div>
@@ -184,4 +175,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(DialogueForum));
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(PressReleases));

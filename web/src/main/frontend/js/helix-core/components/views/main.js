@@ -112,6 +112,9 @@ class Main extends React.Component {
         case EnumPostCategory.OtherEvent:
           icon = 'events_icon.svg';
           break;
+        case EnumPostCategory.PressRelease:
+          icon = 'newsletter_icon.svg';
+          break;
         case EnumPostCategory.Workshop:
           icon = 'workshop_icon.svg';
           break;
@@ -181,6 +184,9 @@ class Main extends React.Component {
         case EnumPostCategory.OtherEvent:
           cardClassName += '--events';
           buttonResource = 'buttons.card.other-event-more';
+          break;
+        case EnumPostCategory.PressRelease:
+          buttonResource = 'buttons.card.press-release-more';
           break;
         case EnumPostCategory.Workshop:
           buttonResource = 'buttons.card.workshop-more';

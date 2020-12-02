@@ -52,6 +52,12 @@ const initialState = {
       posts: null,
       count: 0,
     },
+    [EnumPostCategory.PressRelease]: {
+      pageIndex: 1,
+      pageSize: 10,
+      posts: null,
+      count: 0,
+    },
     [EnumPostCategory.Workshop]: {
       pageIndex: 1,
       pageSize: 10,

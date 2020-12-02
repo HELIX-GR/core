@@ -84,6 +84,7 @@ import {
   DialogueForum,
   Newsletter,
   OtherEvents,
+  PressReleases,
   Workshops,
 } from './views/pages/news';
 
@@ -206,6 +207,7 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.DialogueForum} component={DialogueForum} />
         <Route path={StaticRoutes.Newsletter} component={Newsletter} />
         <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
+        <Route path={StaticRoutes.PressReleases} component={PressReleases} />
         <Route path={StaticRoutes.Workshops} component={Workshops} />
 
         <Route path={StaticRoutes.Contact} component={Contact} />

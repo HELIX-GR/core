@@ -32,6 +32,7 @@ const Blog = '/news-events/blog';
 const DialogueForum = '/news-events/dialogue-forum';
 const Newsletter = '/news-events/newsletter';
 const OtherEvents = '/news-events/other-events';
+const PressReleases = '/news-events/press-releases';
 const Workshops = '/news-events/workshops';
 
 const Contact = '/contact';
@@ -39,8 +40,6 @@ const TermsOfUse = '/terms-of-use';
 
 
 
-const ACTIONS = '/news/actions/';
-const APPLICATIONS = '/applications/';
 const EVENTS = '/news/events/';
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
@@ -82,22 +81,12 @@ export const StaticRoutes = {
   DialogueForum,
   Newsletter,
   OtherEvents,
+  PressReleases,
   Workshops,
 
   Contact,
   TermsOfUse,
 
-
-
-
-
-
-
-
-
-
-  ACTIONS,
-  APPLICATIONS,
   COLLECTIONS,
   EVENTS,
   FAVORITES,

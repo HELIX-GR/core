@@ -80,6 +80,9 @@ class PostPage extends React.Component {
         case EnumPostCategory.OtherEvent:
           icon = 'events_icon.svg';
           break;
+        case EnumPostCategory.PressRelease:
+          icon = 'newsletter_icon.svg';
+          break;
         case EnumPostCategory.Workshop:
           icon = 'workshop_icon.svg';
           break;

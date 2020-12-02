@@ -35,6 +35,7 @@ export const EnumPostCategory = {
   DialogueForum: 'dialogue-forum',
   Newsletter: 'newsletter',
   OtherEvent: 'other-event',
+  PressRelease: 'press-release',
   Workshop: 'workshop',
 };
 
