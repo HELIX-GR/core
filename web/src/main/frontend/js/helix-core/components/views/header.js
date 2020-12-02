@@ -244,7 +244,7 @@ class Header extends React.Component {
               <a href="#" onClick={(e) => this.onChangeLocale(e, EnumLocale.EN)}>EN</a>
             </li> */}
           </ul>
-          <a href="#" className="header__login">
+          <a href="#" className="header__login" onClick={(e) => e.preventDefault()}>
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
               <path id="Path_1597" data-name="Path 1597" d="M18.5,36A17.5,17.5,0,1,0,36,18.5,17.5,17.5,0,0,0,18.5,36ZM36,50.167a14.274,14.274,0,0,1-7.333-2.056,7.333,7.333,0,0,1,14.667,0A14.274,14.274,0,0,1,36,50.167ZM32.5,34.056a3.5,3.5,0,1,1,3.5,3.5A3.5,3.5,0,0,1,32.5,34.056ZM50.167,36a13.833,13.833,0,0,1-3.833,9.611,10.612,10.612,0,0,0-5.389-6.833,6.833,6.833,0,1,0-9.889,0,10.612,10.612,0,0,0-5.389,6.833A13.833,13.833,0,0,1,21.833,36a14.167,14.167,0,0,1,28.333,0Z" transform="translate(-18.5 -18.5)" fill="#c9e9fc" />
             </svg>

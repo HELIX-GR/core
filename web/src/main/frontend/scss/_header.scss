@@ -14,13 +14,13 @@
   &__logo {
     display: block;
     z-index:2;
-    @media(max-width: 992px) {   
+    @media(max-width: 992px) {
       margin-right: -25px;
     }
     img {
       max-width: 200px;
       display: block;
-      @media(max-width: 992px) { 
+      @media(max-width: 992px) {
         max-width: 140px;
       }
     }
@@ -33,7 +33,7 @@
     z-index:2;
     height: 10px;
     width: 35px;
-    @media(min-width: 993px) { 
+    @media(min-width: 993px) {
       display: none;
     }
     &:after, &:before {
@@ -45,14 +45,14 @@
       background: $mainColor;
       transition: transform 0.2s 0.2s ease;
     }
-    &:before { 
+    &:before {
       top: 0;
     }
-    &:after { 
+    &:after {
       bottom: 0;
     }
     .open & {
-      &:after, &:before { 
+      &:after, &:before {
         transition: transform 0.2s 0.0s ease;
       }
       &:before {
@@ -72,10 +72,10 @@
     @include border-bottom;
     padding: 17px 0;
     overflow: hidden;
-    @media(max-width: 992px) { 
+    @media(max-width: 992px) {
       overflow: unset;
     }
-    @media(max-width: 992px) { 
+    @media(max-width: 992px) {
       border-bottom: 0px solid $mainColor;
       justify-content: space-between;
       padding: 20px 0 16px 0;
@@ -121,7 +121,7 @@
       > li.has-submenu {
         height: var(--header-height);
         transition: height 0.4s ease-in-out;
-        @media(max-width: 992px) { 
+        @media(max-width: 992px) {
           height: auto!important;
         }
         &:hover {
@@ -134,7 +134,7 @@
        > a{
          position: relative;
          display: inline-block;
-        @media(max-width: 992px) { 
+        @media(max-width: 992px) {
           &:after{
             content: '';
             background:url(../images/icons/arrow-menu.svg);
@@ -160,7 +160,7 @@
         @media(max-width: 1260px) {
           padding-left: 30px;
         }
-        @media(max-width: 992px) { 
+        @media(max-width: 992px) {
           display: block;
           padding: 8px 0;
         }
@@ -173,7 +173,7 @@
           position: relative;
           padding: 5px 0;
           transition: opacity 0.2s ease;
-          @media(max-width: 992px) {  
+          @media(max-width: 992px) {
             padding: 5px 0;
             display: inline;
           }
@@ -200,7 +200,7 @@
             }
           }
           &.active {
-            &:before, &:after { 
+            &:before, &:after {
               opacity: 1;
             }
           }
@@ -213,7 +213,7 @@
           margin-top: 60px;
           padding-bottom: 30px;;
           transition: opacity 0.4s ease;
-          @media(max-width: 992px) {  
+          @media(max-width: 992px) {
             margin-left: 15px;
             position: relative;
             opacity: 1;
@@ -224,7 +224,7 @@
           li {
             display: block;
             padding: 3px 0;
-            @media(max-width: 992px) { 
+            @media(max-width: 992px) {
               padding: 5px 0;
             }
             a {
@@ -240,7 +240,7 @@
     margin-left: auto;
     position: relative;
     text-align: right;
-    @media(max-width: 992px) {  
+    @media(max-width: 992px) {
       margin-left: unset;
     }
     li {
@@ -271,13 +271,14 @@
   }
 
   &__login{
+    cursor: default;
     margin-left: 30px;
     transition: opacity .2s ease;
-    @media(max-width: 992px) {  
+    @media(max-width: 992px) {
       display: none;
     }
     &:hover{
-      opacity: 0.5;
+      // opacity: 0.5;
     }
     svg{
       display: block;
