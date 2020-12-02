@@ -276,6 +276,7 @@ class Main extends React.Component {
               </div>
             </section>
             <section className="cards">
+              <h1><FormattedMessage id="text.main.recent-activity" /></h1>
               <div className="container">
                 <Draggable className="cards__inner">
                   {posts && this.renderPosts(posts)}
