@@ -103,32 +103,32 @@ class Blog extends React.Component {
               <ul className="page__sidebar__menu">
                 <li>
                   <NavLink to={StaticRoutes.Workshops} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.workshops' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.workshops' })}
                   </NavLink>
                 </li>
                 {/* <li>
                   <NavLink to={StaticRoutes.OtherEvents} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.other-events' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.other-events' })}
                   </NavLink>
                 </li> */}
                 <li>
                   <NavLink to={StaticRoutes.Newsletter} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.newsletter' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.newsletter' })}
                   </NavLink>
                 </li>
                 {/* <li>
                   <NavLink to={StaticRoutes.Blog} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.blog' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.blog' })}
                   </NavLink>
                 </li> */}
                 <li>
                   <NavLink to={StaticRoutes.DialogueForum} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.dialogue-forum' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.dialogue-forum' })}
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to={StaticRoutes.PressReleases} activeClassName="active">
-                    {_t({ id: 'header.menu.news-events.items.press-releases' })}
+                    {_t({ id: 'sidebar.menu.news-events.items.press-releases' })}
                   </NavLink>
                 </li>
               </ul>

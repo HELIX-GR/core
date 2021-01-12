@@ -1,7 +1,7 @@
 {
   "breadcrumb": {
     "home": "Αρχική",
-    "about": "Σχετικά",
+    "about": "Το Πρόγραμμα Climpact",
     "overview": "Επισκόπηση",
     "targets": "Στόχοι",
     "committee": "Διοικούσα Επιτροπή",
@@ -97,7 +97,7 @@
     "menu": {
       "about": {
         "items": {
-          "about": "Σχετικά",
+          "about": "Το Πρόγραμμα Climpact",
           "deliverables": "Παραδοτέα",
           "committee": "Διοικούσα Επιτροπή",
           "overview": "Επισκόπηση",
@@ -126,7 +126,8 @@
           "dialogue-forum": "Φόρουμ Διαλόγου",
           "newsletter": "Newsletter",
           "other-events": "Άλλες Εκδηλώσεις",
-          "workshops": "Εργαστήρια"
+          "workshops": "Εργαστήρια",
+          "press-releases": "Δελτία Τύπου"
         }
       }
     }

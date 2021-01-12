@@ -65,17 +65,17 @@ class Associate extends React.Component {
               <ul className="page__sidebar__menu">
                 <li>
                   <NavLink to={StaticRoutes.Core} activeClassName="active">
-                    {_t({ id: 'header.menu.network.items.core' })}
+                    {_t({ id: 'sidebar.menu.network.items.core' })}
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to={StaticRoutes.Associate} activeClassName="active">
-                    {_t({ id: 'header.menu.network.items.associate' })}
+                    {_t({ id: 'sidebar.menu.network.items.associate' })}
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to={StaticRoutes.Join} activeClassName="active">
-                    {_t({ id: 'header.menu.network.items.join' })}
+                    {_t({ id: 'sidebar.menu.network.items.join' })}
                   </NavLink>
                 </li>
               </ul>
