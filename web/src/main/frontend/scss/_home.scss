@@ -16,7 +16,7 @@
       }
       h1 {
         font-weight: inherit;
-        @include fluid-type(30px, 80px);
+        @include fluid-type(30px, 70px);
         line-height: 1em;
         color: $mainColor;
         font-weight: 600;

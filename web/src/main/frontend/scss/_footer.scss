@@ -19,7 +19,7 @@
         }
       }
       h3 {
-        @include fluid-type(30px, 40px);
+        font-size: em(30);
         line-height: 1.2em;
         font-weight: 700;
         color: $mainColor;
@@ -111,5 +111,5 @@
       }
     }
   }
-  
+
 }
