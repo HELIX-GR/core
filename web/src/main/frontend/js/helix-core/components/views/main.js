@@ -233,7 +233,7 @@ class Main extends React.Component {
       <React.Fragment>
         <main className="home">
           <div className="container">
-            <ClimateClock countdown={countdown} />
+            {/* <ClimateClock countdown={countdown} /> */}
 
             <section className="home__bigtext">
               <div className="home__bigtext__main">

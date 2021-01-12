@@ -79,7 +79,7 @@ class Associate extends React.Component {
                   </NavLink>
                 </li>
               </ul>
-              <ClimateClock countdown={countdown} minimal />
+              {/* <ClimateClock countdown={countdown} minimal /> */}
             </div>
             <div className="page__content">
               <ul className="page__breadcrumbs">

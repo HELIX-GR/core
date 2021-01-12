@@ -2,9 +2,9 @@
   &__bigtext {
 
     @include border-bottom;
-    @include border-top;
+    // @include border-top;
     padding: 25px 0;
-    margin: 30px 0;
+    margin: 0 0 30px 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
