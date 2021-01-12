@@ -113,7 +113,7 @@ class Main extends React.Component {
           icon = 'events_icon.svg';
           break;
         case EnumPostCategory.PressRelease:
-          icon = 'newsletter_icon.svg';
+          icon = 'press_release_icon.svg';
           break;
         case EnumPostCategory.Workshop:
           icon = 'workshop_icon.svg';
