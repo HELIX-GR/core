@@ -102,21 +102,21 @@ class DialogueForum extends React.Component {
                     {_t({ id: 'header.menu.news-events.items.workshops' })}
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to={StaticRoutes.OtherEvents} activeClassName="active">
                     {_t({ id: 'header.menu.news-events.items.other-events' })}
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to={StaticRoutes.Newsletter} activeClassName="active">
                     {_t({ id: 'header.menu.news-events.items.newsletter' })}
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to={StaticRoutes.Blog} activeClassName="active">
                     {_t({ id: 'header.menu.news-events.items.blog' })}
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to={StaticRoutes.DialogueForum} activeClassName="active">
                     {_t({ id: 'header.menu.news-events.items.dialogue-forum' })}

@@ -176,7 +176,7 @@ class Header extends React.Component {
               }}>
                 <a href="#">{_t({ id: 'header.menu.applications.title' })}</a>
                 <ul className="submenu" ref={this.appRef} >
-                  <li>
+                  {/* <li>
                     <NavLink to={StaticRoutes.Services} activeClassName="active">
                       {_t({ id: 'header.menu.applications.items.services' })}
                     </NavLink>
@@ -185,7 +185,7 @@ class Header extends React.Component {
                     <NavLink to={StaticRoutes.Tools} activeClassName="active">
                       {_t({ id: 'header.menu.applications.items.tools' })}
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <a href={ExternalRoutes.Lab} target="_blank">
                       {_t({ id: 'header.menu.applications.items.lab' })}
@@ -207,21 +207,21 @@ class Header extends React.Component {
                       {_t({ id: 'header.menu.news-events.items.workshops' })}
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink to={StaticRoutes.OtherEvents} activeClassName="active">
                       {_t({ id: 'header.menu.news-events.items.other-events' })}
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink to={StaticRoutes.Newsletter} activeClassName="active">
                       {_t({ id: 'header.menu.news-events.items.newsletter' })}
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink to={StaticRoutes.Blog} activeClassName="active">
                       {_t({ id: 'header.menu.news-events.items.blog' })}
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink to={StaticRoutes.DialogueForum} activeClassName="active">
                       {_t({ id: 'header.menu.news-events.items.dialogue-forum' })}

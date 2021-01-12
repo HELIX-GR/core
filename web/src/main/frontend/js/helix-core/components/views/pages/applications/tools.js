@@ -37,7 +37,7 @@ class Tools extends React.Component {
             <div className="page__sidebar">
               <h2 className="page__title">{_t({ id: 'breadcrumb.applications' })}</h2>
               <ul className="page__sidebar__menu">
-                <li>
+                {/* <li>
                   <NavLink to={StaticRoutes.Services} activeClassName="active">
                     {_t({ id: 'sidebar.menu.applications.items.services' })}
                   </NavLink>
@@ -46,7 +46,7 @@ class Tools extends React.Component {
                   <NavLink to={StaticRoutes.Tools} activeClassName="active">
                     {_t({ id: 'sidebar.menu.applications.items.tools' })}
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <a href={ExternalRoutes.Lab} target="_blank">
                     {_t({ id: 'sidebar.menu.applications.items.lab' })}
