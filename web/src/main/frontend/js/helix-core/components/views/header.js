@@ -34,6 +34,8 @@ class Header extends React.Component {
     this.networkRef = React.createRef();
     this.appRef = React.createRef();
     this.newsRef = React.createRef();
+
+    this.onCloseMenu = this.onCloseMenu.bind(this);
   }
 
   static propTypes = {
@@ -45,6 +47,10 @@ class Header extends React.Component {
 
   static defaultProps = {
     locale: EnumLocale.EL,
+  }
+
+  onCloseMenu() {
+    this.setState({ open: false });
   }
 
   onChangeLocale(e, locale) {
@@ -99,7 +105,7 @@ class Header extends React.Component {
           <nav className="header__nav">
             <ul>
               <li>
-                <NavLink to={StaticRoutes.Home} activeClassName="active">
+                <NavLink to={StaticRoutes.Home} activeClassName="active" onClick={this.onCloseMenu}>
                   {_t({ id: 'header.menu.about.items.home' })}
                 </NavLink>
               </li>
@@ -111,32 +117,32 @@ class Header extends React.Component {
                 <a href="#">{_t({ id: 'header.menu.about.title' })}</a>
                 <ul className="submenu" ref={this.aboutRef} >
                   <li>
-                    <NavLink to={StaticRoutes.Overview} activeClassName="active">
+                    <NavLink to={StaticRoutes.Overview} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.overview' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Targets} activeClassName="active">
+                    <NavLink to={StaticRoutes.Targets} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.targets' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Committee} activeClassName="active">
+                    <NavLink to={StaticRoutes.Committee} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.committee' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.ScientificCommittee} activeClassName="active">
+                    <NavLink to={StaticRoutes.ScientificCommittee} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.scientific-committee' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.WorkPackages} activeClassName="active">
+                    <NavLink to={StaticRoutes.WorkPackages} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.work-packages' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Deliverables} activeClassName="active">
+                    <NavLink to={StaticRoutes.Deliverables} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.deliverables' })}
                     </NavLink>
                   </li>
@@ -150,17 +156,17 @@ class Header extends React.Component {
                 <a href="#">{_t({ id: 'header.menu.network.title' })}</a>
                 <ul className="submenu" ref={this.networkRef}>
                   <li>
-                    <NavLink to={StaticRoutes.Core} activeClassName="active">
+                    <NavLink to={StaticRoutes.Core} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.core' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Associate} activeClassName="active">
+                    <NavLink to={StaticRoutes.Associate} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.associate' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Join} activeClassName="active">
+                    <NavLink to={StaticRoutes.Join} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.join' })}
                     </NavLink>
                   </li>
@@ -177,12 +183,12 @@ class Header extends React.Component {
                 <a href="#">{_t({ id: 'header.menu.applications.title' })}</a>
                 <ul className="submenu" ref={this.appRef} >
                   {/* <li>
-                    <NavLink to={StaticRoutes.Services} activeClassName="active">
+                    <NavLink to={StaticRoutes.Services} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.applications.items.services' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.Tools} activeClassName="active">
+                    <NavLink to={StaticRoutes.Tools} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.applications.items.tools' })}
                     </NavLink>
                   </li> */}
@@ -203,32 +209,32 @@ class Header extends React.Component {
                 <a href="#">{_t({ id: 'header.menu.news-events.title' })}</a>
                 <ul className="submenu" ref={this.newsRef} >
                   <li>
-                    <NavLink to={StaticRoutes.Workshops} activeClassName="active">
+                    <NavLink to={StaticRoutes.Workshops} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.workshops' })}
                     </NavLink>
                   </li>
                   {/* <li>
-                    <NavLink to={StaticRoutes.OtherEvents} activeClassName="active">
+                    <NavLink to={StaticRoutes.OtherEvents} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.other-events' })}
                     </NavLink>
                   </li> */}
                   <li>
-                    <NavLink to={StaticRoutes.Newsletter} activeClassName="active">
+                    <NavLink to={StaticRoutes.Newsletter} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.newsletter' })}
                     </NavLink>
                   </li>
                   {/* <li>
-                    <NavLink to={StaticRoutes.Blog} activeClassName="active">
+                    <NavLink to={StaticRoutes.Blog} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.blog' })}
                     </NavLink>
                   </li> */}
                   <li>
-                    <NavLink to={StaticRoutes.DialogueForum} activeClassName="active">
+                    <NavLink to={StaticRoutes.DialogueForum} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.dialogue-forum' })}
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.PressReleases} activeClassName="active">
+                    <NavLink to={StaticRoutes.PressReleases} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.press-releases' })}
                     </NavLink>
                   </li>
