@@ -181,8 +181,8 @@
     }
   },
   "cookie": {
-    "consent": "This website uses cookies to enhance the user experience.",
-    "learn-more": "Learn more",
+    "consent": "Η ιστοσελίδα χρησιμοποιεί cookies για να εξασφαλίσει την σωστή λειτουργία της.",
+    "learn-more": "Μάθετε Περισσότερα",
     "accept": "Αποδοχή"
   }
 }
