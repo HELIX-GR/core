@@ -73,18 +73,36 @@ class Newsletter extends React.Component {
     const sortedPosts = _.sortBy(posts, (n) => n[WordPressField.Index]);
 
     return sortedPosts.map((p) => {
+      // Get featured image
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
           this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
           '/images/dummy_card.png'
       );
+      // Get author
+      const author = p[WordPressField.Author] || p._embedded.author[0].name;
+      // Get date either as a fixed date from a custom field or as
+      // the interval from the publication date
+      const date = this.renderDate(p);
+      // Get title
+      const title = p[WordPressField.Location] || p[WordPressField.Title] || '';
 
       return (
-        <a key={`post-${p.id}`} href="#" onClick={(e) => this.onDownload(e, p[WordPressField.File])} className="cards__item cards__item--newsletter">
-          <div className="cards__item__top" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-          <h3 className="cards__item__title">{p.title.rendered}</h3>
+        <Link
+          key={`post-${p.id}`}
+          className="cards__item cards__item--newsletter"
+          to={buildPath(DynamicRoutes.POST_PAGE, [p.id])}
+          onClick={(e) => this.onDownload(e, p[WordPressField.File])}
+        >
+          <div className="cards__item__top">
+            <span className="cards__item__date">{title ? `${title} • ` : ''}{date}</span>
+            <h3 className="cards__item__title">{p.title.rendered}</h3>
+          </div>
+          <div className="cards__item__img" style={{ height: 300 }}>
+            <img src={imageUrl} alt="" />
+          </div>
           <span className="cards__item__button">{_t({ id: 'buttons.card.newsletter-more' })}</span>
-        </a>
+        </Link>
       );
     });
   }
