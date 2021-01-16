@@ -258,7 +258,7 @@ class ContentRoot extends React.Component {
             location={this.props.location}
           />
         </div>
-        {/* <CookieConsent
+        <CookieConsent
           location="none"
           disableStyles={true}
           containerClasses="cookie-consent"
@@ -270,11 +270,11 @@ class ContentRoot extends React.Component {
             <FormattedMessage id="cookie.consent" />
           </div>
           <div className="cookie-consent-learn-more">
-            <Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>
+            <Link to={StaticRoutes.TermsOfUse}>
               <FormattedMessage id="cookie.learn-more" />
             </Link>
           </div>
-        </CookieConsent> */}
+        </CookieConsent>
       </React.Fragment>
     );
   }

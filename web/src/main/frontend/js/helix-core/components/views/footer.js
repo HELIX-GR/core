@@ -96,7 +96,7 @@ class Footer extends React.Component {
               {/*
               <li><a href="/privacy.html">PRIVACY POLICY</a></li>
               */}
-              <li><Link to={StaticRoutes.TermsOfUse}><FormattedMessage id="text.footer.terms-of-user" /></Link></li>
+              <li><Link to={StaticRoutes.TermsOfUse}><FormattedMessage id="text.footer.terms-of-use" /></Link></li>
             </ul>
           </div>
         </div>
