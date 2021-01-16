@@ -54,8 +54,6 @@ class WordPressPage extends React.Component {
   render() {
     const { className, style = {}, pages } = this.props;
 
-    const _t = this.props.intl.formatMessage;
-
     const name = this.getPageName();
 
     if (!pages[name]) {

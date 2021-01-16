@@ -80,10 +80,13 @@ import {
 } from './views/pages/network';
 
 import {
+  Announcements,
   Blog,
+  ClimpactOnMedia,
   DialogueForum,
   Newsletter,
   OtherEvents,
+  Podcasts,
   PressReleases,
   Workshops,
 } from './views/pages/news';
@@ -203,10 +206,13 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.Core} component={Core} />
         <Route path={StaticRoutes.Join} component={Join} />
 
+        <Route path={StaticRoutes.Announcements} component={Announcements} />
         <Route path={StaticRoutes.Blog} component={Blog} />
+        <Route path={StaticRoutes.ClimpactOnMedia} component={ClimpactOnMedia} />
         <Route path={StaticRoutes.DialogueForum} component={DialogueForum} />
         <Route path={StaticRoutes.Newsletter} component={Newsletter} />
         <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
+        <Route path={StaticRoutes.Podcasts} component={Podcasts} />
         <Route path={StaticRoutes.PressReleases} component={PressReleases} />
         <Route path={StaticRoutes.Workshops} component={Workshops} />
 

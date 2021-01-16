@@ -14,10 +14,6 @@ import {
 } from '../../../model';
 
 import {
-  Faq,
-} from './';
-
-import {
   Code,
 } from 'react-content-loader';
 

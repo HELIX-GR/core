@@ -103,6 +103,12 @@ class Main extends React.Component {
 
     if (category) {
       switch (category.name) {
+        case EnumPostCategory.Announcement:
+          icon = 'announcement.svg';
+          break;
+        case EnumPostCategory.ClimpactOnMedia:
+          icon = 'climpact_on_media.svg';
+          break;
         case EnumPostCategory.DialogueForum:
           icon = 'dialogue_forum_icon.svg';
           break;
@@ -111,6 +117,9 @@ class Main extends React.Component {
           break;
         case EnumPostCategory.OtherEvent:
           icon = 'events_icon.svg';
+          break;
+        case EnumPostCategory.Podcast:
+          icon = 'podcast.svg';
           break;
         case EnumPostCategory.PressRelease:
           icon = 'press_release_icon.svg';
@@ -168,9 +177,15 @@ class Main extends React.Component {
       let buttonResource = '';
 
       switch (category.name) {
+        case EnumPostCategory.Announcement:
+          buttonResource = 'buttons.card.announcement-more';
+          break;
         case EnumPostCategory.Blog:
           cardClassName += '--blog';
           buttonResource = 'buttons.card.blog-more';
+          break;
+        case EnumPostCategory.ClimpactOnMedia:
+          buttonResource = 'buttons.card.climpact-on-media-more';
           break;
         case EnumPostCategory.DialogueForum:
           cardClassName += '--forum';
@@ -183,6 +198,9 @@ class Main extends React.Component {
         case EnumPostCategory.OtherEvent:
           cardClassName += '--events';
           buttonResource = 'buttons.card.other-event-more';
+          break;
+        case EnumPostCategory.Podcast:
+          buttonResource = 'buttons.card.podcast-more';
           break;
         case EnumPostCategory.PressRelease:
           buttonResource = 'buttons.card.press-release-more';

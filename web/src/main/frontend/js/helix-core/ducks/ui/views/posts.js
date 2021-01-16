@@ -28,7 +28,19 @@ const initialState = {
   },
   // Current page of posts
   pages: {
+    [EnumPostCategory.Announcement]: {
+      pageIndex: 1,
+      pageSize: 10,
+      posts: null,
+      count: 0,
+    },
     [EnumPostCategory.Blog]: {
+      pageIndex: 1,
+      pageSize: 10,
+      posts: null,
+      count: 0,
+    },
+    [EnumPostCategory.ClimpactOnMedia]: {
       pageIndex: 1,
       pageSize: 10,
       posts: null,
@@ -47,6 +59,12 @@ const initialState = {
       count: 0,
     },
     [EnumPostCategory.OtherEvent]: {
+      pageIndex: 1,
+      pageSize: 10,
+      posts: null,
+      count: 0,
+    },
+    [EnumPostCategory.Podcast]: {
       pageIndex: 1,
       pageSize: 10,
       posts: null,

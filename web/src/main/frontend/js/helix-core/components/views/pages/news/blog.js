@@ -116,6 +116,11 @@ class Blog extends React.Component {
                     {_t({ id: 'sidebar.menu.news-events.items.newsletter' })}
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to={StaticRoutes.Podcasts} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.news-events.items.podcasts' })}
+                  </NavLink>
+                </li>
                 {/* <li>
                   <NavLink to={StaticRoutes.Blog} activeClassName="active">
                     {_t({ id: 'sidebar.menu.news-events.items.blog' })}
@@ -129,6 +134,16 @@ class Blog extends React.Component {
                 <li>
                   <NavLink to={StaticRoutes.PressReleases} activeClassName="active">
                     {_t({ id: 'sidebar.menu.news-events.items.press-releases' })}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={StaticRoutes.Announcements} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.news-events.items.announcements' })}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={StaticRoutes.ClimpactOnMedia} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.news-events.items.climpact-on-media' })}
                   </NavLink>
                 </li>
               </ul>

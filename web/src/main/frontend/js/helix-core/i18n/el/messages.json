@@ -21,7 +21,10 @@
     "newsletter": "Newsletter",
     "other-event": "Άλλες Εκδηλώσεις",
     "press-release": "Δελτία Τύπου",
-    "workshop": "Εργαστήρια"
+    "workshop": "Εργαστήρια",
+    "announcement": "Ανακοινώσεις ",
+    "climpact-on-media": "To CLIMPACT στα ΜΜΕ",
+    "podcast": "Podcasts"
   },
   "buttons": {
     "learn-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
@@ -34,7 +37,10 @@
       "newsletter-more": "ΜΕΤΑΦΟΡΤΩΣΗ",
       "other-event-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
       "press-release-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
-      "workshop-more": "ΠΕΡΙΣΣΟΤΕΡΑ"
+      "workshop-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "announcement-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "climpact-on-media-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
+      "podcast-more": "ΠΕΡΙΣΣΟΤΕΡΑ"
     }
   },
   "header": {
@@ -78,7 +84,10 @@
           "newsletter": "NEWSLETTER",
           "other-events": "ΑΛΛΕΣ ΕΚΔΗΛΩΣΕΙΣ",
           "press-releases": "ΔΕΛΤΙΑ ΤΥΠΟΥ",
-          "workshops": "ΕΡΓΑΣΤΗΡΙΑ"
+          "workshops": "ΕΡΓΑΣΤΗΡΙΑ",
+          "announcements": "ΑΝΑΚΟΙΝΩΣΕΙΣ",
+          "climpact-on-media": "ΤΟ CLIMPACT ΣΤΑ ΜΜΕ",
+          "podcasts": "PODCASTS"
         }
       }
     }
@@ -127,7 +136,10 @@
           "newsletter": "Newsletter",
           "other-events": "Άλλες Εκδηλώσεις",
           "workshops": "Εργαστήρια",
-          "press-releases": "Δελτία Τύπου"
+          "press-releases": "Δελτία Τύπου",
+          "announcements": "Ανακοινώσεις",
+          "climpact-on-media": "To CLIMPACT στα ΜΜΕ",
+          "podcasts": "Podcasts"
         }
       }
     }

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -33,24 +32,22 @@ import {
 
 import ClimateClock from '../../climate-clock';
 
-class Newsletter extends React.Component {
+const truncateText = (text, tag, length = 200) => {
+  const result = text.replace(`<${tag}>`, '').replace(`</${tag}>`, '');
+  return result.length > length ? result.substring(0, length) + '...' : result;
+};
+
+
+class ClimpactOnMedia extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.getPosts(1, 100, EnumPostCategory.Newsletter);
+    this.props.getPosts(1, 100, EnumPostCategory.ClimpactOnMedia);
   }
 
   toggleSecureUrl(content) {
     return content.replace(/(http:\/\/)/g, 'https://');
-  }
-
-  onDownload(e, file) {
-    e.preventDefault();
-
-    if (file) {
-      window.open(file);
-    }
   }
 
   renderDate(post) {
@@ -69,29 +66,32 @@ class Newsletter extends React.Component {
   renderPosts(posts) {
     const _t = this.props.intl.formatMessage;
 
-    // Sort posts based on index
-    const sortedPosts = _.sortBy(posts, (n) => n[WordPressField.Index]);
-
-    return sortedPosts.map((p) => {
+    return posts.map((p) => {
       const imageUrl = (
         p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'].length === 1 ?
           this.toggleSecureUrl(p._embedded['wp:featuredmedia'][0].source_url) :
-          '/images/dummy_card.png'
+          '/images/sample_images/academy.jpg'
       );
 
       return (
-        <a key={`post-${p.id}`} href="#" onClick={(e) => this.onDownload(e, p[WordPressField.File])} className="cards__item cards__item--newsletter">
-          <div className="cards__item__top" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-          <h3 className="cards__item__title">{p.title.rendered}</h3>
-          <span className="cards__item__button">{_t({ id: 'buttons.card.newsletter-more' })}</span>
-        </a>
+        <Link key={`post-${p.id}`} to={buildPath(DynamicRoutes.POST_PAGE, [p.id])} className="cards__item cards__item--text cards__item--events">
+          <div className="cards__item__top">
+            <span className="cards__item__date">{p[WordPressField.Title] ? `${p[WordPressField.Title]} • ` : ''}{this.renderDate(p)}</span>
+            <h3 className="cards__item__title">{p.title.rendered}</h3>
+            <div className="cards__item__excerpt" dangerouslySetInnerHTML={{ __html: truncateText(this.toggleSecureUrl(p.excerpt.rendered), 'p') }}></div>
+          </div>
+          <div className="cards__item__img">
+            <img src={imageUrl} alt="" />
+          </div>
+          <span className="cards__item__button">{_t({ id: 'buttons.card.climpact-on-media-more' })}</span>
+        </Link>
       );
     });
   }
 
   render() {
     const { countdown, pages } = this.props;
-    const { posts } = pages[EnumPostCategory.Newsletter];
+    const { posts } = pages[EnumPostCategory.ClimpactOnMedia];
 
     const _t = this.props.intl.formatMessage;
 
@@ -154,7 +154,7 @@ class Newsletter extends React.Component {
               <ul className="page__breadcrumbs">
                 <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.news' })}</a></li>
-                <li><a href="#">{_t({ id: 'breadcrumb.newsletter' })}</a></li>
+                <li><a href="#">{_t({ id: 'breadcrumb.climpact-on-media' })}</a></li>
               </ul>
 
               <section className="cards cards--sidebar">
@@ -190,4 +190,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Newsletter));
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(ClimpactOnMedia));

@@ -5,7 +5,6 @@ import { injectIntl } from 'react-intl';
 
 import {
   buildPath,
-  DynamicRoutes,
 } from '../../../model';
 
 class Menu extends React.Component {

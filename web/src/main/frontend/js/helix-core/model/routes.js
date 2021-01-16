@@ -28,10 +28,13 @@ const Join = '/network/join';
 const Services = '/applications/services';
 const Tools = '/applications/tools';
 
+const Announcements = '/news-events/announcements';
 const Blog = '/news-events/blog';
+const ClimpactOnMedia = '/news-events/climpact-on-media';
 const DialogueForum = '/news-events/dialogue-forum';
 const Newsletter = '/news-events/newsletter';
 const OtherEvents = '/news-events/other-events';
+const Podcasts = '/news-events/podcasts';
 const PressReleases = '/news-events/press-releases';
 const Workshops = '/news-events/workshops';
 
@@ -77,10 +80,13 @@ export const StaticRoutes = {
   Services,
   Tools,
 
+  Announcements,
   Blog,
+  ClimpactOnMedia,
   DialogueForum,
   Newsletter,
   OtherEvents,
+  Podcasts,
   PressReleases,
   Workshops,
 

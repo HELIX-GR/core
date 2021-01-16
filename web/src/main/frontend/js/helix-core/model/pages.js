@@ -21,9 +21,12 @@ export const WordPressPages = {
     Tools: 'applications-tools',
   },
   NewsEvents: {
+    Announcements: 'announcements',
+    ClimpactOnMedia: 'climpact-on-media',
     DialogueForum: 'news-events-dialogue-forum',
     Workshops: 'news-events-workshops',
     OtherEvents: 'news-events-other-events',
+    Podcasts: 'podcasts',
     PressReleases: 'news-events-press-releases',
     Newsletter: 'news-events-newsletter',
   },

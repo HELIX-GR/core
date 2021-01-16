@@ -71,6 +71,12 @@ class PostPage extends React.Component {
 
     if (category) {
       switch (category.name) {
+        case EnumPostCategory.Announcement:
+          icon = 'announcement.svg';
+          break;
+        case EnumPostCategory.ClimpactOnMedia:
+          icon = 'climpact_on_media.svg';
+          break;
         case EnumPostCategory.DialogueForum:
           icon = 'dialogue_forum_icon.svg';
           break;
@@ -79,6 +85,9 @@ class PostPage extends React.Component {
           break;
         case EnumPostCategory.OtherEvent:
           icon = 'events_icon.svg';
+          break;
+        case EnumPostCategory.Podcast:
+          icon = 'podcast.svg';
           break;
         case EnumPostCategory.PressRelease:
           icon = 'press_release_icon.svg';

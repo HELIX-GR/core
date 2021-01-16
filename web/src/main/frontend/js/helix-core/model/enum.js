@@ -31,10 +31,13 @@ export const EnumAuthProvider = {
 };
 
 export const EnumPostCategory = {
+  Announcement: 'announcement',
   Blog: 'blog',
+  ClimpactOnMedia: 'climpact-on-media',
   DialogueForum: 'dialogue-forum',
   Newsletter: 'newsletter',
   OtherEvent: 'other-event',
+  Podcast: 'podcast',
   PressRelease: 'press-release',
   Workshop: 'workshop',
 };
