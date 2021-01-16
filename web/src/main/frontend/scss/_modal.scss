@@ -46,6 +46,7 @@
       max-width: 180px;
       margin: 0 auto;
       padding: 20px 0;
+      text-align: center;
 
       @media(max-height: 700px) {
         padding: 0px;
@@ -107,6 +108,7 @@
   &__bio {
     overflow-y: scroll;
     letter-spacing: 0.03em;
+    text-align: justify;
 
     p {
       max-width: 700px;

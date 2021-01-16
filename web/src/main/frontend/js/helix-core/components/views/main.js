@@ -133,7 +133,6 @@ class Main extends React.Component {
     const items = [];
 
     const titleStyle = { maxWidth: 360 };
-    const imageStyle = { maxWidth: 400 };
 
     posts.forEach((p) => {
       // Must have at least one category
@@ -206,7 +205,7 @@ class Main extends React.Component {
             <h3 className="cards__item__title" style={titleStyle}>{p.title.rendered}</h3>
           </div>
           <div className="cards__item__img">
-            <img src={imageUrl} alt="" style={imageStyle} />
+            <img src={imageUrl} alt="" />
           </div>
           <span className="cards__item__button">{_t({ id: buttonResource })}</span>
         </Link >

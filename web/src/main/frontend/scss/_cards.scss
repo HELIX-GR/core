@@ -202,7 +202,7 @@
       }
     }
     &__title {
-      font-size: em(30);
+      font-size: em(25);
       font-weight: 600;
       display: block;
       padding: 13px 0 25px;
@@ -398,6 +398,7 @@
       padding: 20px 20px 55px 20px;
       flex: 1;
       position: relative;
+      text-align: justify;
       &:before {
         content: '';
         background: $mainColor;

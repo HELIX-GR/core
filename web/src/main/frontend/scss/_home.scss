@@ -16,7 +16,8 @@
       }
       h1 {
         font-weight: inherit;
-        @include fluid-type(30px, 70px);
+        @include fluid-type(30px, 40px);
+        text-align: justify;
         line-height: 1em;
         color: $mainColor;
         font-weight: 600;
@@ -92,6 +93,7 @@
     &__text {
       flex: 0 1 30%;
       min-width: 500px;
+      text-align: justify;
       @include fluid-type(15px, 30px);
       color: $mainColor;
       padding-right: 20px;

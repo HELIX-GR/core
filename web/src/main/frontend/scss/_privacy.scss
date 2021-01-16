@@ -7,12 +7,12 @@
     text-align: center;
     margin-bottom: 20px;
     h1{
-      @include fluid-type(30px, 74px);
+      @include fluid-type(30px, 60px);
     }
   }
   ul.privacy__list{
     > li {
-      > span { 
+      > span {
         color:#D41A2C;
       }
     }

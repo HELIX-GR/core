@@ -24,7 +24,7 @@
     background: $mainColor;
     display: flex;
     flex-wrap: wrap;
-    padding: 30px 30px 50px;
+    padding: 15px 30px;
     position: relative;
     margin-bottom: 7px;
     @media(max-width: 576px) {
@@ -32,6 +32,9 @@
       margin-top: -1px;
     }
 
+    &__title {
+      @include fluid-type(0px, 45px);
+    }
 
     &:not(.open) {
       cursor: pointer;
@@ -130,7 +133,7 @@
     }
 
     &__side {
-      flex: 0 1 30%;
+      flex: 0 1 25%;
       padding-right: 20px;
       display: flex;
       flex-direction: column;
@@ -144,7 +147,7 @@
         align-self: flex-start;
       }
       &__title{
-        @include fluid-type(0px, 90px);
+        @include fluid-type(0px, 60px);
         font-weight: 300;
         line-height: 1;
         @media(max-width:992px){
@@ -177,6 +180,7 @@
       padding-right: 40px;
       overflow: hidden;
       height: 110px;
+      text-align: justify;
       @media(max-width:992px){
         padding-left: 0px;
         padding-right: 20px;
