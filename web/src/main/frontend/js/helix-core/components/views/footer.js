@@ -48,7 +48,7 @@ class Footer extends React.Component {
             </div>
             <div className="footer__upper__block">
               <h3><FormattedMessage id="text.footer.subscribe.header" /></h3>
-              <input type="text" placeholder="Email address" />
+              <input type="text" placeholder="Email address" style={{ visibility: 'hidden' }} />
               <a href="#" className="btn btn--std">{_t({ id: 'buttons.keep-me-updated' })}</a>
             </div>
           </div>
