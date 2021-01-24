@@ -11,12 +11,9 @@ import {
 } from 'react-router-dom';
 
 import {
-  buildPath,
-  DynamicRoutes,
   EnumLocale,
   ExternalRoutes,
   StaticRoutes,
-  WordPressPages,
 } from '../../model';
 
 class Header extends React.Component {
@@ -255,6 +252,8 @@ class Header extends React.Component {
   }
 
   renderApplicationMenuOld() {
+    const _t = this.props.intl.formatMessage;
+
     return (
       <li className="has-submenu" onMouseOver={(e) => {
         const height = this.outerHeight(this.appRef.current);
