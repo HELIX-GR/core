@@ -5,9 +5,9 @@
   display: inline-block;
 
   &--std {
-    font-size: em(20);
+    font-size: em(16);
     font-weight: 800;
-    letter-spacing: 0.2em;  
+    letter-spacing: 0.2em;
     background: $mainColor;
     color:$mainFontColor;
     padding: 10px 30px;
@@ -16,7 +16,7 @@
       background: #fff;
     }
   }
-  
+
   &--outline {
     // font-size: em(20);
     font-weight: 400;
