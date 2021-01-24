@@ -46,9 +46,9 @@ class Footer extends React.Component {
               <p><FormattedMessage id="text.footer.join.content" /></p>
               <Link to={StaticRoutes.Join} className="btn btn--std">{_t({ id: 'buttons.join' })}</Link>
             </div>
-            <div className="footer__upper__block">
+            <div className="footer__upper__block" style={{ visibility: 'hidden' }}>
               <h3><FormattedMessage id="text.footer.subscribe.header" /></h3>
-              <input type="text" placeholder="Email address" style={{ visibility: 'hidden' }} />
+              <input type="text" placeholder="Email address" />
               <a href="#" className="btn btn--std">{_t({ id: 'buttons.keep-me-updated' })}</a>
             </div>
           </div>
