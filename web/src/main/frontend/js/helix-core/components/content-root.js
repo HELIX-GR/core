@@ -8,8 +8,8 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { ToastContainer } from 'react-toastify';
 import CookieConsent from "react-cookie-consent";
 
-import { EnumAuthProvider, EnumRole as Roles, WordPressPages } from '../model';
-import { Pages, StaticRoutes, DynamicRoutes, buildPath } from '../model/routes';
+import { EnumAuthProvider, EnumRole as Roles } from '../model';
+import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
 
 
 import {
@@ -33,26 +33,10 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
-  Actions,
-  ActionsDetails,
-  Applications,
-  CollectionDetails,
-  Collections,
-  DatasetDetails,
-  Events,
-  EventsDetails,
-  Favorites,
   Footer,
   Header,
   Main,
-  MainResults,
-  Network,
-  News,
-  NewsAndEvents,
-  NewsDetails,
-  NotebookDetails,
   Profile,
-  TheAction,
 } from './views';
 
 import {
@@ -69,6 +53,7 @@ import {
 } from './views/pages/about';
 
 import {
+  Applications,
   Services,
   Tools,
 } from './views/pages/applications';
@@ -199,6 +184,7 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.Targets} component={Targets} />
         <Route path={StaticRoutes.WorkPackages} component={WorkPackages} />
 
+        <Route path={StaticRoutes.Applications} component={Applications} />
         <Route path={StaticRoutes.Services} component={Services} />
         <Route path={StaticRoutes.Tools} component={Tools} />
 

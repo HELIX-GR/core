@@ -175,31 +175,10 @@ class Header extends React.Component {
               <li>
                 <a href={ExternalRoutes.Data}>{_t({ id: 'header.menu.data.title' })}</a>
               </li>
-              <li className="has-submenu" onMouseOver={(e) => {
-                const height = this.outerHeight(this.appRef.current);
-
-                document.documentElement.style.setProperty('--header-height-open', `${height}px`);
-              }}>
-                <a href="#">{_t({ id: 'header.menu.applications.title' })}</a>
-                <ul className="submenu" ref={this.appRef} >
-                  {/* <li>
-                    <NavLink to={StaticRoutes.Services} activeClassName="active" onClick={this.onCloseMenu}>
-                      {_t({ id: 'header.menu.applications.items.services' })}
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to={StaticRoutes.Tools} activeClassName="active" onClick={this.onCloseMenu}>
-                      {_t({ id: 'header.menu.applications.items.tools' })}
-                    </NavLink>
-                  </li> */}
-                  <li>
-                    <a href={ExternalRoutes.Lab} target="_blank">
-                      {_t({ id: 'header.menu.applications.items.lab' })}
-                      {' '}
-                      <img src="../images/icons/arrow-link.svg" alt="" style={{ maxWidth: '0.83em' }} />
-                    </a>
-                  </li>
-                </ul>
+              <li>
+                <NavLink to={StaticRoutes.Applications} activeClassName="active" onClick={this.onCloseMenu}>
+                  {_t({ id: 'header.menu.applications.title' })}
+                </NavLink>
               </li>
               <li className="has-submenu" onMouseOver={(e) => {
                 const height = this.outerHeight(this.newsRef.current);
@@ -272,6 +251,37 @@ class Header extends React.Component {
           </a>
         </div>
       </header>
+    );
+  }
+
+  renderApplicationMenuOld() {
+    return (
+      <li className="has-submenu" onMouseOver={(e) => {
+        const height = this.outerHeight(this.appRef.current);
+
+        document.documentElement.style.setProperty('--header-height-open', `${height}px`);
+      }}>
+        <a href="#">{_t({ id: 'header.menu.applications.title' })}</a>
+        <ul className="submenu" ref={this.appRef} >
+          {/* <li>
+            <NavLink to={StaticRoutes.Services} activeClassName="active" onClick={this.onCloseMenu}>
+              {_t({ id: 'header.menu.applications.items.services' })}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={StaticRoutes.Tools} activeClassName="active" onClick={this.onCloseMenu}>
+              {_t({ id: 'header.menu.applications.items.tools' })}
+            </NavLink>
+          </li> */}
+          <li>
+            <a href={ExternalRoutes.Lab} target="_blank">
+              {_t({ id: 'header.menu.applications.items.lab' })}
+              {' '}
+              <img src="../images/icons/arrow-link.svg" alt="" style={{ maxWidth: '0.83em' }} />
+            </a>
+          </li>
+        </ul>
+      </li>
     );
   }
 

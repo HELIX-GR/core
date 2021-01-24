@@ -25,6 +25,7 @@ const Associate = '/network/associate';
 const Core = '/network/core';
 const Join = '/network/join';
 
+const Applications = '/applications/overview';
 const Services = '/applications/services';
 const Tools = '/applications/tools';
 
@@ -77,6 +78,7 @@ export const StaticRoutes = {
   Core,
   Join,
 
+  Applications,
   Services,
   Tools,
 

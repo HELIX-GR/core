@@ -17,6 +17,7 @@ export const WordPressPages = {
     Join: 'network-join',
   },
   Applications: {
+    Overview: 'applications-menu',
     Services: 'applications-services',
     Tools: 'applications-tools',
   },
