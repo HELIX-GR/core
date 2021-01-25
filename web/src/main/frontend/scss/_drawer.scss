@@ -122,7 +122,6 @@
     }
 
     &--title{
-      @include fluid-type(0px, 45px);
       #{$item}__side{
         justify-content: flex-start;
         @media(max-width: 576px){
