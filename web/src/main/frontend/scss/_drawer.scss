@@ -108,15 +108,14 @@
     &--noside{
       display: block;
       #{$item}__title {
-        @include fluid-type(0px, 60px);
+        @include fluid-type(0px, 40px);
         font-weight: 300;
         line-height: 1;
-        margin-bottom: 25px;
         span{
           font-weight: 300;
         }
         @media(max-width:992px){
-          font-size:60px;
+          font-size:30px;
         }
       }
     }
