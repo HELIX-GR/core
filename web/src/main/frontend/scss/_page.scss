@@ -359,7 +359,7 @@
       }
       h1 {
         padding: 10px 30px 20px;
-        @include fluid-type(30px, 62px);
+        @include fluid-type(30px, 40px);
         font-weight: 600;
         line-height: 1.1em;
         background: $gradientFont;
