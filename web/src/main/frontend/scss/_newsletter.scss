@@ -1,0 +1,259 @@
+.newsletter_modal {
+  // display: none;
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // height: calc(100vh - 30px);
+  width: calc(100% - 30px);
+  max-width: 1000px;
+  background: $mainColor;
+  border-radius: 20px;
+  border: 1px solid $mainFontColor;
+  overflow-y: auto;
+  z-index: 1000;
+  &__inner {
+    max-width: 770px;
+    margin: 0 auto;
+    padding: 40px 15px;
+    @media(max-height: 700px) {
+      padding: 20px 15px;
+    }
+    @media(max-width: 768px) {
+      padding: 20px 15px;
+    }
+  }
+  @media(max-height: 700px) {
+    transform: translateX(-50%);
+    top: 0;
+    height: calc(100vh - 30px);
+    margin: 15px 0;
+  }
+
+  &__backdrop {
+    // display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  h2 {
+    width: 100%;
+    text-align: center;
+    font-size: em(40);
+    font-weight: 800;
+    padding: 15px 0 25px;
+    font-family: $mainFontFamily;
+    @media(max-height: 700px) {
+      padding: 15px 0 15px;
+    }
+    @media(max-width: 768px) {
+      @include fluid-type(22px, 70px);
+      padding: 15px 0 20px;
+    }
+  }
+
+  &__close {
+    display: block;
+    width: 30px;
+    margin:10px auto 5px;
+    position: relative;
+    @media(max-width: 768px) {
+      margin:10px auto 5px;
+    }
+  }
+
+  .mc-field-group {
+    position: relative;
+    margin-bottom: 20px;
+    @media(max-width: 768px) {
+      margin-bottom: 15px;
+    }
+    &.required {
+      position: relative;
+      &:after {
+        content: "*";
+        color: $mainFontColor;
+        position: absolute;
+        top: 0;
+        right: -10px;
+
+      }
+    }
+    label {
+      display: none;
+    }
+    .mc_fieldset {
+      margin: 0;
+      margin-bottom: 5px;
+      label {
+        display: block;
+      }
+    }
+    .checkbox {
+      margin: 10px 0 10px;
+      span {
+        user-select: none;
+      }
+      &__control {
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        vertical-align: middle;
+        background-color: inherit;
+        color: #fff;
+        border: 2px solid #fff;
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 10px;
+          height: 10px;
+          background-color: $mainFontColor;
+          opacity: 0;
+        }
+      }
+      input {
+        opacity: 0;
+        position: absolute;
+        &:checked {
+          ~ .checkbox__label {
+            color: $mainFontColor;
+          }
+          + .checkbox__control {
+            border-color: $mainFontColor;
+            &:after {
+              opacity: 1!important;
+            }
+          }
+        }
+      }
+    }
+    input[type=text],input[type=email] {
+      outline: none;
+      border: none;
+      padding: 11px 15px;
+      width: 100%;
+      font-size: em(14);
+      color: $mainFontColor;
+      border-radius: 50px;
+      font-family: $mainFontColor;
+      letter-spacing: 0.03em;
+      height: 100%;
+      @media(max-width: 767px) {
+          max-width: unset;
+      }
+      &::placeholder {
+        color: $mainFontColor;
+      }
+    }
+    div.mce_inline_error {
+      background: none!important;
+      color: $mainFontColor!important;
+      font-weight: 400!important;
+      font-size: 14px;
+      padding: 5px 16px!important;
+    }
+  }
+  .mc-field-group-split {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .mc-field-group {
+      flex: 0 1 calc(50% - 10px);
+      @media(max-width: 768px) {
+        flex: 0 1 calc(50% - 7px);
+      }
+    }
+  }
+
+  .content__gdprLegal {
+    font-size: 0.8em;
+    line-height: 1.4em;
+    a {
+      color: $mainFontColor;
+      display: block;
+    }
+  }
+  .content__gdpr {
+    font-size: 0.8em;
+    line-height: 1.4em;
+    > label {
+      display: block;
+      font-size: em(20);
+      font-weight: 700;
+      font-family: $mainFontFamily;
+      margin: 30px 0 10px;
+    }
+  }
+
+  button, input[type=submit] {
+    appearance: none;
+    margin-top: 10px;
+    height: 100%;
+    outline: none;
+    border: none;
+    border: 1px solid $mainFontColor;
+    padding: 8px 30px;
+    font-size: em(14);
+    color: #fff;
+    background: $mainFontColor;
+    border-radius: 50px;
+    font-family: $mainFontFamily;
+    letter-spacing: 0.03em;
+    margin-left: 5px;
+    transition: all 0.2s ease;;
+    font-weight: 700;
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    @media(max-width: 767px) {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    &:hover {
+        background: $darkColor;
+        border-color: $darkColor;
+        color: #fff;
+    }
+  }
+
+  #mce-responses {
+    .response {
+      color: $darkColor;
+      font-weight: 700;
+      padding-bottom: 15px;
+      a {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.checkbox__label {
+  a {
+    color: inherit;
+  }
+}
+div.mce_inline_error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.mc_fieldset {
+  position: relative;
+  div.mce_inline_error {
+    position: relative;
+  }
+}
