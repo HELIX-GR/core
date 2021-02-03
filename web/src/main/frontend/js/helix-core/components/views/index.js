@@ -14,6 +14,7 @@ export { default as MainResults } from './main-results';
 export { default as Network } from './network';
 export { default as News } from './news';
 export { default as NewsAndEvents } from './news-events';
+export { default as NewsletterForm } from './newsletter-form';
 export { default as NewsDetails } from './news-details';
 export { default as NotebookDetails } from './notebook-details';
 export { default as Profile } from './profile';
