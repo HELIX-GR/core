@@ -30,8 +30,8 @@
   "buttons": {
     "learn-more": "LEARN MORE",
     "our-targets": "OUR TARGETS",
-    "join": "JOIN",
-    "keep-me-updated": "KEEP ME UPDATED",
+    "join": "PARTICIPATION",
+    "keep-me-updated": "KEEP ME UP TO DATE",
     "card": {
       "blog-more": "VIEW",
       "dialogue-forum-more": "VIEW",
@@ -150,7 +150,7 @@
   "text": {
     "main": {
       "header": " Science at the service of the State and Society for tackling Climate Change.",
-      "content": "The CLIMPACT network seeks to cooperate with the National Commission for Climate Change, with the Committee of the Bank of Greece on Studying the Impact of Climate Change, and other relevant initiatives and actions, aiming to be established as a central pillar of authoritative and multifaceted expertise, as well as an advisory body of the State and Society.",
+      "content": "The CLIMPACT network seeks cooperation with the National Commission for Climate Change, with the Climate Change Impact Study Committee of the Bank of Greece but also with other relevant initiatives and actions. CLIMPACT aims to be a pole of valid and multifaceted expertise and an advisory body of the State and Society.",
       "recent-activity": "Recent Activity"
     },
     "countdown": {
@@ -164,11 +164,11 @@
     },
     "footer": {
       "join": {
-        "header": "Do you want to be a member of the Network for Climate Change?",
-        "content": "Participation is open to Greek scientific organizations"
+        "header": "Do you want to become a member of the CLIMPACT Network?",
+        "content": "Participation is open to scientific organizations in Greece"
       },
       "subscribe": {
-        "header": "Do you want to receive news from CLIMPACT and Climate Change?"
+        "header": "Want to receive news on CLIMPACT and Climate Change?"
       },
       "title": "© 2020 • CLIMPACT • National Network for Climate Change and its impact • ",
       "contact": "CONTACT",
