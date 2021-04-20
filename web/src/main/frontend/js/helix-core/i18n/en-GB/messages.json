@@ -9,11 +9,11 @@
     "committee": "Managing Committee",
     "core": "Core",
     "deliverables": "Deliverables",
-    "dialogue-forum": "Dialog Forum",
+    "dialogue-forum": "Dialog Forums",
     "home": "Home",
     "join": "Join",
     "network": "Network",
-    "news": "News & Events",
+    "news": "News and Events",
     "newsletter": "Newsletter",
     "other-event": "Other Events",
     "overview": "Overview",
@@ -135,7 +135,7 @@
       "news-events": {
         "items": {
           "blog": "Blog",
-          "dialogue-forum": "Dialog Forum",
+          "dialogue-forum": "Dialog Forums",
           "newsletter": "Newsletter",
           "other-events": "Other Events",
           "workshops": "Workshops",
@@ -193,7 +193,13 @@
     "button": "ΕΓΓΡΑΦΗ",
     "consent": {
       "title": "Δήλωση Ενημέρωσης και Συγκατάθεση",
-      "text": "Με την παρούσα δήλωσή μου συμφωνώ να  χρησιμοποιηθούν τα στοιχεία που υποβάλλω για να λαμβάνω ενημερώσεις μέσω ηλεκτρονικού ταχυδρομείου, από το Εθνικό Δίκτυο για την Κλιματική Αλλαγή σύμφωνα με την Πολιτική Προστασίας Προσωπικών Δεδομένων που δίνονται πιο κάτω. Είμαι επίσης ενήμερος ότι η συλλογή των στοιχείων πραγματοποιείται μέσω της πλατφόρμας Mailchimp.  "
+      "text1": "Με την παρούσα δήλωσή μου συμφωνώ να  χρησιμοποιηθούν τα στοιχεία που υποβάλλω για να λαμβάνω ενημερώσεις μέσω ηλεκτρονικού ταχυδρομείου, από το Εθνικό Δίκτυο για την Κλιματική Αλλαγή σύμφωνα με την Πολιτική Προστασίας Προσωπικών Δεδομένων που δίνονται πιο κάτω. Είμαι επίσης ενήμερος ότι η συλλογή των στοιχείων πραγματοποιείται μέσω της πλατφόρμας Mailchimp.  ",
+      "text2": "Διαβάστε σχετικά με την Πολιτική Προστασίας Προσωπικών Δεδομένων",
+      "text3": "και σχετικά με τη διαχείριση των επαφών στον ιστότοπο της εταιρείας Mailchip,  στα ελληνικά (μέσω αυτόματης μετάφρασης)",
+      "link1": "εδώ",
+      "text4": "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing.",
+      "link2": "Learn more about Mailchimp's privacy practices here.",
+      "checkbox": "Συναινώ"
     },
     "label": {
       "firstName": "Όνομα",
