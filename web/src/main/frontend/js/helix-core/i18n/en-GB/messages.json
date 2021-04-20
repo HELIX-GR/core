@@ -1,9 +1,11 @@
 {
   "breadcrumb": {
     "about": "About",
+    "announcement": "Announcements",
     "applications": "Applications",
     "associate": "Associate",
     "blog": "Blog",
+    "climpact-on-media": "CLIMPACT on Media",
     "committee": "Managing Committee",
     "core": "Core",
     "deliverables": "Deliverables",
@@ -15,6 +17,7 @@
     "newsletter": "Newsletter",
     "other-event": "Other Events",
     "overview": "Overview",
+    "podcast": "Podcasts",
     "press-release": "Press Releases",
     "research-groups": "Research Groups",
     "scientific-committee": "Scientific Committee",
@@ -35,7 +38,10 @@
       "newsletter-more": "DOWNLOAD",
       "other-event-more": "VIEW",
       "press-release-more": "VIEW",
-      "workshop-more": "VIEW"
+      "workshop-more": "VIEW",
+      "announcement-more": "VIEW",
+      "climpact-on-media-more": "VIEW",
+      "podcast-more": "VIEW"
     }
   },
   "header": {
@@ -53,6 +59,7 @@
         }
       },
       "applications": {
+        "title": "APPLICATIONS",
         "items": {
           "lab": "LAB",
           "services": "SERVICES",
@@ -79,7 +86,10 @@
           "newsletter": "NEWSLETTER",
           "other-events": "OTHER EVENTS",
           "press-releases": "PRESS RELEASES",
-          "workshops": "WORKSHOPS"
+          "workshops": "WORKSHOPS",
+          "announcements": "ANNOUNCEMENTS",
+          "climpact-on-media": "CLIMPACT ON MEDIA",
+          "podcasts": "PODCASTS"
         }
       }
     }
@@ -128,7 +138,11 @@
           "dialogue-forum": "Dialog Forum",
           "newsletter": "Newsletter",
           "other-events": "Other Events",
-          "workshops": "Workshops"
+          "workshops": "Workshops",
+          "press-releases": "Press Releases",
+          "announcements": "Announcements",
+          "climpact-on-media": "CLIMPACT on Media",
+          "podcasts": "Podcasts"
         }
       }
     }
@@ -162,6 +176,30 @@
     },
     "network-associate": {
       "intro": "The CLIMPACT network is open to cooperation with all  scientific, research and development organizations of the country that deal with the study and management of the effects of Climate Change. Your organization can officially become an associate member of the network and participate in its actions."
+    }
+  },
+  "pages": {
+    "terms-of-use": {
+      "title": "Όροι Χρήσης και Πολιτική Προστασίας Προσωπικών Δεδομένων"
+    }
+  },
+  "cookie": {
+    "consent": "Η ιστοσελίδα χρησιμοποιεί cookies για να εξασφαλίσει την σωστή λειτουργία της.",
+    "learn-more": "Μάθετε Περισσότερα",
+    "accept": "Αποδοχή"
+  },
+  "newsletter-form": {
+    "title": "Εγγραφειτε στο newsletter:",
+    "button": "ΕΓΓΡΑΦΗ",
+    "consent": {
+      "title": "Δήλωση Ενημέρωσης και Συγκατάθεση",
+      "text": "Με την παρούσα δήλωσή μου συμφωνώ να  χρησιμοποιηθούν τα στοιχεία που υποβάλλω για να λαμβάνω ενημερώσεις μέσω ηλεκτρονικού ταχυδρομείου, από το Εθνικό Δίκτυο για την Κλιματική Αλλαγή σύμφωνα με την Πολιτική Προστασίας Προσωπικών Δεδομένων που δίνονται πιο κάτω. Είμαι επίσης ενήμερος ότι η συλλογή των στοιχείων πραγματοποιείται μέσω της πλατφόρμας Mailchimp.  "
+    },
+    "label": {
+      "firstName": "Όνομα",
+      "lastName": "Επώνυμο",
+      "authority": "Φορέας",
+      "email": "Email"
     }
   }
 }

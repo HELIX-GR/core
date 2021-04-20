@@ -239,12 +239,12 @@ class Header extends React.Component {
             </ul>
           </nav>
           <ul className="header__lang">
-            {/* <li style={{ fontWeight: this.props.locale === EnumLocale.EL ? 800 : 300 }}>
-              <a href="#" onClick={(e) => this.onChangeLocale(e, EnumLocale.EL)}>ΕΛ</a>
-            </li> */}
-            {/* <li style={{ fontWeight: this.props.locale === EnumLocale.EN ? 800 : 300 }}>
+            <li style={{ fontWeight: this.props.locale === EnumLocale.EL ? 800 : 300 }}>
+              <a href="#" onClick={(e) => this.onChangeLocale(e, EnumLocale.EL)}>ΕΛ&nbsp;</a>
+            </li>
+            <li style={{ fontWeight: this.props.locale === EnumLocale.EN ? 800 : 300 }}>
               <a href="#" onClick={(e) => this.onChangeLocale(e, EnumLocale.EN)}>EN</a>
-            </li> */}
+            </li>
           </ul>
           <a href="#" className="header__login" onClick={(e) => e.preventDefault()} style={{ display: 'none' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
