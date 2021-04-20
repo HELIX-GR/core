@@ -5,7 +5,7 @@
     "applications": "Applications",
     "associate": "Associate",
     "blog": "Blog",
-    "climpact-on-media": "CLIMPACT on Media",
+    "climpact-on-media": "CLIMPACT in the Media",
     "committee": "Managing Committee",
     "core": "Core",
     "deliverables": "Deliverables",
@@ -47,11 +47,11 @@
   "header": {
     "menu": {
       "about": {
-        "title": "ABOUT",
+        "title": "About the Project",
         "items": {
           "deliverables": "DELIVERABLES",
           "home": "HOME",
-          "committee": "MANAGEMENT COMMITTEE",
+          "committee": "STEERING COMMITTEE",
           "overview": "OVERVIEW",
           "scientific-committee": "SCIENTIFIC COMMITTEE",
           "targets": "TARGETS",
@@ -70,25 +70,25 @@
         "title": "DATA"
       },
       "network": {
-        "title": "NETWORK",
+        "title": "THE NETWORK",
         "items": {
-          "associate": "ASSOCIATE",
-          "core": "CORE",
+          "associate": "AFFILIATED MEMBERS",
+          "core": "MEMBERS",
           "join": "JOIN",
           "research-groups": "RESEARCH GROUPS"
         }
       },
       "news-events": {
-        "title": "NEWS & EVENTS",
+        "title": "NEWS and EVENTS",
         "items": {
           "blog": "BLOG",
-          "dialogue-forum": "DIALOGUE FORUM",
+          "dialogue-forum": "DIALOGUE FORUMS",
           "newsletter": "NEWSLETTER",
           "other-events": "OTHER EVENTS",
           "press-releases": "PRESS RELEASES",
           "workshops": "WORKSHOPS",
           "announcements": "ANNOUNCEMENTS",
-          "climpact-on-media": "CLIMPACT ON MEDIA",
+          "climpact-on-media": "CLIMPACT IN THE MEDIA",
           "podcasts": "PODCASTS"
         }
       }
@@ -141,7 +141,7 @@
           "workshops": "Workshops",
           "press-releases": "Press Releases",
           "announcements": "Announcements",
-          "climpact-on-media": "CLIMPACT on Media",
+          "climpact-on-media": "CLIMPACT in the Media",
           "podcasts": "Podcasts"
         }
       }
