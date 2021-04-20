@@ -180,31 +180,31 @@
   },
   "pages": {
     "terms-of-use": {
-      "title": "Όροι Χρήσης και Πολιτική Προστασίας Προσωπικών Δεδομένων"
+      "title": "Terms of Use and Privacy Statement"
     }
   },
   "cookie": {
-    "consent": "Η ιστοσελίδα χρησιμοποιεί cookies για να εξασφαλίσει την σωστή λειτουργία της.",
-    "learn-more": "Μάθετε Περισσότερα",
-    "accept": "Αποδοχή"
+    "consent": "We use cookies to optimize your experience.",
+    "learn-more": "Learn More",
+    "accept": "Accept"
   },
   "newsletter-form": {
-    "title": "Εγγραφειτε στο newsletter:",
-    "button": "ΕΓΓΡΑΦΗ",
+    "title": "Subscribe to our newsletter:",
+    "button": "SUBSCRIBE",
     "consent": {
-      "title": "Δήλωση Ενημέρωσης και Συγκατάθεση",
-      "text1": "Με την παρούσα δήλωσή μου συμφωνώ να  χρησιμοποιηθούν τα στοιχεία που υποβάλλω για να λαμβάνω ενημερώσεις μέσω ηλεκτρονικού ταχυδρομείου, από το Εθνικό Δίκτυο για την Κλιματική Αλλαγή σύμφωνα με την Πολιτική Προστασίας Προσωπικών Δεδομένων που δίνονται πιο κάτω. Είμαι επίσης ενήμερος ότι η συλλογή των στοιχείων πραγματοποιείται μέσω της πλατφόρμας Mailchimp.  ",
-      "text2": "Διαβάστε σχετικά με την Πολιτική Προστασίας Προσωπικών Δεδομένων",
-      "text3": "και σχετικά με τη διαχείριση των επαφών στον ιστότοπο της εταιρείας Mailchip,  στα ελληνικά (μέσω αυτόματης μετάφρασης)",
-      "link1": "εδώ",
+      "title": "Consent Form",
+      "text1": "I hearby declare my informed consent to the treatment of my personal data with the modalities indicated in the privacy statement for the purposes of being contacted via email from the National Network for Climate Change (CLIMPACT) in accordance to the Privacy Policy terms. I acknowledge that the collection and processing of my information will be performed by Mailchimp. ",
+      "text2": "Read more about our Privacy Statement",
+      "link1": "here",
+      "text3": "and",
       "text4": "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing.",
       "link2": "Learn more about Mailchimp's privacy practices here.",
-      "checkbox": "Συναινώ"
+      "checkbox": "I consent"
     },
     "label": {
-      "firstName": "Όνομα",
-      "lastName": "Επώνυμο",
-      "authority": "Φορέας",
+      "firstName": "Name",
+      "lastName": "Surname",
+      "authority": "Organization",
       "email": "Email"
     }
   }

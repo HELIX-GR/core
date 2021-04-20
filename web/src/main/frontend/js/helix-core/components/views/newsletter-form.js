@@ -1,10 +1,11 @@
 /* global jQuery */
 
 import * as React from 'react';
+import * as ReactRedux from 'react-redux';
 
-import {
-  injectIntl,
-} from 'react-intl';
+import { bindActionCreators } from 'redux';
+import { injectIntl } from 'react-intl';
+import { EnumLocale } from '../../model';
 
 class NewsletterForm extends React.Component {
 
@@ -74,7 +75,13 @@ class NewsletterForm extends React.Component {
   }
 
   render() {
+    const { locale } = this.props;
     const _t = this.props.intl.formatMessage;
+
+
+    const link = locale === EnumLocale.EN ?
+      "https://mailchimp.com/legal/privacy/#3._Privacy_for_Contacts" :
+      "https://translate.google.com/translate?sl=en&tl=el&u=https%3A%2F%2Fmailchimp.com%2Flegal%2Fprivacy%2F%233._Privacy_for_Contacts";
 
     return (
       <React.Fragment>
@@ -124,10 +131,10 @@ class NewsletterForm extends React.Component {
                         <span className="checkbox__label">{_t({ id: 'newsletter-form.consent.checkbox' })}</span>
                       </label>
                     </fieldset>
-                    <p>{_t({ id: 'newsletter-form.consent.text2' })} <a target="_blank" href="https://climpact.gr/terms-of-use">{_t({ id: 'newsletter-form.consent.link1' })}</a> {_t({ id: 'newsletter-form.consent.text3' })} <a target="_blank" href="https://translate.google.com/translate?sl=en&tl=el&u=https%3A%2F%2Fmailchimp.com%2Flegal%2Fprivacy%2F%233._Privacy_for_Contacts">{_t({ id: 'newsletter-form.consent.link1' })}</a>.</p>
+                    <p>{_t({ id: 'newsletter-form.consent.text2' })} <a target="_blank" href="https://climpact.gr/terms-of-use">{_t({ id: 'newsletter-form.consent.link1' })}</a> {_t({ id: 'newsletter-form.consent.text3' })} <a target="_blank" href={link}>{_t({ id: 'newsletter-form.consent.link1' })}</a>.</p>
                   </div>
                   <div className="content__gdprLegal">
-                    <p>{_t({ id: 'newsletter-form.consent.text2' })} <a href="https://mailchimp.com/legal/" target="_blank">{_t({ id: 'newsletter-form.consent.link2' })}</a></p>
+                    <p>{_t({ id: 'newsletter-form.consent.text4' })} <a href="https://mailchimp.com/legal/" target="_blank">{_t({ id: 'newsletter-form.consent.link2' })}</a></p>
                   </div>
                 </div>
                 <div id="mce-responses" className="clear">
@@ -150,4 +157,17 @@ class NewsletterForm extends React.Component {
   }
 }
 
-export default injectIntl(NewsletterForm);
+const mapStateToProps = (state) => ({
+  locale: state.i18n.locale,
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+}, dispatch);
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+});
+
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(NewsletterForm));
