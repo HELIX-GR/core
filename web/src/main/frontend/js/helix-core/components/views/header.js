@@ -158,6 +158,11 @@ class Header extends React.Component {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.network.items.research-groups' })}
+                    </NavLink>
+                  </li>
+                  <li>
                     <NavLink to={StaticRoutes.Associate} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.associate' })}
                     </NavLink>

@@ -62,6 +62,7 @@ import {
   Associate,
   Core,
   Join,
+  ResearchGroups,
 } from './views/pages/network';
 
 import {
@@ -191,6 +192,7 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.Associate} component={Associate} />
         <Route path={StaticRoutes.Core} component={Core} />
         <Route path={StaticRoutes.Join} component={Join} />
+        <Route path={StaticRoutes.ResearchGroups} component={ResearchGroups} />
 
         <Route path={StaticRoutes.Announcements} component={Announcements} />
         <Route path={StaticRoutes.Blog} component={Blog} />

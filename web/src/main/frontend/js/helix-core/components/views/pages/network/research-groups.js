@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -19,36 +18,10 @@ import {
 import ClimateClock from '../../climate-clock';
 import WordPressPage from '../word-press-page';
 
-
-class Associate extends React.Component {
+class ResearchGroups extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-
-    $('#root').on('click', '.drawer__item', (e) => {
-      const $el = $(e.currentTarget);
-
-      if (!$el.hasClass('open')) {
-        e.preventDefault();
-
-        $el.addClass('open');
-      }
-    });
-
-    $('#root').on('click', '.drawer__item__trigger', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const $el = $(e.currentTarget).closest('.drawer__item');
-
-      $el.toggleClass('open');
-    });
-  }
-
-  componentWillUnmount() {
-    $('#root').off('click', '.drawer__item');
-
-    $('#root').off('click', '.drawer__item__trigger');
   }
 
   render() {
@@ -90,16 +63,9 @@ class Associate extends React.Component {
               <ul className="page__breadcrumbs">
                 <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.network' })}</a></li>
-                <li><a href="#">{_t({ id: 'breadcrumb.associate' })}</a></li>
+                <li><a href="#">{_t({ id: 'breadcrumb.research-groups' })}</a></li>
               </ul>
-              <div className="page__content__intro">
-                <div className="page__content__intro__text">
-                  {_t({ id: 'text.network-associate.intro' })}
-                </div>
-              </div>
-              <div className="page__content__default">
-                <WordPressPage className="drawer" name={'network-associate'} />
-              </div>
+              <WordPressPage className="page__content__default" name={'network-research-groups'} />
             </div>
           </div>
         </div>
@@ -122,4 +88,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
 });
 
-export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(Associate));
+export default injectIntl(ReactRedux.connect(mapStateToProps, mapDispatchToProps, mergeProps)(ResearchGroups));

@@ -1,30 +1,31 @@
 {
   "breadcrumb": {
-    "home": "Αρχική",
     "about": "Το Πρόγραμμα Climpact",
-    "overview": "Επισκόπηση",
-    "targets": "Στόχοι",
-    "committee": "Διοικούσα Επιτροπή",
-    "scientific-committee": "Επιστημονική Επιτροπή",
-    "work-packages": "Πακέτα Εργασίας",
-    "deliverables": "Παραδοτέα",
-    "network": "Το Δίκτυο",
-    "associate": "Συνδεδεμένα Μέλη",
-    "core": "Μέλη",
-    "join": "Συμμετοχή",
-    "news": "Νέα και Δράσεις",
+    "announcement": "Ανακοινώσεις ",
     "applications": "Εφαρμογές",
-    "services": "Υπηρεσίες",
-    "tools": "Εργαλεία",
+    "associate": "Συνδεδεμένα Μέλη",
     "blog": "Blog",
+    "climpact-on-media": "To CLIMPACT στα ΜΜΕ",
+    "committee": "Διοικούσα Επιτροπή",
+    "core": "Μέλη",
+    "deliverables": "Παραδοτέα",
     "dialogue-forum": "Φόρουμ Διαλόγου",
+    "home": "Αρχική",
+    "join": "Συμμετοχή",
+    "network": "Το Δίκτυο",
+    "news": "Νέα και Δράσεις",
     "newsletter": "Newsletter",
     "other-event": "Άλλες Εκδηλώσεις",
+    "overview": "Επισκόπηση",
+    "podcast": "Podcasts",
     "press-release": "Δελτία Τύπου",
-    "workshop": "Εργαστήρια",
-    "announcement": "Ανακοινώσεις ",
-    "climpact-on-media": "To CLIMPACT στα ΜΜΕ",
-    "podcast": "Podcasts"
+    "research-groups": "Ερευνητικές Ομάδες",
+    "scientific-committee": "Επιστημονική Επιτροπή",
+    "services": "Υπηρεσίες",
+    "targets": "Στόχοι",
+    "tools": "Εργαλεία",
+    "work-packages": "Πακέτα Εργασίας",
+    "workshop": "Εργαστήρια"
   },
   "buttons": {
     "learn-more": "ΠΕΡΙΣΣΟΤΕΡΑ",
@@ -73,7 +74,8 @@
         "items": {
           "associate": "ΣΥΝΔΕΔΕΜΕΝΑ ΜΕΛΗ",
           "core": "ΜΕΛΗ",
-          "join": "ΣΥΜΜΕΤΟΧΗ"
+          "join": "ΣΥΜΜΕΤΟΧΗ",
+          "research-groups": "ΕΡΕΥΝΗΤΙΚΕΣ ΟΜΑΔΕΣ"
         }
       },
       "news-events": {
@@ -126,7 +128,8 @@
         "items": {
           "associate": "Συνδεδεμένα Μέλη",
           "core": "Μέλη",
-          "join": "Συμμετοχή"
+          "join": "Συμμετοχή",
+          "research-groups": "Ερευνητικές Ομάδες"
         }
       },
       "news-events": {

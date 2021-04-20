@@ -1,26 +1,27 @@
 {
   "breadcrumb": {
-    "home": "Home",
     "about": "About",
-    "overview": "Overview",
-    "targets": "Targets",
-    "committee": "Managing Committee",
-    "scientific-committee": "Scientific Committee",
-    "work-packages": "Work Packages",
-    "deliverables": "Deliverables",
-    "network": "Network",
-    "associate": "Associate",
-    "core": "Core",
-    "join": "Join",
-    "news": "News & Events",
     "applications": "Applications",
-    "services": "Services",
-    "tools": "Tools",
+    "associate": "Associate",
     "blog": "Blog",
+    "committee": "Managing Committee",
+    "core": "Core",
+    "deliverables": "Deliverables",
     "dialogue-forum": "Dialog Forum",
+    "home": "Home",
+    "join": "Join",
+    "network": "Network",
+    "news": "News & Events",
     "newsletter": "Newsletter",
     "other-event": "Other Events",
+    "overview": "Overview",
     "press-release": "Press Releases",
+    "research-groups": "Research Groups",
+    "scientific-committee": "Scientific Committee",
+    "services": "Services",
+    "targets": "Targets",
+    "tools": "Tools",
+    "work-packages": "Work Packages",
     "workshop": "Workshops"
   },
   "buttons": {
@@ -66,7 +67,8 @@
         "items": {
           "associate": "ASSOCIATE",
           "core": "CORE",
-          "join": "JOIN"
+          "join": "JOIN",
+          "research-groups": "RESEARCH GROUPS"
         }
       },
       "news-events": {
@@ -116,7 +118,8 @@
         "items": {
           "associate": "Associate",
           "core": "Core",
-          "join": "Join"
+          "join": "Join",
+          "research-groups": "Research Groups"
         }
       },
       "news-events": {

@@ -24,6 +24,7 @@ const Deliverables = '/about/deliverables';
 const Associate = '/network/associate';
 const Core = '/network/core';
 const Join = '/network/join';
+const ResearchGroups = '/network/research-groups';
 
 const Applications = '/applications/overview';
 const Services = '/applications/services';
@@ -41,8 +42,6 @@ const Workshops = '/news-events/workshops';
 
 const Contact = '/contact';
 const TermsOfUse = '/terms-of-use';
-
-
 
 const EVENTS = '/news/events/';
 const MAIN = '/main/';
@@ -77,6 +76,7 @@ export const StaticRoutes = {
   Associate,
   Core,
   Join,
+  ResearchGroups,
 
   Applications,
   Services,

@@ -15,6 +15,7 @@ export const WordPressPages = {
   Network: {
     Members: 'network-members',
     Join: 'network-join',
+    ResearchGroups: 'network-research-groups',
   },
   Applications: {
     Overview: 'applications-menu',

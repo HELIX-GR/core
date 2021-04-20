@@ -42,6 +42,11 @@ class Join extends React.Component {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to={StaticRoutes.Associate} activeClassName="active">
                     {_t({ id: 'sidebar.menu.network.items.associate' })}
                   </NavLink>
