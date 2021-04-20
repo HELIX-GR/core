@@ -21,7 +21,9 @@ import {
 import {
   buildPath,
   DynamicRoutes,
+  EnumLocale,
   EnumPostCategory,
+  EnumPostCategoryEn,
   StaticRoutes,
   WordPressField,
 } from '../../../../model';
@@ -39,10 +41,16 @@ const truncateText = (text, tag, length = 200) => {
 
 class Workshops extends React.Component {
 
+  get category() {
+    const { locale } = this.props;
+
+    return locale === EnumLocale.EN ? EnumPostCategoryEn.Workshop : EnumPostCategory.Workshop;
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.getPosts(1, 100, EnumPostCategory.Workshop);
+    this.props.getPosts(1, 100, this.category);
   }
 
   toggleSecureUrl(content) {
@@ -90,7 +98,7 @@ class Workshops extends React.Component {
 
   render() {
     const { countdown, pages } = this.props;
-    const { posts } = pages[EnumPostCategory.Workshop];
+    const { posts } = pages[this.category] || [];
 
     const _t = this.props.intl.formatMessage;
 
@@ -175,8 +183,9 @@ class Workshops extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
+  locale: state.i18n.locale,
+  pages: state.ui.posts.pages,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

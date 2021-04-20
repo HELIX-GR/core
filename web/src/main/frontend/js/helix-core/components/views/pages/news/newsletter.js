@@ -22,7 +22,9 @@ import {
 import {
   buildPath,
   DynamicRoutes,
+  EnumLocale,
   EnumPostCategory,
+  EnumPostCategoryEn,
   StaticRoutes,
   WordPressField,
 } from '../../../../model';
@@ -35,10 +37,16 @@ import ClimateClock from '../../climate-clock';
 
 class Newsletter extends React.Component {
 
+  get category() {
+    const { locale } = this.props;
+
+    return locale === EnumLocale.EN ? EnumPostCategoryEn.Newsletter : EnumPostCategory.Newsletter;
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.getPosts(1, 100, EnumPostCategory.Newsletter);
+    this.props.getPosts(1, 100, this.category);
   }
 
   toggleSecureUrl(content) {
@@ -109,7 +117,7 @@ class Newsletter extends React.Component {
 
   render() {
     const { countdown, pages } = this.props;
-    const { posts } = pages[EnumPostCategory.Newsletter];
+    const { posts } = pages[this.category] || [];
 
     const _t = this.props.intl.formatMessage;
 
@@ -194,8 +202,9 @@ class Newsletter extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
+  locale: state.i18n.locale,
+  pages: state.ui.posts.pages,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

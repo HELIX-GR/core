@@ -105,6 +105,7 @@ export default (state = initialState, action) => {
         latest: {
           lastUpdate: new Date(),
           posts: action.posts,
+          locale: action.locale,
         },
       };
 
@@ -130,7 +131,7 @@ export default (state = initialState, action) => {
             // If the first page is requested, reset results
             posts: action.pageIndex === 1 ? action.posts : [...current.posts, ...action.posts],
             // If an error occurs, keep the last total record counter
-            count: action.count || current.count,
+            count: action.count || (current && current.count) || 0,
           },
         },
       };
@@ -162,9 +163,10 @@ const getPostLatestBegin = (count) => ({
   count,
 });
 
-const getPostLatestComplete = (posts) => ({
+const getPostLatestComplete = (posts, locale) => ({
   type: POST_LATEST_RESPONSE,
   posts,
+  locale,
 });
 
 const getPostPageBegin = (pageIndex, pageSize, category) => ({
@@ -197,35 +199,36 @@ const getPostComplete = (post) => ({
 // Thunk actions
 export const getLatestPosts = (count, categoryName = null) => (dispatch, getState) => {
   const {
-    ui: { posts: { latest: { lastUpdate, posts } } },
+    ui: { posts: { latest: { lastUpdate, posts, locale: queryLocale } } },
     config: { wordPress: { endpoint: host, categories } },
+    i18n: { locale },
   } = getState();
 
-  const categoryId = categoryName ? categories.find(c => c.name === categoryName).id : null;
+  const excludedCategories = categories.filter(c => c.locale !== locale).map(c => c.id);
 
   // Check configuration
   if (!host) {
-    dispatch(getPostLatestComplete([]));
+    dispatch(getPostLatestComplete([], locale));
   }
 
-  // Refresh only after 30 minutes since the last update
-  if ((lastUpdate) && (posts.length !== 0)) {
+  // Refresh only after 30 minutes since the last update or if the locale has changed
+  if ((lastUpdate) && (posts.length !== 0) && queryLocale === locale) {
     const now = moment();
     const interval = moment.duration(now.diff(lastUpdate)).asMinutes();
     if (interval < 30) {
-      dispatch(getPostLatestComplete(posts));
+      dispatch(getPostLatestComplete(posts, locale));
       return posts;
     }
   }
 
   dispatch(getPostLatestBegin(count));
-  return wordPressService.getLatestPosts(host, count)
+  return wordPressService.getLatestPosts(host, count, null, excludedCategories)
     .then((data) => {
-      dispatch(getPostLatestComplete(data.posts));
+      dispatch(getPostLatestComplete(data.posts, locale));
     })
     .catch((err) => {
       console.error('Failed loading WordPress posts:', err);
-      dispatch(getPostLatestComplete([]));
+      dispatch(getPostLatestComplete([], locale));
     });
 };
 

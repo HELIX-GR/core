@@ -14,16 +14,25 @@ const options = {
   headers,
 };
 
-const getLatestPosts = (host, count, category) => {
-  return getPosts(host, 1, count, category);
+const getLatestPosts = (host, count, category = null, excludedCategories = []) => {
+  return getPosts(host, 1, count, category, excludedCategories);
 };
 
 const getPostsByCategory = (host, count, category) => {
   return getPosts(host, 1, count, category);
 };
 
-const getPosts = (host, pageIndex, pageSize, category = null) => {
-  const url = `${host}/wp-json/wp/v2/posts?page=${pageIndex}&per_page=${pageSize}${category ? '&categories=' + category : ''}&_embed`;
+const getPosts = (host, pageIndex, pageSize, category = null, excludedCategories = []) => {
+  const params = {
+    page: pageIndex,
+    per_page: pageSize,
+    categories: category || null,
+    categories_exclude: excludedCategories && excludedCategories.length !== 0 ? excludedCategories.join(',') : null,
+  };
+
+  const query = Object.keys(params).filter(k => params[k] !== null).map(k => `${k}=${params[k]}`).join('&');
+
+  const url = `${host}/wp-json/wp/v2/posts?${query}&_embed`;
 
   return fetch(url, options)
     .then(checkStatus)

@@ -30,15 +30,15 @@ const Applications = '/applications/overview';
 const Services = '/applications/services';
 const Tools = '/applications/tools';
 
-const Announcements = '/news-events/announcements';
+const Announcements = '/news-events/announcement';
 const Blog = '/news-events/blog';
 const ClimpactOnMedia = '/news-events/climpact-on-media';
 const DialogueForum = '/news-events/dialogue-forum';
 const Newsletter = '/news-events/newsletter';
 const OtherEvents = '/news-events/other-events';
-const Podcasts = '/news-events/podcasts';
-const PressReleases = '/news-events/press-releases';
-const Workshops = '/news-events/workshops';
+const Podcasts = '/news-events/podcast';
+const PressReleases = '/news-events/press-release';
+const Workshops = '/news-events/workshop';
 
 const Contact = '/contact';
 const TermsOfUse = '/terms-of-use';

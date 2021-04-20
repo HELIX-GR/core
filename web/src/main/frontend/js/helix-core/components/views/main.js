@@ -27,6 +27,7 @@ import {
   buildPath,
   DynamicRoutes,
   EnumPostCategory,
+  EnumPostCategoryEn,
   StaticRoutes,
   WordPressField,
 } from '../../model';
@@ -104,27 +105,35 @@ class Main extends React.Component {
     if (category) {
       switch (category.name) {
         case EnumPostCategory.Announcement:
+        case EnumPostCategoryEn.Announcement:
           icon = 'announcement.svg';
           break;
         case EnumPostCategory.ClimpactOnMedia:
+        case EnumPostCategoryEn.ClimpactOnMedia:
           icon = 'climpact_on_media.svg';
           break;
         case EnumPostCategory.DialogueForum:
+        case EnumPostCategoryEn.DialogueForum:
           icon = 'dialogue_forum_icon.svg';
           break;
         case EnumPostCategory.Newsletter:
+        case EnumPostCategoryEn.Newsletter:
           icon = 'newsletter_icon.svg';
           break;
         case EnumPostCategory.OtherEvent:
+        case EnumPostCategoryEn.OtherEvent:
           icon = 'events_icon.svg';
           break;
         case EnumPostCategory.Podcast:
+        case EnumPostCategoryEn.Podcast:
           icon = 'podcast.svg';
           break;
         case EnumPostCategory.PressRelease:
+        case EnumPostCategoryEn.PressRelease:
           icon = 'press_release_icon.svg';
           break;
         case EnumPostCategory.Workshop:
+        case EnumPostCategoryEn.Workshop:
           icon = 'workshop_icon.svg';
           break;
       }
@@ -178,34 +187,43 @@ class Main extends React.Component {
 
       switch (category.name) {
         case EnumPostCategory.Announcement:
+        case EnumPostCategoryEn.Announcement:
           buttonResource = 'buttons.card.announcement-more';
           break;
         case EnumPostCategory.Blog:
+        case EnumPostCategoryEn.Blog:
           cardClassName += '--blog';
           buttonResource = 'buttons.card.blog-more';
           break;
         case EnumPostCategory.ClimpactOnMedia:
+        case EnumPostCategoryEn.ClimpactOnMedia:
           buttonResource = 'buttons.card.climpact-on-media-more';
           break;
         case EnumPostCategory.DialogueForum:
+        case EnumPostCategoryEn.DialogueForum:
           cardClassName += '--forum';
           buttonResource = 'buttons.card.dialogue-forum-more';
           break;
         case EnumPostCategory.Newsletter:
+        case EnumPostCategoryEn.Newsletter:
           cardClassName += '--newsletter';
           buttonResource = 'buttons.card.newsletter-more';
           break;
         case EnumPostCategory.OtherEvent:
+        case EnumPostCategoryEn.OtherEvent:
           cardClassName += '--events';
           buttonResource = 'buttons.card.other-event-more';
           break;
         case EnumPostCategory.Podcast:
+        case EnumPostCategoryEn.Podcast:
           buttonResource = 'buttons.card.podcast-more';
           break;
         case EnumPostCategory.PressRelease:
+        case EnumPostCategoryEn.PressRelease:
           buttonResource = 'buttons.card.press-release-more';
           break;
         case EnumPostCategory.Workshop:
+        case EnumPostCategoryEn.Workshop:
           buttonResource = 'buttons.card.workshop-more';
           break;
       }

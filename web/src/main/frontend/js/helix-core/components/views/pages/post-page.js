@@ -21,6 +21,7 @@ import {
 import {
   EnumCatalog,
   EnumPostCategory,
+  EnumPostCategoryEn,
   PathVariable,
   WordPressField,
 } from '../../../model';
@@ -72,27 +73,35 @@ class PostPage extends React.Component {
     if (category) {
       switch (category.name) {
         case EnumPostCategory.Announcement:
+        case EnumPostCategoryEn.Announcement:
           icon = 'announcement.svg';
           break;
         case EnumPostCategory.ClimpactOnMedia:
+        case EnumPostCategoryEn.ClimpactOnMedia:
           icon = 'climpact_on_media.svg';
           break;
         case EnumPostCategory.DialogueForum:
+        case EnumPostCategoryEn.DialogueForum:
           icon = 'dialogue_forum_icon.svg';
           break;
         case EnumPostCategory.Newsletter:
+        case EnumPostCategoryEn.Newsletter:
           icon = 'newsletter_icon.svg';
           break;
         case EnumPostCategory.OtherEvent:
+        case EnumPostCategoryEn.OtherEvent:
           icon = 'events_icon.svg';
           break;
         case EnumPostCategory.Podcast:
+        case EnumPostCategoryEn.Podcast:
           icon = 'podcast.svg';
           break;
         case EnumPostCategory.PressRelease:
+        case EnumPostCategoryEn.PressRelease:
           icon = 'press_release_icon.svg';
           break;
         case EnumPostCategory.Workshop:
+        case EnumPostCategoryEn.Workshop:
           icon = 'workshop_icon.svg';
           break;
       }
@@ -107,12 +116,15 @@ class PostPage extends React.Component {
   renderBreadcrumb(post, category) {
     const _t = this.props.intl.formatMessage;
 
+    const name = category.name;
+    const categoryPrefix = name.endsWith('-en') ? name.substring(0, name.length - 3) : name;
+
     return (
       <ul className="page__breadcrumbs">
         <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
         <li><a href="#">{_t({ id: 'breadcrumb.news' })}</a></li>
         {category &&
-          <li><a href="#">{_t({ id: `breadcrumb.${category.name}` })}</a></li>
+          <li><a href="#">{_t({ id: `breadcrumb.${categoryPrefix}` })}</a></li>
         }
         <li><a href="#">{post.title.rendered}</a></li>
       </ul>
@@ -183,6 +195,7 @@ class PostPage extends React.Component {
 
 const mapStateToProps = (state) => ({
   config: state.config,
+  locale: state.i18n.locale,
   posts: state.ui.posts,
 });
 

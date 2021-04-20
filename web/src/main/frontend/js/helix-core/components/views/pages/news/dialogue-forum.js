@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as ReactRedux from 'react-redux';
 
-import moment from '../../../../moment-localized';
-
 import {
   bindActionCreators
 } from 'redux';
@@ -15,13 +13,11 @@ import {
 } from 'react-router-dom';
 
 import {
-  FormattedDate,
-} from 'react-intl';
-
-import {
   buildPath,
   DynamicRoutes,
+  EnumLocale,
   EnumPostCategory,
+  EnumPostCategoryEn,
   StaticRoutes,
   WordPressField,
 } from '../../../../model';
@@ -39,10 +35,16 @@ const truncateText = (text, tag, length = 200) => {
 
 class DialogueForum extends React.Component {
 
+  get category() {
+    const { locale } = this.props;
+
+    return locale === EnumLocale.EN ? EnumPostCategoryEn.DialogueForum : EnumPostCategory.DialogueForum;
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.getPosts(1, 100, EnumPostCategory.DialogueForum);
+    this.props.getPosts(1, 100, this.category);
   }
 
   toggleSecureUrl(content) {
@@ -86,7 +88,7 @@ class DialogueForum extends React.Component {
 
   render() {
     const { countdown, pages } = this.props;
-    const { posts } = pages[EnumPostCategory.DialogueForum];
+    const { posts } = pages[this.category] || [];
 
     const _t = this.props.intl.formatMessage;
 
@@ -185,8 +187,9 @@ class DialogueForum extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  pages: state.ui.posts.pages,
   countdown: state.countdown.value,
+  locale: state.i18n.locale,
+  pages: state.ui.posts.pages,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

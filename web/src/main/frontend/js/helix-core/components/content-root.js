@@ -99,8 +99,25 @@ class ContentRoot extends React.Component {
     super(props);
 
     this.toggleLoginDialog = this.toggleLoginDialog.bind(this);
+    this.onLocaleChange = this.onLocaleChange.bind(this);
 
     this.countdownInterval = null;
+  }
+
+  onLocaleChange(locale) {
+    if (this.props.location.pathname.startsWith('/news-events/post/')) {
+      const { config: { wordPress: { categories } }, posts: { current: p } } = this.props;
+      const category = categories.find(c => +c.id === p.categories[0]);
+
+      if (category) {
+        const name = category.name;
+        const categoryPrefix = name.endsWith('-en') ? name.substring(0, name.length - 3) : name;
+
+        this.props.history.push(`/news-events/${categoryPrefix}`);
+      }
+    }
+
+    this.props.changeLocale(locale);
   }
 
   setBodyClassName() {
@@ -232,7 +249,7 @@ class ContentRoot extends React.Component {
         />
         <div>
           <Header
-            changeLocale={this.props.changeLocale}
+            changeLocale={this.onLocaleChange}
             config={this.props.config}
             locale={this.props.locale}
             location={this.props.location}
@@ -276,6 +293,7 @@ const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
   login: state.ui.login,
+  posts: state.ui.posts,
   profile: state.user.profile,
 });
 

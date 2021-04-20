@@ -12,6 +12,7 @@ export {
   EnumCollectionAction,
   EnumLocale,
   EnumPostCategory,
+  EnumPostCategoryEn,
   EnumRole,
 } from './enum';
 

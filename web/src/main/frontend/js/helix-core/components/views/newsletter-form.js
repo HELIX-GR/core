@@ -31,7 +31,6 @@ class NewsletterForm extends React.Component {
 
   initializeForm(refresh) {
     (function ($) {
-      console.log(1);
       window.fnames = new Array();
       window.ftypes = new Array();
       window.fnames[0] = 'EMAIL';
@@ -117,18 +116,18 @@ class NewsletterForm extends React.Component {
                 <div id="mergeRow-gdpr" className="mergeRow gdpr-mergeRow content__gdprBlock mc-field-group">
                   <div className="content__gdpr">
                     <label>{_t({ id: 'newsletter-form.consent.title' })}</label>
-                    <p>{_t({ id: 'newsletter-form.consent.text' })}</p>
+                    <p>{_t({ id: 'newsletter-form.consent.text1' })}</p>
                     <fieldset className="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
                       <label className="checkbox subfield" htmlFor="gdpr_50524">
                         <input type="checkbox" id="gdpr_50524" name="gdpr[50524]" value="Y" className="av-checkbox gdpr" />
                         <span className="checkbox__control"></span>
-                        <span className="checkbox__label">Συναινώ</span>
+                        <span className="checkbox__label">{_t({ id: 'newsletter-form.consent.checkbox' })}</span>
                       </label>
                     </fieldset>
-                    <p>Διαβάστε σχετικά με την Πολιτική Προστασίας Προσωπικών Δεδομένων <a target="_blank" href="https://climpact.gr/terms-of-use">εδώ</a> και σχετικά με τη διαχείριση των επαφών στον ιστότοπο της εταιρείας Mailchip,  στα ελληνικά (μέσω αυτόματης μετάφρασης) <a target="_blank" href="https://translate.google.com/translate?sl=en&tl=el&u=https%3A%2F%2Fmailchimp.com%2Flegal%2Fprivacy%2F%233._Privacy_for_Contacts">εδώ</a>.</p>
+                    <p>{_t({ id: 'newsletter-form.consent.text2' })} <a target="_blank" href="https://climpact.gr/terms-of-use">{_t({ id: 'newsletter-form.consent.link1' })}</a> {_t({ id: 'newsletter-form.consent.text3' })} <a target="_blank" href="https://translate.google.com/translate?sl=en&tl=el&u=https%3A%2F%2Fmailchimp.com%2Flegal%2Fprivacy%2F%233._Privacy_for_Contacts">{_t({ id: 'newsletter-form.consent.link1' })}</a>.</p>
                   </div>
                   <div className="content__gdprLegal">
-                    <p>We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank">Learn more about Mailchimp's privacy practices here.</a></p>
+                    <p>{_t({ id: 'newsletter-form.consent.text2' })} <a href="https://mailchimp.com/legal/" target="_blank">{_t({ id: 'newsletter-form.consent.link2' })}</a></p>
                   </div>
                 </div>
                 <div id="mce-responses" className="clear">

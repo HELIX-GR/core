@@ -42,6 +42,18 @@ export const EnumPostCategory = {
   Workshop: 'workshop',
 };
 
+export const EnumPostCategoryEn = {
+  Announcement: 'announcement-en',
+  Blog: 'blog-en',
+  ClimpactOnMedia: 'climpact-on-media-en',
+  DialogueForum: 'dialogue-forum-en',
+  Newsletter: 'newsletter-en',
+  OtherEvent: 'other-event-en',
+  Podcast: 'podcast-en',
+  PressRelease: 'press-release-en',
+  Workshop: 'workshop-en',
+};
+
 export const EnumCollectionAction = {
   Create: 'create',
   Update: 'update',
