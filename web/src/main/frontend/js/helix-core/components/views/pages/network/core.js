@@ -67,11 +67,11 @@ class Core extends React.Component {
                     {_t({ id: 'sidebar.menu.network.items.core' })}
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
-                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
-                  </NavLink>
-                </li>
+//                <li>
+//                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
+//                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
+//                  </NavLink>
+//                </li>
                 <li>
                   <NavLink to={StaticRoutes.Associate} activeClassName="active">
                     {_t({ id: 'sidebar.menu.network.items.associate' })}
@@ -93,7 +93,7 @@ class Core extends React.Component {
               </ul>
               <div className="page__content__intro">
                 <div className="page__content__intro__text">
-                  {_t({ id: 'text.network-associate.intro' })}
+                  {_t({ id: 'text.network-core.intro' })}
                 </div>
               </div>
               <div className="page__content__default">

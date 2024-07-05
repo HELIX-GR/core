@@ -19,7 +19,6 @@
     "overview": "Overview",
     "podcast": "Podcasts",
     "press-release": "Press Releases",
-    "research-groups": "Research Groups",
     "scientific-committee": "Scientific Committee",
     "services": "Services",
     "targets": "Targets",
@@ -129,7 +128,6 @@
           "associate": "Associate",
           "core": "Core",
           "join": "Join",
-          "research-groups": "Research Groups"
         }
       },
       "news-events": {

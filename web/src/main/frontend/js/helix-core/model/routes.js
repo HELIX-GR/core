@@ -16,15 +16,20 @@ const Home = '/main/';
 
 const Overview = '/about/overview';
 const Targets = '/about/targets';
+const TargetsSecondPhase = '/about/targets-second-phase';
 const Committee = '/about/committee';
 const ScientificCommittee = '/about/scientific-committee';
+const FirstPhaseClimpact = '/about/first-phase';
+const SecondPhaseClimpact = '/about/second-phase';
 const WorkPackages = '/about/work-packages';
+const WorkPackagesSecondPhase = '/about/work-packages-second-phase';
 const Deliverables = '/about/deliverables';
+const DeliverablesSecondPhase = '/about/deliverables-second-phase';
 
 const Associate = '/network/associate';
 const Core = '/network/core';
 const Join = '/network/join';
-const ResearchGroups = '/network/research-groups';
+//const ResearchGroups = '/network/research-groups';
 
 const Applications = '/applications/overview';
 const Services = '/applications/services';
@@ -68,10 +73,14 @@ export const StaticRoutes = {
 
   Overview,
   Targets,
+  TargetsSecondPhase,
   Committee,
   ScientificCommittee,
+  FirstPhaseClimpact,
+  SecondPhaseClimpact,
   WorkPackages,
   Deliverables,
+  DeliverablesSecondPhase,
 
   Associate,
   Core,

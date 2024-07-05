@@ -1,6 +1,11 @@
 export { default as Committee } from './committee';
 export { default as Deliverables } from './deliverables';
+export { default as DeliverablesSecondPhase } from './deliverables-second-phase';
 export { default as Overview } from './overview';
 export { default as ScientificCommittee } from './scientific-committee';
+export { default as FirstPhaseClimpact } from './first-phase';
+export { default as SecondPhaseClimpact } from './second-phase';
 export { default as Targets } from './targets';
+export { default as TargetsSecondPhase } from './targets-second-phase';
 export { default as WorkPackages } from './work-packages';
+export { default as WorkPackagesSecondPhase } from './work-packages-second-phase';

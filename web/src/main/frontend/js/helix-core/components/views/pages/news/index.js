@@ -6,4 +6,4 @@ export { default as Newsletter } from './newsletter';
 export { default as OtherEvents } from './other-events';
 export { default as Podcasts } from './podcasts';
 export { default as PressReleases } from './press-releases';
-export { default as Workshops } from './workshops';
+//export { default as Workshops } from './workshops';
