@@ -43,6 +43,11 @@ class AboutTemplate extends React.Component {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to={StaticRoutes.TargetsSecondPhase} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.about.items.targets-second-phase' })}
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to={StaticRoutes.Committee} activeClassName="active">
                     {_t({ id: 'sidebar.menu.about.items.committee' })}
                   </NavLink>
@@ -53,13 +58,33 @@ class AboutTemplate extends React.Component {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to={StaticRoutes.FirstPhaseClimpact} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.about.items.first-phase' })}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={StaticRoutes.SecondPhaseClimpact} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.about.items.second-phase' })}
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to={StaticRoutes.WorkPackages} activeClassName="active">
                     {_t({ id: 'sidebar.menu.about.items.work-packages' })}
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to={StaticRoutes.WorkPackagesSecondPhase} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.about.items.work-packages-second-phase' })}
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to={StaticRoutes.Deliverables} activeClassName="active">
                     {_t({ id: 'sidebar.menu.about.items.deliverables' })}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={StaticRoutes.DeliverablesSecondPhase} activeClassName="active">
+                    {_t({ id: 'sidebar.menu.about.items.deliverables-second-phase' })}
                   </NavLink>
                 </li>
               </ul>

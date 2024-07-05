@@ -124,6 +124,11 @@ class Header extends React.Component {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink to={StaticRoutes.TargetsSecondPhase} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.about.items.targets-second-phase' })}
+                    </NavLink>
+                  </li>
+                  <li>
                     <NavLink to={StaticRoutes.Committee} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.committee' })}
                     </NavLink>
@@ -134,13 +139,33 @@ class Header extends React.Component {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink to={StaticRoutes.FirstPhaseClimpact} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.about.items.first-phase' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={StaticRoutes.SecondPhaseClimpact} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.about.items.second-phase' })}
+                    </NavLink>
+                  </li>
+                  <li>
                     <NavLink to={StaticRoutes.WorkPackages} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.work-packages' })}
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink to={StaticRoutes.WorkPackagesSecondPhase} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.about.items.work-packages-second-phase' })}
+                    </NavLink>
+                  </li>
+                  <li>
                     <NavLink to={StaticRoutes.Deliverables} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.about.items.deliverables' })}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={StaticRoutes.DeliverablesSecondPhase} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.about.items.deliverables-second-phase' })}
                     </NavLink>
                   </li>
                 </ul>
@@ -157,11 +182,11 @@ class Header extends React.Component {
                       {_t({ id: 'header.menu.network.items.core' })}
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active" onClick={this.onCloseMenu}>
-                      {_t({ id: 'header.menu.network.items.research-groups' })}
-                    </NavLink>
-                  </li>
+//                  <li>
+//                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active" onClick={this.onCloseMenu}>
+//                      {_t({ id: 'header.menu.network.items.research-groups' })}
+//                    </NavLink>
+//                  </li>
                   <li>
                     <NavLink to={StaticRoutes.Associate} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.associate' })}
@@ -189,11 +214,11 @@ class Header extends React.Component {
               }}>
                 <a href="#">{_t({ id: 'header.menu.news-events.title' })}</a>
                 <ul className="submenu" ref={this.newsRef} >
-                  <li>
-                    <NavLink to={StaticRoutes.Workshops} activeClassName="active" onClick={this.onCloseMenu}>
-                      {_t({ id: 'header.menu.news-events.items.workshops' })}
-                    </NavLink>
-                  </li>
+//                  <li>
+//                    <NavLink to={StaticRoutes.Workshops} activeClassName="active" onClick={this.onCloseMenu}>
+//                      {_t({ id: 'header.menu.news-events.items.workshops' })}
+//                    </NavLink>
+//                  </li>
                   {/* <li>
                     <NavLink to={StaticRoutes.OtherEvents} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.other-events' })}

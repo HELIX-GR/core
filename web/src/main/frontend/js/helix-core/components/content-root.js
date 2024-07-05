@@ -46,9 +46,12 @@ import {
 import {
   Committee,
   Deliverables,
+  DeliverablesSecondPhase,
   Overview,
   ScientificCommittee,
+  FirstPhaseClimpact,
   Targets,
+  TargetsSecondPhase,
   WorkPackages,
 } from './views/pages/about';
 
@@ -74,7 +77,7 @@ import {
   OtherEvents,
   Podcasts,
   PressReleases,
-  Workshops,
+//  Workshops,
 } from './views/pages/news';
 
 import {
@@ -197,9 +200,13 @@ class ContentRoot extends React.Component {
 
         <Route path={StaticRoutes.Committee} component={Committee} />
         <Route path={StaticRoutes.Deliverables} component={Deliverables} />
+        <Route path={StaticRoutes.DeliverablesSecondPhase} component={DeliverablesSecondPhase} />
         <Route path={StaticRoutes.Overview} component={Overview} />
         <Route path={StaticRoutes.ScientificCommittee} component={ScientificCommittee} />
+        <Route path={StaticRoutes.FirstPhaseClimpact} component={FirstPhaseClimpact} />
+        <Route path={StaticRoutes.SecondPhaseClimpact} component={SecondPhaseClimpact} />
         <Route path={StaticRoutes.Targets} component={Targets} />
+        <Route path={StaticRoutes.TargetsSecondPhase} component={TargetsSecondPhase} />
         <Route path={StaticRoutes.WorkPackages} component={WorkPackages} />
 
         <Route path={StaticRoutes.Applications} component={Applications} />
@@ -219,7 +226,7 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
         <Route path={StaticRoutes.Podcasts} component={Podcasts} />
         <Route path={StaticRoutes.PressReleases} component={PressReleases} />
-        <Route path={StaticRoutes.Workshops} component={Workshops} />
+//        <Route path={StaticRoutes.Workshops} component={Workshops} />
 
         <Route path={StaticRoutes.Contact} component={Contact} />
         <Route path={StaticRoutes.TermsOfUse} component={TermsOfUse} />

@@ -41,11 +41,11 @@ class ResearchGroups extends React.Component {
                     {_t({ id: 'sidebar.menu.network.items.core' })}
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
-                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
-                  </NavLink>
-                </li>
+//                <li>
+//                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
+//                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
+//                  </NavLink>
+//                </li>
                 <li>
                   <NavLink to={StaticRoutes.Associate} activeClassName="active">
                     {_t({ id: 'sidebar.menu.network.items.associate' })}
@@ -63,9 +63,9 @@ class ResearchGroups extends React.Component {
               <ul className="page__breadcrumbs">
                 <li><a href="#">{_t({ id: 'breadcrumb.home' })}</a></li>
                 <li><a href="#">{_t({ id: 'breadcrumb.network' })}</a></li>
-                <li><a href="#">{_t({ id: 'breadcrumb.research-groups' })}</a></li>
+//                <li><a href="#">{_t({ id: 'breadcrumb.research-groups' })}</a></li>
               </ul>
-              <WordPressPage className="page__content__default" name={'network-research-groups'} />
+//              <WordPressPage className="page__content__default" name={'network-research-groups'} />
             </div>
           </div>
         </div>

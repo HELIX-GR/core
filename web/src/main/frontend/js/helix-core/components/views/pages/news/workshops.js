@@ -109,11 +109,11 @@ class Workshops extends React.Component {
             <div className="page__sidebar">
               <h2 className="page__title">{_t({ id: 'breadcrumb.news' })}</h2>
               <ul className="page__sidebar__menu">
-                <li>
-                  <NavLink to={StaticRoutes.Workshops} activeClassName="active">
-                    {_t({ id: 'sidebar.menu.news-events.items.workshops' })}
-                  </NavLink>
-                </li>
+//                <li>
+//                  <NavLink to={StaticRoutes.Workshops} activeClassName="active">
+//                    {_t({ id: 'sidebar.menu.news-events.items.workshops' })}
+//                  </NavLink>
+//                </li>
                 {/* <li>
                   <NavLink to={StaticRoutes.OtherEvents} activeClassName="active">
                     {_t({ id: 'sidebar.menu.news-events.items.other-events' })}
