@@ -50,6 +50,7 @@ import {
   Overview,
   ScientificCommittee,
   FirstPhaseClimpact,
+  SecondPhaseClimpact,
   Targets,
   TargetsSecondPhase,
   WorkPackages,
@@ -77,7 +78,6 @@ import {
   OtherEvents,
   Podcasts,
   PressReleases,
-//  Workshops,
 } from './views/pages/news';
 
 import {
@@ -226,7 +226,6 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
         <Route path={StaticRoutes.Podcasts} component={Podcasts} />
         <Route path={StaticRoutes.PressReleases} component={PressReleases} />
-//        <Route path={StaticRoutes.Workshops} component={Workshops} />
 
         <Route path={StaticRoutes.Contact} component={Contact} />
         <Route path={StaticRoutes.TermsOfUse} component={TermsOfUse} />

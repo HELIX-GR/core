@@ -12,7 +12,7 @@ export const WordPressPages = {
     FirstPhaseClimpact: 'the-action-first-phase',
     SecondPhaseClimpact: 'the-action-second-phase',
     WorkPackages: 'the-action-work-packages',
-    WorkPackages: 'the-action-work-packages-second-phase',
+    WorkPackagesSecondPhase: 'the-action-work-packages-second-phase',
     Deliverables: 'the-action-deliverables',
     DeliverablesSecondPhase: 'the-action-deliverables-second-phase',
     ContactUs: 'the-action-contact-us',
