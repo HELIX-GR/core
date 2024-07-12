@@ -43,7 +43,7 @@ const Newsletter = '/news-events/newsletter';
 const OtherEvents = '/news-events/other-events';
 const Podcasts = '/news-events/podcast';
 const PressReleases = '/news-events/press-release';
-const Workshops = '/news-events/workshop';
+//const Workshops = '/news-events/workshop';
 
 const Contact = '/contact';
 const TermsOfUse = '/terms-of-use';
@@ -85,7 +85,7 @@ export const StaticRoutes = {
   Associate,
   Core,
   Join,
-  ResearchGroups,
+//  ResearchGroups,
 
   Applications,
   Services,
@@ -99,7 +99,7 @@ export const StaticRoutes = {
   OtherEvents,
   Podcasts,
   PressReleases,
-  Workshops,
+//  Workshops,
 
   Contact,
   TermsOfUse,
