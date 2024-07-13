@@ -8,6 +8,8 @@
     "climpact-on-media": "To CLIMPACT στα ΜΜΕ",
     "committee": "Διοικούσα Επιτροπή",
     "core": "Μέλη",
+    "first-phase": "1η Φάση Δικτύου Climpact",
+    "second-phase": "2η Φάση Δικτύου Climpact",
     "deliverables": "Παραδοτέα 1ης φάσης Δικτύου CLIMPACT",
     "deliverables-second-phase": "Παραδοτέα 2ης φάσης Δικτύου CLIMPACT",
     "dialogue-forum": "Φόρουμ Διαλόγου",
@@ -52,13 +54,18 @@
       "about": {
         "title": "ΤΟ ΠΡΟΓΡΑΜΜΑ CLIMPACT",
         "items": {
-          "deliverables": "ΠΑΡΑΔΟΤΕΑ",
+          "deliverables": "ΠΑΡΑΔΟΤΕΑ 1ΗΣ ΦΑΣΗΣ CLIMPACT",
+          "deliverables-second-phase": "ΠΑΡΑΔΟΤΕΑ 2ΗΣ ΦΑΣΗΣ CLIMPACT",
           "home": "ΑΡΧΙΚΗ",
           "committee": "ΔΙΟΙΚΟΥΣΑ ΕΠΙΤΡΟΠΗ",
           "overview": "ΕΠΙΣΚΟΠΗΣΗ",
           "scientific-committee": "ΕΠΙΣΤΗΜΟΝΙΚΗ ΕΠΙΤΡΟΠΗ",
-          "targets": "ΣΤΟΧΟΙ",
-          "work-packages": "ΠΑΚΕΤΑ ΕΡΓΑΣΙΑΣ"
+          "targets": "ΣΤΟΧΟΙ 1ΗΣ ΦΑΣΗΣ CLIMPACT",
+          "targets-second-phase": "ΣΤΟΧΟΙ 2ΗΣ ΦΑΣΗΣ CLIMPACT",
+          "work-packages": "ΠΑΚΕΤΑ ΕΡΓΑΣΙΑΣ 1ΗΣ ΦΑΣΗΣ CLIMPACT",
+          "work-packages-second-phase": "ΠΑΚΕΤΑ ΕΡΓΑΣΙΑΣ 2ΗΣ ΦΑΣΗΣ CLIMPACT",
+          "first-phase": "1Η ΦΑΣΗ ΔΙΚΤΥΟΥ CLIMPACT",
+          "second-phase": "2Η ΦΑΣΗ ΔΙΚΤΥΟΥ CLIMPACT"
         }
       },
       "applications": {
@@ -118,6 +125,7 @@
           "overview": "Επισκόπηση",
           "scientific-committee": "Επιστημονική Επιτροπή",
           "first-phase": "Η 1η φάση του Δικτύου CLIMPACT",
+          "second-phase": "Η 2η φάση του Δικτύου CLIMPACT",
           "targets": "Στόχοι της 1ης φάσης του Δικτύου CLIMPACT",
           "targets-second-phase": "Στόχοι της 2ης φάσης του Δικτύου CLIMPACT",
           "work-packages": "Πακέτα Εργασίας 1ης φάσης Δικτύου CLIMPACT",

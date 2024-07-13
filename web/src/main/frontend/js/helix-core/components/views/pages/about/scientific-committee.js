@@ -101,7 +101,7 @@ class ScientificCommittee extends React.Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={StaticRoutes.SecondPhaceClimpact} activeClassName="active">
+                    <NavLink to={StaticRoutes.SecondPhaseClimpact} activeClassName="active">
                       {_t({ id: 'sidebar.menu.about.items.second-phase' })}
                     </NavLink>
                   </li>

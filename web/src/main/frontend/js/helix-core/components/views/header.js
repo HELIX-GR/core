@@ -182,11 +182,11 @@ class Header extends React.Component {
                       {_t({ id: 'header.menu.network.items.core' })}
                     </NavLink>
                   </li>
-//                  <li>
-//                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active" onClick={this.onCloseMenu}>
-//                      {_t({ id: 'header.menu.network.items.research-groups' })}
-//                    </NavLink>
-//                  </li>
+                  {/*<li>
+                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active" onClick={this.onCloseMenu}>
+                      {_t({ id: 'header.menu.network.items.research-groups' })}
+                    </NavLink>
+                  </li> */}
                   <li>
                     <NavLink to={StaticRoutes.Associate} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.network.items.associate' })}
@@ -214,11 +214,6 @@ class Header extends React.Component {
               }}>
                 <a href="#">{_t({ id: 'header.menu.news-events.title' })}</a>
                 <ul className="submenu" ref={this.newsRef} >
-//                  <li>
-//                    <NavLink to={StaticRoutes.Workshops} activeClassName="active" onClick={this.onCloseMenu}>
-//                      {_t({ id: 'header.menu.news-events.items.workshops' })}
-//                    </NavLink>
-//                  </li>
                   {/* <li>
                     <NavLink to={StaticRoutes.OtherEvents} activeClassName="active" onClick={this.onCloseMenu}>
                       {_t({ id: 'header.menu.news-events.items.other-events' })}
