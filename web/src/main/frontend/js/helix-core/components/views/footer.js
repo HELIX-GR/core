@@ -70,7 +70,6 @@ class Footer extends React.Component {
             <div className="footer__logos">
               <a target="_blank" href="http://www.gsrt.gr/"><img src="/images/logos/footer_logo_1.png" alt="" /></a>
               <a target="_blank" href="http://www.mindev.gov.gr/"><img src="/images/logos/footer_logo_2.png" alt="" /></a>
-              <a target="_blank" href="#"><img src="/images/logos/footer_logo_3.png" alt="" /></a>
               <div className="footer__copyright">
                 <p><FormattedMessage id="text.footer.national-innovation-program" /></p>
               </div>
