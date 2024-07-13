@@ -79,6 +79,7 @@ export const StaticRoutes = {
   FirstPhaseClimpact,
   SecondPhaseClimpact,
   WorkPackages,
+  WorkPackagesSecondPhase,
   Deliverables,
   DeliverablesSecondPhase,
 
