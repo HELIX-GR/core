@@ -54,6 +54,7 @@ import {
   Targets,
   TargetsSecondPhase,
   WorkPackages,
+  WorkPackagesSecondPhase,
 } from './views/pages/about';
 
 import {
@@ -208,6 +209,7 @@ class ContentRoot extends React.Component {
         <Route path={StaticRoutes.Targets} component={Targets} />
         <Route path={StaticRoutes.TargetsSecondPhase} component={TargetsSecondPhase} />
         <Route path={StaticRoutes.WorkPackages} component={WorkPackages} />
+        <Route path={StaticRoutes.WorkPackagesSecondPhase} component={WorkPackagesSecondPhase} />
 
         <Route path={StaticRoutes.Applications} component={Applications} />
         <Route path={StaticRoutes.Services} component={Services} />
