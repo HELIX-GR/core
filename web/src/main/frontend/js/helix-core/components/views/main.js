@@ -276,7 +276,6 @@ class Main extends React.Component {
                 <div className="home__bigtext__buttons">
                   <Link to={StaticRoutes.Overview} className="btn btn--std">{_t({ id: 'buttons.learn-more' })}</Link>
                   <Link to={StaticRoutes.Targets} className="btn btn--std">{_t({ id: 'buttons.our-targets' })}</Link>
-                  <Link to={StaticRoutes.TargetsSecondPhase} className="btn btn--std">{_t({ id: 'buttons.our-targets' })}</Link>
                 </div>
               </div>
               <div className="home__bigtext__video">

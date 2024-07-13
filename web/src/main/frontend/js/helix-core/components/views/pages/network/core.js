@@ -67,11 +67,11 @@ class Core extends React.Component {
                     {_t({ id: 'sidebar.menu.network.items.core' })}
                   </NavLink>
                 </li>
-//                <li>
-//                  <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
-//                    {_t({ id: 'sidebar.menu.network.items.research-groups' })}
-//                  </NavLink>
-//                </li>
+                {/* <li>
+                    <NavLink to={StaticRoutes.ResearchGroups} activeClassName="active">
+                      {_t({ id: 'sidebar.menu.network.items.research-groups' })}
+                    </NavLink>
+                </li> */}
                 <li>
                   <NavLink to={StaticRoutes.Associate} activeClassName="active">
                     {_t({ id: 'sidebar.menu.network.items.associate' })}
