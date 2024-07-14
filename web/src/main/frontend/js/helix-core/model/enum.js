@@ -2,7 +2,6 @@ export const EnumCatalog = {
   CKAN: 'CKAN',
   DSPACE: 'DSPACE',
   LAB: 'LAB',
-  OPENAIRE: 'OPENAIRE',
 };
 
 export const EnumCkanFacet = {
@@ -11,16 +10,6 @@ export const EnumCkanFacet = {
   License: 'licenses',
   Organization: 'organizations',
   Tag: 'tags',
-};
-
-export const EnumMimeType = {
-  PDF: 'application/pdf',
-};
-
-export const EnumOpenaireFilter = {
-  Authors: 'authors',
-  FromDateAccepted: 'fromDateAccepted',
-  ToDateAccepted: 'toDateAccepted',
 };
 
 export const EnumRole = {
@@ -39,13 +28,30 @@ export const EnumAuthProvider = {
   Google: 'Google',
   GitHub: 'GitHub',
   HELIX: 'HELIX',
-  SAML: 'SAML',
 };
 
 export const EnumPostCategory = {
-  News: 'news',
-  Events: 'events',
-  Actions: 'actions',
+  Announcement: 'announcement',
+  Blog: 'blog',
+  ClimpactOnMedia: 'climpact-on-media',
+  DialogueForum: 'dialogue-forum',
+  Newsletter: 'newsletter',
+  OtherEvent: 'other-event',
+  Podcast: 'podcast',
+  PressRelease: 'press-release',
+  Workshop: 'workshop',
+};
+
+export const EnumPostCategoryEn = {
+  Announcement: 'announcement-en',
+  Blog: 'blog-en',
+  ClimpactOnMedia: 'climpact-on-media-en',
+  DialogueForum: 'dialogue-forum-en',
+  Newsletter: 'newsletter-en',
+  OtherEvent: 'other-event-en',
+  Podcast: 'podcast-en',
+  PressRelease: 'press-release-en',
+  Workshop: 'workshop-en',
 };
 
 export const EnumCollectionAction = {

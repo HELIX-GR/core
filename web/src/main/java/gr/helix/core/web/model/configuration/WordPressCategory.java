@@ -6,6 +6,8 @@ public class WordPressCategory {
 
     private String name;
 
+    private String locale;
+
     public String getId() {
         return this.id;
     }
@@ -20,6 +22,14 @@ public class WordPressCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocale() {
+        return this.locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
 }

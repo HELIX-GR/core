@@ -16,7 +16,6 @@ import gr.helix.core.common.model.RestResponse;
 import gr.helix.core.web.model.CompositeCatalogQuery;
 import gr.helix.core.web.model.CompositeCatalogResult;
 import gr.helix.core.web.model.ckan.CkanCatalogQuery;
-import gr.helix.core.web.model.openaire.OpenaireCatalogQuery;
 import gr.helix.core.web.service.SearchService;
 
 @RestController
@@ -59,16 +58,6 @@ public class SearchController {
         }
     }
 
-    @RequestMapping(value = "/action/publication/query", method = RequestMethod.GET)
-    public RestResponse<?> getPublications(Authentication authentication, @RequestParam String search) {
-        try {
-            return RestResponse.result(this.searchService.queryPublications(search));
-        } catch (final Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return RestResponse.error(BasicErrorCode.UNKNOWN, ex.getMessage());
-        }
-    }
-
     @RequestMapping(value = "/action/catalog/query", method = RequestMethod.POST)
     public RestResponse<?> query(Authentication authentication, @RequestBody CompositeCatalogQuery query) {
         try {
@@ -97,16 +86,6 @@ public class SearchController {
         } catch (final Exception ex) {
             logger.error(ex.getMessage(), ex);
             return RestResponse.error(BasicErrorCode.UNKNOWN, "An unknown error has occurred");
-        }
-    }
-
-    @RequestMapping(value = "/action/publication/query", method = RequestMethod.POST)
-    public RestResponse<?> getPublications(Authentication authentication, @RequestBody OpenaireCatalogQuery query) {
-        try {
-            return RestResponse.result(this.searchService.queryPublications(query));
-        } catch (final Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return RestResponse.error(BasicErrorCode.UNKNOWN, ex.getMessage());
         }
     }
 

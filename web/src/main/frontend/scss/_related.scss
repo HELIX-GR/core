@@ -1,0 +1,37 @@
+.related{
+  margin-top: 40px;
+  padding-top: 40px;
+  @include border-top;
+  display: flex;
+  flex-wrap: wrap;
+  @media(max-width: 768px) {
+    margin-top: 20px;
+    padding-top: 0px;
+    border-width: 0;
+  }
+  &__title{
+    color:$mainColor;
+    font-size: em(30);
+    font-weight: 500;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    flex: 0 0 190px;
+    @media(max-width: 768px) {
+      font-size: em(25);
+      flex: 1 0 100%;
+      margin-bottom: 20px;
+    }
+  }
+  &__items{
+    display: flex;
+    overflow-x: auto;
+    flex: 1;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    cursor: grab;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+}

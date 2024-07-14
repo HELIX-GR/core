@@ -1,115 +1,97 @@
 {
+  "breadcrumb": {
+    "about": "About",
+    "announcement": "Announcements",
+    "applications": "Applications",
+    "associate": "Associate",
+    "blog": "Blog",
+    "climpact-on-media": "CLIMPACT in the Media",
+    "committee": "Managing Committee",
+    "core": "Core",
+    "deliverables": "Deliverables",
+    "dialogue-forum": "Dialog Forums",
+    "home": "Home",
+    "join": "Join",
+    "network": "Network",
+    "news": "News and Events",
+    "newsletter": "Newsletter",
+    "other-event": "Other Events",
+    "overview": "Overview",
+    "podcast": "Podcasts",
+    "press-release": "Press Releases",
+    "scientific-committee": "Scientific Committee",
+    "services": "Services",
+    "targets": "Targets",
+    "tools": "Tools",
+    "work-packages": "Work Packages",
+    "workshop": "Workshops"
+  },
+  "buttons": {
+    "learn-more": "LEARN MORE",
+    "our-targets": "OUR TARGETS",
+    "join": "PARTICIPATION",
+    "keep-me-updated": "KEEP ME UP TO DATE",
+    "card": {
+      "blog-more": "VIEW",
+      "dialogue-forum-more": "VIEW",
+      "newsletter-more": "DOWNLOAD",
+      "other-event-more": "VIEW",
+      "press-release-more": "VIEW",
+      "workshop-more": "VIEW",
+      "announcement-more": "VIEW",
+      "climpact-on-media-more": "VIEW",
+      "podcast-more": "VIEW"
+    }
+  },
   "header": {
     "menu": {
-      "data": {
-        "title": "Data"
-      },
-      "pubs": {
-        "title": "Pubs"
-      },
-      "lab": {
-        "title": "Lab"
-      },
-      "project": {
-        "title": "About",
-        "items": {
-          "about": "About",
-          "what-is-helix": "What is HELIX?",
-          "services": "Services",
-          "faq": "FAQ",
-          "publish-data": "Publish Data",
-          "software": "Software",
-          "the-project": "The project",
-          "media": "Media",
-          "acknowledge-helix": "Acknowledge HELIX",
-          "contact": "Contact",
-          "terms-of-use": "Terms of use",
-          "subjects": "Subjects"
-        }
-      },
-      "news": {
-        "title": "News",
-        "items": {
-          "news": "News",
-          "events": "Events",
-          "actions": "Actions"
-        }
-      },
-      "login": {
-        "items": {
-          "signed-in": "Signed in as {username}",
-          "account": "Account Settings",
-          "collections": "My Collections",
-          "favorites": "Favorites",
-          "help": "Help",
-          "logout": "Log out"
-        }
-      }
-    }
-  },
-  "breadcrumb": {
-    "results": "RESULTS",
-    "all": "ALL",
-    "events": "Events",
-    "favorites": "FAVORITES",
-    "helix-team": "HELIX Team",
-    "news": "News",
-    "actions": "Actions"
-  },
-  "favorites": {
-    "text.placeholder": "Search favorites",
-    "order-by": {
-      "label": "Order by",
-      "options": {
-        "date": "Data Added",
-        "title": "Title"
-      }
-    }
-  },
-  "collections": {
-    "create.title": "Create Collection",
-    "create.text.placeholder": "Enter a name for the collection ...",
-    "create.success": "Collection {title} has been created",
-    "create.failure": "Collection creation has failed",
-    "update.title": "Update Collection",
-    "update.text.placeholder": "Enter a new name for the collection ...",
-    "update.success": "Collection {title} has been updated",
-    "update.failure": "Collection update has failed",
-    "delete.title": "Delete Collection",
-    "delete.text.placeholder": "Do you want to delete collection {title} permanently?",
-    "delete.success": "Collection {title} has been deleted",
-    "delete.failure": "Collection deletion has failed",
-    "last-modified": "lasted saved {when}",
-    "manager.title": "Select Collections",
-    "add-favorite.failure": "Failed to add favorite to collection",
-    "remove-favorite.failure": "Failed to remove favorite from collection"
-  },
-  "footer": {
-    "columns": {
       "about": {
-        "title": "About",
-        "links": {
-          "home": "Home",
-          "what-is-helix": "The Project",
-          "contact": "Contact",
-          "terms-of-use": "Terms of Use"
+        "title": "About the Project",
+        "items": {
+          "deliverables": "DELIVERABLES",
+          "home": "HOME",
+          "committee": "STEERING COMMITTEE",
+          "overview": "OVERVIEW",
+          "scientific-committee": "SCIENTIFIC COMMITTEE",
+          "targets": "TARGETS",
+          "work-packages": "WORK PACKAGES"
         }
       },
-      "research": {
-        "title": "Research",
-        "links": {
-          "data": "Data",
-          "pubs": "Publications",
-          "lab": "Lab",
-          "topics": "Topics",
-          "organizations": "Organizations"
+      "applications": {
+        "title": "APPLICATIONS",
+        "items": {
+          "lab": "LAB",
+          "services": "SERVICES",
+          "tools": "TOOLS"
         }
       },
-      "partners": {
-        "title": "Partners"
+      "data": {
+        "title": "DATA"
+      },
+      "network": {
+        "title": "THE NETWORK",
+        "items": {
+          "associate": "AFFILIATED MEMBERS",
+          "core": "MEMBERS",
+          "join": "JOIN",
+          "research-groups": "RESEARCH GROUPS"
+        }
+      },
+      "news-events": {
+        "title": "NEWS and EVENTS",
+        "items": {
+          "blog": "BLOG",
+          "dialogue-forum": "DIALOGUE FORUMS",
+          "newsletter": "NEWSLETTER",
+          "other-events": "OTHER EVENTS",
+          "press-releases": "PRESS RELEASES",
+          "workshops": "WORKSHOPS",
+          "announcements": "ANNOUNCEMENTS",
+          "climpact-on-media": "CLIMPACT IN THE MEDIA",
+          "podcasts": "PODCASTS"
+        }
       }
-    },
-    "copyright": "© 2018 HELIX. All rights reserved."
+    }
   },
   "locales": {
     "en": "English",
@@ -121,284 +103,107 @@
     "subtitle": "Sign-in into your account",
     "failure": "The username or password is incorrect"
   },
-  "profile": {
-    "action": {
-      "edit": "Edit Profile",
-      "update": "Update",
-      "upload-image": "Upload New Picture"
-    },
-    "title": "Profile",
-    "form": {
-      "image": "Picture",
-      "username": "User Name",
-      "email": "Email",
-      "resume": "Resume",
-      "url": "URL",
-      "company": "Company",
-      "location": "Location"
-    },
-    "notes": "All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears. Please see our privacy statement to learn more about how we use this information.",
-    "error": {
-      "update.failure": "Failed to update user profile",
-      "update.success": "Profile has been updated successfully"
-    }
-  },
-  "pills": {
-    "data": "DATA",
-    "pubs": "PUBS",
-    "lab": "LAB"
-  },
-  "main": {
-    "search": {
-      "placeholder": {
-        "prefix": "Search {catalogs}",
-        "data": "data",
-        "pubs": "publications",
-        "lab": "research tools",
-        "author": "Enter a name and press enter ..."
+  "sidebar": {
+    "menu": {
+      "about": {
+        "items": {
+          "about": "About",
+          "deliverables": "Deliverables",
+          "committee": "Managing Committee",
+          "overview": "Overview",
+          "scientific-committee": "Scientific Committee",
+          "targets": "Targets",
+          "work-packages": "Work Packages"
+        }
       },
-      "advanced-search": "ADVANCED SEARCH"
-    },
-    "news": {
-      "title": "Latest News",
-      "read-more": "Read more"
-    },
-    "about": {
-      "title": "About HELIX",
-      "sections": {
-        "1": {
-          "title": "What is HELIX?",
-          "content": "HELIX is an horizontal eInfrastructure for data-intensive research, handling the data management, analysis, sharing, and reuse needs of Greek scientists, researchers and innovators in a cross-disciplinary, scalable, and low-cost manner.",
-          "link": "Learn more"
-        },
-        "2": {
-          "title": "Search for Data",
-          "content": "Find, use, and share open scientific data created by Greek Research organizations, institutions, and innovators. Use them in your own research or line of work.",
-          "link": "Find data"
-        },
-        "3": {
-          "title": "Build with data",
-          "content": "Learn, experiment, and work with data, without ever leaving in your browser. Tap into ready to use, highly scalable Big Data and HPC infrastructures.",
-          "link": "Start coding"
-        },
-        "4": {
-          "title": "Our partners",
-          "content": "HELIX is a collective effort of Athena RC and GRNET S.A., with the financial support of the European Union, bringing together the entire Greek research community.",
-          "link": "Learn more"
+      "applications": {
+        "items": {
+          "lab": "Lab",
+          "services": "Services",
+          "tools": "Tools"
+        }
+      },
+      "network": {
+        "items": {
+          "associate": "Associate",
+          "core": "Core",
+          "join": "Join",
+        }
+      },
+      "news-events": {
+        "items": {
+          "blog": "Blog",
+          "dialogue-forum": "Dialog Forums",
+          "newsletter": "Newsletter",
+          "other-events": "Other Events",
+          "workshops": "Workshops",
+          "press-releases": "Press Releases",
+          "announcements": "Announcements",
+          "climpact-on-media": "CLIMPACT in the Media",
+          "podcasts": "Podcasts"
         }
       }
     }
   },
-  "advanced-search": {
-    "title": "Advanced Search",
-    "placeholder": {
-      "prefix": "Search {catalogs}",
-      "data": "data",
-      "pubs": "publications",
-      "lab": "research tools",
-      "author": "Enter a name and press enter ..."
-    },
-    "tabs": {
-      "data": "DATA",
-      "pubs": "PUBLICATIONS",
-      "lab": "LAB"
-    },
-    "filters": {
-      "ckan": {
-        "organizations": "ORGANIZATIONS",
-        "topics": "TOPICS",
-        "tags": "TAGS",
-        "formats": "FORMATS",
-        "licenses": "LICENSES"
-      },
-      "pubs": {
-        "providers": "Providers",
-        "author": "Author",
-        "acceptance-from": "Date Accepted From",
-        "acceptance-to": "Date Accepted To"
-      }
-    },
-    "help": {
-      "author": "White-space separated list of names and/or surnames. Search for publications by authors.",
-      "acceptance-from": "Gets the publications whose date of acceptance is greater than or equal the given date.",
-      "acceptance-to": "Gets the publications whose date of acceptance is less than or equal the given date."
-    },
-    "view-less": "View Less",
-    "view-more": "View More"
-  },
-  "pubs": {
-    "search": {
-      "placeholder": "Search publications",
-      "advanced-search": "ADVANCED SEARCH"
-    },
-    "featured": "Featured Publications",
-    "subject": {
-      "title": "Search by subject",
-      "items": {
-        "humanities": "Humanities and Social Sciences",
-        "business": "Business, Economics and Law",
-        "agricultural": "Agricultural and Veterinary Sciences",
-        "environmental": "Environmental Sciences",
-        "engineering": "Engineering, Computing and Technology",
-        "biological": "Biological Sciences",
-        "medical": "Medical and Health",
-        "sciences": "Physical, Chemical and Mathematical Sciences"
-      }
-    },
-    "explore": {
-      "title": "Explore",
-      "items": {
-        "themes": {
-          "title": "Themed Collections",
-          "description": "Explore selected resources by theme"
-        },
-        "services-tools": {
-          "title": "Services and Tools",
-          "description": "Access data-related services and tools"
-        },
-        "open-data": {
-          "title": "Open Data",
-          "description": "Find open data that is reusable"
-        },
-        "projects": {
-          "title": "Grants and Projects",
-          "description": "Search for research grants and projects"
-        }
-      }
-    }
-  },
-  "project": {
-    "title": "The project"
-  },
-  "events": {
-    "title": "Events",
-    "load-more": "More"
-  },
-  "news": {
-    "title": "News",
-    "load-more": "More",
-    "read-more": "Read more",
-    "related-news": "Related News"
-  },
-  "actions": {
-    "title": "Actions",
-    "load-more": "More"
-  },
-  "results": {
-    "shared": {
-      "search": {
-        "advanced-search": "Advanced Search",
-        "order-by": {
-          "label": "Order by",
-          "options": {
-            "relevance": "Relevance"
-          }
-        },
-        "location": {
-          "title": "LOCATION"
-        }
-      },
-      "count": {
-        "data": "{count} datasets found",
-        "pubs": "{count} publications found",
-        "lab": "{count} notebooks found"
-      }
-    },
+  "text": {
     "main": {
-      "search": {
-        "placeholder": {
-          "prefix": "Search {catalogs}",
-          "data": "data",
-          "pubs": "publications",
-          "lab": "research tools"
-        }
-      }
+      "header": " Science at the service of the State and Society for tackling Climate Change.",
+      "content": "The CLIMPACT network seeks cooperation with the National Commission for Climate Change, with the Climate Change Impact Study Committee of the Bank of Greece but also with other relevant initiatives and actions. CLIMPACT aims to be a pole of valid and multifaceted expertise and an advisory body of the State and Society.",
+      "recent-activity": "Recent Activity"
     },
-    "pubs": {
-      "search": {
-        "placeholder": "Search publications"
-      }
-    }
-  },
-  "dataset": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
-    "dataset": "Dataset",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This dataset satisfies the Open Definition.",
-    "buttons": {
-      "download": "DOWNLOAD"
-    }
-  },
-  "publication": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "date-of-acceptance": "Acceptance Date",
-    "embargo-end-date": "Embargo End Date",
-    "publication": "Publication",
-    "no-description": "No description",
-    "related-publications": "Similar Research Results ({count})",
-    "hosted-by": "Hosted By: {host}",
-    "similarity": "Similarity",
-    "download-section": "Download From",
-    "citation": "Citation",
-    "select-citation-style": "Select citation style ...",
-    "not-found": "Publication was not found",
-    "buttons": {
-      "view": "VIEW"
-    }
-  },
-  "notebook": {
-    "publisher": "Publisher",
-    "subjects": "Subjects",
-    "license": "License",
-    "publication": "PUBLICATION: ",
-    "last-revision": "LAST REVISION: ",
-    "notebook": "Notebook",
-    "resources": "DATA AND RESOURCES",
-    "no-description": "No description",
-    "open-data-license": "This notebook satisfies the Open Definition.",
-    "buttons": {
-      "download": "DOWNLOAD",
-      "view": "VIEW"
-    }
-  },
-  "favorite": {
-    "login-required": "Please login to add result to favorites",
-    "add-error-dataset": "Failed to add dataset to favorites",
-    "add-error-publication": "Failed to add publication to favorites",
-    "add-error-notebook": "Failed to add notebook to favorites",
-    "remove-error-dataset": "Failed to remove dataset from favorites",
-    "remove-error-publication": "Failed remove add publication from favorites",
-    "remove-error-notebook": "Failed to remove notebook from favorites"
-  },
-  "tooltip": {
-    "add-favorite": "Add to favorites",
-    "remove-favorite": "Remove from favorites",
-    "view-publication": "View publication",
-    "manage-collections": "Manage collections"
-  },
-  "filesystem": {
-    "size": {
-      "less-than": "File size must be less than {size}"
+    "countdown": {
+      "header": "Time remaining",
+      "footer": "to act for climate",
+      "years": "YEARS",
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTES",
+      "seconds": "SECONDS"
     },
-    "read-failed": "File read operation has failed",
-    "type-not-supported": "File type is not supported"
+    "footer": {
+      "join": {
+        "header": "Do you want to become a member of the CLIMPACT Network?",
+        "content": "Participation is open to scientific organizations in Greece"
+      },
+      "subscribe": {
+        "header": "Want to receive news on CLIMPACT and Climate Change?"
+      },
+      "title": "© 2020 • CLIMPACT • National Network for Climate Change and its impact • ",
+      "contact": "CONTACT",
+      "terms-of-use": "TERMS AND CONDITIONS"
+    },
+    "network-associate": {
+      "intro": "The CLIMPACT network is open to cooperation with all the scientific, research, and development organizations of the country dealing with the study and management of the effects of Climate Change. Your organization can officially become a collaborating member of the network and participate in its actions."
+    }
   },
-  "FavoriteErrorCode": {
-    "TITLE_MISSING": "Title is required",
-    "COLLECTION_ALREADY_EXISTS": "Collection with the same title already exists",
-    "COLLECTION_NOT_FOUND": "Collection was not found",
-    "HANDLE_NOT_FOUND": "Favorite was not found",
-    "ITEM_NOT_FOUND": "Favorite does not belong to the collection"
+  "pages": {
+    "terms-of-use": {
+      "title": "Terms of Use and Privacy Statement"
+    }
   },
   "cookie": {
-    "consent": "This website uses cookies to enhance the user experience.",
-    "learn-more": "Learn more",
+    "consent": "We use cookies to optimize your experience.",
+    "learn-more": "Learn More",
     "accept": "Accept"
+  },
+  "newsletter-form": {
+    "title": "Subscribe to our newsletter:",
+    "button": "SUBSCRIBE",
+    "consent": {
+      "title": "Consent Form",
+      "text1": "I hearby declare my informed consent to the treatment of my personal data with the modalities indicated in the privacy statement for the purposes of being contacted via email from the National Network for Climate Change (CLIMPACT) in accordance to the Privacy Policy terms. I acknowledge that the collection and processing of my information will be performed by Mailchimp. ",
+      "text2": "Read more about our Privacy Statement",
+      "link1": "here",
+      "text3": "and",
+      "text4": "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing.",
+      "link2": "Learn more about Mailchimp's privacy practices here.",
+      "checkbox": "I consent"
+    },
+    "label": {
+      "firstName": "Name",
+      "lastName": "Surname",
+      "authority": "Organization",
+      "email": "Email"
+    }
   }
 }

@@ -1,4 +1,9 @@
-import * as RoleNames from './role';
+export { Roles } from './role';
+
+export {
+  PathVariable,
+  WordPressField,
+} from './const';
 
 export {
   EnumAuthProvider,
@@ -6,9 +11,8 @@ export {
   EnumCkanFacet,
   EnumCollectionAction,
   EnumLocale,
-  EnumMimeType,
-  EnumOpenaireFilter,
   EnumPostCategory,
+  EnumPostCategoryEn,
   EnumRole,
 } from './enum';
 
@@ -30,9 +34,3 @@ export {
   Pages,
   StaticRoutes,
 } from './routes';
-
-
-export const Roles = {
-  ...RoleNames,
-};
-

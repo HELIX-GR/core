@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { authProviders, defaultIdentityProvider: idp } = this.props.config;
+    const { authProviders } = this.props.config;
 
     return (
       <Modal
@@ -144,16 +144,6 @@ class LoginForm extends React.Component {
                   <a href={StaticRoutes.LOGIN.HELIX}>
                     <button type="button" name="helix" className="oauth">
                       <span>HELIX</span>
-                    </button>
-                  </a>
-                </div>
-              }
-
-              {authProviders.indexOf(EnumAuthProvider.SAML) !== -1 &&
-                <div className="login-academic">
-                  <a href={idp ? `${StaticRoutes.LOGIN.SAML}?idp=${idp}` : StaticRoutes.LOGIN.SAML}>
-                    <button type="button" name="academic" className="academic">
-                      <span>Academic Login</span>
                     </button>
                   </a>
                 </div>

@@ -21,12 +21,6 @@ public class ServiceProxyConfiguration {
     private HttpClient   httpClient;
 
     @Bean
-    @ConfigurationProperties(prefix = "helix.pubs.openaire")
-    OpenaireServiceConfiguration openaireConfiguration() {
-        return new OpenaireServiceConfiguration();
-    }
-
-    @Bean
     @ConfigurationProperties(prefix = "helix.data.ckan")
     ServiceConfiguration dataCkanConfiguration() {
         return new ServiceConfiguration();

@@ -7,19 +7,55 @@ import { matchPath } from 'react-router';
  * External routes
  */
 export const ExternalRoutes = {
-  Data: 'https://data.hellenicdataservice.gr',
+  Data: 'https://data.climpact.gr/dataset',
   Lab: 'https://lab.hellenicdataservice.gr',
 };
 
 // Static routes
-const ACTIONS = '/news/actions/';
+const Home = '/main/';
+
+const Overview = '/about/overview';
+const Targets = '/about/targets';
+const TargetsSecondPhase = '/about/targets-second-phase';
+const Committee = '/about/committee';
+const ScientificCommittee = '/about/scientific-committee';
+const FirstPhaseClimpact = '/about/first-phase';
+const SecondPhaseClimpact = '/about/second-phase';
+const WorkPackages = '/about/work-packages';
+const WorkPackagesSecondPhase = '/about/work-packages-second-phase';
+const Deliverables = '/about/deliverables';
+const DeliverablesSecondPhase = '/about/deliverables-second-phase';
+
+const Associate = '/network/associate';
+const Core = '/network/core';
+const Join = '/network/join';
+//const ResearchGroups = '/network/research-groups';
+
+const Applications = '/applications/overview';
+const Services = '/applications/services';
+const Tools = '/applications/tools';
+
+const Announcements = '/news-events/announcement';
+const Blog = '/news-events/blog';
+const ClimpactOnMedia = '/news-events/climpact-on-media';
+const DialogueForum = '/news-events/dialogue-forum';
+const Newsletter = '/news-events/newsletter';
+const OtherEvents = '/news-events/other-events';
+const Podcasts = '/news-events/podcast';
+const PressReleases = '/news-events/press-release';
+//const Workshops = '/news-events/workshop';
+
+const Contact = '/contact';
+const TermsOfUse = '/terms-of-use';
+
 const EVENTS = '/news/events/';
 const MAIN = '/main/';
 const MAIN_RESULTS = '/main/results';
+const NETWORK = '/network/';
 const NEWS = '/news/';
+const NEWS_EVENTS = '/news-events/';
 const PROJECT = '/project/';
-const PUBS = '/pubs/';
-const PUBS_RESULTS = '/pubs/results';
+const THE_ACTION = '/the-action/';
 
 const PROFILE = '/profile/';
 const COLLECTIONS = '/collections/';
@@ -28,53 +64,73 @@ const FAVORITES = '/favorites/';
 const GOOGLE = '/login/google';
 const GITHUB = '/login/github';
 const HELIX = '/login/helix';
-const SAML = '/saml/login';
 
 /**
  * Static routes
  */
 export const StaticRoutes = {
-  ACTIONS,
+  Home,
+
+  Overview,
+  Targets,
+  TargetsSecondPhase,
+  Committee,
+  ScientificCommittee,
+  FirstPhaseClimpact,
+  SecondPhaseClimpact,
+  WorkPackages,
+  WorkPackagesSecondPhase,
+  Deliverables,
+  DeliverablesSecondPhase,
+
+  Associate,
+  Core,
+  Join,
+//  ResearchGroups,
+
+  Applications,
+  Services,
+  Tools,
+
+  Announcements,
+  Blog,
+  ClimpactOnMedia,
+  DialogueForum,
+  Newsletter,
+  OtherEvents,
+  Podcasts,
+  PressReleases,
+//  Workshops,
+
+  Contact,
+  TermsOfUse,
+
   COLLECTIONS,
   EVENTS,
   FAVORITES,
   MAIN,
   MAIN_RESULTS,
+  NETWORK,
   NEWS,
+  NEWS_EVENTS,
   PROFILE,
   PROJECT,
-  PUBS,
-  PUBS_RESULTS,
   LOGIN: {
     GITHUB,
     GOOGLE,
     HELIX,
-    SAML,
   },
+  THE_ACTION,
 };
 
 // Dynamic routes
-const ACTION_PAGE = '/news/actions/view/:id';
-const COLLECTION_PAGE = '/collections/:id';
-const DATASET_PAGE = '/datasets/:id';
-const EVENT_PAGE = '/news/events/view/:id';
-const NEWS_PAGE = '/news/view/:id';
-const NOTEBOOK_PAGE = '/notebooks/:id';
-const PROJECT_PAGE = '/project/page/:name';
-const PUBLICATION_PAGE = '/publications/:id';
+const POST_PAGE = '/news-events/post/:id';
 
 /**
  * Dynamic routes
  */
 export const DynamicRoutes = {
-  ACTION_PAGE,
-  COLLECTION_PAGE,
-  DATASET_PAGE,
-  EVENT_PAGE,
-  NEWS_PAGE,
-  NOTEBOOK_PAGE,
-  PROJECT_PAGE,
-  PUBLICATION_PAGE,
+  POST_PAGE,
 };
 
 // Routes for utility pages
@@ -110,11 +166,8 @@ export const api = {
   SearchAll: '/action/catalog/query',
   SearchData: '/action/data/query',
   SearchNotebooks: '/action/notebook/query',
-  SearchPubs: '/action/publication/query',
   GetDataset: '/action/dataset/:id',
   GetNotebook: '/action/notebook/:id',
-  GetFeaturedPublications: '/action/featured-publications',
-  GetPublication: '/action/publication/:id',
 };
 
 // Default links

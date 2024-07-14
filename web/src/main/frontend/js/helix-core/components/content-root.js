@@ -8,8 +8,13 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { ToastContainer } from 'react-toastify';
 import CookieConsent from "react-cookie-consent";
 
-import { EnumAuthProvider, EnumRole as Roles, WordPressPages } from '../model';
-import { Pages, StaticRoutes, DynamicRoutes, buildPath } from '../model/routes';
+import { EnumAuthProvider, EnumRole as Roles } from '../model';
+import { Pages, StaticRoutes, DynamicRoutes } from '../model/routes';
+
+
+import {
+  updateCountDown,
+} from '../ducks/countdown';
 
 import {
   changeLocale,
@@ -28,31 +33,62 @@ import {
 } from '../ducks/ui/viewport';
 
 import {
-  Actions,
-  ActionsDetails,
-  CollectionDetails,
-  Collections,
-  DatasetDetails,
-  Events,
-  EventsDetails,
-  Favorites,
   Footer,
   Header,
   Main,
-  MainResults,
-  News,
-  NewsDetails,
-  NotebookDetails,
   Profile,
-  Project,
-  PublicationDetails,
-  Publications,
-  PublicationsResults,
 } from './views';
 
 import {
   LoginForm,
 } from './pages';
+
+import {
+  Committee,
+  Deliverables,
+  DeliverablesSecondPhase,
+  Overview,
+  ScientificCommittee,
+  FirstPhaseClimpact,
+  SecondPhaseClimpact,
+  Targets,
+  TargetsSecondPhase,
+  WorkPackages,
+  WorkPackagesSecondPhase,
+} from './views/pages/about';
+
+import {
+  Applications,
+  Services,
+  Tools,
+} from './views/pages/applications';
+
+import {
+  Associate,
+  Core,
+  Join,
+  ResearchGroups,
+} from './views/pages/network';
+
+import {
+  Announcements,
+  Blog,
+  ClimpactOnMedia,
+  DialogueForum,
+  Newsletter,
+  OtherEvents,
+  Podcasts,
+  PressReleases,
+} from './views/pages/news';
+
+import {
+  Contact,
+  TermsOfUse,
+} from './views/pages/misc';
+
+import {
+  PostPage
+} from './views/pages';
 
 import {
   SecureRoute
@@ -67,15 +103,65 @@ class ContentRoot extends React.Component {
     super(props);
 
     this.toggleLoginDialog = this.toggleLoginDialog.bind(this);
+    this.onLocaleChange = this.onLocaleChange.bind(this);
+
+    this.countdownInterval = null;
+  }
+
+  onLocaleChange(locale) {
+    if (this.props.location.pathname.startsWith('/news-events/post/')) {
+      const { config: { wordPress: { categories } }, posts: { current: p } } = this.props;
+      const category = categories.find(c => +c.id === p.categories[0]);
+
+      if (category) {
+        const name = category.name;
+        const categoryPrefix = name.endsWith('-en') ? name.substring(0, name.length - 3) : name;
+
+        this.props.history.push(`/news-events/${categoryPrefix}`);
+      }
+    }
+
+    this.props.changeLocale(locale);
+  }
+
+  setBodyClassName() {
+    const { location } = this.props;
+
+    let className = '';
+
+    if (location.pathname) {
+      if (location.pathname.startsWith('/news-events/other-events')) {
+        className = 'events-template';
+      }
+      if (location.pathname.startsWith('/news-events/blog')) {
+        className = 'blog-template';
+      }
+      if (location.pathname.startsWith('/news-events/dialogue-forum')) {
+        className = 'forum-template';
+      }
+    }
+
+    document.body.className = className;
   }
 
   componentDidMount() {
     this._viewportListener = _.debounce(this._setViewport.bind(this), 150);
     window.addEventListener('resize', this._viewportListener);
+
+    // Start countdown
+    this.countdownInterval = setInterval(() => {
+      this.props.updateCountDown();
+    }, 997);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this._viewportListener);
+
+    // Stop countdown
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+      this.countdownInterval = null;
+    }
   }
 
   _setViewport() {
@@ -83,33 +169,6 @@ class ContentRoot extends React.Component {
       document.documentElement.clientWidth,
       document.documentElement.clientHeight
     );
-  }
-
-  resolvePageClassName() {
-    const { location } = this.props;
-
-    if (location.pathname) {
-      if (location.pathname.startsWith('/news')) {
-        return 'news';
-      }
-      if (location.pathname.startsWith('/project')) {
-        return 'project';
-      }
-      if (location.pathname.startsWith('/pubs')) {
-        return 'pubs';
-      }
-      if (location.pathname.startsWith('/publications')) {
-        return 'pubs';
-      }
-      if (location.pathname.startsWith('/datasets')) {
-        return 'data';
-      }
-      if (location.pathname.startsWith('/notebooks')) {
-        return 'lab';
-      }
-    }
-
-    return 'home';
   }
 
   toggleLoginDialog() {
@@ -123,6 +182,8 @@ class ContentRoot extends React.Component {
   }
 
   render() {
+    this.setBodyClassName();
+
     const roles = [Roles.Admin, Roles.User];
     const _t = this.props.intl.formatMessage;
 
@@ -133,23 +194,44 @@ class ContentRoot extends React.Component {
             /error/404 to render */}
         <Redirect from={Pages.Register} to={StaticRoutes.MAIN} exact />
         {/* Dynamic routes */}
-        <SecureRoute path={DynamicRoutes.COLLECTION_PAGE} component={CollectionDetails} exact roles={roles} />
-        <Route path={DynamicRoutes.DATASET_PAGE} component={DatasetDetails} />
-        <Route path={DynamicRoutes.ACTION_PAGE} component={ActionsDetails} />
-        <Route path={DynamicRoutes.EVENT_PAGE} component={EventsDetails} />
-        <Route path={DynamicRoutes.NEWS_PAGE} component={NewsDetails} />
-        <Route path={DynamicRoutes.NOTEBOOK_PAGE} component={NotebookDetails} />
-        <Route path={DynamicRoutes.PUBLICATION_PAGE} component={PublicationDetails} />
+        <Route path={DynamicRoutes.POST_PAGE} component={PostPage} />
+
         {/* Static routes */}
-        <SecureRoute path={StaticRoutes.COLLECTIONS} component={Collections} roles={roles} />
-        <SecureRoute path={StaticRoutes.FAVORITES} component={Favorites} roles={roles} />
-        <Route path={StaticRoutes.PUBS_RESULTS} component={PublicationsResults} />
-        <Route path={StaticRoutes.PUBS} component={Publications} />
-        <Route path={StaticRoutes.ACTIONS} component={Actions} />
-        <Route path={StaticRoutes.EVENTS} component={Events} />
-        <Route path={StaticRoutes.NEWS} component={News} />
-        <Route path={StaticRoutes.PROJECT} component={Project} />
-        <Route path={StaticRoutes.MAIN_RESULTS} component={MainResults} />
+        <Route path={StaticRoutes.Home} component={Main} exact />
+
+        <Route path={StaticRoutes.Committee} component={Committee} />
+        <Route path={StaticRoutes.Deliverables} component={Deliverables} />
+        <Route path={StaticRoutes.DeliverablesSecondPhase} component={DeliverablesSecondPhase} />
+        <Route path={StaticRoutes.Overview} component={Overview} />
+        <Route path={StaticRoutes.ScientificCommittee} component={ScientificCommittee} />
+        <Route path={StaticRoutes.FirstPhaseClimpact} component={FirstPhaseClimpact} />
+        <Route path={StaticRoutes.SecondPhaseClimpact} component={SecondPhaseClimpact} />
+        <Route path={StaticRoutes.Targets} component={Targets} />
+        <Route path={StaticRoutes.TargetsSecondPhase} component={TargetsSecondPhase} />
+        <Route path={StaticRoutes.WorkPackages} component={WorkPackages} />
+        <Route path={StaticRoutes.WorkPackagesSecondPhase} component={WorkPackagesSecondPhase} />
+
+        <Route path={StaticRoutes.Applications} component={Applications} />
+        <Route path={StaticRoutes.Services} component={Services} />
+        <Route path={StaticRoutes.Tools} component={Tools} />
+
+        <Route path={StaticRoutes.Associate} component={Associate} />
+        <Route path={StaticRoutes.Core} component={Core} />
+        <Route path={StaticRoutes.Join} component={Join} />
+        <Route path={StaticRoutes.ResearchGroups} component={ResearchGroups} />
+
+        <Route path={StaticRoutes.Announcements} component={Announcements} />
+        <Route path={StaticRoutes.Blog} component={Blog} />
+        <Route path={StaticRoutes.ClimpactOnMedia} component={ClimpactOnMedia} />
+        <Route path={StaticRoutes.DialogueForum} component={DialogueForum} />
+        <Route path={StaticRoutes.Newsletter} component={Newsletter} />
+        <Route path={StaticRoutes.OtherEvents} component={OtherEvents} />
+        <Route path={StaticRoutes.Podcasts} component={Podcasts} />
+        <Route path={StaticRoutes.PressReleases} component={PressReleases} />
+
+        <Route path={StaticRoutes.Contact} component={Contact} />
+        <Route path={StaticRoutes.TermsOfUse} component={TermsOfUse} />
+
         <SecureRoute path={StaticRoutes.PROFILE} component={Profile} roles={roles} />
         {/* Default */}
         <Route path={StaticRoutes.MAIN} component={Main} exact />
@@ -173,9 +255,9 @@ class ContentRoot extends React.Component {
           toggle={this.toggleLoginDialog}
           visible={this.props.login.visible}
         />
-        <div className={this.resolvePageClassName()}>
+        <div>
           <Header
-            changeLocale={this.props.changeLocale}
+            changeLocale={this.onLocaleChange}
             config={this.props.config}
             locale={this.props.locale}
             location={this.props.location}
@@ -201,7 +283,7 @@ class ContentRoot extends React.Component {
             <FormattedMessage id="cookie.consent" />
           </div>
           <div className="cookie-consent-learn-more">
-            <Link to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.TermsOfUse])}>
+            <Link to={StaticRoutes.TermsOfUse}>
               <FormattedMessage id="cookie.learn-more" />
             </Link>
           </div>
@@ -219,6 +301,7 @@ const mapStateToProps = (state) => ({
   config: state.config,
   locale: state.i18n.locale,
   login: state.ui.login,
+  posts: state.ui.posts,
   profile: state.user.profile,
 });
 
@@ -227,6 +310,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout,
   resize,
   toggleLoginDialog,
+  updateCountDown,
 }, dispatch);
 
 export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(injectIntl(ContentRoot));

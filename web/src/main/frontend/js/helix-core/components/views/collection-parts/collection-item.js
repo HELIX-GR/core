@@ -20,7 +20,6 @@ class CollectionItem extends React.Component {
     this.state = {
       pills: {
         [EnumCatalog.CKAN]: true,
-        [EnumCatalog.OPENAIRE]: true,
         [EnumCatalog.LAB]: true,
       },
     };
@@ -66,14 +65,6 @@ class CollectionItem extends React.Component {
             text="pills.data"
             className="pill-data"
             selected={pills[EnumCatalog.CKAN]}
-            onChange={this.onPillChanged}
-          />
-          <Pill
-            id={EnumCatalog.OPENAIRE}
-            counter={c.publicationCounter}
-            text="pills.pubs"
-            className="pill-pubs"
-            selected={pills[EnumCatalog.OPENAIRE]}
             onChange={this.onPillChanged}
           />
           <Pill

@@ -85,7 +85,7 @@ class CollectionDetails extends React.Component {
             // Ignore
             return;
           }
-          const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : data.catalog === EnumCatalog.OPENAIRE ? 'publication' : 'notebook';
+          const type = data.catalog === EnumCatalog.CKAN ? 'dataset' : 'notebook';
 
           toast.dismiss();
           toast.error(<FormattedMessage id={`favorite.${active ? 'remove' : 'add'}-error-${type}`} />);

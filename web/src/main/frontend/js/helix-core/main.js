@@ -16,19 +16,23 @@ document.addEventListener('DOMContentLoaded', function () {
   var rootEl = document.querySelector(rootSelector);
 
   // TODO: read from non-httponly "locale" cookie
-  const locale = getCookieValue('helix-cookie-locale') || EnumLocale.EN;
+  const locale = getCookieValue('helix-cookie-locale') || EnumLocale.EL;
 
   const token = document.querySelector('meta[name=_csrf]').getAttribute('content');
 
   // Chain preliminary actions before initial rendering
 
+  // TODO: Uncomment profile reloading if login features are enabled ...
+
   Promise.resolve()
     .then(() => store.dispatch(setCsrfToken(token)))
     .then(() => store.dispatch(changeLocale(locale)))
     .then(() => store.dispatch(getConfiguration(locale)))
+    /*
     .then(() => store.dispatch(refreshProfile())
       // recover from an "Unauthorized" error
       .catch(() => console.error('Cannot refresh user profile')))
+    */
     .then(() => renderRoot(rootEl));
 });
 
