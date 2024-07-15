@@ -29,7 +29,7 @@ const DeliverablesSecondPhase = '/about/deliverables-second-phase';
 const Associate = '/network/associate';
 const Core = '/network/core';
 const Join = '/network/join';
-//const ResearchGroups = '/network/research-groups';
+const ResearchGroups = '/network/research-groups';
 
 const Applications = '/applications/overview';
 const Services = '/applications/services';
@@ -43,7 +43,7 @@ const Newsletter = '/news-events/newsletter';
 const OtherEvents = '/news-events/other-events';
 const Podcasts = '/news-events/podcast';
 const PressReleases = '/news-events/press-release';
-//const Workshops = '/news-events/workshop';
+const Workshops = '/news-events/workshop';
 
 const Contact = '/contact';
 const TermsOfUse = '/terms-of-use';
@@ -86,7 +86,7 @@ export const StaticRoutes = {
   Associate,
   Core,
   Join,
-//  ResearchGroups,
+  ResearchGroups,
 
   Applications,
   Services,
@@ -100,7 +100,7 @@ export const StaticRoutes = {
   OtherEvents,
   Podcasts,
   PressReleases,
-//  Workshops,
+  Workshops,
 
   Contact,
   TermsOfUse,
