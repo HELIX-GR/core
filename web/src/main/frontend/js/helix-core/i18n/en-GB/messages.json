@@ -3,7 +3,7 @@
     "about": "About",
     "announcement": "Announcements",
     "applications": "Applications",
-    "associate": "Associate",
+    "associate": "Associates",
     "blog": "Blog",
     "climpact-on-media": "Climpact in the Media",
     "committee": "Managing Committee",
@@ -188,7 +188,10 @@
       "terms-of-use": "TERMS AND CONDITIONS"
     },
     "network-associate": {
-      "intro": "The Climpact network is open to cooperation with all the scientific, research, and development organizations of the country dealing with the study and management of the effects of Climate Change. Your organization can officially become a collaborating member of the network and participate in its actions."
+      "intro": "By 2024, 17 academic and research institutions from Greece and Cyprus have joined the Climpact Network as affiliated members.\n The affiliated members of Climpact participate in the project's meetings (working groups, EU meetings)/actions, exchanging expertise and collaborating with the other members of the network to develop the project's activities and achieve the network's goals.\n\nThe Climpact network is open to collaboration with all scientific, research, and developmental organizations in the country that are involved in the study and management of the impacts of Climate Change.\n Your organization can officially become an affiliated member of the network and participate in its activities."
+    },
+    "network-core": {
+      "intro": "The Climpact network was founded by 11 academic members and scientific entities (initial members of the network).\n Since 2021 until today 17 associates from Greece and Cyprus have joined the network.\nIn 2024 the Climpact network consists of 28 academic and scientific associates from Greece and Cyprus.\nThe Climpact network is open to collaboration with all scientific, research, and developmental organizations in the countries that are involved in the study and management of the impacts of Climate Change. Your organization can officially become an affiliated member of the network and participate in its actions."
     }
   },
   "pages": {
