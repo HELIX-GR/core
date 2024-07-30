@@ -5,10 +5,13 @@
     "applications": "Applications",
     "associate": "Associate",
     "blog": "Blog",
-    "climpact-on-media": "CLIMPACT in the Media",
+    "climpact-on-media": "Climpact in the Media",
     "committee": "Managing Committee",
     "core": "Core",
-    "deliverables": "Deliverables",
+    "first-phase": "1st Phase of the Climpact Network",
+    "second-phase": "2nd Phase of the Climpact Network",
+    "deliverables": "Deliverables of the 1st Phase of the Climpact Network",
+    "deliverables-second-phase": "Deliverables of the 2nd Phase of the Climpact Network",
     "dialogue-forum": "Dialog Forums",
     "home": "Home",
     "join": "Join",
@@ -21,9 +24,11 @@
     "press-release": "Press Releases",
     "scientific-committee": "Scientific Committee",
     "services": "Services",
-    "targets": "Targets",
+    "targets": "Targets of the 1st Phase of the Climpact Network",
+    "targets-second-phase": "Targets of the 2nd Phase of the Climpact Network",
     "tools": "Tools",
-    "work-packages": "Work Packages",
+    "work-packages": "Work packages for the 1st phase of the Climpact Network",
+    "work-packages-second-phase": "Work packages for the 2nd phase of the Climpact Network",
     "workshop": "Workshops"
   },
   "buttons": {
@@ -46,14 +51,16 @@
   "header": {
     "menu": {
       "about": {
-        "title": "About the Project",
+        "title": "About Climpact",
         "items": {
-          "deliverables": "DELIVERABLES",
+          "deliverables": "DELIVERABLES OF THE 1ST PHASE OF CLIMPACT",
+          "deliverables-second-phase": "DELIVERABLES OF THE 2ND PHASE OF CLIMPACT",
           "home": "HOME",
           "committee": "STEERING COMMITTEE",
           "overview": "OVERVIEW",
           "scientific-committee": "SCIENTIFIC COMMITTEE",
-          "targets": "TARGETS",
+          "targets": "GOALS OF THE 1ST PHASE OF CLIMPACT",
+          "targets-second-phase": "GOALS OF THE 2ND PHASE OF CLIMPACT",
           "work-packages": "WORK PACKAGES"
         }
       },
@@ -108,11 +115,15 @@
       "about": {
         "items": {
           "about": "About",
-          "deliverables": "Deliverables",
+          "deliverables": "Deliverables for the 1st Phase of the Climpact Network",
+          "deliverables-second-phase": "Deliverables for the 2st Phase of the Climpact Network",
           "committee": "Managing Committee",
           "overview": "Overview",
           "scientific-committee": "Scientific Committee",
-          "targets": "Targets",
+          "first-phase": "1st phase of the Climpact Network",
+          "second-phase": "2nd phase of the Climpact Network",
+          "targets": "Goals of the 1st phase of the Climpact Network",
+          "targets-second-phase": "Goals of the 2nd phase of the Climpact Network",
           "work-packages": "Work Packages"
         }
       },
@@ -127,7 +138,7 @@
         "items": {
           "associate": "Associate",
           "core": "Core",
-          "join": "Join",
+          "join": "Join"
         }
       },
       "news-events": {
@@ -139,7 +150,7 @@
           "workshops": "Workshops",
           "press-releases": "Press Releases",
           "announcements": "Announcements",
-          "climpact-on-media": "CLIMPACT in the Media",
+          "climpact-on-media": "Climpact in the Media",
           "podcasts": "Podcasts"
         }
       }
@@ -148,7 +159,7 @@
   "text": {
     "main": {
       "header": " Science at the service of the State and Society for tackling Climate Change.",
-      "content": "The CLIMPACT network seeks cooperation with the National Commission for Climate Change, with the Climate Change Impact Study Committee of the Bank of Greece but also with other relevant initiatives and actions. CLIMPACT aims to be a pole of valid and multifaceted expertise and an advisory body of the State and Society.",
+      "content": "The Climpact network seeks cooperation with the National Commission for Climate Change, with the Climate Change Impact Study Committee of the Bank of Greece but also with other relevant initiatives and actions. Climpact aims to be a pole of valid and multifaceted expertise and an advisory body of the State and Society.",
       "recent-activity": "Recent Activity"
     },
     "countdown": {
@@ -162,18 +173,18 @@
     },
     "footer": {
       "join": {
-        "header": "Do you want to become a member of the CLIMPACT Network?",
+        "header": "Do you want to become a member of the Climpact Network?",
         "content": "Participation is open to scientific organizations in Greece"
       },
       "subscribe": {
-        "header": "Want to receive news on CLIMPACT and Climate Change?"
+        "header": "Want to receive news on Climpact and Climate Change?"
       },
-      "title": "© 2020 • CLIMPACT • National Network for Climate Change and its impact • ",
+      "title": "© 2020 • Climpact • National Network for Climate Change and its impact • ",
       "contact": "CONTACT",
       "terms-of-use": "TERMS AND CONDITIONS"
     },
     "network-associate": {
-      "intro": "The CLIMPACT network is open to cooperation with all the scientific, research, and development organizations of the country dealing with the study and management of the effects of Climate Change. Your organization can officially become a collaborating member of the network and participate in its actions."
+      "intro": "The Climpact network is open to cooperation with all the scientific, research, and development organizations of the country dealing with the study and management of the effects of Climate Change. Your organization can officially become a collaborating member of the network and participate in its actions."
     }
   },
   "pages": {
@@ -191,7 +202,7 @@
     "button": "SUBSCRIBE",
     "consent": {
       "title": "Consent Form",
-      "text1": "I hearby declare my informed consent to the treatment of my personal data with the modalities indicated in the privacy statement for the purposes of being contacted via email from the National Network for Climate Change (CLIMPACT) in accordance to the Privacy Policy terms. I acknowledge that the collection and processing of my information will be performed by Mailchimp. ",
+      "text1": "I hearby declare my informed consent to the treatment of my personal data with the modalities indicated in the privacy statement for the purposes of being contacted via email from the National Network for Climate Change (Climpact) in accordance to the Privacy Policy terms. I acknowledge that the collection and processing of my information will be performed by Mailchimp. ",
       "text2": "Read more about our Privacy Statement",
       "link1": "here",
       "text3": "and",
