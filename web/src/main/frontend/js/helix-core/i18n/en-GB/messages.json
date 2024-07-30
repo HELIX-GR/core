@@ -24,8 +24,8 @@
     "press-release": "Press Releases",
     "scientific-committee": "Scientific Committee",
     "services": "Services",
-    "targets": "Targets of the 1st Phase of the Climpact Network",
-    "targets-second-phase": "Targets of the 2nd Phase of the Climpact Network",
+    "targets": "Goals of the 1st Phase of the Climpact Network",
+    "targets-second-phase": "Goals of the 2nd Phase of the Climpact Network",
     "tools": "Tools",
     "work-packages": "Work packages for the 1st phase of the Climpact Network",
     "work-packages-second-phase": "Work packages for the 2nd phase of the Climpact Network",
@@ -33,7 +33,7 @@
   },
   "buttons": {
     "learn-more": "LEARN MORE",
-    "our-targets": "OUR TARGETS",
+    "our-targets": "OUR AIM",
     "join": "PARTICIPATION",
     "keep-me-updated": "KEEP ME UP TO DATE",
     "card": {
@@ -51,7 +51,7 @@
   "header": {
     "menu": {
       "about": {
-        "title": "About Climpact",
+        "title": "ABOUT CLIMPACT",
         "items": {
           "deliverables": "DELIVERABLES OF THE 1ST PHASE OF CLIMPACT",
           "deliverables-second-phase": "DELIVERABLES OF THE 2ND PHASE OF CLIMPACT",
@@ -61,7 +61,10 @@
           "scientific-committee": "SCIENTIFIC COMMITTEE",
           "targets": "GOALS OF THE 1ST PHASE OF CLIMPACT",
           "targets-second-phase": "GOALS OF THE 2ND PHASE OF CLIMPACT",
-          "work-packages": "WORK PACKAGES"
+          "work-packages": "WORK PACKAGES OF THE 1ST PHASE OF CLIMPACT",
+          "work-packages-second-phase": "WORK PACKAGES OF THE 2ND PHASE OF CLIMPACT",
+          "first-phase": "1ST PHASE OF THE CLIMPACT NETWORK",
+          "second-phase": "2ND PHASE OF THE CLIMPACT NETWORK"
         }
       },
       "applications": {
@@ -124,7 +127,8 @@
           "second-phase": "2nd phase of the Climpact Network",
           "targets": "Goals of the 1st phase of the Climpact Network",
           "targets-second-phase": "Goals of the 2nd phase of the Climpact Network",
-          "work-packages": "Work Packages"
+          "work-packages": "Work packages of the 1st phase of the Climpact Network",
+          "work-packages-second-phase": "Work packages of the 2nd phase of the Climpact Network"
         }
       },
       "applications": {
