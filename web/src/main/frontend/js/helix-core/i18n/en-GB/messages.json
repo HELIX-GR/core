@@ -72,7 +72,8 @@
         "items": {
           "lab": "LAB",
           "services": "SERVICES",
-          "tools": "TOOLS"
+          "tools": "TOOLS",
+          "climdat": "CLIMDAT"
         }
       },
       "data": {
@@ -163,7 +164,7 @@
   "text": {
     "main": {
       "header": " Science at the service of the State and Society for tackling Climate Change.",
-      "content": "The Climpact network seeks cooperation with the National Commission for Climate Change, with the Climate Change Impact Study Committee of the Bank of Greece but also with other relevant initiatives and actions. Climpact aims to be a pole of valid and multifaceted expertise and an advisory body of the State and Society.",
+      "content": "The \"National Research Network for Climate Change and Its Impacts - CLIMPACT\" is an interdisciplinary consortium consisting of 28 members from the academic and research communities in Greece and Cyprus. These members are engaged with the issue of Climate Change (CC) and the related climate risks, natural disasters, and the social and economic impacts associated with them.",
       "recent-activity": "Recent Activity"
     },
     "countdown": {
