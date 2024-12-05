@@ -3,10 +3,6 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 
 import {
-  Link,
-} from 'react-router-dom';
-
-import {
   Pagination,
 } from '../shared-parts';
 
@@ -16,8 +12,6 @@ import {
 } from '../../helpers';
 
 import {
-  buildPath,
-  DynamicRoutes,
   EnumCatalog,
 } from '../../../model';
 
@@ -49,14 +43,12 @@ const filterFavorites = (
   pageSize = DEFAULT_PAGE_SIZE,
   text = '',
   selectData = true,
-  selectPubs = true,
   selectLab = true,
   orderBy = 'createdOn'
 ) => {
   const items = favorites.filter(f => {
     return (
       (f.catalog === EnumCatalog.CKAN && selectData) ||
-      (f.catalog === EnumCatalog.OPENAIRE && selectPubs) ||
       (f.catalog === EnumCatalog.LAB && selectLab)
     ) && (!text || f.title.indexOf(text) !== -1);
   });
@@ -103,7 +95,6 @@ class FavoriteList extends React.Component {
       pageSize,
       text,
       pills[EnumCatalog.CKAN],
-      pills[EnumCatalog.OPENAIRE],
       pills[EnumCatalog.LAB],
       orderBy
     );
@@ -120,7 +111,6 @@ class FavoriteList extends React.Component {
       pageSize,
       text,
       pills[EnumCatalog.CKAN],
-      pills[EnumCatalog.OPENAIRE],
       pills[EnumCatalog.LAB],
       orderBy
     );
@@ -188,43 +178,6 @@ class FavoriteList extends React.Component {
     );
   }
 
-  renderPublication(p, host) {
-    return (
-      <div className="result-item pubs" key={`publication-fav-${p.handle}`}>
-        <Favorite
-          active={true}
-          activeClass="active-auto-hide"
-          activeImage="/images/icons/various/delete.svg"
-          catalog={EnumCatalog.OPENAIRE}
-          description={p.description || null}
-          handle={p.handle}
-          onClick={this.onFavoriteDelete}
-          title={p.title}
-          url={`${host}/search/publication?articleId=${p.handle}`}
-        />
-        {this.props.onCollectionSelect && this.props.collections.length !== 0 &&
-          <FavoriteCollectionPicker
-            favorite={p}
-            onClick={this.props.onCollectionSelect}
-          />
-        }
-        <h3 className="title">
-          <Link to={buildPath(DynamicRoutes.PUBLICATION_PAGE, [p.handle])}>
-            {p.title.length > MAX_TITLE_LENGTH ? `${p.title.substring(0, MAX_TITLE_LENGTH)} ...` : p.title}
-          </Link>
-          <div className="pill pubs ml-1">
-            PUBS
-          </div>
-        </h3>
-        {p.description &&
-          <div className="notes">
-            {p.description.length > MAX_NOTES_LENGTH ? `${p.description.substring(0, MAX_NOTES_LENGTH)} ...` : p.description}
-          </div>
-        }
-      </div>
-    );
-  }
-
   renderNotebook(n, host) {
     return (
       <div className="result-item lab" key={`notebook-fav-${n.handle}`}>
@@ -265,15 +218,13 @@ class FavoriteList extends React.Component {
       return null;
     }
 
-    const { data: { host: dataHost }, openaire: { host: pubsHost }, lab: { host: labHost } } = this.props.config;
+    const { data: { host: dataHost }, lab: { host: labHost } } = this.props.config;
 
     return favorites
       .map(f => {
         switch (f.catalog) {
           case EnumCatalog.CKAN:
             return this.renderDataset(f, dataHost);
-          case EnumCatalog.OPENAIRE:
-            return this.renderPublication(f, pubsHost);
           case EnumCatalog.LAB:
             return this.renderNotebook(f, labHost);
           default:
@@ -302,7 +253,6 @@ class FavoriteList extends React.Component {
     const page = items.filter((f, index) => (index >= pageIndex * pageSize) && (index < (pageIndex + 1) * pageSize));
 
     const countData = items.filter(f => f.catalog === EnumCatalog.CKAN).length;
-    const countPubs = items.filter(f => f.catalog === EnumCatalog.OPENAIRE).length;
     const countLab = items.filter(f => f.catalog === EnumCatalog.LAB).length;
 
     const rowCount = items.length;
@@ -341,17 +291,9 @@ class FavoriteList extends React.Component {
               {pills[EnumCatalog.CKAN] &&
                 <span>{_t({ id: 'results.shared.count.data' }, { count: countData })}</span>
               }
-              {pills[EnumCatalog.OPENAIRE] &&
-                <React.Fragment>
-                  {pills[EnumCatalog.CKAN] &&
-                    <span className="pr-2 pl-2">|</span>
-                  }
-                  <span>{_t({ id: 'results.shared.count.pubs' }, { count: countPubs })}</span>
-                </React.Fragment>
-              }
               {pills[EnumCatalog.LAB] &&
                 <React.Fragment>
-                  {(pills[EnumCatalog.CKAN] || pills[EnumCatalog.OPENAIRE]) &&
+                  {pills[EnumCatalog.CKAN] &&
                     <span className="pr-2 pl-2">|</span>
                   }
                   <span>{_t({ id: 'results.shared.count.lab' }, { count: countLab })}</span>

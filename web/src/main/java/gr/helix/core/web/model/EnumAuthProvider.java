@@ -5,7 +5,6 @@ public enum EnumAuthProvider {
     Google,
     GitHub,
     HELIX,
-    SAML,
     ;
 
     public static EnumAuthProvider fromString(String value) {

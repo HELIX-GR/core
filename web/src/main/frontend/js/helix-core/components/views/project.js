@@ -8,7 +8,6 @@ import {
   DynamicRoutes,
   ErrorPages,
   getParams,
-  WordPressPages,
 } from '../../model';
 
 import {
@@ -23,20 +22,11 @@ import {
 
 class Project extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const match = getParams(this.props.location.pathname, {
-      path: DynamicRoutes.PROJECT_PAGE,
-      exact: true,
-      strict: false,
-    });
+    const { path, name, prefix, pages } = this.props;
 
-    const { name = 'about'} = match ? match.params : WordPressPages.About;
     const _t = this.props.intl.formatMessage;
-    const singleColumn = name === WordPressPages.Subjects;
+    const singleColumn = false;
 
     return (
       <div>
@@ -53,7 +43,7 @@ class Project extends React.Component {
               {!singleColumn &&
                 <div className="col-md-3 col-xs-12">
                   <h4 className="about-header">
-                    {_t({ id: 'project.title' })}
+                    {_t({ id: `${prefix}.title` })}
                   </h4>
                 </div>
               }
@@ -61,14 +51,14 @@ class Project extends React.Component {
               {!singleColumn &&
                 <div className={`col-md-${singleColumn ? 12 : 9} col-xs-12`}>
                   <h4 className="about-header">
-                    {_t({ id: `header.menu.project.items.${name}` })}
+                    {_t({ id: `${prefix}.items.${name}` })}
                   </h4>
                 </div>
               }
 
               {!singleColumn &&
                 <div className="col-md-3 col-xs-12">
-                  <Menu />
+                  <Menu path={path} prefix={prefix} pages={pages} />
                 </div>
               }
 
@@ -80,9 +70,9 @@ class Project extends React.Component {
                     <Route path={ErrorPages.Forbidden} component={Page403} exact />
                     <Route path={ErrorPages.NotFound} component={Page404} exact />
                     {/* Detail component */}
-                    <Route path={DynamicRoutes.PROJECT_PAGE} component={Page} />
+                    <Route path={path} component={Page} />
                     {/* Default */}
-                    <Redirect to={buildPath(DynamicRoutes.PROJECT_PAGE, [WordPressPages.About])} />
+                    <Redirect to={buildPath(path, [name])} />
                   </Switch>
 
                 </div>

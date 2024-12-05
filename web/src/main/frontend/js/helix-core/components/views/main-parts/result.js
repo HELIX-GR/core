@@ -51,9 +51,6 @@ class Result extends React.Component {
       this.props.searchCatalog(catalog);
     } else {
       switch (catalog) {
-        case EnumCatalog.OPENAIRE:
-          this.props.navigate(buildPath(DynamicRoutes.PUBLICATION_PAGE, [id]));
-          break;
         case EnumCatalog.LAB:
           this.props.navigate(buildPath(DynamicRoutes.NOTEBOOK_PAGE, [id]));
           break;
@@ -66,16 +63,14 @@ class Result extends React.Component {
       pills,
       result: {
         [EnumCatalog.CKAN]: packages,
-        [EnumCatalog.OPENAIRE]: publications,
         [EnumCatalog.LAB]: notebooks,
       },
     } = this.props;
 
     const showPackages = (pills.data && packages && packages.results && packages.results.length !== 0);
-    const showPublications = (pills.pubs && publications && publications.results && publications.results.length !== 0);
     const showNotebooks = (pills.lab && notebooks && notebooks.results && notebooks.results.length !== 0);
 
-    const visible = this.props.visible && (showPackages || showPublications || showNotebooks);
+    const visible = this.props.visible && (showPackages || showNotebooks);
 
     return (
       <div
@@ -99,22 +94,6 @@ class Result extends React.Component {
             </div>
             <div className="search-results">
               {this.renderPackages(packages.results)}
-            </div>
-          </div>
-        }
-
-        {showPublications &&
-          <div className="landing-live-search-group pubs">
-            <div className="results-header">
-              <div className="results-title">
-                Pubs
-              </div>
-              <a className="all-link" onClick={(e) => this.handleLink(e, EnumCatalog.OPENAIRE, null)}>
-                all Pubs
-              </a>
-            </div>
-            <div className="search-results">
-              {this.renderPublications(publications.results)}
             </div>
           </div>
         }
@@ -149,20 +128,6 @@ class Result extends React.Component {
           href={`${host}/dataset/${p.id}`}
           className="result-entry"
           target="_blank"
-        >
-          {p.title}
-        </a>
-      );
-    });
-  }
-
-  renderPublications(publications) {
-    return publications.map((p, index) => {
-      return (
-        <a
-          key={`publication-${index}`}
-          onClick={(e) => this.handleLink(e, EnumCatalog.OPENAIRE, p.objectIdentifier)}
-          className="result-entry" target="_blank"
         >
           {p.title}
         </a>

@@ -3,11 +3,8 @@ package gr.helix.core.web.model.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import gr.helix.core.web.model.EnumAuthProvider;
 import gr.helix.core.web.model.ckan.CkanMetadata;
-import gr.helix.core.web.model.openaire.OpenaireMetadata;
 
 /**
  * Application configuration settings
@@ -18,11 +15,6 @@ public class ClientConfiguration {
 
     private String                       jupyterNotebookViewer;
 
-    @JsonIgnore
-    private final List<String>           identityProviders = new ArrayList<String>();
-
-    private String                       defaultIdentityProvider;
-
     private OsmConfiguration             osm;
 
     private BingMapsConfiguration        bingMaps;
@@ -32,12 +24,6 @@ public class ClientConfiguration {
     private CkanMetadata                 data;
 
     private CkanMetadata                 lab;
-
-    private OpenaireMetadata             openaire;
-
-    public List<String> getIdentityProviders() {
-        return this.identityProviders;
-    }
 
     public OsmConfiguration getOsm() {
         return this.osm;
@@ -63,18 +49,6 @@ public class ClientConfiguration {
         this.wordPress = wordPress;
     }
 
-    public String getDefaultIdentityProvider() {
-        return this.defaultIdentityProvider;
-    }
-
-    public void setDefaultIdentityProvider(String defaultIdentityProvider) {
-        this.defaultIdentityProvider = defaultIdentityProvider;
-    }
-
-    public void addIdentityProvider(String identityProvider) {
-        this.identityProviders.add(identityProvider);
-    }
-
     public CkanMetadata getData() {
         return this.data;
     }
@@ -89,14 +63,6 @@ public class ClientConfiguration {
 
     public void setLab(CkanMetadata lab) {
         this.lab = lab;
-    }
-
-    public OpenaireMetadata getOpenaire() {
-        return this.openaire;
-    }
-
-    public void setOpenaire(OpenaireMetadata openaire) {
-        this.openaire = openaire;
     }
 
     public List<EnumAuthProvider> getAuthProviders() {

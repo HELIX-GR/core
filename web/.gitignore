@@ -8,7 +8,6 @@
 .classpath
 
 **/*.min.js
-!apidoc/template/**/*.min.js
 
 node
 node_modules
@@ -29,9 +28,6 @@ maven-build.xml
 
 bower_components
 jspm_packages
-
-/apidoc/docs
-/jsdoc/
 
 .sass-cache
 

@@ -1,0 +1,16 @@
+$baseFontSize: 18;
+$mainFontFamily: 'Manrope', sans-serif;
+
+$mainColor: #C9E9FC;
+$mainFontColor: #971035;
+$darkColor: #6B0A3F;
+$gradientBg: linear-gradient(90deg, rgba(117,11,62,1) 0%, rgba(220,27,38,1) 40%, rgba(251,161,32,1) 100%);
+$gradientFont: linear-gradient(90deg, rgba(209,25,41,1) 0%, rgba(220,27,38,1) 20%, rgba(251,161,32,1) 100%);
+$gradientBgBlog: linear-gradient(90deg, rgba(107,10,63,1) 0%, rgba(177,206,222,1) 100%);
+$gradientBgEvents: linear-gradient(90deg, rgba(151,16,53,1) 0%, rgba(222,26,42,1) 100%);
+$gradientBgForum: linear-gradient(90deg, rgba(222,26,36,1) 0%, rgba(252,160,31,1) 100%);
+
+:root {
+  --header-height-open: 0px;
+  --header-height: 0px;
+}

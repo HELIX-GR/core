@@ -11,12 +11,7 @@ import {
 
 import {
   EnumLocale,
-  WordPressPages,
 } from '../../../model';
-
-import {
-  Faq,
-} from './';
 
 import {
   Code,
@@ -71,20 +66,13 @@ class Page extends React.Component {
 
     return (
       <div>
-        {page && !page.slug.startsWith(WordPressPages.FAQ) &&
-          <a href=''>
-            <h4 className="about-details-header">
-              {page.title.rendered.endsWith('-EL') ? page.title.rendered.slice(0, -3) : page.title.rendered}
-            </h4>
-          </a>
-        }
-        {page && !page.slug.startsWith(WordPressPages.FAQ) &&
-          <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: this.toggleSecureUrl(page.content.rendered) }}>
-          </div>
-        }
-        {page && page.slug.startsWith(WordPressPages.FAQ) &&
-          <Faq page={page} />
-        }
+        <a href=''>
+          <h4 className="about-details-header">
+            {page.title.rendered.endsWith('-el') ? page.title.rendered.slice(0, -3) : page.title.rendered}
+          </h4>
+        </a>
+        <div className="about-text style-5" dangerouslySetInnerHTML={{ __html: this.toggleSecureUrl(page.content.rendered) }}>
+        </div>
       </div>
 
     );
